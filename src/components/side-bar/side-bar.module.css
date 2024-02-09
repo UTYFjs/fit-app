@@ -1,0 +1,63 @@
+.sider.sider2{
+ position: relative;
+  
+}
+
+
+.logo {
+  display:flex;
+  justify-content: baseline;
+  padding-left: 29px;
+  align-items: center;
+  margin: 30px 0 46px;
+ 
+  height: 64px;
+  cursor: pointer;
+
+}
+.logo:hover {
+  color: #1890ff;
+}
+.exit{
+  position: relative;
+  bottom:0;
+  margin-top: auto;
+}
+.sider .trigger{
+  margin-left: 0;
+}
+.button__wrapper{
+  margin-top: auto;
+}
+.button_trigger{
+  position:absolute;
+  padding: 0;
+  height: 66px;
+  width: 20px;
+  border: none;
+  transform:translateY(-50%);
+  right: -20px;
+  top:54.5%;
+  clip-path: polygon(0 0, 100% 15%, 100% 85%, 0% 100%);
+}
+
+.button_exit{
+  display:flex;
+  padding:  0;
+  height: 40px;
+  margin: 0 24px;
+  margin-top: auto;
+  border: none;
+  background: transparent;
+}
+
+.button__text{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+line-height: 130%;
+text-align: center;
+color: var(--character-light-title-85);
+  padding: 4px 15px;
+  margin-left: 10px;
+}
