@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
     	--character-light-title-85: #262626;
@@ -86,29 +86,23 @@
     --font-family: "Inter", sans-serif;
     --second-family: "Roboto", sans-serif;
 
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+
+    margin: 0 auto;
+    height: 100vh;
+		max-width: 1440px;
+
+    font-family: --font-family, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
 
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
-
+*{
+	box-sizing: border-box;
+}
 body {
-    display: flex;
-    place-items: center;
-    min-width: 320px;
     min-height: 100vh;
-}
-
-
-#root{
-    margin: 0 auto;
-    height: 100vh;
 }

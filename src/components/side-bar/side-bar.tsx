@@ -81,7 +81,7 @@ export const SideBar: React.FC = () => {
                     ]}
                 />
             </div>
-            <Button className={styles['button_trigger']} onClick={() => setCollapsed(!collapsed)}>
+            <Button className={styles['button_trigger']} onClick={() => setCollapsed(!collapsed)} data-test-id='sider-switch'>
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </Button>
 
