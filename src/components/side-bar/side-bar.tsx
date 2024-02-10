@@ -25,6 +25,13 @@ export const SideBar: React.FC = () => {
   const colorCharacterLightTitle85 = getCssVar('--character-light-title-85') || '#000';
 
    const classNameSider = classNames(styles.sider, styles.sider2)
+
+   const styleMenuItem = {
+       padding: collapsed ? '0 12px':'0 16px',
+
+       height: 42,
+       letterSpacing: '.8px',
+   };
     return (
         <Sider
             className={classNameSider}
@@ -42,7 +49,11 @@ export const SideBar: React.FC = () => {
             }}
         >
             <div>
-                <div className={styles.logo} onClick={() => setCollapsed(!collapsed)}>
+                <div
+                    className={styles.logo}
+                    onClick={() => setCollapsed(!collapsed)}
+                    style={{  marginRight: collapsed ? 0 : '15px' }}
+                >
                     {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
                         className: 'trigger',
                     })}
@@ -54,7 +65,8 @@ export const SideBar: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        height: 216,
+                        height: 226,
+                        marginTop: 46,
                     }}
                     //defaultSelectedKeys={['1']}
                     items={[
@@ -62,26 +74,35 @@ export const SideBar: React.FC = () => {
                             key: '1',
                             icon: <CalendarTwoTone twoToneColor={colorPrimaryLight9} />,
                             label: 'Календарь',
+                            style: styleMenuItem,
                         },
                         {
                             key: '2',
                             icon: <HeartFilled style={{ color: colorPrimaryLight9 }} />,
                             label: 'Тренировки',
+                            style: styleMenuItem,
                         },
                         {
                             key: '3',
                             icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
                             label: 'Достижения',
+
+                            style: styleMenuItem,
                         },
                         {
                             key: '4',
                             icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
                             label: 'Профиль',
+                            style: styleMenuItem,
                         },
                     ]}
                 />
             </div>
-            <Button className={styles['button_trigger']} onClick={() => setCollapsed(!collapsed)} data-test-id='sider-switch'>
+            <Button
+                className={styles['button_trigger']}
+                onClick={() => setCollapsed(!collapsed)}
+                data-test-id='sider-switch'
+            >
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </Button>
 

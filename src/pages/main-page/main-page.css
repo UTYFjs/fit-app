@@ -15,9 +15,10 @@
     flex-direction: column;
     min-height: 100%;
 }
+.ant-menu-title-content{
 
-
-
+  margin-left: 30px;
+}
 
 .main{
   background: no-repeat center/cover url('/public/Main_page_light.png');
