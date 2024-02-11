@@ -1,0 +1,81 @@
+.footer{
+  display:flex;
+  justify-content: space-between;
+  background: transparent;
+  margin-bottom: 42px;
+  padding: 0 24px;
+  
+}
+
+.button_review{
+
+  align-self: self-end;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  text-align: center;
+  color: var(--primary-light-6);
+  padding-top: 0;
+  
+
+}
+.footer__card{
+  width: 240px;
+  height: 127px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+  background: var(--character-light-primary-inverse);
+}
+
+.footer__card > div > div > div > div[class="ant-card-meta-title"]{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  margin-bottom: 8px;
+  color: var(--primary-light-6);
+
+}
+.footer__card > div > div > div > div[class="ant-card-meta-description"]{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--character-light-secondary-45);
+
+}
+.footer__card > ul > li > span > button{
+  padding: 8px 11px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  text-align: center;
+  color: var(--character-light-title-85);
+
+  
+
+}
+.footer__card > ul > li > span > button > span[role="img"]{
+  width: 14px;
+  height: 14px;
+
+}
+.footer__card > div{
+  padding: 12px 24px;
+}
+
+.footer__card > ul {
+  border-radius: 2px;
+}
+.footer__card > ul >li:not(:last-child) {
+  border: none;
+
+  
+}
+
+.card-body{
+  padding: 0;
+}

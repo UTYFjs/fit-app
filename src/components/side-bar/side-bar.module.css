@@ -58,9 +58,9 @@
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
-line-height: 130%;
-text-align: center;
-color: var(--character-light-title-85);
+  line-height: 130%;
+  text-align: center;
+  color: var(--character-light-title-85);
   padding: 4px 15px;
   margin-left: 10px;
 }
