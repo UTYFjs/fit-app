@@ -27,8 +27,8 @@ export const SideBar: React.FC = () => {
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
     const colorCharacterLightTitle85 = getCssVar('--character-light-title-85') || '#000';
     const styleMenuItem = {
-        padding: collapsed ? '0 12px' : '0 16px',
-
+        //padding: collapsed ? '0 12px' : '0 16px',
+        marginLeft: collapsed ? '0' : '-8px',
         height: 42,
         letterSpacing: '.8px',
     };
@@ -59,12 +59,12 @@ export const SideBar: React.FC = () => {
             style: styleMenuItem,
         },
     ];
-   const classNameSider = classNames(styles.sider, styles.sider2)
+   const classNameSider = classNames(styles.sider)
 
 
     return (
         <Sider
-            className={classNameSider}
+            className={styles.sider}
             trigger={null}
             collapsible
             collapsed={collapsed}
@@ -89,14 +89,15 @@ export const SideBar: React.FC = () => {
                     })}
                 </div>
                 <Menu
+                className={styles.menu}
                     theme='light'
                     mode='inline'
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        height: 226,
-                        marginTop: 46,
+                        height: 230,
+                        marginTop: 42,
                     }}
                     //defaultSelectedKeys={['1']}
                     items={menuItems}
