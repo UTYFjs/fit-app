@@ -1,37 +1,49 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
-import { Card, Col, Layout, Menu, Row, Typography } from 'antd';
+import { Button, Card, Col, Layout, Menu, Row, Typography } from 'antd';
 import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import Profile from 'public/profile.svg'
 import { SideBar } from '@components/side-bar/side-bar';
 import { HeaderMy } from '@components/header/header-my';
 import { FooterMy } from '@components/footer/footer-my';
+import Meta from 'antd/lib/card/Meta';
+import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 
 
-const { Header, Content, Sider } = Layout;
-const {Title, Text, Paragraph} = Typography;
-
+const { Content } = Layout;
 
 
 export const MainPage: React.FC = () => {
-   const [collapsed, setCollapsed] = useState(false);
-
+    
+    const buttonActions = [
+        {
+            key: useId(),
+            title: 'Расписать тренировки',
+            icon: <HeartFilled />,
+            label: 'Тренировки',
+        },
+        {
+            key: useId(),
+            title: 'Назначить календарь',
+            icon: <CalendarTwoTone />,
+            label: 'Календарь',
+        },
+        {
+            key: useId(),
+            title: 'Заполнить профиль',
+            icon: <IdcardOutlined />,
+            label: 'Профиль',
+        },
+    ];
    return (
        <Layout className='app'>
            <SideBar />
 
            <Layout className='site-layout'>
                <HeaderMy />
-               <Content
-                   className='main'
-                   style={{
-                       padding: 24,
-                       minHeight: 280,
-                   }}
-               >
-                   <Card style={{ maxWidth: 752 }}>
+               <Content className='main'>
+                   <Card>
                        <p>С CleverFit ты сможешь:</p>
                        <p>
                            {' '}
@@ -40,35 +52,39 @@ export const MainPage: React.FC = () => {
                        </p>
                        <p>
                            — отслеживать свои достижения в разделе статистики, сравнивая свои
-                           результаты с нормами и рекордами;{' '}
+                           результаты с&nbsp;нормами и рекордами;{' '}
                        </p>
                        <p>
                            — создавать свой профиль, где ты можешь загружать свои фото, видео и
-                           отзывы о тренировках;{' '}
+                           отзывы о&nbsp;тренировках;{' '}
                        </p>
                        <p>
                            — выполнять расписанные тренировки для разных частей тела, следуя
                            подробным инструкциям и советам профессиональных тренеров.
                        </p>
                    </Card>
-                   <Card style={{ maxWidth: 752 }}>
+                   <Card bordered={false}>
                        <p>
-                           CleverFit — это не просто приложение, а твой личный помощник в мире
-                           фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
+                           CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
+                           фитнеса. Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
                        </p>
                    </Card>
-
-                   <Row>
-                       <Col>
-                           <Card title='Расписать тренировки'>1111 </Card>
-                       </Col>
-                       <Col>
-                           <Card title='Назначить календаль'>22222 </Card>
-                       </Col>
-                       <Col>
-                           {' '}
-                           <Card title='Заполнить профиль'>33333 </Card>
-                       </Col>
+                   <Row  justify='space-between'>
+                       {buttonActions.map((item) => {
+                           return (
+                               <Col>
+                                   <CustomCardAction
+                                       title={item.title}
+                                       actions={[
+                                           <Button type='text' icon={item.icon}>
+                                               {item.label}{' '}
+                                           </Button>,
+                                       ]}
+                                   />
+                               </Col>
+                           );
+                       })}
+                       
                    </Row>
                </Content>
                <FooterMy />

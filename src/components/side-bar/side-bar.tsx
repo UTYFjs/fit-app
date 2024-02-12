@@ -18,20 +18,50 @@ import { getCssVar } from '@utils/get-css-var.ts';
 
 const {  Sider } = Layout;
 
+
+
+
 export const SideBar: React.FC = () => {
 
-   const [collapsed, setCollapsed] = useState(false);
-  const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
-  const colorCharacterLightTitle85 = getCssVar('--character-light-title-85') || '#000';
+    const [collapsed, setCollapsed] = useState(false);
+    const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
+    const colorCharacterLightTitle85 = getCssVar('--character-light-title-85') || '#000';
+    const styleMenuItem = {
+        padding: collapsed ? '0 12px' : '0 16px',
 
+        height: 42,
+        letterSpacing: '.8px',
+    };
+    const menuItems = [
+        {
+            key: '1',
+            icon: <CalendarTwoTone twoToneColor={colorPrimaryLight9} />,
+            label: 'Календарь',
+            style: styleMenuItem,
+        },
+        {
+            key: '2',
+            icon: <HeartFilled style={{ color: colorPrimaryLight9 }} />,
+            label: 'Тренировки',
+            style: styleMenuItem,
+        },
+        {
+            key: '3',
+            icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
+            label: 'Достижения',
+
+            style: styleMenuItem,
+        },
+        {
+            key: '4',
+            icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
+            label: 'Профиль',
+            style: styleMenuItem,
+        },
+    ];
    const classNameSider = classNames(styles.sider, styles.sider2)
 
-   const styleMenuItem = {
-       padding: collapsed ? '0 12px':'0 16px',
 
-       height: 42,
-       letterSpacing: '.8px',
-   };
     return (
         <Sider
             className={classNameSider}
@@ -69,33 +99,7 @@ export const SideBar: React.FC = () => {
                         marginTop: 46,
                     }}
                     //defaultSelectedKeys={['1']}
-                    items={[
-                        {
-                            key: '1',
-                            icon: <CalendarTwoTone twoToneColor={colorPrimaryLight9} />,
-                            label: 'Календарь',
-                            style: styleMenuItem,
-                        },
-                        {
-                            key: '2',
-                            icon: <HeartFilled style={{ color: colorPrimaryLight9 }} />,
-                            label: 'Тренировки',
-                            style: styleMenuItem,
-                        },
-                        {
-                            key: '3',
-                            icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
-                            label: 'Достижения',
-
-                            style: styleMenuItem,
-                        },
-                        {
-                            key: '4',
-                            icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
-                            label: 'Профиль',
-                            style: styleMenuItem,
-                        },
-                    ]}
+                    items={menuItems}
                 />
             </div>
             <Button
