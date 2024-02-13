@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './header-my.module.css';
-import classNames from 'classnames';
 import 'antd/dist/antd.css';
 import { Typography, Layout, Breadcrumb, Button } from 'antd';
 import {    SettingOutlined} from '@ant-design/icons';
@@ -21,10 +20,10 @@ export const HeaderMy: React.FC = () => {
                 {' '}
                 <Title
                     className={styles['title_header']}
-                    style={{ marginTop: 14, lineHeight: '130%' }}
                 >
-                    Приветствуем тебя в CleverFit — приложении,<br/>
-                    которое&nbsp;поможет&nbsp;тебе&nbsp;добиться&nbsp;своей мечты!
+                    Приветствуем тебя в&nbsp;CleverFit — приложении,
+                    <br />
+                    которое&nbsp;поможет&nbsp;тебе добиться&nbsp;своей мечты!
                 </Title>
                 <Button
                     type={'text'}

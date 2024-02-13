@@ -80,7 +80,7 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
 
 
 
-@media (max-width: 834px) and (min-width: 360px) {
+@media (max-width: 834px) and (min-width: 576px) {
 
 .main > div:last-child{
   background: transparent;
@@ -88,4 +88,22 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
   
   
 }
+}
+
+@media (max-width: 576px){
+  .app {
+  height: fit-content;
+
+}
+  .main{
+    padding: 24px 16px;
+  }
+
+    .main > div:first-child{
+      height: 368px;
+    }
+  .main .ant-card-body {
+    padding: 16px;
+}
+
 }
