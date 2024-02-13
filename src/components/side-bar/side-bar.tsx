@@ -3,7 +3,6 @@ import styles from'./side-bar.module.css'
 import 'antd/dist/antd.css';
 import { Button, Layout, Menu } from 'antd';
 import {
-    CalendarTwoTone,
     HeartFilled,
     IdcardOutlined,
     MenuFoldOutlined,
@@ -11,7 +10,7 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 
-import {CleverFitIcon, FitIcon, ExitIcon} from '../custom-icons/custom-icons.tsx';
+import {CleverFitIcon, FitIcon, ExitIcon, CalendarIcon} from '../custom-icons/custom-icons.tsx';
 import { getCssVar } from '@utils/get-css-var.ts';
 
 const {  Sider } = Layout;
@@ -35,7 +34,9 @@ export const SideBar: React.FC = () => {
     const menuItems = [
         {
             key: '1',
-            icon: <CalendarTwoTone twoToneColor={colorPrimaryLight9} />,
+            icon: (
+                <CalendarIcon style={{ fill: colorPrimaryLight9 }}/>
+            ),
             label: 'Календарь',
             style: styleMenuItem,
         },
@@ -49,7 +50,6 @@ export const SideBar: React.FC = () => {
             key: '3',
             icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
             label: 'Достижения',
-
             style: styleMenuItem,
         },
         {

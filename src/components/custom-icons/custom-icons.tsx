@@ -3,7 +3,13 @@ import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/
 
 
 const ExitSvg = () => (
-    <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+        width='16'
+        height='16'
+        viewBox='0 0 16 16'
+        fill='currentColor'
+        xmlns='http://www.w3.org/2000/svg'
+    >
         <rect width='16' height='16' fill='white' />
         <path
             d='M3.74621 7.39397V5.86897C3.74621 5.80112 3.66943 5.76183 3.61585 5.80469L0.919425 7.93683C0.90984 7.94439 0.902093 7.95402 0.896766 7.965C0.891439 7.97598 0.888672 7.98802 0.888672 8.00022C0.888672 8.01243 0.891439 8.02447 0.896766 8.03545C0.902093 8.04643 0.90984 8.05606 0.919425 8.06362L3.61585 10.1975C3.66764 10.2386 3.74621 10.2011 3.74621 10.1333V8.60826H10.6664V7.39397H3.74621Z'
@@ -83,6 +89,24 @@ const FitSvg = () =>
   </svg>);
 
 
+
+const CalendarSvg = () => (
+    <svg
+        width='13'
+        height='13'
+        viewBox='0 0 13 13'
+        fill='currentColor'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            fill-rule='evenodd'
+            clip-rule='evenodd'
+            d='M9.375 1.125H12C12.2766 1.125 12.5 1.34844 12.5 1.625V12C12.5 12.2766 12.2766 12.5 12 12.5H0.5C0.223437 12.5 0 12.2766 0 12V1.625C0 1.34844 0.223437 1.125 0.5 1.125H3.125V0.125C3.125 0.05625 3.18125 0 3.25 0H4.125C4.19375 0 4.25 0.05625 4.25 0.125V1.125H8.25V0.125C8.25 0.05625 8.30625 0 8.375 0H9.25C9.31875 0 9.375 0.05625 9.375 0.125V1.125ZM1.125 11.375H11.375V5.4375H1.125V11.375Z'
+            fill='inherit'
+        />
+    </svg>
+);
+
  const ExitIcon = (props: Partial<CustomIconComponentProps>) => (<Icon component={ExitSvg} {...props}/>)
  const CleverFitIcon = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={CleverFitSvg} {...props} />
@@ -91,4 +115,8 @@ const FitSvg = () =>
     <Icon component={FitSvg} {...props} />
 );
 
-export { ExitIcon, CleverFitIcon, FitIcon };
+const CalendarIcon = (props: Partial<CustomIconComponentProps>) => (
+    <Icon component={CalendarSvg} {...props} />
+);
+
+export { ExitIcon, CleverFitIcon, FitIcon, CalendarIcon };
