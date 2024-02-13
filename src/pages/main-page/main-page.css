@@ -14,6 +14,8 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
+
+    
 }
 .ant-menu-title-content{
 
@@ -33,9 +35,9 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
 }
 
 .main > * {
-
+  border-radius: 2px;
   max-width: 752px;
-  color: red;
+
 }
 .main > div{
   border-radius: 2px;
@@ -71,5 +73,19 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
 
 .main > div:last-child{
   background: transparent;
+  max-width: 766px;
+
+  
+}
+
+
+
+@media (max-width: 834px) and (min-width: 360px) {
+
+.main > div:last-child{
+  background: transparent;
   margin-top: -8px;
+  
+  
+}
 }

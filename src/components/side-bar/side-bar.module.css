@@ -6,6 +6,7 @@
 
 .sider .menu li[class='ant-menu-item']{
   margin-left: -8px;
+
   
 }
 
@@ -39,9 +40,9 @@
   width: 20px;
   border: none;
   transform:translateY(-50%);
-  right: -20px;
+  right: -19px;
   top:50%;
-  clip-path: polygon(0 0, 100% 15%, 100% 85%, 0% 100%);
+  clip-path: polygon(0 0, 100% 12%, 100% 88%, 0% 100%);
 }
 
 .button_exit{

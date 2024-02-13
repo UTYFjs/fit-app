@@ -43,7 +43,7 @@ export const MainPage: React.FC = () => {
            <Layout className='site-layout'>
                <HeaderMy />
                <Content className='main'>
-                   <Card>
+                   <Card bordered={false}>
                        <p>С CleverFit ты сможешь:</p>
                        <p>
                            {' '}
@@ -69,10 +69,10 @@ export const MainPage: React.FC = () => {
                            фитнеса. Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
                        </p>
                    </Card>
-                   <Row  justify='space-between'>
+                   <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8}}>
                        {buttonActions.map((item) => {
                            return (
-                               <Col>
+                               <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
                                    <CustomCardAction
                                        title={item.title}
                                        actions={[
@@ -84,7 +84,6 @@ export const MainPage: React.FC = () => {
                                </Col>
                            );
                        })}
-                       
                    </Row>
                </Content>
                <FooterMy />

@@ -19,11 +19,18 @@ export const HeaderMy: React.FC = () => {
             <Breadcrumb className={styles.breadcrumb}>Главная </Breadcrumb>
             <div className={styles['title__wrapper']}>
                 {' '}
-                <Title className={styles['title_header']} style={{marginTop: 14, lineHeight: '130%', }}>
-                    Приветствуем тебя в CleverFit — приложении, которое&nbsp;поможет тебе добиться
-                    своей мечты!
+                <Title
+                    className={styles['title_header']}
+                    style={{ marginTop: 14, lineHeight: '130%' }}
+                >
+                    Приветствуем тебя в CleverFit — приложении,<br/>
+                    которое&nbsp;поможет&nbsp;тебе&nbsp;добиться&nbsp;своей мечты!
                 </Title>
-                <Button type={'text'} icon={<SettingOutlined />} className={styles['button_setting']}>
+                <Button
+                    type={'text'}
+                    icon={<SettingOutlined />}
+                    className={styles['button_setting']}
+                >
                     Настройки
                 </Button>
             </div>

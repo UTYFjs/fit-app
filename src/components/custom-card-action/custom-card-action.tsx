@@ -17,8 +17,9 @@ export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actio
             bordered={false}
             actions={actions}
             className={styles['custom-card']}
+            title={title}
         >
-            <Meta title={title} />
+           
         </Card>
     );
 };

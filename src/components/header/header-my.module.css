@@ -44,3 +44,23 @@ color: var(--character-light-title-85);
   text-align: center;
   color: var(--character-light-title-85);
 }
+
+@media (max-width: 834px) and (min-width: 360px) {
+
+.header{
+  height: fit-content;
+  z-index: 1;
+   box-shadow: none;
+}
+
+  .header .title_header{
+  font-weight: 500;
+  font-size: 24px;
+    margin-bottom: 6px;
+}
+.button_setting span[role='img']{
+  visibility: hidden;
+}
+
+
+}
