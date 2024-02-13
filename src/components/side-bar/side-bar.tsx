@@ -80,7 +80,6 @@ export const SideBar: React.FC = () => {
             <div>
                 <div
                     className={styles.logo}
-                    onClick={() => setCollapsed(!collapsed)}
                     style={{ marginRight: collapsed ? 0 : '15px' }}
                 >
                     {React.createElement(collapsed ? FitIcon : CleverFitIcon, {

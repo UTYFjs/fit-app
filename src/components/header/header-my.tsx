@@ -11,9 +11,8 @@ const { Header } = Layout;
 const { Title } = Typography;
 
 
-export const HeaderMy: React.FC = () => {
-
-    return (
+export const HeaderMy: React.FC = () => 
+     (
         <Header className={styles.header}>
             <Breadcrumb className={styles.breadcrumb}>Главная </Breadcrumb>
             <div className={styles['title__wrapper']}>
@@ -35,4 +34,4 @@ export const HeaderMy: React.FC = () => {
             </div>
         </Header>
     );
-};
+

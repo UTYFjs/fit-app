@@ -8,9 +8,9 @@ import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 const { Footer } = Layout;
 const {Meta} = Card
 
-export const FooterMy: React.FC = () => {
-    return (
-        <Footer className={styles.footer}>
+export const FooterMy: React.FC = () => 
+    (
+        <Footer className={styles.footer} >
             <Button type='text' className={styles['button_review']}>
                 {' '}
                 Смотреть отзывы{' '}
@@ -39,4 +39,4 @@ export const FooterMy: React.FC = () => {
             </Card>
         </Footer>
     );
-};
+

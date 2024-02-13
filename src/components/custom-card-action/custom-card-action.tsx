@@ -7,8 +7,8 @@ interface ICustomCardActionProps {
     title: string;
     actions: ReactNode[];
 }
-export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actions}) => {
-    return (
+export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actions}) => 
+     (
         <Card
             bordered={false}
             actions={actions}
@@ -18,4 +18,4 @@ export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actio
            
         </Card>
     );
-};
+

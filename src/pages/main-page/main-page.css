@@ -1,6 +1,6 @@
 .app {
   max-width: 1440px;
-  height: 100vh;
+  min-height: 100vh;
 
 }
 
@@ -80,8 +80,13 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
 
 
 
-@media (max-width: 834px) and (min-width: 576px) {
+@media (max-width: 992px) and (min-width: 768px) {
+.app {
+  min-height: 100vh;
+  height: auto;
 
+
+}
 .main > div:last-child{
   background: transparent;
   margin-top: -8px;
@@ -90,7 +95,7 @@ background: no-repeat center/cover url('/public/Main_page_light.png');
 }
 }
 
-@media (max-width: 576px){
+@media (max-width: 768px){
   .app {
   height: fit-content;
 
