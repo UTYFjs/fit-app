@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from'./side-bar.module.css'
-import classNames from 'classnames'
 import 'antd/dist/antd.css';
 import { Button, Layout, Menu } from 'antd';
 import {
@@ -15,14 +14,9 @@ import {
 import {CleverFitIcon, FitIcon, ExitIcon} from '../custom-icons/custom-icons.tsx';
 import { getCssVar } from '@utils/get-css-var.ts';
 
-
 const {  Sider } = Layout;
 
-
-
-
 export const SideBar: React.FC = () => {
-
     const [collapsed, setCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -30,12 +24,8 @@ export const SideBar: React.FC = () => {
         setIsMobile(window.innerWidth < 767);
     });
 
-
-
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
-    const colorCharacterLightTitle85 = getCssVar('--character-light-title-85') || '#000';
     const styleMenuItem = {
-        //padding: collapsed ? '0 12px' : '0 16px',
         paddingLeft: isMobile ? 8 : 24,
         paddingRight: isMobile ? 0 : 16,
         marginLeft: collapsed ? '0' : '-8px',
@@ -108,7 +98,6 @@ export const SideBar: React.FC = () => {
                         height: isMobile ? 192 : 230,
                         marginTop: isMobile ? 16 : 42,
                     }}
-                    //defaultSelectedKeys={['1']}
                     items={menuItems}
                 />
             </div>

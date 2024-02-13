@@ -1,11 +1,7 @@
 import React, { ReactNode } from 'react';
 import styles from './custom-card-action.module.css';
 import 'antd/dist/antd.css';
-import { Card, Button } from 'antd';
-import {  HeartFilled } from '@ant-design/icons';
-
-const { Meta } = Card;
-
+import { Card } from 'antd';
 
 interface ICustomCardActionProps {
     title: string;

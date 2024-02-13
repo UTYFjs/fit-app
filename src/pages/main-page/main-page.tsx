@@ -1,13 +1,13 @@
-import React, { useId, useState } from 'react';
+import React, { useId } from 'react';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
-import { Button, Card, Col, Layout, Menu, Row, Typography } from 'antd';
-import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled, UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Layout, Row } from 'antd';
+import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { SideBar } from '@components/side-bar/side-bar';
 import { HeaderMy } from '@components/header/header-my';
 import { FooterMy } from '@components/footer/footer-my';
-import Meta from 'antd/lib/card/Meta';
+
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 
 
@@ -39,7 +39,6 @@ export const MainPage: React.FC = () => {
    return (
        <Layout className='app'>
            <SideBar />
-
            <Layout className='site-layout'>
                <HeaderMy />
                <Content className='main'>
