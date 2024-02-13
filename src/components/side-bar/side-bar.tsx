@@ -35,7 +35,7 @@ export const SideBar: React.FC = () => {
         {
             key: '1',
             icon: (
-                <CalendarIcon style={{ fill: colorPrimaryLight9 }}/>
+                <CalendarIcon style={{ color: colorPrimaryLight9 }}/>
             ),
             label: 'Календарь',
             style: styleMenuItem,
