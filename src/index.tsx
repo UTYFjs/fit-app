@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { HistoryRouter } from 'redux-first-history/rr6';
 
@@ -11,6 +11,9 @@ import { MainPage } from './pages';
 
 import 'normalize.css';
 import './index.css';
+import { LayoutMain } from '@pages/layouts/layout-main/layout-main';
+import { Auth } from '@pages/auth/auth';
+import { LayoutAuth } from '@pages/layouts/auth-layout/layout-auth';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -20,13 +23,17 @@ root.render(
         <Provider store={store}>
             <HistoryRouter history={history}>
                 <Routes>
-                    <Route path='/' element={<MainPage />}>
-                        <Route path='auth'>
-                            <Route path='registration' />
-                            <Route path='login' />
-                            <Route path='change-password' />
-                            <Route path='confirm-email' />
+                    <Route path='/' element={<LayoutMain />}>
+                        <Route index element={<MainPage />} />
+                        <Route path='auth' element={<LayoutAuth />}>
+                                <Route index element={<Auth />}/>
+                                <Route path='registration' />
+                                <Route path='login' />
+                                <Route path='change-password' />
+                                <Route path='confirm-email' />
+                            
                         </Route>
+
                         <Route path='result'>
                             <Route path='success' />
                             <Route path='error' />
