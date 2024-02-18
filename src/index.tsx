@@ -26,12 +26,11 @@ root.render(
                     <Route path='/' element={<LayoutMain />}>
                         <Route index element={<MainPage />} />
                         <Route path='auth' element={<LayoutAuth />}>
-                                <Route index element={<Auth />}/>
-                                <Route path='registration' />
-                                <Route path='login' />
-                                <Route path='change-password' />
-                                <Route path='confirm-email' />
-                            
+                            <Route index element={<Auth />} />
+                            <Route path='registration' element={<Auth />} />
+                            <Route path='login' element={<Auth />} />
+                            <Route path='change-password' />
+                            <Route path='confirm-email' />
                         </Route>
 
                         <Route path='result'>

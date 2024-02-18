@@ -20,7 +20,7 @@ export const SideBar: React.FC = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     window.addEventListener('resize', () => {
-        setIsMobile(window.innerWidth < 767);
+        setIsMobile(window.innerWidth < 768);
     });
 
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
