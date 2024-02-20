@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from'./auth.module.css';
 import 'antd/dist/antd.css';
 import { CleverFitIcon } from '@components/custom-icons/custom-icons';
