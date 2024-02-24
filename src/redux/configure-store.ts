@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 import appReducer from'./app-slice'
+import { api } from '@services/api';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -13,9 +14,10 @@ export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
         app: appReducer,
+        [api.reducerPath]: api.reducer
     }),
 
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware,api.middleware),
 });
 
 

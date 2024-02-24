@@ -6,18 +6,31 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 
 import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
+import { useRegistrationMutation } from '@services/auth-api';
+import { IRegisterData } from '../../types/forms';
+import { useNavigate } from 'react-router-dom';
 
 export const Registration: React.FC = () => {
     const [form] = Form.useForm();
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
+    const [registration, {isLoading }] = useRegistrationMutation()
+    const navigate = useNavigate()
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
 
 
-    const onFinish = (values: any) => {
+    const onFinish = (values: IRegisterData) => {
+        registration({email: values.email, password: values.password})
+        .unwrap()
+        .then((data)=>{console.log(data)
+        navigate('/result/success');})
+        .catch((e) => {
+            if(e.status === 409){
+              console.log(e)  
+            }
+        });
         console.log('Success:', values);
     };
 
@@ -29,14 +42,14 @@ export const Registration: React.FC = () => {
             onFinish={onFinish}
         >
             <Form.Item
-                name='username'
+                name='email'
                 rules={[
                     { required: true, message: '' },
                     { type: 'email', message: '' },
                 ]}
                 style={{ marginBottom: 32 }}
             >
-                <Input addonBefore='e-mail' size='large' />
+                <Input addonBefore='e-mail' size='large' data-test-id='registration-email' />
             </Form.Item>
 
             <>
@@ -49,16 +62,17 @@ export const Registration: React.FC = () => {
                             message: messageValidation.password,
                         },
                     ]}
-                    help={
-                        <div className={styles.help}>
-                           {messageValidation.password}
-                        </div>
-                    }
+                    help={<div className={styles.help}>{messageValidation.password}</div>}
                 >
-                    <Input.Password type='password' placeholder='Пароль' size='large' />
+                    <Input.Password
+                        type='password'
+                        placeholder='Пароль'
+                        size='large'
+                        data-test-id='registration-password'
+                    />
                 </Form.Item>
                 <Form.Item
-                    name='password-repeat'
+                    name='passwordRepeat'
                     className={styles['password-repeat']}
                     dependencies={['password']}
                     rules={[
@@ -76,7 +90,12 @@ export const Registration: React.FC = () => {
                         }),
                     ]}
                 >
-                    <Input.Password type='password' placeholder='Повторите пароль' size='large' />
+                    <Input.Password
+                        type='password'
+                        placeholder='Повторите пароль'
+                        size='large'
+                        data-test-id='registration-confirm-password'
+                    />
                 </Form.Item>
             </>
             <Form.Item style={{ marginBottom: 16 }}>
@@ -86,6 +105,7 @@ export const Registration: React.FC = () => {
                     size='large'
                     style={{ width: '100%' }}
                     className={styles['login-form-button']}
+                    data-test-id='registration-submit-button'
                 >
                     Войти
                 </Button>

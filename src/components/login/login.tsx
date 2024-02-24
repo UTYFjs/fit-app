@@ -5,6 +5,8 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
+import { useLoginMutation } from '@services/auth-api';
+import { ILoginData } from '../..//types/forms';
 
 
 
@@ -13,6 +15,7 @@ export const Login: React.FC = () => {
     const [form] = Form.useForm();
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [login] = useLoginMutation();
 
         window.addEventListener('resize', () => {
             setIsMobile(window.innerWidth < 768);
@@ -20,7 +23,12 @@ export const Login: React.FC = () => {
 
 
 
-    const onFinish = (values: any) => {
+    const onFinish = (values: ILoginData) => {
+        login({email: values.email, password: values.password}).unwrap()
+        .then((data) => {console.log(data)})
+        .catch((e)=>{
+            if(e) {console.log(e)}
+        })
         console.log('Success:', values);
     };
 
@@ -33,14 +41,14 @@ export const Login: React.FC = () => {
           onFinish={onFinish}
       >
           <Form.Item
-              name='username'
+              name='email'
               rules={[
                   { required: true, message: '' },
                   { type: 'email', message: '' },
               ]}
               style={{ marginBottom: 32 }}
           >
-              <Input addonBefore='e-mail' size='large' />
+              <Input addonBefore='e-mail' size='large' data-test-id='login-email' />
           </Form.Item>
 
           <Form.Item
@@ -53,13 +61,25 @@ export const Login: React.FC = () => {
                   },
               ]}
           >
-              <Input.Password type='password' placeholder='Пароль' size='large' />
+              <Input.Password
+                  type='password'
+                  placeholder='Пароль'
+                  size='large'
+                  data-test-id='login-password'
+              />
           </Form.Item>
           <div className={styles['form-item_check-area']}>
               <Form.Item name='remember' valuePropName='checked' noStyle>
-                  <Checkbox className={styles['checkbox_remember']}>Запомнить меня</Checkbox>
+                  <Checkbox className={styles['checkbox_remember']} data-test-id='login-remember'>
+                      Запомнить меня
+                  </Checkbox>
               </Form.Item>
-              <Button type='text' size='small' className={styles['login-form-forgot']}>
+              <Button
+                  type='text'
+                  size='small'
+                  className={styles['login-form-forgot']}
+                  data-test-id='login-forgot-button'
+              >
                   Забыли пароль?
               </Button>
           </div>
@@ -70,6 +90,7 @@ export const Login: React.FC = () => {
                   size='large'
                   style={{ width: '100%' }}
                   className={styles['login-form-button']}
+                  data-test-id='login-submit-button'
               >
                   Войти
               </Button>
