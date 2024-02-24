@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { CleverFitIcon } from '@components/custom-icons/custom-icons';
 import { Tabs } from 'antd';
 import { Login } from '@components/login/login';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Registration } from '@components/registration/registration';
 import Loader from '@components/loader/loader';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';

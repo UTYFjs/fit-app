@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './registration.module.css';
 import 'antd/dist/antd.css';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { GooglePlusOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
+import { Button, Form, Input } from 'antd';
+import { GooglePlusOutlined } from '@ant-design/icons';
+
+import { validationPassword } from '@utils/validation';
+import { messageValidation } from '@constants/validation';
 
 export const Registration: React.FC = () => {
     const [form] = Form.useForm();
@@ -19,24 +21,6 @@ export const Registration: React.FC = () => {
         console.log('Success:', values);
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    const validatePassword = (_: any, value: string) => {
-        if (value && value.length < 8) {
-            return Promise.reject('Пароль должен содержать не менее 8 символов');
-        }
-        if (value && !/[A-Z]/.test(value)) {
-            return Promise.reject('Пароль должен содержать заглавную букву');
-        }
-        if (value && !/\d/.test(value)) {
-            return Promise.reject('Пароль должен содержать цифру');
-        }
-        return Promise.resolve();
-    };
-
-
     return (
         <Form
             name='normal_login'
@@ -46,45 +30,55 @@ export const Registration: React.FC = () => {
         >
             <Form.Item
                 name='username'
-                rules={[{ required: true, message: '' }]}
+                rules={[
+                    { required: true, message: '' },
+                    { type: 'email', message: '' },
+                ]}
                 style={{ marginBottom: 32 }}
             >
                 <Input addonBefore='e-mail' size='large' />
             </Form.Item>
-           
-             
-                <>
-                    <Form.Item
-                        name='password'
-                        rules={[
-                            {
-                                required: true,
-                                //validator: validatePassword,
-                                message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+
+            <>
+                <Form.Item
+                    name='password'
+                    rules={[
+                        {
+                            required: true,
+                            validator: validationPassword,
+                            message: messageValidation.password,
+                        },
+                    ]}
+                    help={
+                        <div className={styles.help}>
+                           {messageValidation.password}
+                        </div>
+                    }
+                >
+                    <Input.Password type='password' placeholder='Пароль' size='large' />
+                </Form.Item>
+                <Form.Item
+                    name='password-repeat'
+                    className={styles['password-repeat']}
+                    dependencies={['password']}
+                    rules={[
+                        {
+                            required: true,
+                            message: messageValidation.repeatPassword,
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error(messageValidation.repeatPassword));
                             },
-                        ]}
-                        //validateStatus={getPasswordValidationStatus('password')}
-                        help={ <div className={styles.help}>
-                                    Пароль не менее 8 символов, с заглавной буквой и цифрой
-                                </div>}
-                    >
-                        <Input.Password type='password' placeholder='Пароль' size='large' />
-                    </Form.Item>
-                    <Form.Item
-                        name='password-repeat'
-                        className={styles['password-repeat']}
-                        rules={[{
-                                required: true,
-                                message: 'Пароли не совпадают',
-                            },]}
-                    >
-                        <Input.Password
-                            type='password'
-                            placeholder='Повторите пароль'
-                            size='large'
-                        />
-                    </Form.Item>
-                </>
+                        }),
+                    ]}
+                >
+                    <Input.Password type='password' placeholder='Повторите пароль' size='large' />
+                </Form.Item>
+            </>
             <Form.Item style={{ marginBottom: 16 }}>
                 <Button
                     type='primary'

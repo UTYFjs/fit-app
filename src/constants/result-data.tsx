@@ -1,5 +1,3 @@
-import { CheckCircleFilled, CloseCircleFilled, WarningFilled } from '@ant-design/icons';
-import { SomethingWrongIcon } from '@components/custom-icons/custom-icons';
 import { ResultStatusType } from 'antd/lib/result';
 
  type resultDataType = {
