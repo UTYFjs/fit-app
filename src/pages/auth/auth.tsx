@@ -6,11 +6,15 @@ import { Tabs } from 'antd';
 import { Login } from '@components/login/login';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Registration } from '@components/registration/registration';
+import Loader from '@components/loader/loader';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { isLoadingState } from '@redux/app-slice';
 
 
 
 export const Auth: React.FC = () => {
  const { pathname } = useLocation();
+ const isLoading = useAppSelector(isLoadingState)
     const items = [
         { label: <Link to='/auth/login'>Вход</Link>, key: 'login', children: <Login /> }, // remember to pass the key prop
         {
@@ -23,10 +27,11 @@ export const Auth: React.FC = () => {
 
     return (
         <>
+            {' '}
+            {isLoading && <Loader />}
             <div className={styles.logo}>
                 <CleverFitIcon />
             </div>
-
             <Tabs
                 className={styles['auth_tabs']}
                 defaultActiveKey={pathname === '/auth/login' ? 'login' : 'registration'}

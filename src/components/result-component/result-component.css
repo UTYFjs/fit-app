@@ -28,7 +28,7 @@ color: var(--character-light-secondary-45);
 
 }
 
-.ant-btn.ant-btn-primary {
+.result-card .ant-btn.ant-btn-primary {
 border: 1px solid var(--primary-light-6);
 border-radius: 2px;
 padding: 4px 15px;
@@ -39,7 +39,7 @@ height: 40px;
 background: var(--primary-light-6);
 }
 
-.ant-btn.ant-btn.ant-btn-primary > span{
+.result-card .ant-btn.ant-btn.ant-btn-primary > span{
   font-family: var(--font-family);
 font-weight: 400;
 font-size: 14px;
