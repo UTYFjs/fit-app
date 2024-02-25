@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './login.module.css';
 import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';
@@ -7,6 +7,10 @@ import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
 import { useLoginMutation } from '@services/auth-api';
 import { ILoginData } from '../..//types/forms';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { setAccessToken } from '@redux/user-slice';
 
 
 
@@ -16,6 +20,14 @@ export const Login: React.FC = () => {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [login] = useLoginMutation();
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
+    const {accessToken} = useAppSelector((state) => state.user)
+
+    useEffect(() => {
+        if(accessToken){ navigate(Paths.MAIN)}
+    }, [accessToken, navigate])
 
         window.addEventListener('resize', () => {
             setIsMobile(window.innerWidth < 768);
@@ -25,9 +37,15 @@ export const Login: React.FC = () => {
 
     const onFinish = (values: ILoginData) => {
         login({email: values.email, password: values.password}).unwrap()
-        .then((data) => {console.log(data)})
+        .then((data) => {
+            values.remember ? localStorage.setItem('accessToken', data.accessToken) : '';
+            dispatch(setAccessToken(data.accessToken));
+            console.log('values Login', values);
+            navigate(Paths.MAIN)
+        })
         .catch((e)=>{
-            if(e) {console.log(e)}
+            navigate(Paths.ERROR_LOGIN);
+
         })
         console.log('Success:', values);
     };

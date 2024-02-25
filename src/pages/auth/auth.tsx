@@ -16,7 +16,7 @@ export const Auth: React.FC = () => {
  const { pathname } = useLocation();
  const isLoading = useAppSelector(isLoadingState)
     const items = [
-        { label: <Link to='/auth/login'>Вход</Link>, key: 'login', children: <Login /> }, // remember to pass the key prop
+        { label: <Link to='/auth'>Вход</Link>, key: 'login', children: <Login /> }, // remember to pass the key prop
         {
             label: <Link to='/auth/registration'>Регистрация</Link>,
             key: 'registration',
@@ -34,7 +34,7 @@ export const Auth: React.FC = () => {
             </div>
             <Tabs
                 className={styles['auth_tabs']}
-                defaultActiveKey={pathname === '/auth/login' ? 'login' : 'registration'}
+                defaultActiveKey={pathname === '/auth' ? 'login' : 'registration'}
                 centered
                 tabBarGutter={0}
                 tabBarStyle={{
@@ -42,7 +42,7 @@ export const Auth: React.FC = () => {
                     margin: '0 auto',
                 }}
                 style={{
-                    marginBottom: pathname === '/auth/login' ? 110 : 0,
+                    marginBottom: pathname === '/auth' ? 110 : 0,
                     //height: pathname === '/auth/login' ? 380 : 418,
                 }}
                 size='large'

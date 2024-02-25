@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './registration.module.css';
 import 'antd/dist/antd.css';
 import { Button, Form, Input } from 'antd';
@@ -8,7 +8,10 @@ import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
 import { useRegistrationMutation } from '@services/auth-api';
 import { IRegisterData } from '../../types/forms';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { setUserValues } from '@redux/user-slice';
 
 export const Registration: React.FC = () => {
     const [form] = Form.useForm();
@@ -16,22 +19,47 @@ export const Registration: React.FC = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [registration, {isLoading }] = useRegistrationMutation()
     const navigate = useNavigate()
+    const location = useLocation();
+    console.log(location.state)
+    const { accessToken, email, password, passwordRepeat } = useAppSelector((state) => state.user);
+    const {previousLocations } = useAppSelector((state) => state.router)
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {        
+        if (accessToken) {
+        navigate(Paths.MAIN);
+    }}, [accessToken, navigate])
+
+    useEffect(() => {
+        if(previousLocations?.[1]?.location?.pathname === Paths.ERROR){
+            console.log('from error page')
+            onFinish({
+                email: email,
+                password: password,
+                passwordRepeat: passwordRepeat,
+            });
+        }
+    }, [email, password, passwordRepeat, previousLocations]);
+
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
 
 
     const onFinish = (values: IRegisterData) => {
+        console.log('onfinish');
+        dispatch(setUserValues(values))
         registration({email: values.email, password: values.password})
         .unwrap()
-        .then((data)=>{console.log(data)
-        navigate('/result/success');})
+        .then(()=>{
+        navigate(Paths.SUCCESS);})
         .catch((e) => {
+            console.log('error', e);
             if(e.status === 409){
-              console.log(e)  
+             navigate(Paths.ERROR_USER_EXIST); 
             }
+            navigate(Paths.ERROR);
         });
-        console.log('Success:', values);
     };
 
     return (

@@ -25,24 +25,26 @@ root.render(
             <HistoryRouter history={history}>
                 <Routes>
                     <Route path='/' element={<LayoutMain />}>
-                        <Route index element={<MainPage />} />
+                        <Route index path='/main' element={<MainPage />} />
                         <Route path='auth' element={<LayoutAuth />}>
                             <Route index element={<Auth />} />
                             <Route path='registration' element={<Auth />} />
-                            <Route path='login' element={<Auth />} />
                             <Route path='change-password' />
                             <Route path='confirm-email' />
                         </Route>
 
                         <Route path='result' element={<LayoutAuth />}>
                             <Route path='success' element={<ResultComponent />} />
-                            <Route path='error' />
-                            <Route path='error-user-exist' />
-                            <Route path='error-login' />
-                            <Route path='error-check-email-no-exist' />
-                            <Route path='error-check-email' />
-                            <Route path='error-change-password' />
-                            <Route path='success-change-password' />
+                            <Route path='error' element={<ResultComponent />} />
+                            <Route path='error-user-exist' element={<ResultComponent />} />
+                            <Route path='error-login' element={<ResultComponent />} />
+                            <Route
+                                path='error-check-email-no-exist'
+                                element={<ResultComponent />}
+                            />
+                            <Route path='error-check-email' element={<ResultComponent />} />
+                            <Route path='error-change-password' element={<ResultComponent />} />
+                            <Route path='success-change-password' element={<ResultComponent />} />
                         </Route>
                     </Route>
                 </Routes>

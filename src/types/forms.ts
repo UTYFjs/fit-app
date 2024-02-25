@@ -6,5 +6,5 @@ export interface IRegisterData {
 export interface ILoginData{
   email: string;
   password: string;
-  isChecked: boolean
+  remember: boolean
 }

@@ -11,7 +11,7 @@ import { ResultStatusType } from 'antd/lib/result';
  };
 export const resultData: resultDataType[] = [
     {
-        url: ' /result/error-login',
+        url: '/result/error-login',
         status: 'warning',
         title: 'Вход не выполнен',
         description: 'Что-то пошло не так. Попробуйте еще раз.',
@@ -45,7 +45,7 @@ export const resultData: resultDataType[] = [
         title: 'Данные не сохранились',
         description: 'Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.',
         buttonText: 'Повторить',
-        buttonLink: '/auth',
+        buttonLink: '/auth/registration',
         dataTestId: 'registration-retry-button',
     },
     {
