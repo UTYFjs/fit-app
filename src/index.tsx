@@ -15,6 +15,8 @@ import { LayoutMain } from '@pages/layouts/layout-main/layout-main';
 import { Auth } from '@pages/auth/auth';
 import { LayoutAuth } from '@pages/layouts/auth-layout/layout-auth';
 import { ResultComponent } from '@components/result-component/result-component';
+import ConfirmEmail from '@pages/confirm-email/confirm-email';
+import ChangePassword from '@pages/change-password/change-password';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -29,8 +31,8 @@ root.render(
                         <Route path='auth' element={<LayoutAuth />}>
                             <Route index element={<Auth />} />
                             <Route path='registration' element={<Auth />} />
-                            <Route path='change-password' />
-                            <Route path='confirm-email' />
+                            <Route path='change-password'element={<ChangePassword/>} />
+                            <Route path='confirm-email' element={<ConfirmEmail />} />
                         </Route>
 
                         <Route path='result' element={<LayoutAuth />}>

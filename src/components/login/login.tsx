@@ -4,13 +4,13 @@ import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { validationPassword } from '@utils/validation';
-import { messageValidation } from '@constants/validation';
-import { useLoginMutation } from '@services/auth-api';
+import { messageValidation, regExpEmail } from '@constants/validation';
+import { useCheckEmailMutation, useLoginMutation } from '@services/auth-api';
 import { ILoginData } from '../..//types/forms';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { setAccessToken } from '@redux/user-slice';
+import { setAccessToken, setUserValues } from '@redux/user-slice';
 
 
 
@@ -20,21 +20,72 @@ export const Login: React.FC = () => {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [login] = useLoginMutation();
+    const [checkEmail] = useCheckEmailMutation();
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
     const {accessToken} = useAppSelector((state) => state.user)
+    const {email} = useAppSelector((state) => state.user)
+    const { previousLocations } = useAppSelector((state) => state.router);
 
     useEffect(() => {
         if(accessToken){ navigate(Paths.MAIN)}
     }, [accessToken, navigate])
 
+    useEffect(() => {
+        if (previousLocations?.[1]?.location?.pathname === Paths.ERROR_CHECK_EMAIL) {
+            console.log('Login from error page');
+           checkEmail({ email: email })
+               .unwrap()
+               .then(() => {
+                console.log('проверка почты')
+                navigate(Paths.CONFIRM_EMAIL)
+               })
+               .catch((e) => {
+                   //console.log('error', e.status === 404 && e.data.message === 'Email не найден', e);
+                   if (e.status === 404 && e.data.message === 'Email не найден') {
+                       console.log('error 404 не найден', e);
+                       navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST);
+                   } else {
+                       navigate(Paths.ERROR_CHECK_EMAIL);
+                   }
+               });
+        }
+    }, [previousLocations]);
+    
         window.addEventListener('resize', () => {
             setIsMobile(window.innerWidth < 768);
         });
 
 
+    const handleForgotPassword = () =>{
+        const email = form.getFieldValue('email') as string
+        if (regExpEmail.test(email)){
+            
+            console.log('forgot password  valid email');
+            dispatch(setUserValues({email: email, password: '', passwordRepeat: ''}))
 
+        checkEmail({email: email})
+        .unwrap()
+        .then(() => {
+            console.log('проверка почты');
+        navigate(Paths.CONFIRM_EMAIL);})
+        .catch((e) =>{
+            //console.log('error', e.status === 404 && e.data.message === 'Email не найден', e);
+            if(e.status === 404 && e.data.message === 'Email не найден'){
+                console.log('error 404 не найден', e);
+                navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST)
+            }else {
+            navigate(Paths.ERROR_CHECK_EMAIL);
+            }
+
+            
+        }) }
+        else {
+        console.log('forgot password dont valid email');
+        }
+
+    }
     const onFinish = (values: ILoginData) => {
         login({email: values.email, password: values.password}).unwrap()
         .then((data) => {
@@ -53,6 +104,7 @@ export const Login: React.FC = () => {
 
   return (
       <Form
+          form={form}
           name='normal_login'
           className={styles['form_login']}
           initialValues={{ remember: true }}
@@ -97,6 +149,7 @@ export const Login: React.FC = () => {
                   size='small'
                   className={styles['login-form-forgot']}
                   data-test-id='login-forgot-button'
+                  onClick={handleForgotPassword}
               >
                   Забыли пароль?
               </Button>

@@ -14,13 +14,9 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setUserValues } from '@redux/user-slice';
 
 export const Registration: React.FC = () => {
-    const [form] = Form.useForm();
-
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [registration, {isLoading }] = useRegistrationMutation()
     const navigate = useNavigate()
-    const location = useLocation();
-    console.log(location.state)
     const { accessToken, email, password, passwordRepeat } = useAppSelector((state) => state.user);
     const {previousLocations } = useAppSelector((state) => state.router)
     const dispatch = useAppDispatch();
@@ -32,7 +28,7 @@ export const Registration: React.FC = () => {
 
     useEffect(() => {
         if(previousLocations?.[1]?.location?.pathname === Paths.ERROR){
-            console.log('from error page')
+            console.log('Registration from error page')
             onFinish({
                 email: email,
                 password: password,
