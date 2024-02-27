@@ -51,6 +51,7 @@ export const Registration: React.FC = () => {
         navigate(Paths.SUCCESS);})
         .catch((e) => {
             console.log('error', e);
+
             if(e.status === 409){
              navigate(Paths.ERROR_USER_EXIST); 
             }

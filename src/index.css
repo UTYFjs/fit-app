@@ -106,3 +106,40 @@
 body {
     min-height: 100vh;
 }
+
+.ant-tabs-ink-bar {
+    background: var(--primary-light-6);
+}
+.ant-tabs-tab a {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 130%;
+	color: var(--character-light-title-85);
+
+}
+.ant-tabs-tab.ant-tabs-tab-active a {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 130%;
+	color: var(--primary-light-6);
+
+}
+
+.ant-btn-primary {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+	background: var(--primary-light-6);
+}
+.anticon-exclamation-circle > svg{
+	width: 70px;
+	height: 70px;
+  color: var(--primary-light-6);
+}
+
+.ant-checkbox-checked .ant-checkbox-inner{
+	background-color: var(--primary-light-6);;
+	border-color: var(--primary-light-6);;
+}
+
+

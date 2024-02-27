@@ -11,7 +11,7 @@ type IUserValues = Pick<IUserState, 'email' | 'password' | 'passwordRepeat'>;
 
 const initialState: IUserState = {
     accessToken: localStorage.getItem('accessToken') || '',
-    email: 'example@gmail.com',
+    email: 'victorbyden@gmail.com',
     password: '',
     passwordRepeat: '',
 };

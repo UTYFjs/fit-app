@@ -4,13 +4,27 @@ import 'antd/dist/antd.css';
 import './layout-main.css';
 import {  Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import Loader from '@components/loader/loader';
+import { RootState } from '@redux/configure-store';
 
 
 
-export const LayoutMain: React.FC = () => 
-     (
-        <Layout className='app'>
-          <Outlet/>
-        </Layout>
+export const LayoutMain: React.FC = () => {
+    const isLoadingMutation = useAppSelector((state: RootState) =>
+       Object.values(state.api.mutations).some((query) => query?.status === 'pending')
     );
+    const isLoadingQuery = useAppSelector((state: RootState) =>
+            Object.values(state.api.queries).some((query) => query?.status === 'pending'),
+        );
+    console.log(isLoadingMutation, isLoadingQuery);
+    
+return (
+    <Layout className='app'>
+        {(isLoadingMutation || isLoadingQuery) && <Loader />}
+        <Outlet />
+    </Layout>
+);
+}
+
 

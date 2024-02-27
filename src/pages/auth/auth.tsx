@@ -40,6 +40,7 @@ export const Auth: React.FC = () => {
                 tabBarStyle={{
                     width: '100%',
                     margin: '0 auto',
+                   
                 }}
                 style={{
                     marginBottom: pathname === '/auth' ? 110 : 0,

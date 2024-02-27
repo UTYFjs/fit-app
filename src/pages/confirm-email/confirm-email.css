@@ -4,7 +4,7 @@
 .container_verification-input{
   margin: 24px auto;
   height: 40px;
-  
+  width: 300px;
 }
 .character_correct{
   border: 1px solid var(--character-light-border);
@@ -28,7 +28,8 @@
 .character_filled{
     font-size: 14px;
     font-weight: 400;
-}
+    line-height: 40px;
+  }
 .extra__text{
   font-family: var(--font-family);
   font-weight: 400;
@@ -36,4 +37,21 @@
   line-height: 130%;
   text-align: center;
   color: var(--character-light-secondary-45);
+}
+
+p.extra__text {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .container_verification-input{
+width: 280px;
+  
+}
+  .container_verification-input{
+    gap:8px;
+  }
+  .character{
+    width: 40px;
+  }
 }
