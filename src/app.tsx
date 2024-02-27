@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { LayoutMain } from '@pages/layouts/layout-main/layout-main';
 import { Auth } from '@pages/auth/auth';
@@ -17,11 +16,6 @@ const App = () => {
   const { previousLocations } = useAppSelector((state) => state.router);
   const { accessToken } = useAppSelector((state) => state.user);
 
-  const isAllowedChangePassword =
-      previousLocations?.[1]?.location?.pathname === Paths.CONFIRM_EMAIL;
-  const isAllowedConfirmEmail =
-      previousLocations?.[1]?.location?.pathname === Paths.LOGIN;
-
   return (
       <>
           <Routes>
@@ -31,36 +25,19 @@ const App = () => {
                           <ProtectedRoute isAllowed={!!accessToken} redirectPath={Paths.LOGIN} />
                       }
                   >
-                      <Route path='/' element={<Navigate to={'/main'} replace/>} />
-                      <Route path='/main' element={<MainPage />} />
+                      <Route path='/' element={<Navigate to={Paths.MAIN} replace />} />
+                      <Route path={Paths.MAIN} element={<MainPage />} />
                   </Route>
                   <Route
                       element={
                           <ProtectedRoute isAllowed={!accessToken} redirectPath={Paths.MAIN} />
                       }
                   >
-                      <Route path='auth' element={<LayoutAuth />}>
+                      <Route path={Paths.LOGIN} element={<LayoutAuth />}>
                           <Route index element={<Auth />} />
-                          <Route path='registration' element={<Auth />} />
-
-                          {/* <Route
-                              element={
-                                  <ProtectedRoute
-                                      isAllowed={isAllowedConfirmEmail}
-                                      redirectPath={Paths.LOGIN}
-                                  />
-                              }
-                          ></Route>
-                          <Route
-                              element={
-                                  <ProtectedRoute
-                                      isAllowed={isAllowedChangePassword}
-                                      redirectPath={Paths.LOGIN}
-                                  />
-                              }
-                          ></Route> */}
-                          <Route path='confirm-email' element={<ConfirmEmail />} />
-                          <Route path='change-password' element={<ChangePassword />} />
+                          <Route path={Paths.REGISTRATION} element={<Auth />} />
+                          <Route path={Paths.CONFIRM_EMAIL} element={<ConfirmEmail />} />
+                          <Route path={Paths.CHANGE_PASSWORD} element={<ChangePassword />} />
                       </Route>
                   </Route>
 
@@ -72,15 +49,18 @@ const App = () => {
                           />
                       }
                   >
-                      <Route path='result' element={<LayoutAuth />}>
-                          <Route path='success' element={<ResultComponent />} />
-                          <Route path='error' element={<ResultComponent />} />
-                          <Route path='error-user-exist' element={<ResultComponent />} />
-                          <Route path='error-login' element={<ResultComponent />} />
-                          <Route path='error-check-email-no-exist' element={<ResultComponent />} />
-                          <Route path='error-check-email' element={<ResultComponent />} />
-                          <Route path='error-change-password' element={<ResultComponent />} />
-                          <Route path='success-change-password' element={<ResultComponent />} />
+                      <Route path={Paths.RESULT} element={<LayoutAuth />}>
+                          <Route path={Paths.SUCCESS} element={<ResultComponent />} />
+                          <Route path={Paths.ERROR} element={<ResultComponent />} />
+                          <Route path={Paths.ERROR_USER_EXIST} element={<ResultComponent />} />
+                          <Route path={Paths.ERROR_LOGIN} element={<ResultComponent />} />
+                          <Route
+                              path={Paths.ERROR_CHECK_EMAIL_NO_EXIST}
+                              element={<ResultComponent />}
+                          />
+                          <Route path={Paths.ERROR_CHECK_EMAIL} element={<ResultComponent />} />
+                          <Route path={Paths.ERROR_CHANGE_PASSWORD} element={<ResultComponent />} />
+                          <Route path={Paths.SUCCESS_CHANGE_PASSWORD} element={<ResultComponent />} />
                       </Route>
                   </Route>
               </Route>

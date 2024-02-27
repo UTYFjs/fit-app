@@ -24,32 +24,25 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    const {accessToken} = useAppSelector((state) => state.user)
     const {email} = useAppSelector((state) => state.user)
     const { previousLocations } = useAppSelector((state) => state.router);
-
-    // useEffect(() => {
-    //     if(accessToken){ navigate(Paths.MAIN)}
-    // }, [accessToken, navigate])
 
     useEffect(() => {
         if (previousLocations?.[1]?.location?.pathname === Paths.ERROR_CHECK_EMAIL) {
            checkEmail({ email: email })
                .unwrap()
                .then(() => {
-                console.log('проверка почты')
                 navigate(Paths.CONFIRM_EMAIL)
                })
                .catch((e) => {
                     if (e.status === 404 && e.data.message === 'Email не найден') {
-                       console.log('error 404 не найден', e);
                        navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST);
                    } else {
                        navigate(Paths.ERROR_CHECK_EMAIL);
                    }
                });
         }
-    }, [previousLocations]);
+    }, [checkEmail, email, navigate, previousLocations]);
     
         window.addEventListener('resize', () => {
             setIsMobile(window.innerWidth < 768);
@@ -66,7 +59,6 @@ export const Login: React.FC = () => {
         .then(() => {navigate(Paths.CONFIRM_EMAIL);})
         .catch((e) =>{
             if(e.status === 404 && e.data.message === 'Email не найден'){
-                console.log('error 404 не найден', e);
                 navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST)
             }else {
             navigate(Paths.ERROR_CHECK_EMAIL);
@@ -74,24 +66,18 @@ export const Login: React.FC = () => {
 
             
         }) }
-        else {
-        console.log('forgot password dont valid email');
-        }
-
     }
     const onFinish = (values: ILoginData) => {
         login({email: values.email, password: values.password}).unwrap()
         .then((data) => {
             values.remember ? localStorage.setItem('accessToken', data.accessToken) : '';
             dispatch(setAccessToken(data.accessToken));
-            console.log('values Login', values);
             navigate(Paths.MAIN)
         })
-        .catch((e)=>{
+        .catch(()=>{
             navigate(Paths.ERROR_LOGIN);
 
         })
-        console.log('Success:', values);
     };
 
 

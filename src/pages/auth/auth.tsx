@@ -13,7 +13,7 @@ import { Paths } from '@constants/api';
 export const Auth: React.FC = () => {
  const { pathname } = useLocation();
     const items = [
-        { label: <Link to={Paths.LOGIN}>Вход</Link>, key: 'login', children: <Login /> }, // remember to pass the key prop
+        { label: <Link to={Paths.LOGIN}>Вход</Link>, key: 'login', children: <Login /> }, 
         {
             label: <Link to={Paths.REGISTRATION}>Регистрация</Link>,
             key: 'registration',
@@ -38,7 +38,6 @@ export const Auth: React.FC = () => {
                 }}
                 style={{
                     marginBottom: pathname === Paths.LOGIN ? 110 : 0,
-                    //height: pathname === '/auth/login' ? 380 : 418,
                 }}
                 size='large'
                 items={items}

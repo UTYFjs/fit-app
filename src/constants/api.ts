@@ -23,6 +23,7 @@ export enum Paths {
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL = '/auth/confirm-email',
     CHANGE_PASSWORD = '/auth/change-password',
+    RESULT = '/result',
     ERROR_LOGIN = '/result/error-login',
     ERROR_USER_EXIST = '/result/error-user-exist',
     ERROR = '/result/error',
@@ -32,3 +33,4 @@ export enum Paths {
     SUCCESS = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
 }
+

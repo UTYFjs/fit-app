@@ -1,4 +1,4 @@
-import React, { useEffect, useId } from 'react';
+import React, { useId } from 'react';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
@@ -10,9 +10,7 @@ import { FooterMy } from '@components/footer/footer-my';
 
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 import { CalendarIcon } from '@components/custom-icons/custom-icons';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useNavigate } from 'react-router-dom';
-import { Paths } from '@constants/api';
+
 
 
 
@@ -20,14 +18,6 @@ const { Content } = Layout;
 
 
 export const MainPage: React.FC = () => {
-           const navigate = useNavigate();
-        const { accessToken } = useAppSelector((state) => state.user);
-
-        // useEffect(() => {
-        //     if (!accessToken) {
-        //         navigate(Paths.LOGIN);
-        //     }
-        // }, [accessToken, navigate]);
 
     const buttonActions = [
         {

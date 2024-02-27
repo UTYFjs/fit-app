@@ -17,7 +17,6 @@ export const LayoutMain: React.FC = () => {
     const isLoadingQuery = useAppSelector((state: RootState) =>
             Object.values(state.api.queries).some((query) => query?.status === 'pending'),
         );
-    console.log(isLoadingMutation, isLoadingQuery);
     
 return (
     <Layout className='app'>

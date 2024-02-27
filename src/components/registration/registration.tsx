@@ -8,14 +8,14 @@ import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
 import { useRegistrationMutation } from '@services/auth-api';
 import { IRegisterData } from '../../types/forms';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setUserValues } from '@redux/user-slice';
 
 export const Registration: React.FC = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const [registration, {isLoading }] = useRegistrationMutation()
+    const [registration] = useRegistrationMutation()
     const navigate = useNavigate()
     const { accessToken, email, password, passwordRepeat } = useAppSelector((state) => state.user);
     const {previousLocations } = useAppSelector((state) => state.router)
@@ -28,13 +28,13 @@ export const Registration: React.FC = () => {
 
     useEffect(() => {
         if(previousLocations?.[1]?.location?.pathname === Paths.ERROR){
-            console.log('Registration from error page')
             onFinish({
                 email: email,
                 password: password,
                 passwordRepeat: passwordRepeat,
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email, password, passwordRepeat, previousLocations]);
 
     window.addEventListener('resize', () => {
@@ -43,7 +43,6 @@ export const Registration: React.FC = () => {
 
 
     const onFinish = (values: IRegisterData) => {
-        console.log('onfinish');
         dispatch(setUserValues(values))
         registration({email: values.email, password: values.password})
         .unwrap()
@@ -55,7 +54,6 @@ export const Registration: React.FC = () => {
             } else {
             navigate(Paths.ERROR);
             }
-
         });
     };
 
