@@ -23,11 +23,11 @@ export const MainPage: React.FC = () => {
            const navigate = useNavigate();
         const { accessToken } = useAppSelector((state) => state.user);
 
-        useEffect(() => {
-            if (!accessToken) {
-                navigate(Paths.LOGIN);
-            }
-        }, [accessToken, navigate]);
+        // useEffect(() => {
+        //     if (!accessToken) {
+        //         navigate(Paths.LOGIN);
+        //     }
+        // }, [accessToken, navigate]);
 
     const buttonActions = [
         {

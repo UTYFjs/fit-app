@@ -28,6 +28,7 @@ export const authApi = api.injectEndpoints({
                 url: Endpoint.CHECK_EMAIL,
                 method: HTTPMethod.POST,
                 body: body,
+                credentials: 'include',
             }),
         }),
         confirmEmail: builder.mutation<ICheckEmailRequest, IConfirmEmailForm>({
@@ -35,6 +36,7 @@ export const authApi = api.injectEndpoints({
                 url: Endpoint.CONFIRM_EMAIL,
                 method: HTTPMethod.POST,
                 body: body,
+                credentials: 'include',
             }),
         }),
         changePassword: builder.mutation<IChangePasswordRequest, IChangePasswordForm>({
@@ -42,7 +44,7 @@ export const authApi = api.injectEndpoints({
                 url: Endpoint.CHANGE_PASSWORD,
                 method: HTTPMethod.POST,
                 body: body,
-                credentials: 'include'
+                credentials: 'include',
             }),
         }),
     }),

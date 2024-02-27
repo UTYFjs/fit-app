@@ -28,13 +28,12 @@ export const Login: React.FC = () => {
     const {email} = useAppSelector((state) => state.user)
     const { previousLocations } = useAppSelector((state) => state.router);
 
-    useEffect(() => {
-        if(accessToken){ navigate(Paths.MAIN)}
-    }, [accessToken, navigate])
+    // useEffect(() => {
+    //     if(accessToken){ navigate(Paths.MAIN)}
+    // }, [accessToken, navigate])
 
     useEffect(() => {
         if (previousLocations?.[1]?.location?.pathname === Paths.ERROR_CHECK_EMAIL) {
-            console.log('Login from error page');
            checkEmail({ email: email })
                .unwrap()
                .then(() => {
@@ -42,8 +41,7 @@ export const Login: React.FC = () => {
                 navigate(Paths.CONFIRM_EMAIL)
                })
                .catch((e) => {
-                   //console.log('error', e.status === 404 && e.data.message === 'Email не найден', e);
-                   if (e.status === 404 && e.data.message === 'Email не найден') {
+                    if (e.status === 404 && e.data.message === 'Email не найден') {
                        console.log('error 404 не найден', e);
                        navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST);
                    } else {
@@ -61,17 +59,12 @@ export const Login: React.FC = () => {
     const handleForgotPassword = () =>{
         const email = form.getFieldValue('email') as string
         if (regExpEmail.test(email)){
-            
-            console.log('forgot password  valid email');
-            dispatch(setUserValues({email: email, password: '', passwordRepeat: ''}))
+        dispatch(setUserValues({email: email, password: '', passwordRepeat: ''}))
 
         checkEmail({email: email})
         .unwrap()
-        .then(() => {
-            console.log('проверка почты');
-        navigate(Paths.CONFIRM_EMAIL);})
+        .then(() => {navigate(Paths.CONFIRM_EMAIL);})
         .catch((e) =>{
-            //console.log('error', e.status === 404 && e.data.message === 'Email не найден', e);
             if(e.status === 404 && e.data.message === 'Email не найден'){
                 console.log('error 404 не найден', e);
                 navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST)

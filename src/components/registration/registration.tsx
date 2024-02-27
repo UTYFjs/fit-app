@@ -50,12 +50,12 @@ export const Registration: React.FC = () => {
         .then(()=>{
         navigate(Paths.SUCCESS);})
         .catch((e) => {
-            console.log('error', e);
-
-            if(e.status === 409){
-             navigate(Paths.ERROR_USER_EXIST); 
-            }
+            if(e.status === 409) {
+                navigate(Paths.ERROR_USER_EXIST)
+            } else {
             navigate(Paths.ERROR);
+            }
+
         });
     };
 

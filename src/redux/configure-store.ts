@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
-import appReducer from'./app-slice'
+
 import userReducer from './user-slice';
 import { api } from '@services/api';
 
@@ -14,7 +14,6 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
-        app: appReducer,
         user: userReducer,
         [api.reducerPath]: api.reducer
     }),
