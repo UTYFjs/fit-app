@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './login.module.css';
 import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';

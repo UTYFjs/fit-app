@@ -1,7 +1,4 @@
-import React, { useId } from 'react';
-
-import 'antd/dist/antd.css';
-import './main-page.css';
+import { useId } from 'react';
 import { Button, Card, Col, Layout, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { SideBar } from '@components/side-bar/side-bar';
@@ -11,6 +8,8 @@ import { FooterMy } from '@components/footer/footer-my';
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 import { CalendarIcon } from '@components/custom-icons/custom-icons';
 
+import 'antd/dist/antd.css';
+import './main-page.css';
 
 
 

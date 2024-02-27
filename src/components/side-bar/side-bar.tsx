@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from'./side-bar.module.css'
 import 'antd/dist/antd.css';
 import { Button, Layout, Menu } from 'antd';
@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api.ts';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
 import { setAccessToken } from '@redux/user-slice.ts';
+import React from 'react';
 
 const {  Sider } = Layout;
 

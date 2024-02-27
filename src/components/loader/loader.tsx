@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './loader.module.css'
 import Lottie from 'react-lottie';
 import animationData from './data/loader.json'

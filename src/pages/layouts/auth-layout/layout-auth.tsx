@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import 'antd/dist/antd.css';
 import './layout-auth.css';

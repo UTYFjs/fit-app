@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './registration.module.css';
 import 'antd/dist/antd.css';
 import { Button, Form, Input } from 'antd';

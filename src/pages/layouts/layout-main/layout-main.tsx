@@ -1,13 +1,10 @@
-import React from 'react';
-
-import 'antd/dist/antd.css';
-import './layout-main.css';
 import {  Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import Loader from '@components/loader/loader';
 import { RootState } from '@redux/configure-store';
-
+import 'antd/dist/antd.css';
+import './layout-main.css';
 
 
 export const LayoutMain: React.FC = () => {
