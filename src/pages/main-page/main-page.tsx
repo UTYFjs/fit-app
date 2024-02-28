@@ -1,7 +1,4 @@
-import React, { useId } from 'react';
-
-import 'antd/dist/antd.css';
-import './main-page.css';
+import { useId } from 'react';
 import { Button, Card, Col, Layout, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { SideBar } from '@components/side-bar/side-bar';
@@ -10,6 +7,10 @@ import { FooterMy } from '@components/footer/footer-my';
 
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 import { CalendarIcon } from '@components/custom-icons/custom-icons';
+
+import 'antd/dist/antd.css';
+import './main-page.css';
+
 
 
 const { Content } = Layout;
@@ -38,7 +39,7 @@ export const MainPage: React.FC = () => {
         },
     ];
    return (
-       <Layout className='app'>
+       <>
            <SideBar />
            <Layout className='site-layout'>
                <HeaderMy />
@@ -69,10 +70,10 @@ export const MainPage: React.FC = () => {
                            фитнеса. Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
                        </p>
                    </Card>
-                   <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8}}>
+                   <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8 }}>
                        {buttonActions.map((item) => {
                            return (
-                               <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
+                               <Col key={item.key} xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
                                    <CustomCardAction
                                        title={item.title}
                                        actions={[
@@ -88,6 +89,6 @@ export const MainPage: React.FC = () => {
                </Content>
                <FooterMy />
            </Layout>
-       </Layout>
+       </>
    );
 };

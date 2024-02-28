@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './header-my.module.css';
 import 'antd/dist/antd.css';
 import { Typography, Layout, Breadcrumb, Button } from 'antd';

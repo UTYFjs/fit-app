@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './footer-my.module.css';
 import 'antd/dist/antd.css';
 import { Card, Layout, Button } from 'antd';

@@ -1,8 +1,5 @@
-.app {
-  max-width: 1440px;
-  min-height: 100vh;
 
-}
+
 
 .app .site-layout {
   width: 100%; 
@@ -21,10 +18,7 @@
 
   margin-left: 30px;
 }
-.app{
-background: no-repeat center/cover url('/public/Main_page_light.png');
 
-}
 .main{
   display: flex;
   flex-direction: column;

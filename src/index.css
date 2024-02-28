@@ -106,3 +106,66 @@
 body {
     min-height: 100vh;
 }
+
+.ant-tabs-ink-bar {
+
+    background: var(--primary-light-6);
+		transition: none;
+}
+.ant-tabs-top .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
+	height: 2px;
+	background: var(--primary-light-6);
+	transition: none;
+	z-index: 3;
+}
+@media (max-width: 992px) and (min-width: 576px){
+	.ant-tabs-top .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
+	height: 2px;
+	width: 50%;
+	background: var(--primary-light-6);
+	transition: none;
+	z-index: 3;
+	}
+}
+@media (max-width: 576px){
+		.ant-tabs-top .ant-tabs-nav-list .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
+	height: 2px;
+	width: 50%;
+	background: var(--primary-light-6);
+	transition: none;
+	z-index: 3;
+	}
+}
+.ant-tabs-tab a {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 130%;
+	color: var(--character-light-title-85);
+
+}
+.ant-tabs-tab.ant-tabs-tab-active a {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 130%;
+	color: var(--primary-light-6);
+
+}
+
+.ant-btn-primary {
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+	background: var(--primary-light-6);
+}
+.anticon-exclamation-circle > svg{
+	width: 70px;
+	height: 70px;
+  color: var(--primary-light-6);
+}
+
+.ant-checkbox-checked .ant-checkbox-inner{
+	background-color: var(--primary-light-6);;
+	border-color: var(--primary-light-6);;
+}
+
+

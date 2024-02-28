@@ -1,0 +1,76 @@
+.form_login {
+display:flex;
+flex-direction: column;
+padding-top: 32px;
+}
+
+.form-item_check-area {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+div[class='ant-form-item'] span[class='ant-input-group-addon']{
+  padding-left: 12px;
+  padding-right: 12px;
+  letter-spacing: .3px;
+}
+
+.help{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  margin-bottom: 28px;
+}
+
+.password-repeat{
+  padding-bottom: 38px;
+}
+
+.checkbox_remember{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: rgba(0, 0, 0, 0.85);
+}
+.login-form-forgot{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  text-align: center;
+  color: var(--primary-light-6);
+}
+
+.buttom_form-submit{
+
+margin-bottom: -20px;
+}
+.login-form-button, .login-form-button_google{
+  letter-spacing: .3px;
+}
+
+  @media (max-width: 576px){
+
+.form_login {
+
+padding-top: 24px;
+}
+
+.password-repeat{
+  padding-bottom: 28px;
+}
+.help{
+      margin-bottom: 12px;
+    }
+.login-form-forgot{
+  font-size: 14px;
+}
+.login-form-button, .login-form-button_google{
+  font-size: 14px;
+  letter-spacing: .4px;
+}
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from'./side-bar.module.css'
 import 'antd/dist/antd.css';
 import { Button, Layout, Menu } from 'antd';
@@ -12,6 +12,11 @@ import {
 
 import {CleverFitIcon, FitIcon, ExitIcon, CalendarIcon} from '../custom-icons/custom-icons.tsx';
 import { getCssVar } from '@utils/get-css-var.ts';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api.ts';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
+import { setAccessToken } from '@redux/user-slice.ts';
+import React from 'react';
 
 const {  Sider } = Layout;
 
@@ -19,9 +24,19 @@ export const SideBar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     window.addEventListener('resize', () => {
-        setIsMobile(window.innerWidth < 767);
+        setIsMobile(window.innerWidth < 768);
     });
+
+
+    const handleExit = () => {
+            localStorage.removeItem('accessToken');
+            dispatch(setAccessToken(''));
+             navigate(Paths.LOGIN)
+        };
 
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
     const styleMenuItem = {
@@ -112,6 +127,7 @@ export const SideBar: React.FC = () => {
                 type='text'
                 icon={isMobile ? '' : <ExitIcon />}
                 className={styles['button_exit']}
+                onClick = {handleExit}
             >
                 {!collapsed && 'Выход'}
             </Button>

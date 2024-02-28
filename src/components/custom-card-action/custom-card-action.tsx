@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import styles from './custom-card-action.module.css';
 import 'antd/dist/antd.css';
 import { Card } from 'antd';
