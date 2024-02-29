@@ -1,0 +1,20 @@
+.app .site-layout {
+  width: 100%; 
+  background: transparent;
+  }
+
+.main{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+
+}
+
+@media (max-width: 768px){
+  .main{
+    padding: 24px 16px;
+  }
+
+}

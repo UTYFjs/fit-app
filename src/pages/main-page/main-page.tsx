@@ -1,10 +1,6 @@
 import { useId } from 'react';
-import { Button, Card, Col, Layout, Row } from 'antd';
+import { Button, Card, Col, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
-import { SideBar } from '@components/side-bar/side-bar';
-import { HeaderMy } from '@components/header/header-my';
-import { FooterMy } from '@components/footer/footer-my';
-
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
 import { CalendarIcon } from '@components/custom-icons/custom-icons';
 
@@ -13,7 +9,7 @@ import './main-page.css';
 
 
 
-const { Content } = Layout;
+
 
 
 export const MainPage: React.FC = () => {
@@ -40,10 +36,7 @@ export const MainPage: React.FC = () => {
     ];
    return (
        <>
-           <SideBar />
-           <Layout className='site-layout'>
-               <HeaderMy />
-               <Content className='main'>
+
                    <Card bordered={false}>
                        <p>С CleverFit ты сможешь:</p>
                        <p>
@@ -86,9 +79,6 @@ export const MainPage: React.FC = () => {
                            );
                        })}
                    </Row>
-               </Content>
-               <FooterMy />
-           </Layout>
        </>
    );
 };
