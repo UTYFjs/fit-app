@@ -19,6 +19,7 @@ export enum Endpoint {
 }
 export enum Paths {
     MAIN = '/main',
+    FEEDBACKS = '/feedbacks',
     LOGIN = '/auth',
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL = '/auth/confirm-email',

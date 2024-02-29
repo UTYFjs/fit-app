@@ -9,6 +9,7 @@ import { MainPage } from './pages';
 import ProtectedRoute from '@components/protected-route/protected-route';
 import { Paths } from '@constants/api';
 import { useAppSelector } from './hooks';
+import Feedbacks from '@pages/feedbacks/feedbacks';
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
                   >
                       <Route path='/' element={<Navigate to={Paths.MAIN} replace />} />
                       <Route path={Paths.MAIN} element={<MainPage />} />
+                      <Route path={Paths.FEEDBACKS} element={<Feedbacks />} />
                   </Route>
                   <Route
                       element={
@@ -60,7 +62,10 @@ const App = () => {
                           />
                           <Route path={Paths.ERROR_CHECK_EMAIL} element={<ResultComponent />} />
                           <Route path={Paths.ERROR_CHANGE_PASSWORD} element={<ResultComponent />} />
-                          <Route path={Paths.SUCCESS_CHANGE_PASSWORD} element={<ResultComponent />} />
+                          <Route
+                              path={Paths.SUCCESS_CHANGE_PASSWORD}
+                              element={<ResultComponent />}
+                          />
                       </Route>
                   </Route>
               </Route>
