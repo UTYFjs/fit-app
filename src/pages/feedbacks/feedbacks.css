@@ -1,0 +1,33 @@
+.feedback-list{
+  max-height: 774px;
+  overflow: auto;
+}
+.feedback-list::-webkit-scrollbar {
+  display: none;
+}
+.feedback-list .ant-row{
+  gap: 20px;
+}
+.feedback-action{
+  display:flex;
+  gap: 8px;
+  padding-top: 108px;
+}
+
+@media screen and (max-width: 768px) {
+  .feedback-list{
+    max-height: 1018px;
+  }
+
+
+  .feedback-list .ant-row{
+  gap: 16px;
+}
+
+.feedback-action{
+  display:flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 32px;
+}
+}

@@ -9,17 +9,17 @@
 
   margin-left: 30px;
 }
-.main > * {
+.main > .main-card {
   border-radius: 2px;
   max-width: 752px;
 
 }
-.main > div{
+.main > .main-card{
   border-radius: 2px;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
   background: var(--character-light-primary-inverse);
 }
-.main > div:first-child{
+.main > .main-card:first-child{
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
@@ -27,12 +27,12 @@
   color: var(--primary-light-9);
 
 }
-.main > div:first-child > div > p{
+.main > .main-card:first-child > div > p{
 
   margin: 0;
 }
 
-.main > div:nth-child(2){
+.main > .main-card:nth-child(2){
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 20px;
@@ -41,12 +41,12 @@
 
 }
 
-.main > div:nth-child(2) > div > p{
+.main > .main-card:nth-child(2) > div > p{
 
   margin: 0;
 }
 
-.main > div:last-child{
+.main > .grid-container:last-child{
   background: transparent;
   max-width: 766px;
 
@@ -62,7 +62,7 @@
 
 
 }
-.main > div:last-child{
+.main > .grid-container:last-child{
   background: transparent;
   margin-top: -8px;
   
@@ -76,7 +76,7 @@
 
 }
 
-  .main > div:first-child{
+  .main > .main-card:first-child{
       height: 368px;
     }
   .main .ant-card-body {
