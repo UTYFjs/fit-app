@@ -20,3 +20,12 @@ export interface ICheckEmailRequest {
 export interface IChangePasswordRequest{
    message: string;
 }
+
+export type IFeedback = {
+  id: string;
+  fullName: string | null;
+  imageSrc: string | null;
+  message: string | null;
+  rating: number;
+  createdAt: string;
+}

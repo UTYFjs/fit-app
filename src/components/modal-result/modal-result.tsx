@@ -1,7 +1,4 @@
-import { Button, Modal, Rate, Result } from 'antd';
-
-import TextArea from 'antd/lib/input/TextArea';
-import { resultData } from '@constants/result-data';
+import { Button, Modal, Result } from 'antd';
 import { useEffect, useState } from 'react';
 import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
@@ -10,11 +7,7 @@ type ModalErrorProps = {
     setIsOpen: (value: boolean) => void;
     typeContent: 'successReview' | 'errorReview' | 'errorServer'
 };
-type DataModaType={
-  status: 500 | 'error' |'success',
-  title: string,
-  subtitle: string,
-}
+
 type DataModalType = {
     status: ResultStatusType;
     title: string;
