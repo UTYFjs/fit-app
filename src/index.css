@@ -188,3 +188,6 @@ color: var(--primary-light-6);
 }
 
 
+p{
+	    margin-bottom: 0;
+}

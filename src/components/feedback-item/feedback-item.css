@@ -42,10 +42,14 @@ color: var(--character-light-disable-25)
 }
 
 
-.anticon-star svg{
+.ant-rate-star-full .anticon-star svg{
   width: 14px;
   height: 14px;
   fill: var(--character-light-warning);
+}
+.ant-rate-star-zero .anticon-star svg{
+  width: 14px;
+  height: 14px;
 }
 
 .feedback__rating{

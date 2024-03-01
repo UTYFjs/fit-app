@@ -1,0 +1,8 @@
+.textarea_modal{
+  margin-top: 16px;
+  border: 1px solid var(--character-light-border);
+border-radius: 2px;
+padding: 5px 12px;
+width: 491px;
+height: 46px;
+}
