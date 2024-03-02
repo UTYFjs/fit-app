@@ -19,28 +19,35 @@ export const FooterMy: React.FC = () => {
         console.log();
     }
     
-    return(
-    <Footer className={styles.footer}>
-        <Button type='text' className={styles['button_review']}>
-            <Link to={Paths.FEEDBACKS}>Смотреть отзывы</Link>
-        </Button>
-        <Card
-            className={styles['footer__card']}
-            actions={[
-                <Button onClick={handleFeedbacks} type='text' icon={<AndroidFilled />} className={styles['button_android']}>
-                    Android OS
-                </Button>,
-                <Button type='text' icon={<AppleFilled />} className={styles['button_apple']}>
-                    Apple iOS
-                </Button>,
-            ]}
-        >
-            <Meta
-                title='Скачать на телефон'
-                description='Доступно в PRO-тарифе'
-                className={styles['card-body']}
-            />
-        </Card>
-    </Footer>
-);}
+    return (
+        <Footer className={styles.footer}>
+            <Button type='text' className={styles['button_review']}>
+                <Link to={Paths.FEEDBACKS} data-test-id='see-reviews'>
+                    Смотреть отзывы
+                </Link>
+            </Button>
+            <Card
+                className={styles['footer__card']}
+                actions={[
+                    <Button
+                        onClick={handleFeedbacks}
+                        type='text'
+                        icon={<AndroidFilled />}
+                        className={styles['button_android']}
+                    >
+                        Android OS
+                    </Button>,
+                    <Button type='text' icon={<AppleFilled />} className={styles['button_apple']}>
+                        Apple iOS
+                    </Button>,
+                ]}
+            >
+                <Meta
+                    title='Скачать на телефон'
+                    description='Доступно в PRO-тарифе'
+                    className={styles['card-body']}
+                />
+            </Card>
+        </Footer>
+    );}
 

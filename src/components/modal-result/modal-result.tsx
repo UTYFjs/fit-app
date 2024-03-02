@@ -4,8 +4,9 @@ import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
 type ModalErrorProps = {
     isOpen: boolean;
-    setIsOpen: (value: boolean) => void;
-    typeContent: 'successReview' | 'errorReview' | 'errorServer'
+    typeContent: 'successReview' | 'errorReview' | null,
+    handlePrimeButton: () => void,
+    handleSecondButton?: () => void,
 };
 
 type DataModalType = {
@@ -16,60 +17,48 @@ type DataModalType = {
     secondButtonText?: string;
     dataTestId?: string;
 };
+
 const dataModal: DataModalType[] = [
-    {
-        status: '500',
-        title: 'Что-то пошло не так',
-        subtitle: 'Произошла ошибка, попробуйте ещё раз.',
-        primeButtonText: 'Назад',
-        secondButtonText: '',
-        dataTestId: '',
-    },
     {
         status: 'error',
         title: 'Данные не сохранились',
-        subtitle: 'Что-то пошло не так. Попробуйте ещё раз.',
         primeButtonText: 'Написать отзыв',
+        subtitle: 'Что-то пошло не так. Попробуйте ещё раз.',
         secondButtonText: 'Закрыть',
         dataTestId: 'write-review-not-saved-modal',
     },
     {
         status: 'success',
         title: 'Отзыв успешно опубликован',
-        subtitle: '',
         primeButtonText: 'Отлично',
-        secondButtonText: '',
-        dataTestId: '',
     },
 ];
-const ModalResult = ({ isOpen, setIsOpen, typeContent }: ModalErrorProps) => {
+//todo check nessessary  switch default
+const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButton }: ModalErrorProps) => {
   const [data, setData] = useState<DataModalType | null>(null);
+  
   useEffect(() => {
   switch (typeContent) {
       case 'successReview':
-          setData(dataModal[2]);
+          setData(dataModal[1]);
           break;
       case 'errorReview':
-         setData(dataModal[1]);
-          break;
-      case 'errorServer':
-          setData(dataModal[0]);
+         setData(dataModal[0]);
           break;
       default:
-          setIsOpen(false);
+          handlePrimeButton();
   }
-  },[setIsOpen, typeContent])
+  },[handlePrimeButton, typeContent])
 
     return (
         <Modal
             closable={false}
             centered
-            visible={isOpen}
+            open={isOpen}
             footer={null}
-            onOk={() => setIsOpen(false)}
-            onCancel={() => setIsOpen(false)}
-            bodyStyle={{padding: 0}}
-
+            //onOk={() => setIsOpen(false)}
+            //onCancel={() => setIsOpen(false)}
+            bodyStyle={{ padding: 0 }}
             mask={true}
             maskClosable={true}
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
@@ -83,30 +72,28 @@ const ModalResult = ({ isOpen, setIsOpen, typeContent }: ModalErrorProps) => {
                 extra={
                     <div className='modal-result__button-wrapper'>
                         <Button
-                            className={typeContent === 'errorServer' ? 'btn_fit-content' : ''}
+                            //className={typeContent === 'errorServer' ? 'btn_fit-content' : ''}
                             type='primary'
                             size='large'
                             data-test-id={data?.dataTestId}
-                            onClick={() => {
-                                setIsOpen(false);
-                            }}
+                            onClick={handlePrimeButton}
+                            
                         >
                             {data?.primeButtonText}
                         </Button>
-                        {data?.secondButtonText && <Button
-                            className={''}
-                            type='ghost'
-                            size='large'
-                            data-test-id={data?.dataTestId}
-                            onClick={() => {
-                                setIsOpen(false);
-                            }}
-                        >
-                            {data?.secondButtonText}
-                        </Button>}
+                        {data?.secondButtonText && (
+                            <Button
+                                className={''}
+                                type='ghost'
+                                size='large'
+                                data-test-id={data?.dataTestId}
+                                onClick={handleSecondButton}
+                            >
+                                {data?.secondButtonText}
+                            </Button>
+                        )}
                     </div>
                 }
-                className=''
             />
         </Modal>
     );

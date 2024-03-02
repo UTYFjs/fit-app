@@ -19,3 +19,9 @@
 .ant-modal-footer{
  padding: 10px 24px
 }
+
+@media  screen and (max-width: 768px) {
+  .button_modal-send{
+    width: 100%
+  }
+}

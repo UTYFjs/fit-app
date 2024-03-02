@@ -119,7 +119,11 @@ export const Login: React.FC = () => {
           </Form.Item>
           <div className={styles['form-item_check-area']}>
               <Form.Item name='remember' valuePropName='checked' noStyle>
-                  <Checkbox className={styles['checkbox_remember']} data-test-id='login-remember'>
+                  <Checkbox
+                      defaultChecked={false}
+                      className={styles['checkbox_remember']}
+                      data-test-id='login-remember'
+                  >
                       Запомнить меня
                   </Checkbox>
               </Form.Item>

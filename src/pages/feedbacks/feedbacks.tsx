@@ -1,26 +1,74 @@
 import FeedbackItem from '@components/feedback-item/feedback-item'
 import './feedbacks.css'
 import { Button, Card, List} from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ModalFeedback from '@components/modal-feedback/modal-feedback'
 import ModalResult from '@components/modal-result/modal-result'
 import ModalServerError from '@components/modal-server-error/modal-server-error'
-import { useGetFeedbacksQuery } from '@services/feedback-api'
+import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api'
+import { IRatingStar } from '../../types/api'
+
+
 
 
 const Feedbacks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isAllFeedbacks, setIsAllFeedbacks] = useState(false)
-  const { data, isError } = useGetFeedbacksQuery('', {});
   
-  const feedbacks = isAllFeedbacks ? data : data?.slice(0,4)
+  const [isModalResultOpen, setIsModalResultOpen] = useState(false);
+  const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(null);
+  const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
+  const [ratingValue, setRatingValue] = useState<IRatingStar>(3);
+  const [textFeedbackValue, setTextFeedBackValue] = useState('')
 
+  const { data, isError, refetch } = useGetFeedbacksQuery('', {});
+  const [addFeedback] = useAddFeedbackMutation();
+    useEffect(() => { console.log('mount')},[])
+
+
+
+  const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
+
+
+  const handleSendFeedBack = () => {
+          addFeedback({ message: textFeedbackValue, rating: ratingValue })
+              .unwrap()
+              .then(() => {
+                  setIsModalOpen(false);
+                  setModalResultType('successReview');
+                  setIsModalResultOpen(true);
+
+                  
+                  console.log('IsModalResultOpen', isModalResultOpen);
+                  refetch();
+                  console.log('should was refetch');
+              })
+              .catch(() => {
+                  setModalResultType('errorReview');
+                  setIsModalResultOpen(true);
+              });
+      };
+    const handleSuccessFeedback = () => {
+        setIsModalResultOpen(false);
+        setModalResultType(null);
+    }
+
+    const handleRetryErrorSendFeedback = () => {
+             setIsModalResultOpen(false);
+             setModalResultType(null)
+             setIsModalOpen(true);
+             console.log( ' хочу переписать отзыв')
+    }
+    const handleCancelErrorFedback = ()=> {
+                setIsModalOpen(false);
+                setIsModalResultOpen(false);
+                setModalResultType(null);
+    }
   const handleShowAllFeedbacks = () => { setIsAllFeedbacks(!isAllFeedbacks)}
 
 
   return (
       <>
-          {feedbacks && (
+          {feedbacks && feedbacks.length > 0 && (
               <>
                   <List
                       className='feedback-list'
@@ -35,18 +83,24 @@ const Feedbacks = () => {
                           onClick={() => {
                               setIsModalOpen(true);
                           }}
+                          data-test-id='write-review'
                       >
                           {' '}
                           Написать отзыв{' '}
                       </Button>
-                      <Button type='link' size='large' onClick={handleShowAllFeedbacks}>
+                      <Button
+                          type='link'
+                          size='large'
+                          onClick={handleShowAllFeedbacks}
+                          data-test-id='all-reviews-button'
+                      >
                           {' '}
-                          { isAllFeedbacks? 'Cвернуть':'Развернуть'  } все отзывы
+                          {isAllFeedbacks ? 'Cвернуть' : 'Развернуть'} все отзывы
                       </Button>
                   </div>
               </>
           )}
-          {!feedbacks && (
+          {feedbacks?.length === 0 && (
               <div className='feedback-empty'>
                   <Card
                       title={<p className='feedback-empty__title'>Оставьте свой отзыв первым</p>}
@@ -66,24 +120,35 @@ const Feedbacks = () => {
                       onClick={() => {
                           setIsModalOpen(true);
                       }}
+                      data-test-id='write-review'
                   >
                       Написать отзыв
                   </Button>
               </div>
           )}
-          <ModalFeedback isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+          <ModalFeedback
+              isOpen={isModalOpen}
+              setIsOpen={setIsModalOpen}
+              setTextFeedBackValue={setTextFeedBackValue}
+              setRatingValue={setRatingValue}
+              handleSubmitReview={handleSendFeedBack}
+          />
 
           {
               //todo result modal
-
-              false && (
-                  <ModalResult
-                      isOpen={isModalOpen}
-                      setIsOpen={setIsModalOpen}
-                      typeContent={'errorReview'}
-                  />
-              )
+              //todo make best isModalResultOpenLogic
           }
+
+          <ModalResult
+              isOpen={isModalResultOpen}
+              typeContent={modalResultType}
+              handlePrimeButton={
+                  modalResultType === 'errorReview'
+                      ? handleRetryErrorSendFeedback
+                      : handleSuccessFeedback
+              }
+              handleSecondButton={handleCancelErrorFedback}
+          />
 
           {isError && <ModalServerError isOpen={isError} setIsOpen={setIsModalOpen} />}
       </>

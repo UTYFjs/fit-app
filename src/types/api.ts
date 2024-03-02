@@ -29,3 +29,10 @@ export type IFeedback = {
   rating: number;
   createdAt: string;
 }
+
+export type IRatingStar = 0|1|2|3|4|5;
+
+export type INewFeedback = {
+    message: string;
+    rating: IRatingStar;
+};

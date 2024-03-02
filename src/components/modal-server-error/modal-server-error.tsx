@@ -1,13 +1,19 @@
 import { Button, Modal, Result } from 'antd';
 
 import styles from './modal-server-error.module.css';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api';
 type ModalErrorProps = {
     isOpen: boolean;
     setIsOpen: (value: boolean) => void;
    };
 
 const ModalServerError = ({ isOpen, setIsOpen }: ModalErrorProps) => {
-   
+   const navigate = useNavigate()
+   const handleGoBack = () => {
+    setIsOpen(false);
+    navigate(Paths.MAIN)
+   }
     return (
         <Modal
             closable={false}
@@ -32,9 +38,7 @@ const ModalServerError = ({ isOpen, setIsOpen }: ModalErrorProps) => {
                         className={styles['btn_fit-content']}
                         type='primary'
                         size='large'
-                        onClick={() => {
-                            setIsOpen(false);
-                        }}
+                        onClick={handleGoBack}
                     >
                         Назад
                     </Button>
