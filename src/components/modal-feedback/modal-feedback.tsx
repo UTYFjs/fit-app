@@ -2,19 +2,22 @@
 import { Button, Modal, Rate } from 'antd';
 import './modal-feedback.css';
 import TextArea from 'antd/lib/input/TextArea';
+import Rating from '@components/rating/rating';
 type ModalFeedbackProps = {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
 const ModalFeedback = ({isOpen, setIsOpen}:ModalFeedbackProps) => {
+
+    
     return (
         <Modal
-            title='Ваш отзыв'
+            title={<p className='title_modal'>Ваш отзыв</p>}
             //closable={false}
             centered
             visible={isOpen}
             footer={
-                <Button type='primary' onClick={() => setIsOpen(false)}>
+                <Button className='button_modal-send' type='primary' size='large' onClick={() => setIsOpen(false)}>
                     {' '}
                     Опубликовать{' '}
                 </Button>
@@ -26,11 +29,14 @@ const ModalFeedback = ({isOpen, setIsOpen}:ModalFeedbackProps) => {
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
         >
-            <Rate defaultValue={3} />
+            <Rating rating={3} fontSize={22} isDisable={false} />
+            {
+                //<Rate defaultValue={3} />
+            }
             <TextArea
                 className='textarea_modal'
-                autoSize={{minRows: 2, maxRows:20}}
-                style={{ height: 120, resize: 'both' }}
+                autoSize={{ minRows: 2, maxRows: 20 }}
+                
                 placeholder='Расскажите, почему Вам понравилось наше приложение'
             />
         </Modal>

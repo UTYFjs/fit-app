@@ -10,6 +10,17 @@ export const feedbackApi = api.injectEndpoints({
             query: () => ({
                 url: Endpoint.FEEDBACK,
             }),
+            transformResponse(baseQueryReturnValue: IFeedback[]) {
+                 
+                baseQueryReturnValue.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                
+                 return baseQueryReturnValue.map((item) => {
+                    item.createdAt = new Date(item.createdAt).toLocaleDateString( "ru-RU" ,{day: 'numeric',month: 'numeric',year: 'numeric'});
+                return item;
+                }
+                );                
+            
+            },
             providesTags: (result) =>
                 result
                     ? [

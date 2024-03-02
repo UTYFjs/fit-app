@@ -42,35 +42,6 @@ color: var(--character-light-disable-25)
 }
 
 
-.ant-rate-star-full .anticon-star svg{
-  width: 14px;
-  height: 14px;
-  fill: var(--character-light-warning);
-}
-.ant-rate-star-zero .anticon-star svg{
-  width: 14px;
-  height: 14px;
-}
-
-.feedback__rating{
-  height: 16px;
-
-}
-.feedback__rating .ant-rate-star{
-    height: 16px;
-  margin-right: 6px;
-
-
-}
-.feedback__rating .ant-rate-star div{
-
-    height: 16px;
-}
-.feedback__rating .ant-rate-star span{
-  margin-bottom: 3px;
-}
-
-
 .feedback-item .feedback-item__content{
   font-family: var(--font-family);
   font-weight: 400;
@@ -78,9 +49,6 @@ color: var(--character-light-disable-25)
   line-height: 130%;
   color: var(--character-light-secondary-45);
 }
-
-
-
 
 @media  screen and (max-width: 768px) {
   .feedback-item .ant-comment-inner{

@@ -2,6 +2,7 @@ import { Avatar, Comment, Rate } from 'antd'
 import { UserOutlined } from '@ant-design/icons';
 import './feedback-item.css';
 import { IFeedback } from '../../types/api';
+import Rating from '@components/rating/rating';
 
 type IFeedbackProps = {
     data: IFeedback
@@ -22,22 +23,25 @@ const FeedbackItem = ({data}: IFeedbackProps) => {
             className='feedback-item'
             avatar={
                 <>
-                    <Avatar size={42} icon={<UserOutlined />} />
+                    {' '}
+                    {imageSrc && <Avatar size={42} src={imageSrc} />}
+                    {!imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
                     <div>
                         <p className='feedback-item__name-owner'>
-                            {firstName ? firstName : 'Пользователь'}
+                            {fullName ? firstName : 'Пользователь'}
                         </p>
                         <p className='feedback-item__name-owner'>{lastName}</p>
                     </div>
                 </>
             }
             author={
-                <Rate
-                    className='feedback__rating'
-                    disabled
-                    defaultValue={rating}
-                    style={{ lineHeight: '14px' }}
-                />
+                <Rating rating={rating} isDisable={true}/>
+                // <Rate
+                //     className='feedback__rating'
+                //     disabled
+                //     defaultValue={rating}
+                //     //style={{ lineHeight: '14px' }}
+                // />
             }
             datetime={<span> {createdAt}</span>}
             content={<p className='feedback-item__content'>{message}</p>}
