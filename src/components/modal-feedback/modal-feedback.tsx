@@ -1,10 +1,9 @@
 
-import { Button, Modal, Rate } from 'antd';
+import { Button, Modal } from 'antd';
 import './modal-feedback.css';
 import TextArea from 'antd/lib/input/TextArea';
 import Rating from '@components/rating/rating';
 import { useState } from 'react';
-import { useAddFeedbackMutation } from '@services/feedback-api';
 import { IRatingStar } from '../../types/api';
 type ModalFeedbackProps = {
     isOpen: boolean;
@@ -21,7 +20,6 @@ const ModalFeedback = ({isOpen, setIsOpen, setTextFeedBackValue, setRatingValue,
     return (
         <Modal
             title={<p className='title_modal'>Ваш отзыв</p>}
-            //closable={false}
             centered
             open={isOpen}
             footer={
@@ -37,20 +35,16 @@ const ModalFeedback = ({isOpen, setIsOpen, setTextFeedBackValue, setRatingValue,
                     Опубликовать{' '}
                 </Button>
             }
-            //onOk={() => setIsOpen(false)}
-            //onCancel={() => setIsOpen(false)}
+            onOk={() => setIsOpen(false)}
+            onCancel={() => setIsOpen(false)}
             mask={true}
-            //maskClosable={true}
+            maskClosable={true}
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
         >
             <Rating rating={3} fontSize={22} isDisable={false} onChange={(value) => {setIsBtnDisable(false);
                 setRatingValue(value)}} />
-            {
-                //<Rate defaultValue={3} />
-            }
             <TextArea
-                //value={111}
                 onChange={(e) => {
                     setTextFeedBackValue(e.currentTarget.value);
                 }}

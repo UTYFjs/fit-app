@@ -18,10 +18,8 @@ const Rating = ({ rating, isDisable = false, fontSize = 14, onChange}: IFeedback
   const colorIcon = getCssVar('--character-light-warning');
     return (
         <Rate
-            //className={'feedback__rating'}
             disabled={isDisable}
-            //allowClear={false}
-            character={({ index, value, allowHalf }) => {
+            character={({ index, value }) => {
                if (index !== undefined && value !== undefined) {
                     return value > index ? (
                         <StarFilled

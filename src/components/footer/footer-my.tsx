@@ -4,23 +4,13 @@ import { Card, Layout, Button } from 'antd';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { Paths } from '@constants/api';
-import { useGetFeedbacksQuery } from '@services/feedback-api';
 
 
 const { Footer } = Layout;
 const {Meta} = Card
 
-export const FooterMy: React.FC = () => {
-    //const {data,refetch,   } = useGetFeedbacksQuery('', {})
-
-    
-    const handleFeedbacks = () =>{
-        
-        console.log();
-    }
-    
-    return (
-        <Footer className={styles.footer}>
+export const FooterMy: React.FC = () => 
+         (  <Footer className={styles.footer}>
             <Button type='text' className={styles['button_review']}>
                 <Link to={Paths.FEEDBACKS} data-test-id='see-reviews'>
                     Смотреть отзывы
@@ -30,7 +20,6 @@ export const FooterMy: React.FC = () => {
                 className={styles['footer__card']}
                 actions={[
                     <Button
-                        onClick={handleFeedbacks}
                         type='text'
                         icon={<AndroidFilled />}
                         className={styles['button_android']}
@@ -49,5 +38,5 @@ export const FooterMy: React.FC = () => {
                 />
             </Card>
         </Footer>
-    );}
+    );
 

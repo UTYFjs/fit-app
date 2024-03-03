@@ -13,7 +13,6 @@ import { IRatingStar } from '../../types/api'
 
 const Feedbacks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  
   const [isModalResultOpen, setIsModalResultOpen] = useState(false);
   const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(null);
   const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
@@ -21,47 +20,39 @@ const Feedbacks = () => {
   const [textFeedbackValue, setTextFeedBackValue] = useState('')
 
   const { data, isError, refetch } = useGetFeedbacksQuery('', {});
-  const [addFeedback] = useAddFeedbackMutation();
-    useEffect(() => { console.log('mount')},[])
+  const [addFeedback, {isError: isErrorAddFeedback, isSuccess: isSuccessAddFeedback} ] = useAddFeedbackMutation();
+    
+    useEffect(()=>{
+        setIsModalOpen(false);
+        setModalResultType('errorReview');
+        setIsModalResultOpen(true); 
+    }, [isErrorAddFeedback])
 
+    useEffect(() => {
+        setIsModalOpen(false);
+        setModalResultType('successReview');
+        setIsModalResultOpen(true);
+        refetch();
+    }, [isSuccessAddFeedback, refetch]);
 
+      const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
 
-  const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
-
-
-  const handleSendFeedBack = () => {
-          addFeedback({ message: textFeedbackValue, rating: ratingValue })
-              .unwrap()
-              .then(() => {
-                  setIsModalOpen(false);
-                  setModalResultType('successReview');
-                  setIsModalResultOpen(true);
-
-                  
-                  console.log('IsModalResultOpen', isModalResultOpen);
-                  refetch();
-                  console.log('should was refetch');
-              })
-              .catch(() => {
-                  setModalResultType('errorReview');
-                  setIsModalResultOpen(true);
-              });
+    const handleSendFeedBack = () => {
+            addFeedback({ message: textFeedbackValue, rating: ratingValue })          
       };
     const handleSuccessFeedback = () => {
-        setIsModalResultOpen(false);
-        setModalResultType(null);
+            setIsModalResultOpen(false);
+            setModalResultType(null);
     }
-
     const handleRetryErrorSendFeedback = () => {
              setIsModalResultOpen(false);
              setModalResultType(null)
              setIsModalOpen(true);
-             console.log( ' хочу переписать отзыв')
     }
     const handleCancelErrorFedback = ()=> {
-                setIsModalOpen(false);
-                setIsModalResultOpen(false);
-                setModalResultType(null);
+             setIsModalOpen(false);
+             setIsModalResultOpen(false);
+             setModalResultType(null);
     }
   const handleShowAllFeedbacks = () => { setIsAllFeedbacks(!isAllFeedbacks)}
 
@@ -134,11 +125,6 @@ const Feedbacks = () => {
               handleSubmitReview={handleSendFeedBack}
           />
 
-          {
-              //todo result modal
-              //todo make best isModalResultOpenLogic
-          }
-
           <ModalResult
               isOpen={isModalResultOpen}
               typeContent={modalResultType}
@@ -150,7 +136,7 @@ const Feedbacks = () => {
               handleSecondButton={handleCancelErrorFedback}
           />
 
-          {isError && <ModalServerError isOpen={isError} setIsOpen={setIsModalOpen} />}
+          {isError && <ModalServerError isOpen={isError} />}
       </>
   );
 }

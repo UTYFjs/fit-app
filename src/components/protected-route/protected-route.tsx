@@ -12,8 +12,6 @@ const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) =
 
     const accessToken = location.search.split('=')
      const dispatch = useAppDispatch()
-     
-    console.log('AccessToken', accessToken[1]);
     if (accessToken[1]) {
         dispatch(setAccessToken(accessToken[1]));
         localStorage.setItem('accessToken', accessToken[1]);

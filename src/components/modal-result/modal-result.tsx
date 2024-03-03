@@ -33,7 +33,6 @@ const dataModal: DataModalType[] = [
         primeButtonText: 'Отлично',
     },
 ];
-//todo check nessessary  switch default
 const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButton }: ModalErrorProps) => {
   const [data, setData] = useState<DataModalType | null>(null);
   
@@ -56,8 +55,6 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
             centered
             open={isOpen}
             footer={null}
-            //onOk={() => setIsOpen(false)}
-            //onCancel={() => setIsOpen(false)}
             bodyStyle={{ padding: 0 }}
             mask={true}
             maskClosable={true}
@@ -72,12 +69,10 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
                 extra={
                     <div className='modal-result__button-wrapper'>
                         <Button
-                            //className={typeContent === 'errorServer' ? 'btn_fit-content' : ''}
                             type='primary'
                             size='large'
                             data-test-id={data?.dataTestId}
-                            onClick={handlePrimeButton}
-                            
+                            onClick={handlePrimeButton}                            
                         >
                             {data?.primeButtonText}
                         </Button>
@@ -86,7 +81,6 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
                                 className={''}
                                 type='ghost'
                                 size='large'
-                                data-test-id={data?.dataTestId}
                                 onClick={handleSecondButton}
                             >
                                 {data?.secondButtonText}

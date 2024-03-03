@@ -39,10 +39,6 @@ export const feedbackApi = api.injectEndpoints({
                 body: body,
             }),
             
-            transformResponse(baseQueryReturnValue: IFeedback[]) {
-                console.log('baseQueryReturnValue', baseQueryReturnValue);
-                return baseQueryReturnValue;
-            },
         }),
     }),
 });
