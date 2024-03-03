@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './login.module.css';
 import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';
@@ -8,7 +8,7 @@ import { messageValidation, regExpEmail } from '@constants/validation';
 import { useCheckEmailMutation, useLoginMutation } from '@services/auth-api';
 import { ILoginData } from '../..//types/forms';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from '@constants/api';
+import { Paths, baseUrl } from '@constants/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setAccessToken, setUserValues } from '@redux/user-slice';
 
@@ -26,7 +26,9 @@ export const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const {email} = useAppSelector((state) => state.user)
     const { previousLocations } = useAppSelector((state) => state.router);
-
+    const handleGoogleAuth = useCallback(async () => {
+        window.location.href = `${baseUrl}/auth/google`;
+    }, []);
     useEffect(() => {
         if (previousLocations?.[1]?.location?.pathname === Paths.ERROR_CHECK_EMAIL) {
            checkEmail({ email: email })
@@ -78,6 +80,8 @@ export const Login: React.FC = () => {
             navigate(Paths.ERROR_LOGIN);
 
         })
+
+
     };
 
 
@@ -86,7 +90,7 @@ export const Login: React.FC = () => {
           form={form}
           name='normal_login'
           className={styles['form_login']}
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
       >
           <Form.Item
@@ -119,10 +123,14 @@ export const Login: React.FC = () => {
           </Form.Item>
           <div className={styles['form-item_check-area']}>
               <Form.Item name='remember' valuePropName='checked' noStyle>
-                  <Checkbox className={styles['checkbox_remember']} data-test-id='login-remember'>
+                  <Checkbox
+                      defaultChecked={false}
+                      className={styles['checkbox_remember']}
+                      data-test-id='login-remember'
+                  >
                       Запомнить меня
                   </Checkbox>
-              </Form.Item>
+              </Form.Item>              
               <Button
                   type='text'
                   size='small'
@@ -151,6 +159,7 @@ export const Login: React.FC = () => {
               size='large'
               icon={isMobile ? '' : <GooglePlusOutlined />}
               className={styles['login-form-button_google']}
+              onClick={handleGoogleAuth}
           >
               Войти через Google
           </Button>

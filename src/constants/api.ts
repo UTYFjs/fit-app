@@ -14,11 +14,13 @@ export enum Endpoint {
     CHECK_EMAIL = 'auth/check-email ',
     CONFIRM_EMAIL = 'auth/confirm-email ',
     CHANGE_PASSWORD = 'auth/change-password ',
-
+    FEEDBACK = 'feedback',
+    GOOGLE_AUTH = 'auth/google'
      
 }
 export enum Paths {
     MAIN = '/main',
+    FEEDBACKS = '/feedbacks',
     LOGIN = '/auth',
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL = '/auth/confirm-email',
@@ -32,5 +34,16 @@ export enum Paths {
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
     SUCCESS = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
+}
+
+export enum StatusCode {
+    OK = 200,
+    CREATED = 201,
+    NO_CONTENT = 204,
+    BAD_REQUEST = 400,
+    NOT_FOUND = 404,
+    FORBIDDEN = 403,
+    METHOD_NOT_ALLOWED = 405,
+    SERVER_ERROR = 500,
 }
 

@@ -5,12 +5,16 @@ import { IRegistrationForm, ILoginRequest, ICheckEmailRequest, IConfirmEmailForm
 
 export const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
-
         login: builder.mutation<ILoginRequest, IRegistrationForm>({
             query: (body) => ({
                 url: Endpoint.LOGIN,
                 method: HTTPMethod.POST,
                 body: body,
+            }),
+        }),
+        GoogleAuth: builder.query<{ accessToken: string }, null>({
+            query: () => ({
+                url: Endpoint.GOOGLE_AUTH,
             }),
         }),
         registration: builder.mutation<void, IRegistrationForm>({
