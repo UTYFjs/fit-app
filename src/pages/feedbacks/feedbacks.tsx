@@ -7,6 +7,10 @@ import ModalResult from '@components/modal-result/modal-result'
 import ModalServerError from '@components/modal-server-error/modal-server-error'
 import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api'
 import { IRatingStar } from '../../types/api'
+import { useNavigate } from 'react-router-dom'
+import { Paths, StatusCode } from '@constants/api'
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks'
+import { setAccessToken } from '@redux/user-slice'
 
 
 
@@ -16,12 +20,28 @@ const Feedbacks = () => {
   const [isModalResultOpen, setIsModalResultOpen] = useState(false);
   const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(null);
   const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
+  
   const [ratingValue, setRatingValue] = useState<IRatingStar>(3);
   const [textFeedbackValue, setTextFeedBackValue] = useState('')
 
-  const { data, isError, refetch } = useGetFeedbacksQuery('', {});
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+
+  const { data, error, isError, refetch } = useGetFeedbacksQuery('', {});
+
   const [addFeedback, {isError: isErrorAddFeedback, isSuccess: isSuccessAddFeedback} ] = useAddFeedbackMutation();
     
+    useEffect(() => {
+        if(error){
+           if('status' in error && error.status == StatusCode.FORBIDDEN){
+            dispatch(setAccessToken(''))
+            localStorage.removeItem('accessToken')
+            navigate(Paths.LOGIN)
+           }
+        }
+    }, [dispatch, error, navigate]);
+
+
     useEffect(()=>{
         setIsModalOpen(false);
         setModalResultType('errorReview');

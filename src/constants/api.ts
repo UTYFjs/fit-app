@@ -36,3 +36,14 @@ export enum Paths {
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
 }
 
+export enum StatusCode {
+    OK = 200,
+    CREATED = 201,
+    NO_CONTENT = 204,
+    BAD_REQUEST = 400,
+    NOT_FOUND = 404,
+    FORBIDDEN = 403,
+    METHOD_NOT_ALLOWED = 405,
+    SERVER_ERROR = 500,
+}
+
