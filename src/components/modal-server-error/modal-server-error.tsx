@@ -3,15 +3,22 @@ import { Button, Modal, Result } from 'antd';
 import styles from './modal-server-error.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
+import { useState } from 'react';
 type ModalErrorProps = {
     isOpen: boolean;
    };
 
 const ModalServerError = ({ isOpen }: ModalErrorProps) => {
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
    const navigate = useNavigate()
    const handleGoBack = () => {
     navigate(Paths.MAIN)
    }
+
+
+    window.addEventListener('resize', () => {
+           setIsMobile(window.innerWidth < 768);
+       });
 
     return (
         <Modal
@@ -23,7 +30,7 @@ const ModalServerError = ({ isOpen }: ModalErrorProps) => {
             mask={true}
             maskClosable={true}
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
-            width={539}
+            width={isMobile ? 328 : 539}
             className={styles['modal-server-error']}
         >
             <Result

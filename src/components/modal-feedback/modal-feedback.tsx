@@ -42,7 +42,7 @@ const ModalFeedback = ({isOpen, setIsOpen, setTextFeedBackValue, setRatingValue,
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
         >
-            <Rating rating={3} fontSize={22} isDisable={false} onChange={(value) => {setIsBtnDisable(false);
+            <Rating rating={0} fontSize={22} isDisable={false} onChange={(value) => {setIsBtnDisable(false);
                 setRatingValue(value)}} />
             <TextArea
                 onChange={(e) => {
