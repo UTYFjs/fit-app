@@ -11,6 +11,11 @@ import { Paths } from '@constants/api';
 import { useAppSelector } from './hooks';
 import Feedbacks from '@pages/feedbacks/feedbacks';
 import { LayoutMainContent } from '@pages/layouts/main-content-layout/main-content-layout';
+import CalendarPage from '@pages/calendar-page/calendar-page';
+import TrainingPage from '@pages/training-page/training-page';
+import AchievmentPage from '@pages/achievment-page/achievment-page';
+import ProfilePage from '@pages/profile-page/profile-page';
+
 
 
 
@@ -31,6 +36,10 @@ const App = () => {
                           <Route path='/' element={<Navigate to={Paths.MAIN} replace />} />
                           <Route path={Paths.MAIN} element={<MainPage />} />
                           <Route path={Paths.FEEDBACKS} element={<Feedbacks />} />
+                          <Route path={Paths.CALENDAR} element={<CalendarPage />} />
+                          <Route path={Paths.TRAINING} element={<TrainingPage />} />
+                          <Route path={Paths.ACHIEVEMENT} element={<AchievmentPage />} />
+                          <Route path={Paths.PROFILE} element={<ProfilePage />} />
                       </Route>
                   </Route>
                   <Route

@@ -6,6 +6,8 @@ import { CalendarIcon } from '@components/custom-icons/custom-icons';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
+import { Paths } from '@constants/api';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,6 +15,7 @@ import './main-page.css';
 
 
 export const MainPage: React.FC = () => {
+    const navigate = useNavigate();
 
     const buttonActions = [
         {
@@ -20,18 +23,21 @@ export const MainPage: React.FC = () => {
             title: 'Расписать тренировки',
             icon: <HeartFilled />,
             label: 'Тренировки',
+            pathTo: Paths.TRAINING,
         },
         {
             key: useId(),
             title: 'Назначить календарь',
             icon: <CalendarIcon />,
             label: 'Календарь',
+            pathTo: Paths.CALENDAR,
         },
         {
             key: useId(),
             title: 'Заполнить профиль',
             icon: <IdcardOutlined />,
             label: 'Профиль',
+            pathTo: Paths.PROFILE
         },
     ];
    return (
@@ -65,7 +71,7 @@ export const MainPage: React.FC = () => {
                            <CustomCardAction
                                title={item.title}
                                actions={[
-                                   <Button type='text' icon={item.icon}>
+                                   <Button type='text' icon={item.icon} onClick={() => {navigate(item.pathTo)}} >
                                        {item.label}{' '}
                                    </Button>,
                                ]}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from'./side-bar.module.css'
 import 'antd/dist/antd.css';
 import { Button, Layout, Menu } from 'antd';
@@ -12,7 +12,7 @@ import {
 
 import {CleverFitIcon, FitIcon, ExitIcon, CalendarIcon} from '../custom-icons/custom-icons.tsx';
 import { getCssVar } from '@utils/get-css-var.ts';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api.ts';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
 import { setAccessToken } from '@redux/user-slice.ts';
@@ -23,9 +23,15 @@ const {  Sider } = Layout;
 export const SideBar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const {pathname} = useLocation();
+    //todo в какой момент менять назад и назачать начальное через useLocation&
+    const [currentMenuItem, setCurrentMenuItem] = useState(pathname)
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    useEffect(()=> {setCurrentMenuItem(pathname)},[pathname])
+
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
@@ -48,7 +54,7 @@ export const SideBar: React.FC = () => {
     };
     const menuItems = [
         {
-            key: '1',
+            key: Paths.CALENDAR,
             icon: (
                 <CalendarIcon style={{ color: colorPrimaryLight9 }}/>
             ),
@@ -56,19 +62,19 @@ export const SideBar: React.FC = () => {
             style: styleMenuItem,
         },
         {
-            key: '2',
+            key: Paths.TRAINING,
             icon: <HeartFilled style={{ color: colorPrimaryLight9 }} />,
             label: 'Тренировки',
             style: styleMenuItem,
         },
         {
-            key: '3',
+            key: Paths.ACHIEVEMENT,
             icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
             label: 'Достижения',
             style: styleMenuItem,
         },
         {
-            key: '4',
+            key: Paths.PROFILE,
             icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
             label: 'Профиль',
             style: styleMenuItem,
@@ -96,6 +102,7 @@ export const SideBar: React.FC = () => {
                 <div
                     className={styles.logo}
                     style={{ marginRight: collapsed ? 0 : '15px' }}
+                    onClick= {()=>{navigate(Paths.MAIN)}}
                 >
                     {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
                         className: 'trigger',
@@ -112,6 +119,10 @@ export const SideBar: React.FC = () => {
                         height: isMobile ? 192 : 230,
                         marginTop: isMobile ? 16 : 42,
                     }}
+                    //selectable = {false}
+                    //todo correct selected key
+                    onClick={(item)=> {navigate(item.key);}}
+                    selectedKeys={[currentMenuItem]}
                     items={menuItems}
                 />
             </div>
