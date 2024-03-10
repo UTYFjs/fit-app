@@ -15,8 +15,9 @@ export enum Endpoint {
     CONFIRM_EMAIL = 'auth/confirm-email ',
     CHANGE_PASSWORD = 'auth/change-password ',
     FEEDBACK = 'feedback',
-    GOOGLE_AUTH = 'auth/google'
-     
+    GOOGLE_AUTH = 'auth/google',
+    TRAINING = 'training',
+    TRAINING_LIST= 'catalogs/training-list'     
 }
 export enum Paths {
     MAIN = '/main',

@@ -6,6 +6,8 @@ import { store, history } from '@redux/configure-store';
 import App from './app';
 import 'normalize.css';
 import './index.css';
+import { ConfigProvider } from 'antd';
+import ru_RU from 'antd/lib/locale-provider/ru_RU'
 
 
 const domNode = document.getElementById('root') as HTMLDivElement;
@@ -15,7 +17,7 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <HistoryRouter history={history}>
-               <App/>
+                    <App />
             </HistoryRouter>
         </Provider>
     </React.StrictMode>,
