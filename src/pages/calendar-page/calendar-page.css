@@ -5,3 +5,9 @@
   background-color: var(--primary-light-1);
 
 }
+
+.calendar-page .ant-picker-cell-inner.ant-picker-calendar-date{
+  /*
+  padding-left:0;
+  */
+}

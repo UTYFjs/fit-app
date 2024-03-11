@@ -6,8 +6,9 @@ import { Card } from 'antd';
 interface ICustomCardActionProps {
     title: string;
     actions: ReactNode[];
+    children?: ReactNode[];
 }
-export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actions}) => 
+export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actions, children}) => 
      (
         <Card
             bordered={false}
@@ -15,7 +16,7 @@ export const CustomCardAction: React.FC<ICustomCardActionProps> = ({title, actio
             className={styles['custom-card']}
             title={title}
         >
-           
+           {children}
         </Card>
     );
 

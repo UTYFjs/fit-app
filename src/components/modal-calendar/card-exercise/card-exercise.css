@@ -1,0 +1,26 @@
+
+.card-exercise__content{
+  display: flex;
+  flex-direction: column;
+
+}
+.card-exercise__content-item{
+  display: flex;
+  justify-content: space-between;
+}
+.card-exercise__title-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+.training-list__select{
+  width: 100%;
+  text-align: left;
+}
+
+.card-training__actions-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

@@ -1,0 +1,45 @@
+.card-training{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  width: 264px;
+  min-height: 200px;
+  z-index: 5;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+  background: var(--character-light-primary-inverse);
+}
+.card-training .ant-card-body{
+  padding: 0 12px;
+}
+.card-training__content{
+  min-height: 64px;
+}
+.card-training .ant-card-actions{
+  padding: 0 12px;
+  min-height: 64px;
+}
+
+
+.card-traning__title-wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.card-training__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--character-light-title-85);
+  margin-bottom: 4px;
+}
+.card-training_subtitle{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--character-light-secondary-45);
+  text-align: left;
+}
