@@ -1,24 +1,64 @@
-import {  Button,  Drawer, Form, Input, InputNumber } from 'antd';
+import { Button, Drawer, Form, Input, InputNumber } from 'antd';
 import type { Moment } from 'moment';
 
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import './drawer-calendar.css';
 import BadgeTraining from '@components/badge-training/badge-training';
-
+import { useId, useRef } from 'react';
+import { ExerciseType } from '../../types/training-types';
 
 type DrawerCalendarProps = {
-  
+  exercises: ExerciseType[]
+  handleAddExercise: () => void
   isDrawerOpen: boolean;
   onClose: () => void;
   calendarDate?: Moment | null;
+  setNewExercises: React.Dispatch<React.SetStateAction<ExerciseType[]>>
 
 };
 
 
-const DrawerCalendar = ({ isDrawerOpen, onClose, calendarDate = null }: DrawerCalendarProps) => {
+const DrawerCalendar = ({ exercises, handleAddExercise, isDrawerOpen, onClose, calendarDate = null, setNewExercises }: DrawerCalendarProps) => {
 
+  const ref = useRef(null)
   const date = calendarDate?.format('DD.MM.YYYY')
   console.log('date', date);
+
+
+  const handleOnChangeName = (name: string, index: number) => {
+    setNewExercises((state) =>  {
+      const newState = [...state];
+      newState[index].name= name;
+      return newState;
+    } 
+       )
+  }
+  const handleOnChangeReplays = (replays: number, index: number) => {
+    setNewExercises((state) => {
+      const newState = [...state];
+      newState[index].replays = replays;
+      return newState;
+    }
+    )
+  }
+  const handleOnChangeWeight = (weight: number, index: number) => {
+    setNewExercises((state) => {
+      const newState = [...state];
+      newState[index].weight = weight;
+      return newState;
+    }
+    )
+  }
+
+  const handleOnChangeApproaches = (approaches: number, index: number) => {
+    setNewExercises((state) => {
+      const newState = [...state];
+      newState[index].approaches = approaches;
+      return newState;
+    }
+    )
+  }
+
   const onFinish = (data: string[]) => {
     console.log(data)
   }
@@ -49,52 +89,78 @@ const DrawerCalendar = ({ isDrawerOpen, onClose, calendarDate = null }: DrawerCa
         <div className='drawer-calendar__badge'>
           <BadgeTraining text='Силовая' /> <span>{date}</span>
         </div>
-        
-     
-          <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" onChange={(e) => {console.log((e.target as HTMLInputElement).name)}}>
-            <Form.List name="exercises">
-              {(fields, { add }) => (
-                <div className='drawer-calendar__exercise-list'>
-                  {fields.map(({ key}) => (
-                    <div  className='exercise-item' key={key} >
 
-                      <Input className='exercise-item__input-title' placeholder="Упражнение" size='small' />
+
+        <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off"
+        //onChange={(e) => {console.log((e.target as HTMLInputElement).name)}}
+        >
+          <Form.List name="exercises">
+            {(fields, { add }) => {
+              console.log('fields', exercises)
+              return (
+                <div className='drawer-calendar__exercise-list'>
+                  {exercises.map(({ approaches, weight, replays, name }, index) => (
+                    <fieldset ref={ref} onChange={(e) => { console.log((e.target as HTMLInputElement).name, (e.target as HTMLInputElement).value) }}
+                      className='exercise-item' key={index} >
+                      <Input name='name' className='exercise-item__input-title' placeholder="Упражнение" size='small' defaultValue={name} 
+                        onChange={(e) => {handleOnChangeName(e.target.value, index)} }/>
                       <div className='exercise-item__values'>
                         <div>
                           <div className='exercise-item__label'> Подходы </div>
-                          <InputNumber className='exercise-item__input-approaches' addonBefore='+' min={1} placeholder="1" size='small' />
+                          <InputNumber 
+                            name='approaches'
+                            className='exercise-item__input-approaches'
+                            addonBefore='+' min={1}
+                            placeholder="1"
+                            size='small'
+                            defaultValue={approaches} 
+                            onChange={(value) => {handleOnChangeApproaches(value || 1, index) }}/>
                         </div>
                         <div className='exercise-item__values_second' >
                           <div>
                             <div className='exercise-item__label'> Вес, кг </div>
-                            <InputNumber className='exercise-item__input-weight' min={0} placeholder="0" size='small'/>
+                            <InputNumber name='weight'
+                              className='exercise-item__input-weight'
+                              min={0}
+                              placeholder="0"
+                              size='small'
+                              defaultValue={weight}
+                              onChange={(value) => {  handleOnChangeWeight(value || 0, index)}} />
                           </div>
                           <div className='input-divider'> x </div>
                           <div>
                             <div className='exercise-item__label'> Количество </div>
-                            <InputNumber className='exercise-item__input-count' min={1} placeholder="3" size='small' />
+                            <InputNumber 
+                            name='replays' 
+                            className='exercise-item__input-count' 
+                            min={1} 
+                            placeholder="3" 
+                            size='small' 
+                            defaultValue={replays} 
+                            onChange={(value) => { handleOnChangeReplays(value || 1, index) }}/>
                           </div>
                         </div>
-                        
+
                       </div>
-                        
-             
-                      
-                    </div>
+
+
+
+                    </fieldset>
                   ))}
                   <Form.Item>
-                    <Button className='drawer-calendar__btn-add' onClick={() => add()} type='text' size='large' icon={<PlusOutlined />} style={{ width: '100%', display: 'flex', alignItems: 'center' }}>  Добавить еще </Button>
-                    
+                    <Button className='drawer-calendar__btn-add'
+                      onClick={ handleAddExercise}
+                      type='text'
+                      size='large'
+                      icon={<PlusOutlined />}
+                      style={{ width: '100%', display: 'flex', alignItems: 'center' }}>  Добавить еще </Button>
+
                   </Form.Item>
                 </div>
-              )}
-            </Form.List>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
+              )
+            }}
+          </Form.List>
+        </Form>
 
       </>
 

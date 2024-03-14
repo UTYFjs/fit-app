@@ -1,35 +1,41 @@
 import { Endpoint, HTTPMethod } from '@constants/api';
 import { api } from './api';
-import { NewTrainingType, ResTrainingType, TrainingListType } from '../types/training-types';
+import { NewTrainingType, ResTrainingType, TrainingListType, TransformResTrainingType } from '../types/training-types';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getTrainings: builder.query<ResTrainingType[], void>({
+        getTrainings: builder.query<TransformResTrainingType, void>({
             query: () => ({
                 url: Endpoint.TRAINING,
             }),
-            // transformResponse(baseQueryReturnValue: ResTrainingType[]) {
-            //     baseQueryReturnValue.sort(
-            //         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-            //     );
-
-            //     return baseQueryReturnValue.map((item) => {
-            //         item.createdAt = new Date(item.createdAt).toLocaleDateString('ru-RU', {
-            //             day: 'numeric',
-            //             month: 'numeric',
-            //             year: 'numeric',
-            //         });
-            //         return item;
-            //     });
-            // },
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.map(({ _id }) => ({ type: 'Trainings' as const, _id })),
-                          { type: 'Trainings', id: 'LIST' },
-                      ]
-                    : [{ type: 'Trainings', id: 'LIST' }],
+            transformResponse(baseQueryReturnValue: ResTrainingType[]) {
+                //console.log('baseQueryReturnValue', baseQueryReturnValue);
+                const response = baseQueryReturnValue.reduce(
+                    (acc: TransformResTrainingType, item) => {
+                        const key = item.date.split('T')[0];
+                        //console.log(typeof key, acc[key]);
+                        if (acc[key]?.length > 0) {
+                            acc[key].push(item);
+                        } else {
+                            acc[key] = [];
+                            acc[key].push(item);
+                        }
+                        return acc;
+                    },
+                    {},
+                );
+                return response;
+            },
+            // providesTags: (result) =>
+            //     result
+            //         ? [
+            //               ...result.map(({ _id }) => ({ type: 'Trainings' as const, _id })),
+            //               { type: 'Trainings', id: 'LIST' },
+            //           ]
+            //         : [{ type: 'Trainings', id: 'LIST' }],
+            providesTags: ['Trainings'],
         }),
+
         addTraining: builder.mutation<void, NewTrainingType>({
             query: (body) => ({
                 url: Endpoint.TRAINING,

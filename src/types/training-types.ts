@@ -10,12 +10,6 @@ export type NewTrainingType = {
     name: string;
     date: string;
     isImplementation: boolean;
-    parameters: {
-        repeat: boolean;
-        period: number;
-        jointTraining: boolean;
-        participants: string[];
-    };
     exercises: ExerciseType[];
 };
 
@@ -24,7 +18,9 @@ export type ResTrainingType = NewTrainingType & {
   userId: string;
 
 }
+export type TransformResTrainingType = Record<string, ResTrainingType[]>
+
+
 export type TrainingListType = {
-  name: string;
-  key: string;
-}
+  name: 'Ноги' | 'Руки'| 'Силовая' |'Спина' | 'Грудь';
+  key: 'legs' | 'hands' | 'strength' | 'back' | 'chest'}
