@@ -18,12 +18,12 @@
 
   }
 .card-exercise__content::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: var(--character-light-primary-inverse);
   }
 .card-exercise__content::-webkit-scrollbar-thumb {
     background-color: var(--character-light-disable-25);
     border-radius: 20px;
-    border: 3px solid #ffffff;
+    border: 3px solid var(--character-light-primary-inverse);
   }
 .card-exercise__content-item{
   display: flex;

@@ -43,7 +43,7 @@ export const trainingApi = api.injectEndpoints({
                 body: body,
             }),
         }),
-        updateTraining: builder.mutation<ResTrainingType[], Omit<ResTrainingType, 'userId'>>({
+        updateTraining: builder.mutation<ResTrainingType[], ResTrainingType>({
             query: ({ _id, ...rest }) => ({
                 url: `${Endpoint.TRAINING}/${_id}`,
                 method: HTTPMethod.PUT,

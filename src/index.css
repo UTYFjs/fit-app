@@ -103,6 +103,18 @@
 *{
 	box-sizing: border-box;
 }
+*::-webkit-scrollbar {
+    width: 7px;
+
+  }
+*::-webkit-scrollbar-track {
+    background: var(--character-light-primary-inverse);
+  }
+*::-webkit-scrollbar-thumb {
+    background-color: var(--character-light-disable-25);
+    border-radius: 20px;
+    border: none;
+  }
 body {
     min-height: 100vh;
 }

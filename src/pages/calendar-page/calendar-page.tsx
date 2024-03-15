@@ -11,6 +11,8 @@ import CardExercise from '@components/modal-calendar/card-exercise/card-exercise
 
 import { ResTrainingType } from '../../types/training-types';
 import BadgeTraining from '@components/badge-training/badge-training';
+import { getSelectedTrainings } from '@utils/get-select-training';
+import { getExercises } from '@utils/get-exercises';
 
 
 const CalendarPage = () => {
@@ -23,15 +25,22 @@ const CalendarPage = () => {
 
   //стейт для модалок
   const [selectedTraining, setSelectedTraining] = useState('')
+  const [selectedExercises, setSelectedExercises] = useState(getExercises(selectedTraining, currentTrainings))
+  const [isEditTraining, setIsEditTraining] = useState(false)
+
 
   const { data: dataTrainings } = useGetTrainingsQuery();
   const { data: dataTrainingList } = useGetTrainingListQuery();
 
   useEffect(() => { if (dataTrainings && calendarDate) { 
     setCurrentTrainings(dataTrainings[calendarDate.format('YYYY-MM-DD')] || []); } }, [calendarDate, dataTrainings])
+  
+  useEffect(() => { 
+       setSelectedExercises(getExercises(selectedTraining, currentTrainings))
+  },[currentTrainings, selectedTraining])
 
 
-  const getDateCellRender = (data: Moment) => {
+    const getDateCellRender = (data: Moment) => {
     const key = data.format('YYYY-MM-DD')
     const trainings = dataTrainings?.[key];
     return trainings && trainings.map((item) => <BadgeTraining key={item._id} text={item.name} isShort={true} />)
@@ -43,11 +52,16 @@ const CalendarPage = () => {
     setParentModal(null);
   }
   const handleBackToTraining = () => {
+    setIsEditTraining(false);
     setSelectedTraining('');
     setTypeModal('training');
   }
   const handleCreateTraining = () => {
 
+    setTypeModal('exercise');
+  }
+  const handleEditTraining = () => { 
+    setIsEditTraining(true);
     setTypeModal('exercise');
   }
 
@@ -72,14 +86,20 @@ const CalendarPage = () => {
         {typeModal === 'training' && <CardTraining currentTrainings={currentTrainings} 
                                                   isDisableCreateBtn={currentTrainings.length === dataTrainingList?.length}
                                                    calendarDate={calendarDate} 
+                                                   setSelectedTraining={setSelectedTraining}
                                                    onClose={onCloseModal} 
-                                                   onCreate={handleCreateTraining} />}
-        {typeModal === 'exercise'  && <CardExercise selectedTraining={selectedTraining}
-                                                                       setSelectedTraining={setSelectedTraining}
-                                                                       currentTrainings={currentTrainings}
-                                                                       calendarDate={calendarDate}
-                                                                       onClose={handleBackToTraining}
-                                                                       trainingList={dataTrainingList} />}
+                                                   onCreate={handleCreateTraining} 
+                                                   onEdit={handleEditTraining}/>}
+        {typeModal === 'exercise' && <CardExercise selectedTraining={selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь'}
+                                                    setSelectedTraining={setSelectedTraining}
+                                                    currentTrainings={currentTrainings}
+                                                    calendarDate={calendarDate}
+                                                    onClose={handleBackToTraining}
+                                                    trainingList={dataTrainingList}
+                                                    isEditTraining={isEditTraining}
+                                                    setIsEditTraining={setIsEditTraining}
+          exercises={selectedExercises}
+          options={getSelectedTrainings(dataTrainingList, currentTrainings, selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь', isEditTraining  )} />}
 
       </Portal>
       }

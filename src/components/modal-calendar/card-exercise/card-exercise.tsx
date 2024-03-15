@@ -6,16 +6,25 @@ import Meta from 'antd/lib/card/Meta';
 import { ExerciseType, ResTrainingType, TrainingListType } from '../../../types/training-types';
 import './card-exercise.css';
 import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
-import { useAddTrainingMutation, useGetTrainingsQuery } from '@services/training-api';
+import { useAddTrainingMutation, useGetTrainingsQuery, useUpdateTrainingMutation } from '@services/training-api';
+import { getExercises } from '@utils/get-exercises';
 
 type CardExerciseProps = {
+  options: {
+    value: "Ноги" | "Руки" | "Силовая" | "Спина" | "Грудь";
+    label: "Ноги" | "Руки" | "Силовая" | "Спина" | "Грудь";
+  }[];
   calendarDate: Moment;
-  selectedTraining: string;
+  selectedTraining: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
   setSelectedTraining: (selectTraining: string) => void;
   currentTrainings: ResTrainingType[];
   trainingList: TrainingListType[];
   onClose: () => void;
-  exercises?: ExerciseType[]
+  isEditTraining: boolean
+  setIsEditTraining: (value: boolean) => void
+  exercises: ExerciseType[]
+
+  
 };
 const defaultExercice = {
   name: '',
@@ -26,20 +35,28 @@ const defaultExercice = {
 }
 
 
-const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, currentTrainings = [], onClose, trainingList, exercises = [] }: CardExerciseProps) => {
-
+const CardExercise = ({ options, calendarDate, selectedTraining, setSelectedTraining, currentTrainings = [], onClose, trainingList, exercises, isEditTraining = false, setIsEditTraining }: CardExerciseProps) => {
+    
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const [newExercises, setNewExercises] = useState<ExerciseType[]>(exercises )
-
+  const [newExercises, setNewExercises] = useState<ExerciseType[]>(getExercises(selectedTraining, currentTrainings))
+  const [forRemoveIdxExercises, setForRemoveIdxExercices] = useState<number[]>([])
+  //const [options, setOptions] = useState(getSelectedTrainings(trainingList, currentTrainings))
   const [addTraining] = useAddTrainingMutation()
+  const [updateTraining] = useUpdateTrainingMutation()
   const {refetch} = useGetTrainingsQuery()
 
   //const date = calendarDate.format('DD.MM.YYYY')
 
   //todo избавиться от key это для селекта
-  const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
-
+  //const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
+  
+ 
+  // if(isEditTraining) {
+  //   console.log(options)
+  //   setOptions((state) => [{label: selectedTraining, value: selectedTraining}, ...state])
+  //   console.log(options)
+  // }
 
 
   const handleAddExercise = () => {
@@ -48,7 +65,9 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, cur
   const handleAddNewExercise = () => {
     setNewExercises((state) => [...state, {...defaultExercice}])
   }
-
+  const handleEditExercise = () => {
+    setIsDrawerOpen(true)
+  }
 
   
   const onCloseDrawer = () => {
@@ -57,12 +76,28 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, cur
   }
 
   const handleSave = () => { 
-    console.log({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
-    addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') +'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
+    //console.log({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
+    if (isEditTraining) {
+
+      let data = currentTrainings.find((item) => item.name === selectedTraining)
+      if (data ) {
+        data = JSON.parse(JSON.stringify(data)) as ResTrainingType
+        data.exercises = newExercises
+        updateTraining(data);
+      } 
+   
+    } else {
+      addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
+    }
+    
     refetch();
     onClose() }
   
   const handleChooseTraining = (newTraining: string) => {
+    //console.log('newTraining', newTraining, newExercises)
+
+    if(isEditTraining) {setIsEditTraining(false)}
+    setNewExercises([]);
     setSelectedTraining(newTraining)
   }
 
@@ -101,13 +136,12 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, cur
                     placeholder={<div>Выбор типа тренировки</div>}
                     size={'middle'}
                     options={options}
-                    //bordered={false}
                     onChange={handleChooseTraining} />
             </div>}
 
         ></Meta>
         {<div className='card-exercise__content'>
-          {newExercises?.map((item) => <div className='card-exercise__content-item' ><span> {item.name}</span> <EditOutlined className='badge__training-item_icon' /></div>)}
+          {newExercises?.map((item) => <div onClick={handleEditExercise} key ={item.name+item.replays} className='card-exercise__content-item' ><span> {item.name}</span> <EditOutlined className='badge__training-item_icon' /></div>)}
           
           {newExercises.length === 0 && (<Empty
             className=''
@@ -121,6 +155,7 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, cur
         selectedTraining={selectedTraining}
         calendarDate={calendarDate}
         isDrawerOpen={isDrawerOpen}
+        isEdit = {isEditTraining}
         exercises={newExercises}
         handleAddExercise={handleAddNewExercise}
         onClose={onCloseDrawer}

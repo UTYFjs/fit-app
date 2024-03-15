@@ -79,6 +79,11 @@ display: flex;
   width: 100%
 }
 
+.drawer-calendar__btn-wrapper{
+  display:flex;
+  background: var(--character-light-dividers);
+  border-radius: 0 0 6px 6px;
+}
 .drawer-calendar .drawer-calendar__btn-add{
   font-family: var(--font-family);
   font-weight: 400;
@@ -86,6 +91,14 @@ display: flex;
   line-height: 130%;
   text-align: center;
   color: var(--primary-light-6);
-  background: var(--character-light-dividers);
-  border-radius: 0 0 6px 6px;
+
+}
+.drawer-calendar .drawer-calendar__btn-remove{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  text-align: center;
+
+
 }
