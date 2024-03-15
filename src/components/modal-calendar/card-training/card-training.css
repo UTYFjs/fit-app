@@ -5,6 +5,7 @@
   position: absolute;
   width: 264px;
   min-height: 200px;
+  max-height: 364px;
   z-index: 5;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
   background: var(--character-light-primary-inverse);
@@ -13,7 +14,12 @@
   padding: 0 12px;
 }
 .card-training__content{
+  display:flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
   min-height: 64px;
+
 }
 .card-training .ant-card-actions{
   padding: 0 12px;
@@ -24,7 +30,7 @@
 .card-traning__title-wrapper{
   display: flex;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 16px 12px;
 }
 
 .card-training__title {
@@ -34,6 +40,12 @@
   line-height: 130%;
   color: var(--character-light-title-85);
   margin-bottom: 4px;
+}
+.card-traning__title-wrapper .card-training__title-button{
+ width: 20px;
+ height: 20px;
+ border: none;
+ border-radius: 2px;
 }
 .card-training_subtitle{
   font-family: var(--font-family);

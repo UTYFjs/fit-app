@@ -8,6 +8,7 @@ import { useId, useRef } from 'react';
 import { ExerciseType } from '../../types/training-types';
 
 type DrawerCalendarProps = {
+  selectedTraining: string
   exercises: ExerciseType[]
   handleAddExercise: () => void
   isDrawerOpen: boolean;
@@ -18,7 +19,7 @@ type DrawerCalendarProps = {
 };
 
 
-const DrawerCalendar = ({ exercises, handleAddExercise, isDrawerOpen, onClose, calendarDate = null, setNewExercises }: DrawerCalendarProps) => {
+const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDrawerOpen, onClose, calendarDate = null, setNewExercises }: DrawerCalendarProps) => {
 
   const ref = useRef(null)
   const date = calendarDate?.format('DD.MM.YYYY')
@@ -87,17 +88,8 @@ const DrawerCalendar = ({ exercises, handleAddExercise, isDrawerOpen, onClose, c
     >
       <>
         <div className='drawer-calendar__badge'>
-          <BadgeTraining text='Силовая' /> <span>{date}</span>
+          <BadgeTraining text={selectedTraining} isGray={true} /> <span className='drawer-calendar__date'>{date}</span>
         </div>
-
-
-        <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off"
-        //onChange={(e) => {console.log((e.target as HTMLInputElement).name)}}
-        >
-          <Form.List name="exercises">
-            {(fields, { add }) => {
-              console.log('fields', exercises)
-              return (
                 <div className='drawer-calendar__exercise-list'>
                   {exercises.map(({ approaches, weight, replays, name }, index) => (
                     <fieldset ref={ref} onChange={(e) => { console.log((e.target as HTMLInputElement).name, (e.target as HTMLInputElement).value) }}
@@ -157,11 +149,6 @@ const DrawerCalendar = ({ exercises, handleAddExercise, isDrawerOpen, onClose, c
 
                   </Form.Item>
                 </div>
-              )
-            }}
-          </Form.List>
-        </Form>
-
       </>
 
     </Drawer>

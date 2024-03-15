@@ -1,9 +1,30 @@
 
+
+
+
 .card-exercise__content{
   display: flex;
   flex-direction: column;
-
+  max-height: 200px;
+  overflow-y: auto;
 }
+
+.card-exercise__content {
+      scrollbar-width: auto;
+    scrollbar-color: var(--character-light-disable-25);
+}
+.card-exercise__content::-webkit-scrollbar {
+    width: 10px;
+
+  }
+.card-exercise__content::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+.card-exercise__content::-webkit-scrollbar-thumb {
+    background-color: var(--character-light-disable-25);
+    border-radius: 20px;
+    border: 3px solid #ffffff;
+  }
 .card-exercise__content-item{
   display: flex;
   justify-content: space-between;

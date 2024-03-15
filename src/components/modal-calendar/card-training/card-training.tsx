@@ -1,4 +1,4 @@
-import { Button, Card } from 'antd';
+import { Button, Card, Empty } from 'antd';
 import type { Moment } from 'moment';
 import { CloseOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
@@ -8,7 +8,8 @@ import { ResTrainingType } from '../../../types/training-types';
 
 
 type CardTrainingProps = {
-  currentTrainings: ResTrainingType[]
+  currentTrainings: ResTrainingType[];
+  isDisableCreateBtn: boolean;
   calendarDate: Moment;
   onClose: () => void;
   onCreate: () => void;
@@ -16,24 +17,26 @@ type CardTrainingProps = {
 };
 
 
-const CardTraining = ({  currentTrainings, calendarDate, onClose, onCreate }: CardTrainingProps) => {
+const CardTraining = ({ currentTrainings = [], isDisableCreateBtn, calendarDate, onClose, onCreate }: CardTrainingProps) => {
 
-  console.log('currentTrainings', currentTrainings)
+  //console.log('currentTrainings', currentTrainings)
  const date = calendarDate.format('DD.MM.YYYY')
 
-
-
+ 
   return (
     <Card
       bordered={false}
       className='card-training'
       style={{ top: 0 }}
+      bodyStyle={{padding: 0}}
       actions={[<Button
         style={{width:'100%' }}
-        disabled={false}
+        disabled={isDisableCreateBtn}
         type='primary'
         size='large'
-        onClick={onCreate}> Создать тренировку</Button>]}>
+        onClick={onCreate}
+        
+        > Создать тренировку</Button>]}>
       <Meta
         title={<div className='card-traning__title-wrapper'>
           <div><p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p>
@@ -41,17 +44,24 @@ const CardTraining = ({  currentTrainings, calendarDate, onClose, onCreate }: Ca
           </div>
             <Button
             data-test-id=''
-
+            className='card-training__title-button'
             type='text'
             size='small'
-            icon={<CloseOutlined />}
+            icon={<CloseOutlined />}  
             onClick={onClose}
           /> </div>}
  
       ></Meta>
       {<div className='card-training__content'>
-        {currentTrainings && currentTrainings.map((item) => <BadgeTraning key={item._id + 'training'} text={item.name} /> )}
+        {currentTrainings && currentTrainings.map((item) => <BadgeTraning key={item._id + 'training'} text={item.name} isEditButton={true} onClickBadge={() =>{console.log('ddddd')}}/> )}
+        {!currentTrainings && (<Empty
+          className=''
+          image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
+          imageStyle={{ height: 32 }}
+          description=''
+        />)}
         </div>}
+
     </Card>
 
   );

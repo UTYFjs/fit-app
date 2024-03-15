@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button, Card, Select } from 'antd';
+import { Button, Card, Empty, Select } from 'antd';
 import type { Moment } from 'moment';
 import { ArrowLeftOutlined, EditOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
-import { ExerciseType, TrainingListType } from '../../../types/training-types';
+import { ExerciseType, ResTrainingType, TrainingListType } from '../../../types/training-types';
 import './card-exercise.css';
 import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
 import { useAddTrainingMutation, useGetTrainingsQuery } from '@services/training-api';
@@ -12,6 +12,7 @@ type CardExerciseProps = {
   calendarDate: Moment;
   selectedTraining: string;
   setSelectedTraining: (selectTraining: string) => void;
+  currentTrainings: ResTrainingType[];
   trainingList: TrainingListType[];
   onClose: () => void;
   exercises?: ExerciseType[]
@@ -25,7 +26,7 @@ const defaultExercice = {
 }
 
 
-const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, onClose, trainingList, exercises = [] }: CardExerciseProps) => {
+const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, currentTrainings = [], onClose, trainingList, exercises = [] }: CardExerciseProps) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
@@ -37,7 +38,7 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, onC
   //const date = calendarDate.format('DD.MM.YYYY')
 
   //todo избавиться от key это для селекта
-  const options = trainingList.map(({ name }) => ({ value: name, label: name }))
+  const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
 
 
 
@@ -85,7 +86,7 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, onC
           type='ghost'
           size='middle'
           onClick={handleAddExercise}> Добавить упражнения</Button>
-          <Button disabled={false} type='text' size='middle' onClick={handleSave}>Сохранить</Button></div>]}>
+          <Button disabled={newExercises.length === 0} type='text' size='middle' onClick={handleSave}>Сохранить</Button></div>]}>
         <Meta
           title={
             <div className='card-exercise__title-wrapper'>
@@ -96,18 +97,28 @@ const CardExercise = ({ calendarDate, selectedTraining, setSelectedTraining, onC
                 onClick={onClose}
               />
               <Select className='training-list__select'
-                defaultValue={selectedTraining || 'Выбор типа тренировки'}
-                size={'middle'} options={options}
-                bordered={false}
-                onChange={handleChooseTraining} />
+                    defaultValue={selectedTraining || 'Выбор типа тренировки' }
+                    placeholder={<div>Выбор типа тренировки</div>}
+                    size={'middle'}
+                    options={options}
+                    //bordered={false}
+                    onChange={handleChooseTraining} />
             </div>}
 
         ></Meta>
         {<div className='card-exercise__content'>
-          {newExercises?.map((item) => <div className='card-exercise__content-item' ><span> {item.name}</span> <EditOutlined /></div>)}
+          {newExercises?.map((item) => <div className='card-exercise__content-item' ><span> {item.name}</span> <EditOutlined className='badge__training-item_icon' /></div>)}
+          
+          {newExercises.length === 0 && (<Empty
+            className=''
+            image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
+            imageStyle={{ height: 32 }}
+            description=''
+          />)}
         </div>}
       </Card>
       <DrawerCalendar 
+        selectedTraining={selectedTraining}
         calendarDate={calendarDate}
         isDrawerOpen={isDrawerOpen}
         exercises={newExercises}
