@@ -43,7 +43,7 @@ const CalendarPage = () => {
     const getDateCellRender = (data: Moment) => {
     const key = data.format('YYYY-MM-DD')
     const trainings = dataTrainings?.[key];
-    return trainings && trainings.map((item) => <BadgeTraining key={item._id} text={item.name} isShort={true} />)
+    return trainings && trainings.map((item) => <BadgeTraining key={item._id} isDisable={item.isImplementation} text={item.name} isShort={true} />)
   }
 
 

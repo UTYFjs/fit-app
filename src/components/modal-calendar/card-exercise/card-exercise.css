@@ -5,12 +5,13 @@
 .card-exercise__content{
   display: flex;
   flex-direction: column;
+  gap: 12px;
   max-height: 200px;
   overflow-y: auto;
 }
 
 .card-exercise__content {
-      scrollbar-width: auto;
+    scrollbar-width: auto;
     scrollbar-color: var(--character-light-disable-25);
 }
 .card-exercise__content::-webkit-scrollbar {
@@ -28,6 +29,12 @@
 .card-exercise__content-item{
   display: flex;
   justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--character-light-secondary-45);
+
 }
 .card-exercise__title-wrapper{
   display: flex;

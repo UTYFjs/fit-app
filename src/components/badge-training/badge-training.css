@@ -53,3 +53,10 @@ font-size: 14px;
 line-height: 130%;
 color: var(--character-light-secondary-45);
 }
+
+.badge__training-item_disable .ant-badge-status-text{
+/* font-weight: 400;
+font-size: 14px;
+line-height: 130%; */
+color: var(--character-light-disable-25);
+}

@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import './main-page.css';
 import { Paths } from '@constants/api';
 import { useNavigate } from 'react-router-dom';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 
 
 
@@ -31,6 +32,7 @@ export const MainPage: React.FC = () => {
             icon: <CalendarIcon />,
             label: 'Календарь',
             pathTo: Paths.CALENDAR,
+            dataTestId: CalendarDataTeatId.MENU_BUTTON_CALENDAR
         },
         {
             key: useId(),
@@ -71,7 +73,7 @@ export const MainPage: React.FC = () => {
                            <CustomCardAction
                                title={item.title}
                                actions={[
-                                   <Button type='text' icon={item.icon} onClick={() => {navigate(item.pathTo)}} >
+                                   <Button type='text' data-test-id={item?.dataTestId} icon={item.icon} onClick={() => {navigate(item.pathTo)}} >
                                        {item.label}{' '}
                                    </Button>,
                                ]}

@@ -1,33 +1,40 @@
 import { Button, Checkbox, Drawer, Input, InputNumber } from 'antd';
 import type { Moment } from 'moment';
-
 import { CloseOutlined, EditOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import './drawer-calendar.css';
 import BadgeTraining from '@components/badge-training/badge-training';
 import { ExerciseType } from '../../types/training-types';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 
 
 type DrawerCalendarProps = {
   selectedTraining: string
   exercises: ExerciseType[]
+  forRemoveIdxExercises: number[]
+  setForRemoveIdxExercises: React.Dispatch<React.SetStateAction<number[]>>
   handleAddExercise: () => void
   isDrawerOpen: boolean;
   isEdit: boolean;
   onClose: () => void;
   calendarDate?: Moment | null;
   setNewExercises: React.Dispatch<React.SetStateAction<ExerciseType[]>>
-
 };
 
 
-const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDrawerOpen, isEdit, onClose, calendarDate = null, setNewExercises }: DrawerCalendarProps) => {
+const DrawerCalendar = ({ selectedTraining,
+                          exercises,
+                          forRemoveIdxExercises,
+                          setForRemoveIdxExercises,
+                          handleAddExercise,
+                          isDrawerOpen,
+                          isEdit,
+                          onClose,
+                          calendarDate = null,
+                          setNewExercises }: DrawerCalendarProps) => {
+
   const date = calendarDate?.format('DD.MM.YYYY')
 
-
-
   const handleOnChangeName = (name: string, index: number) => {
-    
+
     setNewExercises((state) => {
 
       const newState = [...state];
@@ -37,11 +44,15 @@ const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDraw
     }
     )
   }
-  const handleOnChangeRemoveCheckbox = (e: CheckboxChangeEvent, index: number) => {
-    
-    console.log('чекбокс', e.target.checked, index)
+  const handleOnChangeRemoveCheckbox = ( index: number) => {
+
+    if (forRemoveIdxExercises.includes(index)) {
+      setForRemoveIdxExercises((state) => state.filter((item) => item !== index) )
+    } else { 
+      setForRemoveIdxExercises((state) => ([...state, index]))
+    }
   }
-  
+
   const handleOnChangeReplays = (replays: number, index: number) => {
     setNewExercises((state) => {
       const newState = [...state];
@@ -66,6 +77,11 @@ const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDraw
       return newState;
     }
     )
+  }
+  const handleRemove = () => {
+    setNewExercises(exercises.filter(( _, index) => !forRemoveIdxExercises.includes(index) ));
+    setForRemoveIdxExercises([]);
+    console.log(forRemoveIdxExercises);
   }
 
 
@@ -106,7 +122,7 @@ const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDraw
                 placeholder="Упражнение"
                 size='small'
                 defaultValue={name}
-                addonAfter={isEdit ? <Checkbox onChange={(e) => { handleOnChangeRemoveCheckbox(e, index)}}/> : false}
+                addonAfter={isEdit ? <Checkbox defaultChecked={forRemoveIdxExercises.includes(index)} onChange={() => { handleOnChangeRemoveCheckbox(index) }} /> : false}
                 onChange={(e) => { handleOnChangeName(e.target.value, index) }} />
               <div className='exercise-item__values'>
                 <div>
@@ -155,13 +171,13 @@ const DrawerCalendar = ({ selectedTraining, exercises, handleAddExercise, isDraw
               size='large'
               icon={<PlusOutlined />}
               style={{ width: '55%', display: 'flex', alignItems: 'center' }}>  Добавить еще </Button>
-            <Button className='drawer-calendar__btn-remove'
-              onClick={handleAddExercise}
+            {isEdit && <Button className='drawer-calendar__btn-remove'
+              onClick={handleRemove}
               type='text'
               size='large'
-              disabled={true}
+              disabled={forRemoveIdxExercises.length === 0}
               icon={<MinusOutlined />}
-              style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>
+              style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
 
           </div>
         </div>

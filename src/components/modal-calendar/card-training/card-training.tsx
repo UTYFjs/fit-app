@@ -5,6 +5,8 @@ import Meta from 'antd/lib/card/Meta';
 import './card-training.css';
 import BadgeTraning from '@components/badge-training/badge-training';
 import { ResTrainingType } from '../../../types/training-types';
+import { isPast } from '@utils/date-utils';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 
 
 type CardTrainingProps = {
@@ -19,7 +21,13 @@ type CardTrainingProps = {
 };
 
 
-const CardTraining = ({ currentTrainings = [], isDisableCreateBtn, calendarDate, setSelectedTraining, onClose, onCreate, onEdit}: CardTrainingProps) => {
+const CardTraining = ({ currentTrainings = [], 
+                        isDisableCreateBtn, 
+                        calendarDate, 
+                        setSelectedTraining, 
+                        onClose, 
+                        onCreate, 
+                        onEdit}: CardTrainingProps) => {
 
   //console.log('currentTrainings', currentTrainings)
  const date = calendarDate.format('DD.MM.YYYY')
@@ -27,17 +35,18 @@ const CardTraining = ({ currentTrainings = [], isDisableCreateBtn, calendarDate,
 
   return (
     <Card
-      bordered={false}
+      
       className='card-training'
+      bordered={false}
       style={{ top: 0 }}
       bodyStyle={{padding: 0}}
+      data-test-id = {CalendarDataTeatId.MODAL_CREATE_TRAINING}
       actions={[<Button
-        style={{width:'100%' }}
-        disabled={isDisableCreateBtn}
-        type='primary'
-        size='large'
-        onClick={onCreate}
-        
+                  style={{width:'100%' }}
+                  disabled={isDisableCreateBtn || isPast(calendarDate)}
+                  type='primary'
+                  size='large'
+                  onClick={onCreate}        
         > Создать тренировку</Button>]}>
       <Meta
         title={<div className='card-traning__title-wrapper'>
@@ -45,7 +54,7 @@ const CardTraining = ({ currentTrainings = [], isDisableCreateBtn, calendarDate,
             { currentTrainings.length === 0 && <p className='card-training_subtitle'> Нет активных тренировок</p>  }
           </div>
             <Button
-            data-test-id=''
+            data-test-id={CalendarDataTeatId.MODAL_CREATE_TRAINING_BUTTON_CLOSE}
             className='card-training__title-button'
             type='text'
             size='small'
@@ -57,10 +66,11 @@ const CardTraining = ({ currentTrainings = [], isDisableCreateBtn, calendarDate,
       {<div className='card-training__content'>
         {currentTrainings && currentTrainings.map((item) => 
         <BadgeTraning key={item._id + 'training'} 
+                      isDisable={item.isImplementation}
                       text={item.name} 
                       isEditButton={true} 
             onClickBadge={() => { setSelectedTraining(item.name); onEdit()}}/> )}
-        {!currentTrainings && (<Empty
+        {currentTrainings.length === 0 && (<Empty
           className=''
           image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
           imageStyle={{ height: 32 }}
