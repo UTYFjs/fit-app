@@ -58,7 +58,7 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
             bodyStyle={{ padding: 0 }}
             mask={true}
             maskClosable={true}
-            maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
+            maskStyle={{ backdropFilter: 'blur(5px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
             className='modal-result'
         >

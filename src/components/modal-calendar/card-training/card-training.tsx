@@ -7,6 +7,8 @@ import BadgeTraning from '@components/badge-training/badge-training';
 import { ResTrainingType } from '../../../types/training-types';
 import { isPast } from '@utils/date-utils';
 import { CalendarDataTeatId } from '@constants/data-test-id';
+import ModalError from '@components/modal-error/modal-error';
+import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 
 
 type CardTrainingProps = {
@@ -33,8 +35,7 @@ const CardTraining = ({ currentTrainings = [],
  const date = calendarDate.format('DD.MM.YYYY')
 
 
-  return (
-    <Card
+  return (<><Card
       
       className='card-training'
       bordered={false}
@@ -79,6 +80,11 @@ const CardTraining = ({ currentTrainings = [],
         </div>}
 
     </Card>
+    
+    
+    </>
+    
+    
 
   );
 };

@@ -6,13 +6,20 @@ import { Paths } from '@constants/api';
 import { useState } from 'react';
 type ModalErrorProps = {
     isOpen: boolean;
+    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
+    dataTestId?: string
    };
 
-const ModalServerError = ({ isOpen }: ModalErrorProps) => {
+const ModalServerError = ({ isOpen, setIsOpen, dataTestId }: ModalErrorProps) => {
    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
    const navigate = useNavigate()
    const handleGoBack = () => {
-    navigate(Paths.MAIN)
+    if(setIsOpen){
+        setIsOpen(false)
+    }else {
+        navigate(Paths.MAIN)
+    }
+
    }
 
 
@@ -24,7 +31,7 @@ const ModalServerError = ({ isOpen }: ModalErrorProps) => {
         <Modal
             closable={false}
             centered
-            visible={isOpen}
+            open={isOpen}
             footer={null}
             bodyStyle={{ padding: '10px 24px' }}
             mask={true}
@@ -32,6 +39,7 @@ const ModalServerError = ({ isOpen }: ModalErrorProps) => {
             maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={isMobile ? 328 : 539}
             className={styles['modal-server-error']}
+            data-test-id={dataTestId}
         >
             <Result
                 status={500}

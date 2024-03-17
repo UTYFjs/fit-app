@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Button, Card, Col, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
@@ -9,6 +9,8 @@ import './main-page.css';
 import { Paths } from '@constants/api';
 import { useNavigate } from 'react-router-dom';
 import { CalendarDataTeatId } from '@constants/data-test-id';
+import { useLazyGetTrainingsQuery } from '@services/training-api';
+import ModalServerError from '@components/modal-server-error/modal-server-error';
 
 
 
@@ -16,7 +18,14 @@ import { CalendarDataTeatId } from '@constants/data-test-id';
 
 
 export const MainPage: React.FC = () => {
+    const [isOpenServerErrorModal, setIsOpenServerErrorModal] = useState(false)
     const navigate = useNavigate();
+    const [getTrainings, {isError}] = useLazyGetTrainingsQuery()
+
+    useEffect(() => { 
+        setIsOpenServerErrorModal(isError ?  true : false)
+
+    }, [isError])
 
     const buttonActions = [
         {
@@ -42,6 +51,18 @@ export const MainPage: React.FC = () => {
             pathTo: Paths.PROFILE
         },
     ];
+    const handleToCalendar =  async (pathTo: Paths) => {
+        try {
+            await getTrainings().unwrap();
+            navigate(pathTo);
+            if (!isError) {
+                //console.log('djfkjdkjfdkf')
+                
+            }
+        } catch (e){
+            //console.log(e)
+        }
+    }
    return (
        <>
            <Card className='main-card' bordered={false}>
@@ -73,7 +94,7 @@ export const MainPage: React.FC = () => {
                            <CustomCardAction
                                title={item.title}
                                actions={[
-                                   <Button type='text' data-test-id={item?.dataTestId} icon={item.icon} onClick={() => {navigate(item.pathTo)}} >
+                                   <Button type='text' data-test-id={item?.dataTestId} icon={item.icon} onClick={() => { handleToCalendar(item.pathTo)}} >
                                        {item.label}{' '}
                                    </Button>,
                                ]}
@@ -82,6 +103,9 @@ export const MainPage: React.FC = () => {
                    );
                })}
            </Row>
+           {isOpenServerErrorModal && <ModalServerError dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW} isOpen={isOpenServerErrorModal} setIsOpen={setIsOpenServerErrorModal}/>}
        </>
    );
 };
+
+

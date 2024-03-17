@@ -6,7 +6,7 @@ export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getTrainings: builder.query<TransformResTrainingType, void>({
             query: () => ({
-                url: Endpoint.TRAINING,
+                url:  Endpoint.TRAINING,
             }),
             transformResponse(baseQueryReturnValue: ResTrainingType[]) {
                 //console.log('baseQueryReturnValue', baseQueryReturnValue);
@@ -45,7 +45,7 @@ export const trainingApi = api.injectEndpoints({
         }),
         updateTraining: builder.mutation<ResTrainingType[], ResTrainingType>({
             query: ({ _id, ...rest }) => ({
-                url: `${Endpoint.TRAINING}/${_id}`,
+                url:  `${Endpoint.TRAINING}/${_id}`,
                 method: HTTPMethod.PUT,
                 body: rest,
             }),
@@ -72,4 +72,5 @@ export const {
     useUpdateTrainingMutation,
     useDeleteTrainingMutation,
     useGetTrainingListQuery,
+    useLazyGetTrainingListQuery
 } = trainingApi;

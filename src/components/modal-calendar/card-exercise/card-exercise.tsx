@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Card, Empty, Select } from 'antd';
 import type { Moment } from 'moment';
 import { ArrowLeftOutlined, EditOutlined } from '@ant-design/icons';
@@ -9,6 +9,8 @@ import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
 import { useAddTrainingMutation, useGetTrainingsQuery, useUpdateTrainingMutation } from '@services/training-api';
 import { getExercises } from '@utils/get-exercises';
 import { isPast } from '@utils/date-utils';
+import ModalError from '@components/modal-error/modal-error';
+import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 
 type CardExerciseProps = {
   options: {
@@ -35,31 +37,43 @@ const defaultExercice = {
 }
 
 
-const CardExercise = ({ options, 
-                        calendarDate, 
-                        selectedTraining, 
-                        setSelectedTraining, 
-                        currentTrainings = [], 
-                        onClose, 
-                        trainingList, 
-                        exercises, 
-                        isEditTraining = false, 
-                        setIsEditTraining }: CardExerciseProps) => {
+const CardExercise = ({ options,
+  calendarDate,
+  selectedTraining,
+  setSelectedTraining,
+  currentTrainings = [],
+  onClose,
+  trainingList,
+  exercises,
+  isEditTraining = false,
+  setIsEditTraining }: CardExerciseProps) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const [newExercises, setNewExercises] = useState<ExerciseType[]>(getExercises(selectedTraining, currentTrainings))
   const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([])
 
-  const [addTraining] = useAddTrainingMutation()
-  const [updateTraining] = useUpdateTrainingMutation()
+  const [isModalErrorOpen, setIsModalErrorOpen] = useState(false)
+
+  const [addTraining, { isError: isErrorAdd }] = useAddTrainingMutation()
+  const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation()
   const { refetch } = useGetTrainingsQuery()
+
+  useEffect(() => {
+    if (isErrorAdd || isErrorUpdate) { setIsModalErrorOpen(true) }
+    console.log('useEffect')
+  }, [isErrorAdd, isErrorUpdate])
+
 
   //todo избавиться от key это для селекта
   //const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
-  isPast(calendarDate);
+  //isPast(calendarDate);
 
-
+  const handleCloseErrorModal = () => {
+    setIsModalErrorOpen(false);
+    onClose();
+    //todo дописать закрытие всех модалок
+  }
   const handleAddExercise = () => {
     setIsDrawerOpen(true)
   }
@@ -75,21 +89,22 @@ const CardExercise = ({ options,
     setIsDrawerOpen(false)
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (isEditTraining) {
       let data = currentTrainings.find((item) => item.name === selectedTraining)
       if (data) {
-        data = JSON.parse(JSON.stringify(data)) as ResTrainingType
-        data.exercises = newExercises
-        data.isImplementation = isPast(calendarDate)
-        console.log(data);
-        updateTraining(data);
+        data = JSON.parse(JSON.stringify(data)) as ResTrainingType;
+        data.exercises = newExercises;
+        data.isImplementation = isPast(calendarDate);
+        await updateTraining(data).unwrap();
       }
     } else {
-      addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
+      await addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises }).unwrap()
     }
-    refetch();
-    onClose()
+    if (!isErrorAdd || !isErrorUpdate) {
+      refetch();
+      onClose()
+    }
   }
 
   const handleChooseTraining = (newTraining: string) => {
@@ -159,6 +174,10 @@ const CardExercise = ({ options,
         handleAddExercise={handleAddNewExercise}
         onClose={onCloseDrawer}
         setNewExercises={setNewExercises} />
+
+      {(isErrorAdd || isErrorUpdate) && <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}  >
+        <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
+      </ModalError>}
     </>
 
 
