@@ -36,7 +36,7 @@ const CardTraining = ({ currentTrainings = [],
   const date = calendarDate.format('DD.MM.YYYY')
 
 
-  return (<><Card
+  return (<Card
 
     className='card-training'
     bordered={false}
@@ -67,7 +67,7 @@ const CardTraining = ({ currentTrainings = [],
     ></Meta>
     {<div className='card-training__content'>
       {currentTrainings && currentTrainings.map((item, index) =>
-        <div className='card-training__item'>
+        <div className='card-training__item' key={index}>
           <BadgeTraning key={item._id + 'training'}
             isDisable={item.isImplementation}
             text={item.name}
@@ -97,7 +97,7 @@ const CardTraining = ({ currentTrainings = [],
   </Card>
 
 
-  </>
+
 
 
 

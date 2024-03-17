@@ -12,6 +12,7 @@ import { isPast } from '@utils/date-utils';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import { CalendarDataTeatId } from '@constants/data-test-id';
+import { getCssVar } from '@utils/get-css-var';
 
 type CardExerciseProps = {
   options: {
@@ -29,7 +30,7 @@ type CardExerciseProps = {
   exercises: ExerciseType[]
 };
 
-const defaultExercice = {
+export const defaultExercice = {
   name: '',
   replays: 1,
   weight: 0,
@@ -62,7 +63,6 @@ const CardExercise = ({ options,
 
   useEffect(() => {
     if (isErrorAdd || isErrorUpdate) { setIsModalErrorOpen(true) }
-    console.log('useEffect')
   }, [isErrorAdd, isErrorUpdate])
 
 
@@ -75,11 +75,14 @@ const CardExercise = ({ options,
     onClose();
     //todo дописать закрытие всех модалок
   }
-  const handleAddExercise = () => {
-    setIsDrawerOpen(true)
-  }
+
   const handleAddNewExercise = () => {
     setNewExercises((state) => [...state, { ...defaultExercice }])
+  }
+  const handleAddExercise = () => {
+    if (!newExercises.length) { setNewExercises([{ ...defaultExercice }]) }
+    setIsDrawerOpen(true)
+    
   }
   const handleEditExercise = () => {
     setIsDrawerOpen(true)
@@ -140,7 +143,7 @@ const CardExercise = ({ options,
           title={
             <div className='card-exercise__title-wrapper'>
               <Button
-                data-test-id={CalendarDataTeatId.MODAL_CREATE_TRAINING_BUTTON_CLOSE}
+                data-test-id={CalendarDataTeatId.MODAL_EXERCISE_TRAINING_BUTTON_CLOSE}
                 type='text'
                 size='small'
                 icon={<ArrowLeftOutlined />}
@@ -157,7 +160,17 @@ const CardExercise = ({ options,
 
         ></Meta>
         {<div className='card-exercise__content'>
-          {newExercises?.map((item) => <div onClick={handleEditExercise} key={item.name + item.replays} className='card-exercise__content-item' ><span > {item.name}</span> <EditOutlined className='badge__training-item_icon' /></div>)}
+          {newExercises?.map((item, index) => 
+          <div 
+          key={item.name + item.replays} 
+          className='card-exercise__content-item' >
+            <span > {item.name}</span> 
+
+              <EditOutlined 
+              className='badge__training-item_icon' 
+              data-test-id={`${CalendarDataTeatId.MODAL_UPDATE_TRAINING_EDIT_BUTTON_INDEX}${index}`} 
+                onClick={handleEditExercise} />
+            </div>)}
 
           {newExercises.length === 0 && (<Empty
             className=''

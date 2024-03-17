@@ -12,8 +12,7 @@ export const trainingApi = api.injectEndpoints({
                 //console.log('baseQueryReturnValue', baseQueryReturnValue);
                 const response = baseQueryReturnValue.reduce(
                     (acc: TransformResTrainingType, item) => {
-                        const key = item.date.toString().split('T')[0];
-                        //console.log(typeof key, acc[key]);
+                        const key = new Date(item.date).toISOString().split('T')[0];
                         if (acc[key]?.length > 0) {
                             acc[key].push(item);
                         } else {

@@ -9,7 +9,7 @@ import { CalendarDataTeatId } from '@constants/data-test-id';
 
 type DrawerCalendarProps = {
   selectedTraining: string
-  exercises: ExerciseType[]
+  exercises: ExerciseType[] 
   forRemoveIdxExercises: number[]
   setForRemoveIdxExercises: React.Dispatch<React.SetStateAction<number[]>>
   handleAddExercise: () => void
@@ -31,15 +31,12 @@ const DrawerCalendar = ({ selectedTraining,
                           onClose,
                           calendarDate = null,
                           setNewExercises }: DrawerCalendarProps) => {
-
-  const date = calendarDate?.format('DD.MM.YYYY')
+ const date = calendarDate?.format('DD.MM.YYYY')
 
   const handleOnChangeName = (name: string, index: number) => {
 
     setNewExercises((state) => {
-
       const newState = [...state];
-      console.log('handleOnChangeName', newState[index].name, name)
       newState[index].name = name;
       return newState;
     }
@@ -101,6 +98,7 @@ const DrawerCalendar = ({ selectedTraining,
         icon={<CloseOutlined />}
         onClick={onClose}
       />}
+      width={408}
       placement={'right'}
       closable={false}
       onClose={onClose}
@@ -117,14 +115,14 @@ const DrawerCalendar = ({ selectedTraining,
         </div>
         <div className='drawer-calendar__exercise-list'>
           {exercises.map(({ approaches, weight, replays, name }, index) => (
-            <fieldset
-              className='exercise-item' key={index} >
+            <fieldset key={index}
+              className='exercise-item' >
               <Input name='name'
                 className='exercise-item__input-title'
                 data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_EXERCISE_INDEX}${index}`}
                 placeholder="Упражнение"
                 size='small'
-                defaultValue={name}
+                value={name}
                 addonAfter={isEdit ? <Checkbox defaultChecked={forRemoveIdxExercises.includes(index)} onChange={() => { handleOnChangeRemoveCheckbox(index) }} /> : false}
                 onChange={(e) => { handleOnChangeName(e.target.value, index) }} />
               <div className='exercise-item__values'>
@@ -137,7 +135,7 @@ const DrawerCalendar = ({ selectedTraining,
                     addonBefore='+' min={1}
                     placeholder="1"
                     size='small'
-                    defaultValue={approaches}
+                    value={approaches}
                     onChange={(value) => { handleOnChangeApproaches(value || 1, index) }} />
                 </div>
                 <div className='exercise-item__values_second' >
@@ -149,7 +147,7 @@ const DrawerCalendar = ({ selectedTraining,
                       min={0}
                       placeholder="0"
                       size='small'
-                      defaultValue={weight}
+                      value={weight}
                       onChange={(value) => { handleOnChangeWeight(value || 0, index) }} />
                   </div>
                   <div className='input-divider'> x </div>
@@ -162,7 +160,7 @@ const DrawerCalendar = ({ selectedTraining,
                       min={1}
                       placeholder="3"
                       size='small'
-                      defaultValue={replays}
+                      value={replays}
                       onChange={(value) => { handleOnChangeReplays(value || 1, index) }} />
                   </div>
                 </div>
@@ -172,11 +170,15 @@ const DrawerCalendar = ({ selectedTraining,
           ))}
           <div className='drawer-calendar__btn-wrapper'>
             <Button className='drawer-calendar__btn-add'
-              onClick={handleAddExercise}
+              onClick={() => {
+                console.log('click Добавить еще')
+                handleAddExercise()}}
               type='text'
               size='large'
               icon={<PlusOutlined />}
-              style={{ width: '55%', display: 'flex', alignItems: 'center' }}>  Добавить еще </Button>
+              style={{ width: '55%', display: 'flex', alignItems: 'center' }}
+            >
+              Добавить ещё</Button>
             {isEdit && <Button className='drawer-calendar__btn-remove'
               onClick={handleRemove}
               type='text'

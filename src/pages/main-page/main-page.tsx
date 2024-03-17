@@ -52,14 +52,11 @@ export const MainPage: React.FC = () => {
         },
     ];
     const handleToCalendar = async (pathTo: Paths) => {
-        console.log('handler click')
         try {
-                console.log('djfkjdkjfdkf')
                 await getTrainings().unwrap();
                 navigate(pathTo);
         } catch (e) {
             setIsOpenServerErrorModal(isError ? true : false)
-            //console.log(e)
         }
     }
     return (
@@ -97,7 +94,6 @@ export const MainPage: React.FC = () => {
                                         data-test-id={item?.dataTestId}
                                         icon={item.icon}
                                         onClick={() => {
-                                            console.log('click');
                                             handleToCalendar(item.pathTo)}} >
                                         {item.label}{' '}
                                     </Button>,

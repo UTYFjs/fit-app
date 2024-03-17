@@ -15,7 +15,6 @@ import { getSelectedTrainings } from '@utils/get-select-training';
 import { getExercises } from '@utils/get-exercises';
 import ModalError from '@components/modal-error/modal-error';
 import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 
 
 const CalendarPage = () => {
@@ -25,6 +24,7 @@ const CalendarPage = () => {
 
   const [calendarDate, setCalendarDate] = useState<Moment | null>(null);
   const [currentTrainings, setCurrentTrainings] = useState<ResTrainingType[]>([])
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
 
   //стейт для модалок
   const [selectedTraining, setSelectedTraining] = useState('')
@@ -52,12 +52,14 @@ const CalendarPage = () => {
   }, [currentTrainings, selectedTraining])
 
 
-
-
   const getDateCellRender = (data: Moment) => {
+    
     const key = data.format('YYYY-MM-DD')
+    
     const trainings = dataTrainings?.[key];
-    return trainings && trainings.map((item) => <BadgeTraining key={item._id} isDisable={item.isImplementation} text={item.name} isShort={true} />)
+    //console.log('datacellREnder start', key, dataTrainings);
+    return trainings && trainings.map((item) => 
+    <BadgeTraining key={item._id} isDisable={item.isImplementation} text={item.name} isShort={true} />)
   }
 
 
@@ -80,6 +82,8 @@ const CalendarPage = () => {
   }
 
   const onSelect = (data: Moment) => {
+
+    console.log('moment', data.days(), data.month())
     setCalendarDate(data);
     const dateForSelector = data.format('YYYY-MM-DD');
     const parentForModal = document.querySelector(`[title="${dateForSelector}"]`)
@@ -96,11 +100,11 @@ const CalendarPage = () => {
       <Calendar
         fullscreen={true}
         locale={localeCalendar}
-        dateCellRender={/*dataTrainingList && */getDateCellRender}
+        dateCellRender={dataTrainingList && getDateCellRender}
         onSelect={onSelect}
       />
 
-      {parentModal && calendarDate /*&& dataTrainingList*/ && <Portal parent={parentModal}>
+      {parentModal && calendarDate && dataTrainingList && <Portal parent={parentModal}>
         {typeModal === 'training' && <CardTraining currentTrainings={currentTrainings}
           isDisableCreateBtn={currentTrainings.length === dataTrainingList?.length}
           calendarDate={calendarDate}
