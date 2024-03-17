@@ -12,13 +12,17 @@ type ModalErrorProps = {
 
 const ModalServerError = ({ isOpen, setIsOpen, dataTestId }: ModalErrorProps) => {
    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isOpenModal, setIsOpenModal] = useState(isOpen)
    const navigate = useNavigate()
    const handleGoBack = () => {
-    if(setIsOpen){
-        setIsOpen(false)
-    }else {
-        navigate(Paths.MAIN)
-    }
+       setIsOpenModal(false)
+       navigate(Paths.MAIN)
+    // if(setIsOpen){
+    //     setIsOpen(false)
+    //     navigate(Paths.MAIN)
+    // }else {
+    //     navigate(Paths.MAIN)
+    // }
 
    }
 
@@ -31,7 +35,7 @@ const ModalServerError = ({ isOpen, setIsOpen, dataTestId }: ModalErrorProps) =>
         <Modal
             closable={false}
             centered
-            open={isOpen}
+            open={isOpenModal}
             footer={null}
             bodyStyle={{ padding: '10px 24px' }}
             mask={true}

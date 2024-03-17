@@ -4,6 +4,7 @@ import { CloseOutlined, EditOutlined, MinusOutlined, PlusOutlined } from '@ant-d
 import './drawer-calendar.css';
 import BadgeTraining from '@components/badge-training/badge-training';
 import { ExerciseType } from '../../types/training-types';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 
 
 type DrawerCalendarProps = {
@@ -88,12 +89,13 @@ const DrawerCalendar = ({ selectedTraining,
   return (
     <Drawer
       className='drawer-calendar'
+      data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT}
       title={<>
 
         <div className='drawer-calendar__title-wrapper'> {isEdit ? <EditOutlined /> : <PlusOutlined />}<div className='drawer-calendar__title'> {isEdit ? 'Редактирование' : "Добавление упражнений"}</div> </div>
       </>}
       extra={<Button
-        data-test-id=''
+        data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT_BUTTON_CLOSE}
         type='text'
         size='small'
         icon={<CloseOutlined />}
@@ -119,6 +121,7 @@ const DrawerCalendar = ({ selectedTraining,
               className='exercise-item' key={index} >
               <Input name='name'
                 className='exercise-item__input-title'
+                data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_EXERCISE_INDEX}${index}`}
                 placeholder="Упражнение"
                 size='small'
                 defaultValue={name}
@@ -130,6 +133,7 @@ const DrawerCalendar = ({ selectedTraining,
                   <InputNumber
                     name='approaches'
                     className='exercise-item__input-approaches'
+                    data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_APPROACH_INDEX}${index}`}
                     addonBefore='+' min={1}
                     placeholder="1"
                     size='small'
@@ -141,6 +145,7 @@ const DrawerCalendar = ({ selectedTraining,
                     <div className='exercise-item__label'> Вес, кг </div>
                     <InputNumber name='weight'
                       className='exercise-item__input-weight'
+                      data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_WEIGHT_INDEX}${index}`}
                       min={0}
                       placeholder="0"
                       size='small'
@@ -153,6 +158,7 @@ const DrawerCalendar = ({ selectedTraining,
                     <InputNumber
                       name='replays'
                       className='exercise-item__input-count'
+                      data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_QUANTITY_INDEX}${index}`}
                       min={1}
                       placeholder="3"
                       size='small'

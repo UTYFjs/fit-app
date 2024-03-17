@@ -9,14 +9,11 @@
     line-height: 16px;
 }
 .badge__traning-item_big{
-  padding: 0 12px;
     height: 22px;
     line-height: 22px;
 }
 
-.badge__traning-item_big:hover{
-    background: var(--character-light-background);
-}
+
 .badge__button{
   display: flex;
   align-items: center;

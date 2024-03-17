@@ -7,7 +7,7 @@
      MENU_BUTTON_CALENDAR = 'menu-button-calendar',
      MODAL_CREATE_TRAINING = 'modal-create-training',
      MODAL_CREATE_TRAINING_BUTTON_CLOSE = 'modal-create-training-button-close',
-     MODAL_CREATE_TRAINING_EDIT_BUTTON_INDEX = 'modal-update-training-edit-button', //data-test-id=`modal-update-training-edit-button${index}`
+     MODAL_UPDATE_TRAINING_EDIT_BUTTON_INDEX = 'modal-update-training-edit-button', //data-test-id=`modal-update-training-edit-button${index}`
      MODAL_CREATE_EXERCISE = 'modal-create-exercise',
      MODAL_CREATE_EXERCISE_SELECT = 'modal-create-exercise-select',
      MODAL_EXERCISE_TRAINING_BUTTON_CLOSE = 'modal-exercise-training-button-close',

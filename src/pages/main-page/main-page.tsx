@@ -20,12 +20,12 @@ import ModalServerError from '@components/modal-server-error/modal-server-error'
 export const MainPage: React.FC = () => {
     const [isOpenServerErrorModal, setIsOpenServerErrorModal] = useState(false)
     const navigate = useNavigate();
-    const [getTrainings, {isError}] = useLazyGetTrainingsQuery()
+    const [getTrainings, { isError }] = useLazyGetTrainingsQuery()
 
-    useEffect(() => { 
-        setIsOpenServerErrorModal(isError ?  true : false)
+    // useEffect(() => {
+    //     setIsOpenServerErrorModal(isError ? true : false)
 
-    }, [isError])
+    // }, [isError])
 
     const buttonActions = [
         {
@@ -51,61 +51,67 @@ export const MainPage: React.FC = () => {
             pathTo: Paths.PROFILE
         },
     ];
-    const handleToCalendar =  async (pathTo: Paths) => {
+    const handleToCalendar = async (pathTo: Paths) => {
+        console.log('handler click')
         try {
-            await getTrainings().unwrap();
-            navigate(pathTo);
-            if (!isError) {
-                //console.log('djfkjdkjfdkf')
-                
-            }
-        } catch (e){
+                console.log('djfkjdkjfdkf')
+                await getTrainings().unwrap();
+                navigate(pathTo);
+        } catch (e) {
+            setIsOpenServerErrorModal(isError ? true : false)
             //console.log(e)
         }
     }
-   return (
-       <>
-           <Card className='main-card' bordered={false}>
-               <p>С CleverFit ты сможешь:</p>
-               <p> — планировать свои тренировки на календаре, выбирая тип и уровень нагрузки;</p>
-               <p>
-                   — отслеживать свои достижения в разделе статистики, сравнивая свои результаты
-                   с&nbsp;нормами и рекордами;{' '}
-               </p>
-               <p>
-                   — создавать свой профиль, где ты можешь загружать свои фото, видео и отзывы
-                   о&nbsp;тренировках;{' '}
-               </p>
-               <p>
-                   — выполнять расписанные тренировки для разных частей тела, следуя подробным
-                   инструкциям и советам профессиональных тренеров.
-               </p>
-           </Card>
-           <Card className='main-card' bordered={false}>
-               <p>
-                   CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире фитнеса.
-                   Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
-               </p>
-           </Card>
-           <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8 }}>
-               {buttonActions.map((item) => {
-                   return (
-                       <Col key={item.key} xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
-                           <CustomCardAction
-                               title={item.title}
-                               actions={[
-                                   <Button type='text' data-test-id={item?.dataTestId} icon={item.icon} onClick={() => { handleToCalendar(item.pathTo)}} >
-                                       {item.label}{' '}
-                                   </Button>,
-                               ]}
-                           />
-                       </Col>
-                   );
-               })}
-           </Row>
-           {isOpenServerErrorModal && <ModalServerError dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW} isOpen={isOpenServerErrorModal} setIsOpen={setIsOpenServerErrorModal}/>}
-       </>
-   );
+    return (
+        <>
+            <Card className='main-card' bordered={false}>
+                <p>С CleverFit ты сможешь:</p>
+                <p> — планировать свои тренировки на календаре, выбирая тип и уровень нагрузки;</p>
+                <p>
+                    — отслеживать свои достижения в разделе статистики, сравнивая свои результаты
+                    с&nbsp;нормами и рекордами;{' '}
+                </p>
+                <p>
+                    — создавать свой профиль, где ты можешь загружать свои фото, видео и отзывы
+                    о&nbsp;тренировках;{' '}
+                </p>
+                <p>
+                    — выполнять расписанные тренировки для разных частей тела, следуя подробным
+                    инструкциям и советам профессиональных тренеров.
+                </p>
+            </Card>
+            <Card className='main-card' bordered={false}>
+                <p>
+                    CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире фитнеса.
+                    Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
+                </p>
+            </Card>
+            <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8 }}>
+                {buttonActions.map((item) => {
+                    return (
+                        <Col key={item.key} xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
+                            <CustomCardAction
+                                title={item.title}
+                                actions={[
+                                    <Button type='text'
+                                        data-test-id={item?.dataTestId}
+                                        icon={item.icon}
+                                        onClick={() => {
+                                            console.log('click');
+                                            handleToCalendar(item.pathTo)}} >
+                                        {item.label}{' '}
+                                    </Button>,
+                                ]}
+                            />
+                        </Col>
+                    );
+                })}
+            </Row>
+            {isError && <ModalServerError dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
+                                                        isOpen={isError}
+                                                        setIsOpen={setIsOpenServerErrorModal} />}
+        </>
+    );
 };
 
 

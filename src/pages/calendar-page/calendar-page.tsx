@@ -38,7 +38,7 @@ const CalendarPage = () => {
   //const { data: dataTrainingList, isError: IsErrorTrainingsList } = useGetTrainingListQuery();
   const [getTrainingList, { data: dataTrainingList, isError: IsErrorTrainingsList }] = useLazyGetTrainingListQuery();
 
-  useEffect(() => { getTrainingList() }, [getTrainingList])
+  useEffect(() => { getTrainingList() }, [dataTrainings])
   useEffect(() => { if (IsErrorTrainingsList) { setIsOpenModalError(true) } }, [IsErrorTrainingsList])
 
   useEffect(() => {
@@ -96,11 +96,11 @@ const CalendarPage = () => {
       <Calendar
         fullscreen={true}
         locale={localeCalendar}
-        dateCellRender={dataTrainingList && getDateCellRender}
+        dateCellRender={/*dataTrainingList && */getDateCellRender}
         onSelect={onSelect}
       />
 
-      {parentModal && calendarDate && dataTrainingList && <Portal parent={parentModal}>
+      {parentModal && calendarDate /*&& dataTrainingList*/ && <Portal parent={parentModal}>
         {typeModal === 'training' && <CardTraining currentTrainings={currentTrainings}
           isDisableCreateBtn={currentTrainings.length === dataTrainingList?.length}
           calendarDate={calendarDate}
@@ -113,11 +113,11 @@ const CalendarPage = () => {
           currentTrainings={currentTrainings}
           calendarDate={calendarDate}
           onClose={handleBackToTraining}
-          trainingList={dataTrainingList}
+          trainingList={dataTrainingList || []}
           isEditTraining={isEditTraining}
           setIsEditTraining={setIsEditTraining}
           exercises={selectedExercises}
-          options={getSelectedTrainings(dataTrainingList, currentTrainings, selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь', isEditTraining)} />}
+          options={getSelectedTrainings(dataTrainingList || [], currentTrainings, selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь', isEditTraining)} />}
 
       </Portal>
       }

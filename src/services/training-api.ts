@@ -6,13 +6,13 @@ export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getTrainings: builder.query<TransformResTrainingType, void>({
             query: () => ({
-                url:  Endpoint.TRAINING,
+                url: Endpoint.TRAINING,
             }),
             transformResponse(baseQueryReturnValue: ResTrainingType[]) {
                 //console.log('baseQueryReturnValue', baseQueryReturnValue);
                 const response = baseQueryReturnValue.reduce(
                     (acc: TransformResTrainingType, item) => {
-                        const key = item.date.split('T')[0];
+                        const key = item.date.toString().split('T')[0];
                         //console.log(typeof key, acc[key]);
                         if (acc[key]?.length > 0) {
                             acc[key].push(item);

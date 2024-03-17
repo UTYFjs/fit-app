@@ -10,16 +10,30 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
   background: var(--character-light-primary-inverse);
 }
+
 .card-training .ant-card-body{
   padding: 0 12px;
 }
 .card-training__content{
   display:flex;
   flex-direction: column;
+
   gap: 4px;
   padding: 16px 0;
   min-height: 64px;
 
+}
+
+.card-training__item{
+  display: flex;
+  justify-content: space-between;
+    padding: 0 12px;
+        height: 22px;
+    line-height: 22px;
+}
+
+.card-training__item:hover{
+    background: var(--character-light-background);
 }
 .card-training .ant-card-actions{
   padding: 0 12px;

@@ -11,6 +11,7 @@ import { getExercises } from '@utils/get-exercises';
 import { isPast } from '@utils/date-utils';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 
 type CardExerciseProps = {
   options: {
@@ -116,8 +117,9 @@ const CardExercise = ({ options,
   return (
     <>
       <Card
-        bordered={false}
         className='card-training'
+        data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE}
+        bordered={false}
         style={{ top: 0 }}
         // title={<div className='card-traning__title-wrapper'> <p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p> <Button
         //   data-test-id=''
@@ -138,12 +140,14 @@ const CardExercise = ({ options,
           title={
             <div className='card-exercise__title-wrapper'>
               <Button
+                data-test-id={CalendarDataTeatId.MODAL_CREATE_TRAINING_BUTTON_CLOSE}
                 type='text'
                 size='small'
                 icon={<ArrowLeftOutlined />}
                 onClick={onClose}
               />
               <Select className='training-list__select'
+              data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
                 defaultValue={selectedTraining || 'Выбор типа тренировки'}
                 placeholder={<div>Выбор типа тренировки</div>}
                 size={'middle'}
