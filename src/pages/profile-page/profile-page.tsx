@@ -3,7 +3,7 @@ import './profile-page.css'
 const ProfilePage = () => {
   return (
     <div >
-      here should be PROFILE page
+      Here will be PROFILE page
     </div>
   );
 }

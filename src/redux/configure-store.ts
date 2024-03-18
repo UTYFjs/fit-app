@@ -9,15 +9,12 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
     history: createBrowserHistory(), savePreviousLocations: 1, 
 });
 
-
-
 export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
         user: userReducer,
         [api.reducerPath]: api.reducer
     }),
-
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware,api.middleware),
 });
 

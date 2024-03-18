@@ -9,7 +9,6 @@ import { Registration } from '@components/registration/registration';
 import { Paths } from '@constants/api';
 
 
-
 export const Auth = () => {
  const { pathname } = useLocation();
     const items = [
@@ -20,7 +19,6 @@ export const Auth = () => {
             children: <Registration />,
         },
     ];
-
 
     return (
         <>

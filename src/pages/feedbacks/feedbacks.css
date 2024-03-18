@@ -14,7 +14,6 @@
   padding-top: 108px;
 }
 
-
 .feedback-empty{
   display: flex;
   flex-direction: column;
@@ -55,15 +54,10 @@
 
 }
 
-
-
-
 @media screen and (max-width: 768px) {
   .feedback-list{
     max-height: 1018px;
   }
-
-
   .feedback-list .ant-row{
   gap: 16px;
 }
@@ -74,7 +68,6 @@
   gap: 16px;
   padding-top: 32px;
 }
-
 
   .feedback-empty{
     gap: 48px;

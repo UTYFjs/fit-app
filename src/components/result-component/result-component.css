@@ -1,8 +1,6 @@
 .result-card{
   padding: 0;
 }
-
-
 .ant-result-title{
 font-family: var(--font-family);
 font-weight: 500;
@@ -21,13 +19,9 @@ line-height: 130%;
 text-align: center;
 color: var(--character-light-secondary-45);
 }
-
- .ant-result-extra {
+.ant-result-extra {
   margin: 0;
-
-
 }
-
 .result-card .ant-btn.ant-btn-primary {
 border: 1px solid var(--primary-light-6);
 border-radius: 2px;
@@ -41,7 +35,6 @@ background: var(--primary-light-6);
 
 .result-card .ant-btn.ant-btn-primary.ant-btn-fit-content {
     width: fit-content;
-
 }
 
 .result-card .ant-btn.ant-btn.ant-btn-primary > span{

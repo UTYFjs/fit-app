@@ -3,7 +3,6 @@ import styles from './registration.module.css';
 import 'antd/dist/antd.css';
 import { Button, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-
 import { validationPassword } from '@utils/validation';
 import { messageValidation } from '@constants/validation';
 import { useRegistrationMutation } from '@services/auth-api';
@@ -18,23 +17,23 @@ export const Registration: React.FC = () => {
     const [registration] = useRegistrationMutation()
     const navigate = useNavigate()
     const { accessToken, email, password, passwordRepeat } = useAppSelector((state) => state.user);
-    const {previousLocations } = useAppSelector((state) => state.router)
+    const { previousLocations } = useAppSelector((state) => state.router)
     const dispatch = useAppDispatch();
-
-    useEffect(() => {        
+    useEffect(() => {
         if (accessToken) {
-        navigate(Paths.MAIN);
-    }}, [accessToken, navigate])
+            navigate(Paths.MAIN);
+        }
+    }, [accessToken, navigate])
 
     useEffect(() => {
-        if(previousLocations?.[1]?.location?.pathname === Paths.ERROR){
+        if (previousLocations?.[1]?.location?.pathname === Paths.ERROR) {
             onFinish({
                 email: email,
                 password: password,
                 passwordRepeat: passwordRepeat,
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email, password, passwordRepeat, previousLocations]);
 
     window.addEventListener('resize', () => {
@@ -44,19 +43,19 @@ export const Registration: React.FC = () => {
 
     const onFinish = (values: IRegisterData) => {
         dispatch(setUserValues(values))
-        registration({email: values.email, password: values.password})
-        .unwrap()
-        .then(()=>{
-        navigate(Paths.SUCCESS);})
-        .catch((e) => {
-            if(e.status === 409) {
-                navigate(Paths.ERROR_USER_EXIST)
-            } else {
-            navigate(Paths.ERROR);
-            }
-        });
+        registration({ email: values.email, password: values.password })
+            .unwrap()
+            .then(() => {
+                navigate(Paths.SUCCESS);
+            })
+            .catch((e) => {
+                if (e.status === 409) {
+                    navigate(Paths.ERROR_USER_EXIST)
+                } else {
+                    navigate(Paths.ERROR);
+                }
+            });
     };
-
     return (
         <Form
             name='normal_login'

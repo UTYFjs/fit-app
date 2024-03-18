@@ -13,20 +13,16 @@
 .custom-card div[class='ant-card-head']{
   max-height: 45px;
   min-height: 45px;
-
 }
 .custom-card  div[class="ant-card-head-title"] {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
   line-height: 130%;
-
   color: var(--character-light-title-85);
   text-align: center;
   padding-top: 12px;
   padding-bottom: 12px;
-
-
   white-space: initial;
   overflow: none;
   text-overflow: initial;
@@ -39,13 +35,10 @@
   height: 21px;
   color: var(--character-light-title-85);
   text-align: center;
-
   white-space: initial;
   overflow: auto;
   text-overflow: initial;
-  
-
-}
+  }
 
 .custom-card > ul[class="ant-card-actions"] {
   box-sizing: border-box;
@@ -57,7 +50,6 @@ font-size: 14px;
 line-height: 130%;
 text-align: center;
 color: var(--primary-light-6);
-
 }
 
 
@@ -65,27 +57,20 @@ color: var(--primary-light-6);
 
 .custom-card{
   width: 100%;
-
 }
 .custom-card > div[class="ant-card-head"]{
   max-height: 66px;  
 }
 
 .custom-card  div[class="ant-card-head-title"]{
-
   max-height: 66px;
   text-align: left;
-
 }
 
 .custom-card > div[class="ant-card-body"] > div[class="ant-card-meta"] > div > div{
-
-
   height: 150px;
   color: var(--character-light-title-85);
   text-align: center;
-
-
 }
 }
 
@@ -94,8 +79,6 @@ color: var(--primary-light-6);
   width: 100%;
 }
 .custom-card  div[class="ant-card-head-title"]{
-
   text-align: center;
-
 }
 }

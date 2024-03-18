@@ -7,14 +7,13 @@
 .ant-select:not(.ant-select-focused) .ant-select-selector{
   border: none;
 }
-
-  .drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
+.drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
     border-radius: 8px 0 0 8px;
   }
-  .ant-drawer-body{
+.ant-drawer-body{
     overflow: hidden;
   }
-  .drawer-calendar__exercise-list{
+.drawer-calendar__exercise-list{
     max-height: 76%;
     overflow: auto;
   }
@@ -88,7 +87,6 @@ display: flex;
   text-align: center;
 }
 
-
 .exercise-item__input-title{
   width: 100%
 }
@@ -142,7 +140,7 @@ display: flex;
     padding: 22px 15px 0;
 
   }
-    .drawer-calendar .ant-drawer-content .ant-drawer-header{
+  .drawer-calendar .ant-drawer-content .ant-drawer-header{
                 padding: 16px;
                 padding-top: 13px;
                 padding-right: 8px;

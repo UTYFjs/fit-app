@@ -9,21 +9,18 @@ type IFeedbackProps = {
 }
 
 const FeedbackItem = ({data}: IFeedbackProps) => {
-
     const { id, fullName, imageSrc, message, rating, createdAt } = data;
     let firstName = '';
     let lastName = '';
     if(fullName){
         [firstName, lastName] = fullName.split(' ');
-    }
-    
+    }    
     return (
         <Comment
             key={id}
             className='feedback-item'
             avatar={
                 <>
-                    {' '}
                     {imageSrc && <Avatar size={42} src={imageSrc} />}
                     {!imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
                     <div>
@@ -40,5 +37,4 @@ const FeedbackItem = ({data}: IFeedbackProps) => {
         ></Comment>
     );
 };
-
 export default FeedbackItem

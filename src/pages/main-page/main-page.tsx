@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useId } from 'react';
 import { Button, Card, Col, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
@@ -12,20 +12,10 @@ import { CalendarDataTeatId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';
 import ModalServerError from '@components/modal-server-error/modal-server-error';
 
-
-
-
-
-
 export const MainPage: React.FC = () => {
-    const [isOpenServerErrorModal, setIsOpenServerErrorModal] = useState(false)
+
     const navigate = useNavigate();
     const [getTrainings, { isError }] = useLazyGetTrainingsQuery()
-
-    // useEffect(() => {
-    //     setIsOpenServerErrorModal(isError ? true : false)
-
-    // }, [isError])
 
     const buttonActions = [
         {
@@ -53,10 +43,10 @@ export const MainPage: React.FC = () => {
     ];
     const handleToCalendar = async (pathTo: Paths) => {
         try {
-                await getTrainings().unwrap();
-                navigate(pathTo);
+            await getTrainings().unwrap();
+            navigate(pathTo);
         } catch (e) {
-            setIsOpenServerErrorModal(isError ? true : false)
+            //d
         }
     }
     return (
@@ -94,7 +84,8 @@ export const MainPage: React.FC = () => {
                                         data-test-id={item?.dataTestId}
                                         icon={item.icon}
                                         onClick={() => {
-                                            handleToCalendar(item.pathTo)}} >
+                                            handleToCalendar(item.pathTo)
+                                        }} >
                                         {item.label}{' '}
                                     </Button>,
                                 ]}
@@ -104,8 +95,7 @@ export const MainPage: React.FC = () => {
                 })}
             </Row>
             {isError && <ModalServerError dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
-                                                        isOpen={isError}
-                                                        setIsOpen={setIsOpenServerErrorModal} />}
+                isOpen={isError} />}
         </>
     );
 };

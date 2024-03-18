@@ -8,41 +8,37 @@ import { CalendarDataTeatId } from '@constants/data-test-id';
 import { useState } from 'react';
 import { isPast } from '@utils/date-utils';
 
-
 type DrawerCalendarProps = {
   selectedTraining: string
-  exercises: ExerciseType[] 
+  exercises: ExerciseType[]
   forRemoveIdxExercises: number[]
   setForRemoveIdxExercises: React.Dispatch<React.SetStateAction<number[]>>
   handleAddExercise: () => void
   isDrawerOpen: boolean;
   isEdit: boolean;
   onClose: () => void;
-  calendarDate: Moment ;
+  calendarDate: Moment;
   setNewExercises: React.Dispatch<React.SetStateAction<ExerciseType[]>>
 };
 
-
 const DrawerCalendar = ({ selectedTraining,
-                          exercises,
-                          forRemoveIdxExercises,
-                          setForRemoveIdxExercises,
-                          handleAddExercise,
-                          isDrawerOpen,
-                          isEdit,
-                          onClose,
-                          calendarDate,
-                          setNewExercises }: DrawerCalendarProps) => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
+  exercises,
+  forRemoveIdxExercises,
+  setForRemoveIdxExercises,
+  handleAddExercise,
+  isDrawerOpen,
+  isEdit,
+  onClose,
+  calendarDate,
+  setNewExercises }: DrawerCalendarProps) => {
 
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
   window.addEventListener('resize', () => {
     setIsDesktop(window.innerWidth > 480);
   });
-
- const date = calendarDate?.format('DD.MM.YYYY')
+  const date = calendarDate?.format('DD.MM.YYYY')
 
   const handleOnChangeName = (name: string, index: number) => {
-
     setNewExercises((state) => {
       const newState = [...state];
       newState[index].name = name;
@@ -50,11 +46,10 @@ const DrawerCalendar = ({ selectedTraining,
     }
     )
   }
-  const handleOnChangeRemoveCheckbox = ( index: number) => {
-
+  const handleOnChangeRemoveCheckbox = (index: number) => {
     if (forRemoveIdxExercises.includes(index)) {
-      setForRemoveIdxExercises((state) => state.filter((item) => item !== index) )
-    } else { 
+      setForRemoveIdxExercises((state) => state.filter((item) => item !== index))
+    } else {
       setForRemoveIdxExercises((state) => ([...state, index]))
     }
   }
@@ -75,30 +70,26 @@ const DrawerCalendar = ({ selectedTraining,
     }
     )
   }
-
   const handleOnChangeApproaches = (approaches: number, index: number) => {
     setNewExercises((state) => {
       const newState = [...state];
       newState[index].approaches = approaches;
       return newState;
-    }
-    )
+    })
   }
   const handleRemove = () => {
-    setNewExercises(exercises.filter(( _, index) => !forRemoveIdxExercises.includes(index) ));
+    setNewExercises(exercises.filter((_, index) => !forRemoveIdxExercises.includes(index)));
     setForRemoveIdxExercises([]);
-    console.log(forRemoveIdxExercises);
   }
-
 
   return (
     <Drawer
       className='drawer-calendar'
       data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT}
       title={<>
-        <div className='drawer-calendar__title-wrapper'> 
-        {isEdit ? <EditOutlined /> : <PlusOutlined />}
-        <div className='drawer-calendar__title'> {isEdit ? 'Редактирование' : "Добавление упражнений"}</div> 
+        <div className='drawer-calendar__title-wrapper'>
+          {isEdit ? <EditOutlined /> : <PlusOutlined />}
+          <div className='drawer-calendar__title'> {isEdit ? 'Редактирование' : "Добавление упражнений"}</div>
         </div>
       </>}
       extra={<Button
@@ -109,17 +100,14 @@ const DrawerCalendar = ({ selectedTraining,
         onClick={onClose}
       />}
       width={408}
-      height={isDesktop? 'auto' : '91%'}
-      placement={isDesktop? 'right': 'bottom'}
-      //key={isDesktop ? 'right' : 'bottom'}
+      height={isDesktop ? 'auto' : '91%'}
+      placement={isDesktop ? 'right' : 'bottom'}
       closable={false}
       onClose={onClose}
       open={isDrawerOpen}
       mask={true}
       maskStyle={{ background: 'transparent' }}
       drawerStyle={{ borderRadius: '8px 0 0 8px' }}
-      //headerStyle={{ padding: '24px 32px 16px', borderBottom: 'none' }}
-      //bodyStyle={{ padding: '0 32px 24px', borderRadius: '8px 0 0 8px' }}
     >
       <div className='drawer-wrapper'>
         <div className='drawer-calendar__badge'>
@@ -135,11 +123,12 @@ const DrawerCalendar = ({ selectedTraining,
                 placeholder="Упражнение"
                 size='small'
                 value={name}
-                addonAfter={isEdit ? <Checkbox 
-                                        defaultChecked={forRemoveIdxExercises.includes(index)} 
-                                        onChange={() => { handleOnChangeRemoveCheckbox(index) }}
-                                        data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_CHECKBOX_EXERCISE_INDEX}${index}`}
-                                        /> : false}
+                addonAfter={isEdit ?
+                  <Checkbox
+                    defaultChecked={forRemoveIdxExercises.includes(index)}
+                    onChange={() => { handleOnChangeRemoveCheckbox(index) }}
+                    data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_CHECKBOX_EXERCISE_INDEX}${index}`}
+                  /> : false}
                 onChange={(e) => { handleOnChangeName(e.target.value, index) }} />
               <div className='exercise-item__values'>
                 <div>
@@ -180,18 +169,14 @@ const DrawerCalendar = ({ selectedTraining,
                       onChange={(value) => { handleOnChangeReplays(value || 1, index) }} />
                   </div>
                 </div>
-
               </div>
             </fieldset>
           ))}
-          
         </div>
         <div className='drawer_footer-wrapper'>
           <div className='drawer-calendar__btn-wrapper'>
             <Button className='drawer-calendar__btn-add'
-              onClick={() => {
-                handleAddExercise()
-              }}
+              onClick={() => { handleAddExercise() }}
               type='text'
               size='large'
               icon={<PlusOutlined />}
@@ -205,17 +190,13 @@ const DrawerCalendar = ({ selectedTraining,
               disabled={forRemoveIdxExercises.length === 0}
               icon={<MinusOutlined />}
               style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
-
           </div>
           {isPast(calendarDate) && <div className='drawer__warning-message' >
-            После сохранения внесенных 
-          изменений отредактировать проведенную тренировку будет невозможно </div>}
+            После сохранения внесенных
+            изменений отредактировать проведенную тренировку будет невозможно </div>}
         </div>
-        
       </div>
-
     </Drawer>
   );
 };
-
 export default DrawerCalendar;

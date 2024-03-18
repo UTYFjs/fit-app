@@ -16,13 +16,9 @@ import TrainingPage from '@pages/training-page/training-page';
 import AchievmentPage from '@pages/achievment-page/achievment-page';
 import ProfilePage from '@pages/profile-page/profile-page';
 
-
-
-
 const App = () => {
   const { previousLocations } = useAppSelector((state) => state.router);
   const { accessToken } = useAppSelector((state) => state.user);
-
   return (
       <>
           <Routes>

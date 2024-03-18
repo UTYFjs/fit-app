@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, Card, Empty, Select } from 'antd';
 import type { Moment } from 'moment';
 import { ArrowLeftOutlined, EditOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
-import { ExerciseType, ResTrainingType, TrainingListType } from '../../../types/training-types';
+import { ExerciseType, ResTrainingType } from '../../../types/training-types';
 import './card-exercise.css';
 import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
 import { useAddTrainingMutation, useGetTrainingsQuery, useUpdateTrainingMutation } from '@services/training-api';
@@ -12,7 +12,6 @@ import { isPast } from '@utils/date-utils';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import { CalendarDataTeatId } from '@constants/data-test-id';
-import { getCssVar } from '@utils/get-css-var';
 
 type CardExerciseProps = {
   options: {
@@ -24,21 +23,18 @@ type CardExerciseProps = {
   topPosition: number;
   setSelectedTraining: (selectTraining: string) => void;
   currentTrainings: ResTrainingType[];
-  trainingList: TrainingListType[];
   onClose: () => void;
   isEditTraining: boolean
   setIsEditTraining: (value: boolean) => void
-  exercises: ExerciseType[]
 };
 
-export const defaultExercice = {
+const defaultExercise = {
   name: '',
   replays: 1,
   weight: 0,
   approaches: 1,
   isImplementation: false,
 }
-
 
 const CardExercise = ({ options,
   calendarDate,
@@ -47,8 +43,6 @@ const CardExercise = ({ options,
   setSelectedTraining,
   currentTrainings = [],
   onClose,
-  trainingList,
-  exercises,
   isEditTraining = false,
   setIsEditTraining }: CardExerciseProps) => {
 
@@ -63,23 +57,17 @@ const CardExercise = ({ options,
   const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation()
   const { refetch } = useGetTrainingsQuery()
 
-  //todo избавиться от key это для селекта
-  //const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
-  //isPast(calendarDate);
-
   const handleCloseErrorModal = () => {
     setIsModalErrorOpen(false);
     onClose();
-    //todo дописать закрытие всех модалок
   }
 
   const handleAddNewExercise = () => {
-    setNewExercises((state) => [...state, { ...defaultExercice }])
+    setNewExercises((state) => [...state, { ...defaultExercise }])
   }
   const handleAddExercise = () => {
-    if (!newExercises.length) { setNewExercises([{ ...defaultExercice }]) }
+    if (!newExercises.length) { setNewExercises([{ ...defaultExercise }]) }
     setIsDrawerOpen(true)
-
   }
   const handleEditExercise = () => {
     setIsDrawerOpen(true)
@@ -93,31 +81,26 @@ const CardExercise = ({ options,
   const handleSave = async () => {
     if (isEditTraining) {
       let data = currentTrainings.find((item) => item.name === selectedTraining)
-
-      //todo избавиться от if
       if (data) {
         data = JSON.parse(JSON.stringify(data)) as ResTrainingType;
         data.exercises = newExercises;
         data.isImplementation = isPast(calendarDate);
-
         await updateTraining(data).unwrap().then(() => {
           refetch();
           onClose()
-        }).catch((e) => {
+        }).catch(() => {
           setIsModalErrorOpen(true)
         });
-
       }
     } else {
-
       await addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
         .unwrap()
         .then(() => {
           refetch();
-          onClose()})
+          onClose()
+        })
         .catch(() => { setIsModalErrorOpen(true) })
     }
-
   }
 
   const handleChooseTraining = (newTraining: string) => {
@@ -133,14 +116,6 @@ const CardExercise = ({ options,
         data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE}
         bordered={false}
         style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition > 0 ? 24 : 'initial' }}
-        // title={<div className='card-traning__title-wrapper'> <p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p> <Button
-        //   data-test-id=''
-
-        //   type='text'
-        //   size='small'
-        //   icon={<CloseOutlined />}
-        //   onClick={handle}
-        // /> </div>}
         actions={[<div className='card-training__actions-wrapper'><Button
           style={{ width: '100%' }}
           disabled={!selectedTraining}
@@ -209,8 +184,6 @@ const CardExercise = ({ options,
         <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
       </ModalError>}
     </>
-
-
   );
 };
 

@@ -1,26 +1,24 @@
 import { Rate } from 'antd';
-import  './rating.css';
+import './rating.css';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 import { getCssVar } from '@utils/get-css-var';
 import { IRatingStar } from '../../types/api';
-
 
 type IFeedbackProps = {
     rating: number;
     isDisable?: boolean;
     fontSize?: number
     onChange?: (value: IRatingStar) => void
-    
 };
 
-const Rating = ({ rating, isDisable = false, fontSize = 14, onChange}: IFeedbackProps) => {
+const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: IFeedbackProps) => {
 
-  const colorIcon = getCssVar('--character-light-warning');
+    const colorIcon = getCssVar('--character-light-warning');
     return (
         <Rate
             disabled={isDisable}
             character={({ index, value }) => {
-               if (index !== undefined && value !== undefined) {
+                if (index !== undefined && value !== undefined) {
                     return value > index ? (
                         <StarFilled
                             size={45}
@@ -28,7 +26,7 @@ const Rating = ({ rating, isDisable = false, fontSize = 14, onChange}: IFeedback
                         />
                     ) : (
                         <StarOutlined
-                            style={{ color: colorIcon, fontSize: fontSize  }}
+                            style={{ color: colorIcon, fontSize: fontSize }}
                         />
                     );
                 }

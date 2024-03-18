@@ -1,10 +1,7 @@
 .calendar-page{
-
   margin: -24px -24px -93px;
   padding:24px 24px 93px;
   background-color: var(--primary-light-1);
-
-
 }
 .calendar-page .calendar{
   background: var(--primary-light-1);
@@ -31,11 +28,9 @@
 
 
 @media (max-width: 480px) {
-
     .calendar-page{
     padding: 10px 24px 24px;
     margin: -24px -16px -63px;
-
 }
   .calendar-page .calendar{
   background: var(--character-light-primary-inverse);
@@ -44,76 +39,50 @@
     background: var(--character-light-primary-inverse);
 }
 
-
-
-
-  .ant-picker-calendar-header{
+.ant-picker-calendar-header{
     display:flex;
     justify-content: flex-end;
     gap: 8px;
     height: 44px;
     padding: 10px 8px;
   }
-  .ant-picker-calendar-header .ant-picker-calendar-month-select{
+.ant-picker-calendar-header .ant-picker-calendar-month-select{
     margin-left: 0;
   }
-  .ant-picker-calendar-header .ant-select {
-    /* height: 22px; */
+.ant-picker-calendar-header .ant-select {
     width: fit-content;
     border: 1px solid var(--character-light-border);
     border-radius: 2px;
   }
-  .ant-picker-calendar-header .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
+.ant-picker-calendar-header .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
 
     line-height: 22px;
     height: 22px;
   }
-  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-search{
+.ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-search{
     
     height: 22px;
   }
-  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-item{
+.ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-item{
     
     height: 22px;
   }
 
 
-  .ant-picker-calendar-header .ant-radio-group {
+.ant-picker-calendar-header .ant-radio-group {
    margin-top: 0;
    width: fit-content;
   }
-  .ant-picker-calendar-header .ant-radio-group .ant-radio-button-wrapper{
+.ant-picker-calendar-header .ant-radio-group .ant-radio-button-wrapper{
       width:fit-content;
   }
 
-  .calendar .ant-picker-body{
-    padding: 8px!important;
-   /* height: 196px; */
+.ant-picker-calendar .ant-picker-panel .ant-picker-body {
+    padding: 8px;
   }
 
 
-  .calendar .ant-picker-content{
-   
-    /* width:296px!important;
-    margin: 0 auto!important; */
+.calendar .ant-picker-content{
     height: 196px;
-  }
-
-
-  /* .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
-    color: var(--character-light-title-85);
-  } */
-  
-  /* .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before{
-        position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 20;
-    z-index: 3;
-    border: 1px solid #1890ff;
-    border-radius: 2px;
-    content: '';
-  } */
-
+  }  
 }

@@ -34,20 +34,20 @@ const dataModal: DataModalType[] = [
     },
 ];
 const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButton }: ModalErrorProps) => {
-  const [data, setData] = useState<DataModalType | null>(null);
-  
-  useEffect(() => {
-  switch (typeContent) {
-      case 'successReview':
-          setData(dataModal[1]);
-          break;
-      case 'errorReview':
-         setData(dataModal[0]);
-          break;
-      default:
-          handlePrimeButton();
-  }
-  },[handlePrimeButton, typeContent])
+    const [data, setData] = useState<DataModalType | null>(null);
+
+    useEffect(() => {
+        switch (typeContent) {
+            case 'successReview':
+                setData(dataModal[1]);
+                break;
+            case 'errorReview':
+                setData(dataModal[0]);
+                break;
+            default:
+                handlePrimeButton();
+        }
+    }, [handlePrimeButton, typeContent])
 
     return (
         <Modal
@@ -72,7 +72,7 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
                             type='primary'
                             size='large'
                             data-test-id={data?.dataTestId}
-                            onClick={handlePrimeButton}                            
+                            onClick={handlePrimeButton}
                         >
                             {data?.primeButtonText}
                         </Button>

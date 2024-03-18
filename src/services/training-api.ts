@@ -1,6 +1,11 @@
 import { Endpoint, HTTPMethod } from '@constants/api';
 import { api } from './api';
-import { NewTrainingType, ResTrainingType, TrainingListType, TransformResTrainingType } from '../types/training-types';
+import {
+    NewTrainingType,
+    ResTrainingType,
+    TrainingListType,
+    TransformResTrainingType,
+} from '../types/training-types';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,7 +14,6 @@ export const trainingApi = api.injectEndpoints({
                 url: Endpoint.TRAINING,
             }),
             transformResponse(baseQueryReturnValue: ResTrainingType[]) {
-                //console.log('baseQueryReturnValue', baseQueryReturnValue);
                 const response = baseQueryReturnValue.reduce(
                     (acc: TransformResTrainingType, item) => {
                         const key = new Date(item.date).toISOString().split('T')[0];
@@ -25,13 +29,6 @@ export const trainingApi = api.injectEndpoints({
                 );
                 return response;
             },
-            // providesTags: (result) =>
-            //     result
-            //         ? [
-            //               ...result.map(({ _id }) => ({ type: 'Trainings' as const, _id })),
-            //               { type: 'Trainings', id: 'LIST' },
-            //           ]
-            //         : [{ type: 'Trainings', id: 'LIST' }],
             providesTags: ['Trainings'],
         }),
 
@@ -44,7 +41,7 @@ export const trainingApi = api.injectEndpoints({
         }),
         updateTraining: builder.mutation<ResTrainingType[], ResTrainingType>({
             query: ({ _id, ...rest }) => ({
-                url:  `${Endpoint.TRAINING}/${_id}`,
+                url: `${Endpoint.TRAINING}/${_id}`,
                 method: HTTPMethod.PUT,
                 body: rest,
             }),
@@ -71,5 +68,5 @@ export const {
     useUpdateTrainingMutation,
     useDeleteTrainingMutation,
     useGetTrainingListQuery,
-    useLazyGetTrainingListQuery
+    useLazyGetTrainingListQuery,
 } = trainingApi;

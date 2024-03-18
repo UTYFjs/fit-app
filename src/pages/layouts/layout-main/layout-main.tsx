@@ -6,7 +6,6 @@ import { RootState } from '@redux/configure-store';
 import 'antd/dist/antd.css';
 import './layout-main.css';
 
-
 export const LayoutMain: React.FC = () => {
     const isLoadingMutation = useAppSelector((state: RootState) =>
        Object.values(state.api.mutations).some((query) => query?.status === 'pending')

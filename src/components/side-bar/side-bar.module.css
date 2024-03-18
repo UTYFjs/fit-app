@@ -1,25 +1,19 @@
 .sider{
  position: relative;
-
 }
 
 
 .sider .menu li[class='ant-menu-item']{
   margin-left: -8px;
-
-  
 }
 
 .logo {
   display:flex;
   justify-content: center;
-  
   align-items: center;
   margin: 30px 0 0;
-  
   height: 64px;
   cursor: pointer;
-
 }
 
 .exit{
@@ -90,15 +84,12 @@
   }
 
   .logo  svg {
-
     width: 72px;
     height: 18px;
-
   }
 
   .button_trigger{
-  
-    height: 48px;
+      height: 48px;
     width: 32px;
     right: -31px;
     top:48px;

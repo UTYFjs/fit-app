@@ -5,7 +5,6 @@ import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { Paths } from '@constants/api';
 
-
 const { Footer } = Layout;
 const {Meta} = Card
 

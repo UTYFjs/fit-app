@@ -1,21 +1,14 @@
-import { Button, Modal, notification } from 'antd';
-import { ReactNode, useEffect, useState } from 'react';
-import { ResultStatusType } from 'antd/lib/result';
+import { Button } from 'antd';
 import './save-error-card.css';
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { getCssVar } from '@utils/get-css-var';
 import { CalendarDataTeatId } from '@constants/data-test-id';
-
 
 type ModalErrorProps = {
   handlePrimeButton: () => void,
 };
 
-const SaveErrorCard = ({ handlePrimeButton }: ModalErrorProps) => {
-
-
-  return (
-
+const SaveErrorCard = ({ handlePrimeButton }: ModalErrorProps) =>  (
     <div className='modal-error-notification save-error-card'>
       <CloseCircleOutlined
         style={{ color: getCssVar('--character-light-error'), fontSize: 22 }}
@@ -38,13 +31,12 @@ const SaveErrorCard = ({ handlePrimeButton }: ModalErrorProps) => {
           type='primary'
           size='large'
           onClick={handlePrimeButton}
-
         >
           Закрыть
         </Button>
       </div>
     </div>
   );
-};
+
 
 export default SaveErrorCard;

@@ -8,16 +8,14 @@ type ProtectedRouteType = {
     redirectPath?: string;
 };
 const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) => {
-     const location = useLocation();
-
+    const location = useLocation();
     const accessToken = location.search.split('=')
-     const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
     if (accessToken[1]) {
         dispatch(setAccessToken(accessToken[1]));
         localStorage.setItem('accessToken', accessToken[1]);
         return <Navigate to={Paths.MAIN} replace />;
     }
-    
     if (!isAllowed) {
         return <Navigate to={redirectPath} replace />;
     }

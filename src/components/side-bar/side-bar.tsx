@@ -9,7 +9,6 @@ import {
     MenuUnfoldOutlined,
     TrophyFilled,
 } from '@ant-design/icons';
-
 import {CleverFitIcon, FitIcon, ExitIcon, CalendarIcon} from '../custom-icons/custom-icons.tsx';
 import { getCssVar } from '@utils/get-css-var.ts';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -24,19 +23,15 @@ export const SideBar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const {pathname} = useLocation();
-    //todo в какой момент менять назад и назачать начальное через useLocation&
     const [currentMenuItem, setCurrentMenuItem] = useState(pathname)
-
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     useEffect(()=> {setCurrentMenuItem(pathname)},[pathname])
 
-
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
-
 
     const handleExit = () => {
             localStorage.removeItem('accessToken');
@@ -81,8 +76,6 @@ export const SideBar: React.FC = () => {
         },
     ];
 
-
-
     return (
         <Sider
             className={styles.sider}
@@ -119,8 +112,6 @@ export const SideBar: React.FC = () => {
                         height: isMobile ? 192 : 230,
                         marginTop: isMobile ? 16 : 42,
                     }}
-                    //selectable = {false}
-                    //todo correct selected key
                     onClick={(item)=> {navigate(item.key);}}
                     selectedKeys={[currentMenuItem]}
                     items={menuItems}

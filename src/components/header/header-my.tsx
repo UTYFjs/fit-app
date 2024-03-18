@@ -1,33 +1,22 @@
 import styles from './header-my.module.css';
 import 'antd/dist/antd.css';
 import { Typography, Layout, Breadcrumb, Button } from 'antd';
-import {    SettingOutlined} from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import classNames from 'classnames';
 
-
-
-
-
 const { Header } = Layout;
 const { Title } = Typography;
+export const HeaderMy: React.FC = () => {
+    const { pathname } = useLocation();
 
-
-export const HeaderMy: React.FC = () => {  
-    const {pathname} = useLocation();
-    
     const headerSecondClass = {
         [Paths.MAIN]: '',
         [Paths.FEEDBACKS]: 'header_feedbacks',
         [Paths.CALENDAR]: 'header_calendar',
     }
-    const headerClass = classNames(styles.header, styles[headerSecondClass[pathname as keyof  typeof headerSecondClass]] || '');
-    // const headerClass =
-    //     pathname === Paths.MAIN
-    //         ? styles.header
-    //         : classNames(styles.header, styles['header_feedbacks']);
-
+    const headerClass = classNames(styles.header, styles[headerSecondClass[pathname as keyof typeof headerSecondClass]] || '');
     return (
         <Header className={headerClass}>
             <Breadcrumb className={styles.breadcrumb}>
@@ -66,5 +55,6 @@ export const HeaderMy: React.FC = () => {
                 </div>
             )}
         </Header>
-    );}
+    );
+}
 
