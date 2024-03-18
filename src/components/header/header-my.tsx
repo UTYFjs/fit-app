@@ -46,7 +46,7 @@ export const HeaderMy: React.FC = () => {
                 icon={<SettingOutlined />}
                 className={styles['button_setting-calendar']}
             >
-                Настройки
+                <span className={styles['button_setting_text']}> Настройки </span>
             </Button>}
             {pathname === Paths.MAIN && (
                 <div className={styles['title__wrapper']}>

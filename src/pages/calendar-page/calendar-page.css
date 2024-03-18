@@ -4,10 +4,36 @@
   padding:24px 24px 93px;
   background-color: var(--primary-light-1);
 
+
+}
+.calendar-page .calendar{
+  background: var(--primary-light-1);
+}
+.calendar .ant-picker-body {
+    background: var(--primary-light-1);
+    z-index: 1;
 }
 
-.calendar-page .ant-picker-cell-inner.ant-picker-calendar-date{
-  /*
-  padding-left:0;
-  */
+.calendar-page .ant-picker-cell-inner{
+  background: var(--character-light-primary-inverse);
+}
+
+.calendar__cell_mobile{
+  position: absolute;
+  width: 160%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  background: var(--primary-light-1)
+}
+@media (max-width: 768px){
+  .calendar-page{
+
+  margin: -24px -16px -93px;
+
+
+
+}
 }

@@ -5,6 +5,7 @@ import './drawer-calendar.css';
 import BadgeTraining from '@components/badge-training/badge-training';
 import { ExerciseType } from '../../types/training-types';
 import { CalendarDataTeatId } from '@constants/data-test-id';
+import { useState } from 'react';
 
 
 type DrawerCalendarProps = {
@@ -31,6 +32,12 @@ const DrawerCalendar = ({ selectedTraining,
                           onClose,
                           calendarDate = null,
                           setNewExercises }: DrawerCalendarProps) => {
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
+
+  window.addEventListener('resize', () => {
+    setIsDesktop(window.innerWidth > 480);
+  });
+
  const date = calendarDate?.format('DD.MM.YYYY')
 
   const handleOnChangeName = (name: string, index: number) => {
@@ -88,8 +95,10 @@ const DrawerCalendar = ({ selectedTraining,
       className='drawer-calendar'
       data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT}
       title={<>
-
-        <div className='drawer-calendar__title-wrapper'> {isEdit ? <EditOutlined /> : <PlusOutlined />}<div className='drawer-calendar__title'> {isEdit ? 'Редактирование' : "Добавление упражнений"}</div> </div>
+        <div className='drawer-calendar__title-wrapper'> 
+        {isEdit ? <EditOutlined /> : <PlusOutlined />}
+        <div className='drawer-calendar__title'> {isEdit ? 'Редактирование' : "Добавление упражнений"}</div> 
+        </div>
       </>}
       extra={<Button
         data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT_BUTTON_CLOSE}
@@ -99,12 +108,14 @@ const DrawerCalendar = ({ selectedTraining,
         onClick={onClose}
       />}
       width={408}
-      placement={'right'}
+      height={isDesktop? 'auto' : '95%'}
+      placement={isDesktop? 'right': 'bottom'}
+      //key={isDesktop ? 'right' : 'bottom'}
       closable={false}
       onClose={onClose}
       open={isDrawerOpen}
       mask={true}
-      maskStyle={{ background: 'none' }}
+      maskStyle={{ background: 'transparent' }}
       drawerStyle={{ borderRadius: '8px 0 0 8px' }}
       headerStyle={{ padding: '24px 32px 16px', borderBottom: 'none' }}
       bodyStyle={{ padding: '0 32px 24px', borderRadius: '8px 0 0 8px' }}
@@ -123,7 +134,11 @@ const DrawerCalendar = ({ selectedTraining,
                 placeholder="Упражнение"
                 size='small'
                 value={name}
-                addonAfter={isEdit ? <Checkbox defaultChecked={forRemoveIdxExercises.includes(index)} onChange={() => { handleOnChangeRemoveCheckbox(index) }} /> : false}
+                addonAfter={isEdit ? <Checkbox 
+                                        defaultChecked={forRemoveIdxExercises.includes(index)} 
+                                        onChange={() => { handleOnChangeRemoveCheckbox(index) }}
+                                        data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_CHECKBOX_EXERCISE_INDEX}${index}`}
+                                        /> : false}
                 onChange={(e) => { handleOnChangeName(e.target.value, index) }} />
               <div className='exercise-item__values'>
                 <div>

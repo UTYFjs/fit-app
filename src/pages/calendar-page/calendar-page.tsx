@@ -3,7 +3,7 @@ import './calendar-page.css'
 import { localeCalendar } from '@constants/calendar';
 import { useGetTrainingListQuery, useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
 import type { Moment } from 'moment';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import CardTraining from '@components/modal-calendar/card-training/card-training';
 import Portal from '@components/portal/portal';
@@ -15,17 +15,18 @@ import { getSelectedTrainings } from '@utils/get-select-training';
 import { getExercises } from '@utils/get-exercises';
 import ModalError from '@components/modal-error/modal-error';
 import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
+import { getCssVar } from '@utils/get-css-var';
 
 
 const CalendarPage = () => {
-
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
   const [parentModal, setParentModal] = useState<Element | null>(null)
+  const [topPosition, setTopPosition] = useState(0);
   const [typeModal, setTypeModal] = useState<'training' | 'exercise' | null>(null)
 
   const [calendarDate, setCalendarDate] = useState<Moment | null>(null);
   const [currentTrainings, setCurrentTrainings] = useState<ResTrainingType[]>([])
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
-
   //стейт для модалок
   const [selectedTraining, setSelectedTraining] = useState('')
   const [selectedExercises, setSelectedExercises] = useState(getExercises(selectedTraining, currentTrainings))
@@ -38,7 +39,7 @@ const CalendarPage = () => {
   //const { data: dataTrainingList, isError: IsErrorTrainingsList } = useGetTrainingListQuery();
   const [getTrainingList, { data: dataTrainingList, isError: IsErrorTrainingsList }] = useLazyGetTrainingListQuery();
 
-  useEffect(() => { getTrainingList() }, [dataTrainings])
+  useLayoutEffect(() => { getTrainingList() }, [dataTrainings])
   useEffect(() => { if (IsErrorTrainingsList) { setIsOpenModalError(true) } }, [IsErrorTrainingsList])
 
   useEffect(() => {
@@ -51,6 +52,10 @@ const CalendarPage = () => {
     setSelectedExercises(getExercises(selectedTraining, currentTrainings))
   }, [currentTrainings, selectedTraining])
 
+  window.addEventListener('resize', () => {
+    setIsDesktop(window.innerWidth > 768);
+  });
+
 
   const getDateCellRender = (data: Moment) => {
     
@@ -58,8 +63,12 @@ const CalendarPage = () => {
     
     const trainings = dataTrainings?.[key];
     //console.log('datacellREnder start', key, dataTrainings);
-    return trainings && trainings.map((item) => 
-    <BadgeTraining key={item._id} isDisable={item.isImplementation} text={item.name} isShort={true} />)
+    if(isDesktop){
+      return trainings && trainings.map((item) =>
+        <BadgeTraining key={item._id} isDisable={item.isImplementation} text={item.name} isShort={true} />)
+    }
+    return trainings?.length ?  <div className='calendar__cell_mobile'></div> : null
+
   }
 
 
@@ -84,12 +93,28 @@ const CalendarPage = () => {
   const onSelect = (data: Moment) => {
 
     console.log('moment', data.days(), data.month())
-    setCalendarDate(data);
-    const dateForSelector = data.format('YYYY-MM-DD');
-    const parentForModal = document.querySelector(`[title="${dateForSelector}"]`)
-    setSelectedTraining('');
-    setParentModal(parentForModal);
-    setTypeModal('training');
+    if (currentMonth === data.month()){
+      setCalendarDate(data);
+      const dateForSelector = data.format('YYYY-MM-DD');
+      const parentForModal = document.querySelector(`[title="${dateForSelector}"]`) as HTMLElement
+      if(isDesktop){
+        setParentModal(parentForModal);
+        setTopPosition(0);
+      }else {
+        setTopPosition(parentForModal.getBoundingClientRect().top + 35)
+      }
+
+      setSelectedTraining('');
+
+      setTypeModal('training');
+    } else {
+      setCurrentMonth(data.month())
+      setTypeModal(null)
+      setParentModal(null)
+      setSelectedTraining('')
+
+    }
+
   }
   const handleUpdateRequest = () => {
     setIsOpenModalError(false)
@@ -98,22 +123,28 @@ const CalendarPage = () => {
   return (
     <div className='calendar-page'>
       <Calendar
-        fullscreen={true}
+        className='calendar'
+        fullscreen={isDesktop}
         locale={localeCalendar}
-        dateCellRender={dataTrainingList && getDateCellRender}
+        dateCellRender={ dataTrainingList && getDateCellRender}
         onSelect={onSelect}
       />
 
-      {parentModal && calendarDate && dataTrainingList && <Portal parent={parentModal}>
-        {typeModal === 'training' && <CardTraining currentTrainings={currentTrainings}
+      {/*parentModal &&*/ calendarDate && dataTrainingList && <Portal parent={parentModal || document.body}>
+        {typeModal === 'training' && 
+        <CardTraining 
+          currentTrainings={currentTrainings}
           isDisableCreateBtn={currentTrainings.length === dataTrainingList?.length}
           calendarDate={calendarDate}
+          topPosition={topPosition}
           setSelectedTraining={setSelectedTraining}
           onClose={onCloseModal}
           onCreate={handleCreateTraining}
           onEdit={handleEditTraining} />}
-        {typeModal === 'exercise' && <CardExercise selectedTraining={selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь'}
+        {typeModal === 'exercise' && 
+        <CardExercise selectedTraining={selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь'}
           setSelectedTraining={setSelectedTraining}
+          topPosition={topPosition}
           currentTrainings={currentTrainings}
           calendarDate={calendarDate}
           onClose={handleBackToTraining}

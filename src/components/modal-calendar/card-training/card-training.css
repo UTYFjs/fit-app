@@ -69,3 +69,16 @@
   color: var(--character-light-secondary-45);
   text-align: left;
 }
+
+
+@media  (max-width:480px) {
+  
+  .card-training{
+  width: 312px;
+
+
+  }
+
+
+
+}

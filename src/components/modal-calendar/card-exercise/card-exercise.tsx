@@ -21,6 +21,7 @@ type CardExerciseProps = {
   }[];
   calendarDate: Moment;
   selectedTraining: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
+  topPosition: number;
   setSelectedTraining: (selectTraining: string) => void;
   currentTrainings: ResTrainingType[];
   trainingList: TrainingListType[];
@@ -42,6 +43,7 @@ export const defaultExercice = {
 const CardExercise = ({ options,
   calendarDate,
   selectedTraining,
+  topPosition,
   setSelectedTraining,
   currentTrainings = [],
   onClose,
@@ -64,6 +66,7 @@ const CardExercise = ({ options,
   useEffect(() => {
     if (isErrorAdd || isErrorUpdate) { setIsModalErrorOpen(true) }
   }, [isErrorAdd, isErrorUpdate])
+
 
 
   //todo избавиться от key это для селекта
@@ -123,7 +126,7 @@ const CardExercise = ({ options,
         className='card-training'
         data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE}
         bordered={false}
-        style={{ top: 0 }}
+        style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition>0?16: 'initial' }}
         // title={<div className='card-traning__title-wrapper'> <p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p> <Button
         //   data-test-id=''
 

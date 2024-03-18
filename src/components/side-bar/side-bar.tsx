@@ -21,7 +21,7 @@ import React from 'react';
 const {  Sider } = Layout;
 
 export const SideBar: React.FC = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const {pathname} = useLocation();
     //todo в какой момент менять назад и назачать начальное через useLocation&
@@ -94,7 +94,7 @@ export const SideBar: React.FC = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-
+                zIndex: 3,
                 background: '#fff',
             }}
         >

@@ -16,6 +16,7 @@ type CardTrainingProps = {
   currentTrainings: ResTrainingType[];
   isDisableCreateBtn: boolean;
   calendarDate: Moment;
+  topPosition: number;
   setSelectedTraining: (selectedTraining: string) => void;
   onClose: () => void;
   onCreate: () => void;
@@ -27,6 +28,7 @@ type CardTrainingProps = {
 const CardTraining = ({ currentTrainings = [],
   isDisableCreateBtn,
   calendarDate,
+  topPosition,
   setSelectedTraining,
   onClose,
   onCreate,
@@ -37,10 +39,9 @@ const CardTraining = ({ currentTrainings = [],
 
 
   return (<Card
-
     className='card-training'
     bordered={false}
-    style={{ top: 0 }}
+    style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition>0 ? 16 : 'initial' }}
     bodyStyle={{ padding: 0 }}
     data-test-id={CalendarDataTeatId.MODAL_CREATE_TRAINING}
     actions={[<Button

@@ -1,10 +1,16 @@
 
-.drawer-calendar .ant-drawer-content-wrapper{
+/* .drawer-calendar .ant-drawer-content-wrapper{
   width: 408px;
-}
+} */
 .ant-select:not(.ant-select-focused) .ant-select-selector{
   border: none;
 }
+
+  .drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
+    border-radius: 8px 0 0 8px;
+
+  }
+
 .drawer-calendar__title-wrapper{
   display:flex;
   gap: 10px;
@@ -101,4 +107,24 @@ display: flex;
   text-align: center;
 
 
+}
+
+@media  (max-width: 480px) {
+  .drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
+    border-radius: 24px 24px 0 0;
+
+  }
+
+  .drawer-calendar .ant-drawer-content .ant-drawer-header{
+    padding: 22px 15px 0;
+
+  }
+    .drawer-calendar .ant-drawer-content .ant-drawer-header{
+                padding: 16px;
+                padding-top: 13px;
+                padding-right: 8px;
+
+  }
+
+  
 }

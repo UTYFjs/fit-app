@@ -126,5 +126,13 @@ color: var(--character-light-title-85);
 
   .header .button_setting span:last-child{
     display: none;
+    }
+
+    .header.header_calendar .button_setting-calendar{
+      width: 32px;
+      height: 32px;
+    }
+     .header .button_setting_text{
+        display: none;
       }
 }

@@ -117,6 +117,10 @@
   }
 body {
     min-height: 100vh;
+
+}
+main{
+			/* overflow-x: hidden!important; */
 }
 
 .ant-tabs-ink-bar {
