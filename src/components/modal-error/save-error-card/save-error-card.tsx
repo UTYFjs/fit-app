@@ -23,18 +23,22 @@ const SaveErrorCard = ({ handlePrimeButton }: ModalErrorProps) => {
       <div className='modal-error__content' >
         <p
           className='save-error-card__title'
+          data-test-id={CalendarDataTeatId.MODAL_ERROR_USER_TRAINING_TITLE}
         >
           При сохранении данных произошла ошибка
         </p>
         <p className='save-error-card__subtitle'
+          data-test-id={CalendarDataTeatId.MODAL_ERROR_USER_TRAINING_SUBTITLE}
         >
-          Придется попробовать ещё раз.
+          Придётся попробовать ещё раз
         </p>
         <Button
           className='modal-error__button modal-error__button_big'
+          data-test-id={CalendarDataTeatId.MODAL_ERROR_USER_TRAINING_BUTTON}
           type='primary'
           size='large'
           onClick={handlePrimeButton}
+
         >
           Закрыть
         </Button>

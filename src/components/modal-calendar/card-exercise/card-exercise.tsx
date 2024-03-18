@@ -63,12 +63,6 @@ const CardExercise = ({ options,
   const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation()
   const { refetch } = useGetTrainingsQuery()
 
-  useEffect(() => {
-    if (isErrorAdd || isErrorUpdate) { setIsModalErrorOpen(true) }
-  }, [isErrorAdd, isErrorUpdate])
-
-
-
   //todo избавиться от key это для селекта
   //const options = trainingList.filter((item) => !currentTrainings.some((curr) => curr.name === item.name)).map(({ name }) => ({ value: name, label: name }))
   //isPast(calendarDate);
@@ -85,7 +79,7 @@ const CardExercise = ({ options,
   const handleAddExercise = () => {
     if (!newExercises.length) { setNewExercises([{ ...defaultExercice }]) }
     setIsDrawerOpen(true)
-    
+
   }
   const handleEditExercise = () => {
     setIsDrawerOpen(true)
@@ -99,19 +93,31 @@ const CardExercise = ({ options,
   const handleSave = async () => {
     if (isEditTraining) {
       let data = currentTrainings.find((item) => item.name === selectedTraining)
+
+      //todo избавиться от if
       if (data) {
         data = JSON.parse(JSON.stringify(data)) as ResTrainingType;
         data.exercises = newExercises;
         data.isImplementation = isPast(calendarDate);
-        await updateTraining(data).unwrap();
+
+        await updateTraining(data).unwrap().then(() => {
+          refetch();
+          onClose()
+        }).catch((e) => {
+          setIsModalErrorOpen(true)
+        });
+
       }
     } else {
-      await addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises }).unwrap()
+
+      await addTraining({ name: selectedTraining, date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z', isImplementation: false, exercises: newExercises })
+        .unwrap()
+        .then(() => {
+          refetch();
+          onClose()})
+        .catch(() => { setIsModalErrorOpen(true) })
     }
-    if (!isErrorAdd || !isErrorUpdate) {
-      refetch();
-      onClose()
-    }
+
   }
 
   const handleChooseTraining = (newTraining: string) => {
@@ -126,7 +132,7 @@ const CardExercise = ({ options,
         className='card-training'
         data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE}
         bordered={false}
-        style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition>0?16: 'initial' }}
+        style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition > 0 ? 16 : 'initial' }}
         // title={<div className='card-traning__title-wrapper'> <p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p> <Button
         //   data-test-id=''
 
@@ -141,7 +147,11 @@ const CardExercise = ({ options,
           type='ghost'
           size='middle'
           onClick={handleAddExercise}> Добавить упражнения</Button>
-          <Button disabled={newExercises.length === 0 && !isEditTraining} type='text' size='middle' onClick={handleSave}>Сохранить</Button></div>]}>
+          <Button disabled={newExercises.length === 0 && !isEditTraining}
+            type='text'
+            size='middle'
+            onClick={handleSave}>Сохранить изменения</Button>
+        </div>]}>
         <Meta
           title={
             <div className='card-exercise__title-wrapper'>
@@ -153,7 +163,7 @@ const CardExercise = ({ options,
                 onClick={onClose}
               />
               <Select className='training-list__select'
-              data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
+                data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
                 defaultValue={selectedTraining || 'Выбор типа тренировки'}
                 placeholder={<div>Выбор типа тренировки</div>}
                 size={'middle'}
@@ -163,15 +173,15 @@ const CardExercise = ({ options,
 
         ></Meta>
         {<div className='card-exercise__content'>
-          {newExercises?.map((item, index) => 
-          <div 
-          key={item.name + item.replays} 
-          className='card-exercise__content-item' >
-            <span > {item.name}</span> 
+          {newExercises?.map((item, index) =>
+            <div
+              key={index}
+              className='card-exercise__content-item' >
+              <span > {item.name}</span>
 
-              <EditOutlined 
-              className='badge__training-item_icon' 
-              data-test-id={`${CalendarDataTeatId.MODAL_UPDATE_TRAINING_EDIT_BUTTON_INDEX}${index}`} 
+              <EditOutlined
+                className='badge__training-item_icon'
+                data-test-id={`${CalendarDataTeatId.MODAL_UPDATE_TRAINING_EDIT_BUTTON_INDEX}${index}`}
                 onClick={handleEditExercise} />
             </div>)}
 

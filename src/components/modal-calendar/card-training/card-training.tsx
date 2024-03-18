@@ -69,7 +69,7 @@ const CardTraining = ({ currentTrainings = [],
     {<div className='card-training__content'>
       {currentTrainings && currentTrainings.map((item, index) =>
         <div className='card-training__item' key={index}>
-          <BadgeTraning key={item._id + 'training'}
+          <BadgeTraning key={item._id+'training'}
             isDisable={item.isImplementation}
             text={item.name}
             onClickBadge={() => { setSelectedTraining(item.name); onEdit() }} />

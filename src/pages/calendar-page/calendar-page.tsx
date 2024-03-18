@@ -91,8 +91,6 @@ const CalendarPage = () => {
   }
 
   const onSelect = (data: Moment) => {
-
-    console.log('moment', data.days(), data.month())
     if (currentMonth === data.month()){
       setCalendarDate(data);
       const dateForSelector = data.format('YYYY-MM-DD');

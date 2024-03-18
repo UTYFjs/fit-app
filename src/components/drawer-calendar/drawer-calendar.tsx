@@ -108,7 +108,7 @@ const DrawerCalendar = ({ selectedTraining,
         onClick={onClose}
       />}
       width={408}
-      height={isDesktop? 'auto' : '95%'}
+      height={isDesktop? 'auto' : '91%'}
       placement={isDesktop? 'right': 'bottom'}
       //key={isDesktop ? 'right' : 'bottom'}
       closable={false}
@@ -117,8 +117,8 @@ const DrawerCalendar = ({ selectedTraining,
       mask={true}
       maskStyle={{ background: 'transparent' }}
       drawerStyle={{ borderRadius: '8px 0 0 8px' }}
-      headerStyle={{ padding: '24px 32px 16px', borderBottom: 'none' }}
-      bodyStyle={{ padding: '0 32px 24px', borderRadius: '8px 0 0 8px' }}
+      //headerStyle={{ padding: '24px 32px 16px', borderBottom: 'none' }}
+      //bodyStyle={{ padding: '0 32px 24px', borderRadius: '8px 0 0 8px' }}
     >
       <>
         <div className='drawer-calendar__badge'>
@@ -183,26 +183,27 @@ const DrawerCalendar = ({ selectedTraining,
               </div>
             </fieldset>
           ))}
-          <div className='drawer-calendar__btn-wrapper'>
-            <Button className='drawer-calendar__btn-add'
-              onClick={() => {
-                console.log('click Добавить еще')
-                handleAddExercise()}}
-              type='text'
-              size='large'
-              icon={<PlusOutlined />}
-              style={{ width: '55%', display: 'flex', alignItems: 'center' }}
-            >
-              Добавить ещё</Button>
-            {isEdit && <Button className='drawer-calendar__btn-remove'
-              onClick={handleRemove}
-              type='text'
-              size='large'
-              disabled={forRemoveIdxExercises.length === 0}
-              icon={<MinusOutlined />}
-              style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
+          
+        </div>
+        <div className='drawer-calendar__btn-wrapper'>
+          <Button className='drawer-calendar__btn-add'
+            onClick={() => {
+              handleAddExercise()
+            }}
+            type='text'
+            size='large'
+            icon={<PlusOutlined />}
+            style={{ width: '55%', display: 'flex', alignItems: 'center' }}
+          >
+            Добавить ещё</Button>
+          {isEdit && <Button className='drawer-calendar__btn-remove'
+            onClick={handleRemove}
+            type='text'
+            size='large'
+            disabled={forRemoveIdxExercises.length === 0}
+            icon={<MinusOutlined />}
+            style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
 
-          </div>
         </div>
       </>
 
