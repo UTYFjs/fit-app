@@ -6,6 +6,7 @@ import BadgeTraining from '@components/badge-training/badge-training';
 import { ExerciseType } from '../../types/training-types';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import { useState } from 'react';
+import { isPast } from '@utils/date-utils';
 
 
 type DrawerCalendarProps = {
@@ -17,7 +18,7 @@ type DrawerCalendarProps = {
   isDrawerOpen: boolean;
   isEdit: boolean;
   onClose: () => void;
-  calendarDate?: Moment | null;
+  calendarDate: Moment ;
   setNewExercises: React.Dispatch<React.SetStateAction<ExerciseType[]>>
 };
 
@@ -30,7 +31,7 @@ const DrawerCalendar = ({ selectedTraining,
                           isDrawerOpen,
                           isEdit,
                           onClose,
-                          calendarDate = null,
+                          calendarDate,
                           setNewExercises }: DrawerCalendarProps) => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
 
@@ -120,7 +121,7 @@ const DrawerCalendar = ({ selectedTraining,
       //headerStyle={{ padding: '24px 32px 16px', borderBottom: 'none' }}
       //bodyStyle={{ padding: '0 32px 24px', borderRadius: '8px 0 0 8px' }}
     >
-      <>
+      <div className='drawer-wrapper'>
         <div className='drawer-calendar__badge'>
           <BadgeTraining text={selectedTraining} isGray={true} /> <span className='drawer-calendar__date'>{date}</span>
         </div>
@@ -185,27 +186,33 @@ const DrawerCalendar = ({ selectedTraining,
           ))}
           
         </div>
-        <div className='drawer-calendar__btn-wrapper'>
-          <Button className='drawer-calendar__btn-add'
-            onClick={() => {
-              handleAddExercise()
-            }}
-            type='text'
-            size='large'
-            icon={<PlusOutlined />}
-            style={{ width: '55%', display: 'flex', alignItems: 'center' }}
-          >
-            Добавить ещё</Button>
-          {isEdit && <Button className='drawer-calendar__btn-remove'
-            onClick={handleRemove}
-            type='text'
-            size='large'
-            disabled={forRemoveIdxExercises.length === 0}
-            icon={<MinusOutlined />}
-            style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
+        <div className='drawer_footer-wrapper'>
+          <div className='drawer-calendar__btn-wrapper'>
+            <Button className='drawer-calendar__btn-add'
+              onClick={() => {
+                handleAddExercise()
+              }}
+              type='text'
+              size='large'
+              icon={<PlusOutlined />}
+              style={{ width: '55%', display: 'flex', alignItems: 'center' }}
+            >
+              Добавить ещё</Button>
+            {isEdit && <Button className='drawer-calendar__btn-remove'
+              onClick={handleRemove}
+              type='text'
+              size='large'
+              disabled={forRemoveIdxExercises.length === 0}
+              icon={<MinusOutlined />}
+              style={{ width: '45%', display: 'flex', alignItems: 'center' }}>  Удалить </Button>}
 
+          </div>
+          {isPast(calendarDate) && <div className='drawer__warning-message' >
+            После сохранения внесенных 
+          изменений отредактировать проведенную тренировку будет невозможно </div>}
         </div>
-      </>
+        
+      </div>
 
     </Drawer>
   );

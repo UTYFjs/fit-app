@@ -19,7 +19,7 @@ import { getCssVar } from '@utils/get-css-var';
 
 
 const CalendarPage = () => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
   const [parentModal, setParentModal] = useState<Element | null>(null)
   const [topPosition, setTopPosition] = useState(0);
   const [typeModal, setTypeModal] = useState<'training' | 'exercise' | null>(null)
@@ -53,7 +53,7 @@ const CalendarPage = () => {
   }, [currentTrainings, selectedTraining])
 
   window.addEventListener('resize', () => {
-    setIsDesktop(window.innerWidth > 768);
+    setIsDesktop(window.innerWidth > 480);
   });
 
 

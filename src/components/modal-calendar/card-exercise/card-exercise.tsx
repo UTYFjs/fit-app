@@ -132,7 +132,7 @@ const CardExercise = ({ options,
         className='card-training'
         data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE}
         bordered={false}
-        style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition > 0 ? 16 : 'initial' }}
+        style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition > 0 ? 24 : 'initial' }}
         // title={<div className='card-traning__title-wrapper'> <p className='card-training__title'>{`Тренировки на ${date || 'fake date'} `}</p> <Button
         //   data-test-id=''
 

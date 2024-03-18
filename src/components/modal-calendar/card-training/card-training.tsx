@@ -41,7 +41,7 @@ const CardTraining = ({ currentTrainings = [],
   return (<Card
     className='card-training'
     bordered={false}
-    style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition>0 ? 16 : 'initial' }}
+    style={{ top: topPosition, right: calendarDate.days() === 6 ? 0 : 'initial', left: topPosition>0 ? 24 : 'initial' }}
     bodyStyle={{ padding: 0 }}
     data-test-id={CalendarDataTeatId.MODAL_CREATE_TRAINING}
     actions={[<Button

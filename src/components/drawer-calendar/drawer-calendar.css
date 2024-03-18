@@ -1,27 +1,22 @@
 
-/* .drawer-calendar .ant-drawer-content-wrapper{
-  width: 408px;
-} */
+.drawer-wrapper{
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+}
 .ant-select:not(.ant-select-focused) .ant-select-selector{
   border: none;
 }
 
   .drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
-    /* max-height: 500px; */
     border-radius: 8px 0 0 8px;
-
   }
   .ant-drawer-body{
-    /* max-height: 500px; */
     overflow: hidden;
   }
   .drawer-calendar__exercise-list{
-    max-height: 77%;
+    max-height: 76%;
     overflow: auto;
-  }
-  .ant-drawer-body .drawer-calendar__btn-wrapper{
-    /* background: red; */
-    margin-top: auto;
   }
 
 .drawer-calendar__title-wrapper{
@@ -119,7 +114,22 @@ display: flex;
   line-height: 130%;
   text-align: center;
 
-
+}
+.drawer_footer-wrapper{
+  flex-grow: 1;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+.drawer__warning-message{
+  padding: 0 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  text-align: center;
+  color: var(--character-light-secondary-45);
 }
 
 @media  (max-width: 480px) {
@@ -143,9 +153,6 @@ display: flex;
   .ant-drawer-body{
     padding: 0 16px 24px
   }
-  .drawer-calendar__exercise-list{
-    /* margin: 24px 0; */
-  }
   .exercise-item{
     padding: 0 5px;
   }
@@ -153,8 +160,5 @@ display: flex;
 
   gap: 16px;
 }
-
-
-
   
 }

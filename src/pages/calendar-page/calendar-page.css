@@ -11,7 +11,6 @@
 }
 .calendar .ant-picker-body {
     background: var(--primary-light-1);
-    z-index: 1;
 }
 
 .calendar-page .ant-picker-cell-inner{
@@ -20,7 +19,7 @@
 
 .calendar__cell_mobile{
   position: absolute;
-  width: 160%;
+  width: 200%;
   height: 100%;
   top: 50%;
   left: 50%;
@@ -28,12 +27,93 @@
   z-index: -1;
   background: var(--primary-light-1)
 }
-@media (max-width: 768px){
-  .calendar-page{
-
-  margin: -24px -16px -93px;
 
 
+
+@media (max-width: 480px) {
+
+    .calendar-page{
+    padding: 10px 24px 24px;
+    margin: -24px -16px -63px;
 
 }
+  .calendar-page .calendar{
+  background: var(--character-light-primary-inverse);
+}
+.calendar .ant-picker-body {
+    background: var(--character-light-primary-inverse);
+}
+
+
+
+
+  .ant-picker-calendar-header{
+    display:flex;
+    justify-content: flex-end;
+    gap: 8px;
+    height: 44px;
+    padding: 10px 8px;
+  }
+  .ant-picker-calendar-header .ant-picker-calendar-month-select{
+    margin-left: 0;
+  }
+  .ant-picker-calendar-header .ant-select {
+    /* height: 22px; */
+    width: fit-content;
+    border: 1px solid var(--character-light-border);
+    border-radius: 2px;
+  }
+  .ant-picker-calendar-header .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
+
+    line-height: 22px;
+    height: 22px;
+  }
+  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-search{
+    
+    height: 22px;
+  }
+  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-item{
+    
+    height: 22px;
+  }
+
+
+  .ant-picker-calendar-header .ant-radio-group {
+   margin-top: 0;
+   width: fit-content;
+  }
+  .ant-picker-calendar-header .ant-radio-group .ant-radio-button-wrapper{
+      width:fit-content;
+  }
+
+  .calendar .ant-picker-body{
+    padding: 8px!important;
+   /* height: 196px; */
+  }
+
+
+  .calendar .ant-picker-content{
+   
+    /* width:296px!important;
+    margin: 0 auto!important; */
+    height: 196px;
+  }
+
+
+  /* .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
+    color: var(--character-light-title-85);
+  } */
+  
+  /* .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before{
+        position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 20;
+    z-index: 3;
+    border: 1px solid #1890ff;
+    border-radius: 2px;
+    content: '';
+  } */
+
 }
