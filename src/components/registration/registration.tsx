@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import styles from './registration.module.css';
 
@@ -28,6 +28,25 @@ export const Registration: React.FC = () => {
         }
     }, [accessToken, navigate]);
 
+    const onFinish = useCallback(
+        (values: IRegisterData) => {
+            dispatch(setUserValues(values));
+            registration({ email: values.email, password: values.password })
+                .unwrap()
+                .then(() => {
+                    navigate(Paths.SUCCESS);
+                })
+                .catch((e) => {
+                    if (e.status === 409) {
+                        navigate(Paths.ERROR_USER_EXIST);
+                    } else {
+                        navigate(Paths.ERROR);
+                    }
+                });
+        },
+        [dispatch, navigate, registration],
+    );
+
     useEffect(() => {
         if (previousLocations?.[1]?.location?.pathname === Paths.ERROR) {
             onFinish({
@@ -36,27 +55,12 @@ export const Registration: React.FC = () => {
                 passwordRepeat: passwordRepeat,
             });
         }
-    }, [email, password, passwordRepeat, previousLocations]);
+    }, [email, onFinish, password, passwordRepeat, previousLocations]);
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
 
-    const onFinish = (values: IRegisterData) => {
-        dispatch(setUserValues(values));
-        registration({ email: values.email, password: values.password })
-            .unwrap()
-            .then(() => {
-                navigate(Paths.SUCCESS);
-            })
-            .catch((e) => {
-                if (e.status === 409) {
-                    navigate(Paths.ERROR_USER_EXIST);
-                } else {
-                    navigate(Paths.ERROR);
-                }
-            });
-    };
     return (
         <Form
             name='normal_login'

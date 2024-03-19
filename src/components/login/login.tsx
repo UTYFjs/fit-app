@@ -61,11 +61,11 @@ export const Login: React.FC = () => {
                     navigate(Paths.CONFIRM_EMAIL);
                 })
                 .catch((e) => {
-                    if (e.status === 404 && e.data.message === 'Email не найден') {
-                        navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST);
-                    } else {
-                        navigate(Paths.ERROR_CHECK_EMAIL);
-                    }
+                    const path =
+                        e.status === 404 && e.data.message === 'Email не найден'
+                            ? Paths.ERROR_CHECK_EMAIL_NO_EXIST
+                            : Paths.ERROR_CHECK_EMAIL;
+                    navigate(path);
                 });
         }
     };
