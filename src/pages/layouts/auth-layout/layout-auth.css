@@ -18,20 +18,20 @@
   background-color: white;
 }
 
-  @media (max-width: 992px ) and (min-width: 576px){
-    .main_auth{
-      margin-bottom: 52px;
-    }
+@media (max-width: 992px ) and (min-width: 576px){
+  .main_auth{
+    margin-bottom: 52px;
   }
+}
 
 @media (max-width: 576px){
- .main_auth{
-  width: 328px;
-  max-height: 612px;
-  padding: 32px 16px;
-  margin-bottom: 8px;
+  .main_auth{
+    width: 328px;
+    max-height: 612px;
+    padding: 32px 16px;
+    margin-bottom: 8px;
 
-}
+  }
 
 
 

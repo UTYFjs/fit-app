@@ -1,21 +1,23 @@
-import { Button, Modal, Result } from 'antd';
-import styles from './modal-server-error.module.css';
-import { useNavigate } from 'react-router-dom';
-import { Paths } from '@constants/api';
 import { useState } from 'react';
+
+import { Paths } from '@constants/api';
+import { Button, Modal, Result } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './modal-server-error.module.css';
 type ModalErrorProps = {
     isOpen: boolean;
-    dataTestId?: string
+    dataTestId?: string;
 };
 
 const ModalServerError = ({ isOpen, dataTestId }: ModalErrorProps) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const [isOpenModal, setIsOpenModal] = useState(isOpen)
-    const navigate = useNavigate()
+    const [isOpenModal, setIsOpenModal] = useState(isOpen);
+    const navigate = useNavigate();
     const handleGoBack = () => {
-        setIsOpenModal(false)
-        navigate(Paths.MAIN)
-    }
+        setIsOpenModal(false);
+        navigate(Paths.MAIN);
+    };
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });

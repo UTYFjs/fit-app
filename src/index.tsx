@@ -1,8 +1,10 @@
 import React from 'react';
+
+import { store, history } from '@redux/configure-store';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { HistoryRouter } from 'redux-first-history/rr6';
-import { store, history } from '@redux/configure-store';
+
 import App from './app';
 import 'normalize.css';
 import './index.css';
@@ -13,7 +15,7 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <HistoryRouter history={history}>
-                    <App />
+                <App />
             </HistoryRouter>
         </Provider>
     </React.StrictMode>,

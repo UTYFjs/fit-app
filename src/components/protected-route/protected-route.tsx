@@ -9,8 +9,8 @@ type ProtectedRouteType = {
 };
 const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) => {
     const location = useLocation();
-    const accessToken = location.search.split('=')
-    const dispatch = useAppDispatch()
+    const accessToken = location.search.split('=');
+    const dispatch = useAppDispatch();
     if (accessToken[1]) {
         dispatch(setAccessToken(accessToken[1]));
         localStorage.setItem('accessToken', accessToken[1]);

@@ -1,12 +1,13 @@
-import { Button, Modal, Result } from 'antd';
 import { useEffect, useState } from 'react';
+
+import { Button, Modal, Result } from 'antd';
 import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
 type ModalErrorProps = {
     isOpen: boolean;
-    typeContent: 'successReview' | 'errorReview' | null,
-    handlePrimeButton: () => void,
-    handleSecondButton?: () => void,
+    typeContent: 'successReview' | 'errorReview' | null;
+    handlePrimeButton: () => void;
+    handleSecondButton?: () => void;
 };
 
 type DataModalType = {
@@ -33,7 +34,12 @@ const dataModal: DataModalType[] = [
         primeButtonText: 'Отлично',
     },
 ];
-const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButton }: ModalErrorProps) => {
+const ModalResult = ({
+    isOpen,
+    typeContent,
+    handlePrimeButton,
+    handleSecondButton,
+}: ModalErrorProps) => {
     const [data, setData] = useState<DataModalType | null>(null);
 
     useEffect(() => {
@@ -47,7 +53,7 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
             default:
                 handlePrimeButton();
         }
-    }, [handlePrimeButton, typeContent])
+    }, [handlePrimeButton, typeContent]);
 
     return (
         <Modal

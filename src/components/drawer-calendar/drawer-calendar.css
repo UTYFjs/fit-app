@@ -8,15 +8,15 @@
   border: none;
 }
 .drawer-calendar .ant-drawer-content, .drawer-calendar .ant-drawer-content-wrapper{
-    border-radius: 8px 0 0 8px;
-  }
+  border-radius: 8px 0 0 8px;
+}
 .ant-drawer-body{
-    overflow: hidden;
-  }
+  overflow: hidden;
+}
 .drawer-calendar__exercise-list{
-    max-height: 76%;
-    overflow: auto;
-  }
+  max-height: 76%;
+  overflow: auto;
+}
 
 .drawer-calendar__title-wrapper{
   display:flex;
@@ -74,7 +74,7 @@
 }
 
 .exercise-item__values_second{
-display: flex;
+  display: flex;
 }
 .input-divider{
   font-family: var(--font-family);
@@ -141,10 +141,10 @@ display: flex;
 
   }
   .drawer-calendar .ant-drawer-content .ant-drawer-header{
-                padding: 16px;
-                padding-top: 13px;
-                padding-right: 8px;
-                border-bottom: none;
+    padding: 16px;
+    padding-top: 13px;
+    padding-right: 8px;
+    border-bottom: none;
 
   }
 
@@ -156,7 +156,7 @@ display: flex;
   }
   .exercise-item__values{
 
-  gap: 16px;
-}
+    gap: 16px;
+  }
   
 }

@@ -1,4 +1,3 @@
-import moment from 'moment';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
-export const isPast = (date: Moment) =>   moment(date).isBefore(moment());
+export const isPast = (date: Moment) => moment(date).isBefore(moment());

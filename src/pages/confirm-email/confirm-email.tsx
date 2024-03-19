@@ -1,29 +1,30 @@
-import { useState } from 'react'
-import VerificationInput from 'react-verification-input'
-import './confirm-email.css'
-import { Result } from 'antd'
-import { useAppSelector } from '@hooks/typed-react-redux-hooks'
-import { useConfirmEmailMutation } from '@services/auth-api'
-import { useNavigate } from 'react-router-dom'
-import { Paths } from '@constants/api'
+import { useState } from 'react';
+
+import VerificationInput from 'react-verification-input';
+import './confirm-email.css';
+import { Result } from 'antd';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useConfirmEmailMutation } from '@services/auth-api';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api';
 
 const ConfirmEmail = () => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
     const [value, setValue] = useState('');
-    const { email } = useAppSelector((state) => state.user)
+    const { email } = useAppSelector((state) => state.user);
     const [confirmEmail] = useConfirmEmailMutation();
     const onComplete = () => {
         confirmEmail({ email: email, code: value })
             .unwrap()
             .then(() => {
-                navigate(Paths.CHANGE_PASSWORD)
+                navigate(Paths.CHANGE_PASSWORD);
             })
             .catch(() => {
-                setValue('')
+                setValue('');
                 setIsError(true);
-            })
-    }
+            });
+    };
     return (
         <div>
             <Result
@@ -36,8 +37,8 @@ const ConfirmEmail = () => {
                 }
                 subTitle={
                     <span>
-                        Мы отправили вам на email <b>{email}</b> <br /> шестизначный код. Введите его в поле
-                        ниже.
+                        Мы отправили вам на email <b>{email}</b> <br /> шестизначный код. Введите
+                        его в поле ниже.
                     </span>
                 }
                 className='result-card'
@@ -61,6 +62,6 @@ const ConfirmEmail = () => {
             <p className='extra__text'>Не пришло письмо? Проверьте папку Спам.</p>
         </div>
     );
-}
+};
 
-export default ConfirmEmail
+export default ConfirmEmail;

@@ -8,17 +8,17 @@
 }
 
 .feedback-item .ant-avatar{
-   margin: 0 66px 12px;
+  margin: 0 66px 12px;
 }
 .feedback-item__name-owner{
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
-    color: var(--character-light-title-85);
-    text-align: center;
-    margin-bottom: 0;
-  }
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--character-light-title-85);
+  text-align: center;
+  margin-bottom: 0;
+}
 
 .feedback-item .ant-comment-content-author{
   height: 16px;
@@ -31,12 +31,12 @@
 }
 .feedback-item .ant-comment-content-author-time {
   font-family: var(--font-family);
-font-weight: 400;
-font-size: 12px;
-letter-spacing: -1px;
-line-height: 130%;
-text-align: right;
-color: var(--character-light-disable-25)
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: -1px;
+  line-height: 130%;
+  text-align: right;
+  color: var(--character-light-disable-25)
 }
 
 
@@ -50,17 +50,17 @@ color: var(--character-light-disable-25)
 
 @media  screen and (max-width: 768px) {
   .feedback-item .ant-comment-inner{
-  flex-direction: column;
-}
+    flex-direction: column;
+  }
 
-.feedback-item .ant-comment-avatar{
-  display:flex;
-}
-.feedback-item .ant-avatar{
-   margin: 0 16px 12px 0;
-}
-.feedback-item .ant-comment-content-author{
+  .feedback-item .ant-comment-avatar{
+    display:flex;
+  }
+  .feedback-item .ant-avatar{
+    margin: 0 16px 12px 0;
+  }
+  .feedback-item .ant-comment-content-author{
 
-  margin-bottom: 16px;
-}
+    margin-bottom: 16px;
+  }
 }

@@ -2,7 +2,9 @@ import { Button, Modal } from 'antd';
 import './modal-feedback.css';
 import TextArea from 'antd/lib/input/TextArea';
 import Rating from '@components/rating/rating';
+
 import { useState } from 'react';
+
 import { IRatingStar } from '../../types/api';
 type ModalFeedbackProps = {
     isOpen: boolean;
@@ -12,7 +14,13 @@ type ModalFeedbackProps = {
     handleSubmitReview: () => void;
 };
 
-const ModalFeedback = ({ isOpen, setIsOpen, setTextFeedBackValue, setRatingValue, handleSubmitReview }: ModalFeedbackProps) => {
+const ModalFeedback = ({
+    isOpen,
+    setIsOpen,
+    setTextFeedBackValue,
+    setRatingValue,
+    handleSubmitReview,
+}: ModalFeedbackProps) => {
     const [isBtnDisable, setIsBtnDisable] = useState(true);
 
     return (
@@ -28,7 +36,9 @@ const ModalFeedback = ({ isOpen, setIsOpen, setTextFeedBackValue, setRatingValue
                     size='large'
                     onClick={handleSubmitReview}
                     data-test-id='new-review-submit-button'
-                > Опубликовать
+                >
+                    {' '}
+                    Опубликовать
                 </Button>
             }
             onOk={() => setIsOpen(false)}
@@ -38,10 +48,15 @@ const ModalFeedback = ({ isOpen, setIsOpen, setTextFeedBackValue, setRatingValue
             maskStyle={{ backdropFilter: 'blur(5px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
         >
-            <Rating rating={0} fontSize={22} isDisable={false} onChange={(value) => {
-                setIsBtnDisable(false);
-                setRatingValue(value)
-            }} />
+            <Rating
+                rating={0}
+                fontSize={22}
+                isDisable={false}
+                onChange={(value) => {
+                    setIsBtnDisable(false);
+                    setRatingValue(value);
+                }}
+            />
             <TextArea
                 onChange={(e) => {
                     setTextFeedBackValue(e.currentTarget.value);

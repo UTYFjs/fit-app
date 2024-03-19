@@ -1,5 +1,5 @@
 .sider{
- position: relative;
+  position: relative;
 }
 
 
@@ -89,12 +89,12 @@
   }
 
   .button_trigger{
-      height: 48px;
+    height: 48px;
     width: 32px;
     right: -31px;
     top:48px;
   }
-   .sider > div .menu > li[class='ant-menu-item'] span:last-child{
+  .sider > div .menu > li[class='ant-menu-item'] span:last-child{
     margin-left: 8px;
   }
 
@@ -102,8 +102,8 @@
     display:none;
   }
 
-    .button_exit{
-      justify-content: center;
-    }
+  .button_exit{
+    justify-content: center;
+  }
 
 }

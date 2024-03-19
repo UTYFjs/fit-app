@@ -1,18 +1,17 @@
+import styles from './auth.module.css';
 
-import styles from'./auth.module.css';
 import 'antd/dist/antd.css';
 import { CleverFitIcon } from '@components/custom-icons/custom-icons';
-import { Tabs } from 'antd';
 import { Login } from '@components/login/login';
-import { Link, useLocation } from 'react-router-dom';
 import { Registration } from '@components/registration/registration';
 import { Paths } from '@constants/api';
-
+import { Tabs } from 'antd';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Auth = () => {
- const { pathname } = useLocation();
+    const { pathname } = useLocation();
     const items = [
-        { label: <Link to={Paths.LOGIN}>Вход</Link>, key: 'login', children: <Login /> }, 
+        { label: <Link to={Paths.LOGIN}>Вход</Link>, key: 'login', children: <Login /> },
         {
             label: <Link to={Paths.REGISTRATION}>Регистрация</Link>,
             key: 'registration',
@@ -41,4 +40,5 @@ export const Auth = () => {
                 items={items}
             />
         </>
-    );};
+    );
+};

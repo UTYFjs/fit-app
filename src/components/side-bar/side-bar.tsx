@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import styles from'./side-bar.module.css'
+import React, { useEffect, useState } from 'react';
+
+import styles from './side-bar.module.css';
+
 import 'antd/dist/antd.css';
-import { Button, Layout, Menu } from 'antd';
 import {
     HeartFilled,
     IdcardOutlined,
@@ -9,35 +10,38 @@ import {
     MenuUnfoldOutlined,
     TrophyFilled,
 } from '@ant-design/icons';
-import {CleverFitIcon, FitIcon, ExitIcon, CalendarIcon} from '../custom-icons/custom-icons.tsx';
-import { getCssVar } from '@utils/get-css-var.ts';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api.ts';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
 import { setAccessToken } from '@redux/user-slice.ts';
-import React from 'react';
+import { getCssVar } from '@utils/get-css-var.ts';
+import { Button, Layout, Menu } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const {  Sider } = Layout;
+import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
+
+const { Sider } = Layout;
 
 export const SideBar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const {pathname} = useLocation();
-    const [currentMenuItem, setCurrentMenuItem] = useState(pathname)
+    const { pathname } = useLocation();
+    const [currentMenuItem, setCurrentMenuItem] = useState(pathname);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    useEffect(()=> {setCurrentMenuItem(pathname)},[pathname])
+    useEffect(() => {
+        setCurrentMenuItem(pathname);
+    }, [pathname]);
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
 
     const handleExit = () => {
-            localStorage.removeItem('accessToken');
-            dispatch(setAccessToken(''));
-             navigate(Paths.LOGIN)
-        };
+        localStorage.removeItem('accessToken');
+        dispatch(setAccessToken(''));
+        navigate(Paths.LOGIN);
+    };
 
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
     const styleMenuItem = {
@@ -45,14 +49,12 @@ export const SideBar: React.FC = () => {
         paddingRight: isMobile ? 0 : 16,
         marginLeft: collapsed ? '0' : '-8px',
         height: 42,
-        letterSpacing: isMobile? '.4px':'.8px',
+        letterSpacing: isMobile ? '.4px' : '.8px',
     };
     const menuItems = [
         {
             key: Paths.CALENDAR,
-            icon: (
-                <CalendarIcon style={{ color: colorPrimaryLight9 }}/>
-            ),
+            icon: <CalendarIcon style={{ color: colorPrimaryLight9 }} />,
             label: 'Календарь',
             style: styleMenuItem,
         },
@@ -95,7 +97,9 @@ export const SideBar: React.FC = () => {
                 <div
                     className={styles.logo}
                     style={{ marginRight: collapsed ? 0 : '15px' }}
-                    onClick= {()=>{navigate(Paths.MAIN)}}
+                    onClick={() => {
+                        navigate(Paths.MAIN);
+                    }}
                 >
                     {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
                         className: 'trigger',
@@ -112,7 +116,9 @@ export const SideBar: React.FC = () => {
                         height: isMobile ? 192 : 230,
                         marginTop: isMobile ? 16 : 42,
                     }}
-                    onClick={(item)=> {navigate(item.key);}}
+                    onClick={(item) => {
+                        navigate(item.key);
+                    }}
                     selectedKeys={[currentMenuItem]}
                     items={menuItems}
                 />
@@ -129,7 +135,7 @@ export const SideBar: React.FC = () => {
                 type='text'
                 icon={isMobile ? '' : <ExitIcon />}
                 className={styles['button_exit']}
-                onClick = {handleExit}
+                onClick={handleExit}
             >
                 {!collapsed && 'Выход'}
             </Button>

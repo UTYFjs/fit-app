@@ -17,7 +17,7 @@ export enum Endpoint {
     FEEDBACK = 'feedback',
     GOOGLE_AUTH = 'auth/google',
     TRAINING = 'training',
-    TRAINING_LIST= 'catalogs/training-list'     
+    TRAINING_LIST = 'catalogs/training-list',
 }
 export enum Paths {
     MAIN = '/main',
@@ -51,4 +51,3 @@ export enum StatusCode {
     METHOD_NOT_ALLOWED = 405,
     SERVER_ERROR = 500,
 }
-

@@ -1,11 +1,7 @@
-import './achievment-page.css'
+import './achievment-page.css';
 
 const AchievmentPage = () => {
-  return (
-    <div >
-      here should be ACHIEVMENT page
-    </div>
-  );
-}
+    return <div>here should be ACHIEVMENT page</div>;
+};
 
-export default AchievmentPage
+export default AchievmentPage;

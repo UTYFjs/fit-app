@@ -13,23 +13,23 @@
   height: 40px;
 }
 .character_error{
-    border: 1px solid var(--character-light-error);
+  border: 1px solid var(--character-light-error);
   border-radius: 2px;
   width: 40px;
   height: 40px;
 }
 .character_inactive{
-    background: none;
+  background: none;
 }
 .character_selected{
-    outline: none;
-    border: 1px solid var(--primary-light-5);
+  outline: none;
+  border: 1px solid var(--primary-light-5);
 }
 .character_filled{
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 40px;
-  }
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 40px;
+}
 .extra__text{
   font-family: var(--font-family);
   font-weight: 400;
@@ -45,9 +45,9 @@ p.extra__text {
 
 @media (max-width: 768px) {
   .container_verification-input{
-width: 280px;
+    width: 280px;
   
-}
+  }
   .container_verification-input{
     gap:8px;
   }

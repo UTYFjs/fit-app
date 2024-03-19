@@ -27,13 +27,13 @@
 .card-training__item{
   display: flex;
   justify-content: space-between;
-    padding: 0 12px;
-        height: 22px;
-    line-height: 22px;
+  padding: 0 12px;
+  height: 22px;
+  line-height: 22px;
 }
 
 .card-training__item:hover{
-    background: var(--character-light-background);
+  background: var(--character-light-background);
 }
 .card-training .ant-card-actions{
   padding: 0 12px;
@@ -56,10 +56,10 @@
   margin-bottom: 4px;
 }
 .card-traning__title-wrapper .card-training__title-button{
- width: 20px;
- height: 20px;
- border: none;
- border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
 }
 .card-training_subtitle{
   font-family: var(--font-family);
@@ -74,7 +74,7 @@
 @media  (max-width:480px) {
   
   .card-training{
-  width: 312px;
+    width: 312px;
 
 
   }

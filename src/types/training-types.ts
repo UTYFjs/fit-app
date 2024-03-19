@@ -14,10 +14,10 @@ export type NewTrainingType = {
 };
 
 export type ResTrainingType = NewTrainingType & {
-  _id: string;
-  userId: string;
-}
-export type TransformResTrainingType = Record<string, ResTrainingType[]>
+    _id: string;
+    userId: string;
+};
+export type TransformResTrainingType = Record<string, ResTrainingType[]>;
 
 export type TrainingListType = {
     name: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';

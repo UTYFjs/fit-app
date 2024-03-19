@@ -1,4 +1,5 @@
 import { useId } from 'react';
+
 import { Button, Card, Col, Row } from 'antd';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { CustomCardAction } from '@components/custom-card-action/custom-card-action';
@@ -6,16 +7,15 @@ import { CalendarIcon } from '@components/custom-icons/custom-icons';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
+import ModalServerError from '@components/modal-server-error/modal-server-error';
 import { Paths } from '@constants/api';
-import { useNavigate } from 'react-router-dom';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';
-import ModalServerError from '@components/modal-server-error/modal-server-error';
+import { useNavigate } from 'react-router-dom';
 
 export const MainPage: React.FC = () => {
-
     const navigate = useNavigate();
-    const [getTrainings, { isError }] = useLazyGetTrainingsQuery()
+    const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
 
     const buttonActions = [
         {
@@ -31,14 +31,14 @@ export const MainPage: React.FC = () => {
             icon: <CalendarIcon />,
             label: 'Календарь',
             pathTo: Paths.CALENDAR,
-            dataTestId: CalendarDataTeatId.MENU_BUTTON_CALENDAR
+            dataTestId: CalendarDataTeatId.MENU_BUTTON_CALENDAR,
         },
         {
             key: useId(),
             title: 'Заполнить профиль',
             icon: <IdcardOutlined />,
             label: 'Профиль',
-            pathTo: Paths.PROFILE
+            pathTo: Paths.PROFILE,
         },
     ];
     const handleToCalendar = async (pathTo: Paths) => {
@@ -48,7 +48,7 @@ export const MainPage: React.FC = () => {
         } catch (e) {
             //d
         }
-    }
+    };
     return (
         <>
             <Card className='main-card' bordered={false}>
@@ -69,8 +69,8 @@ export const MainPage: React.FC = () => {
             </Card>
             <Card className='main-card' bordered={false}>
                 <p>
-                    CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире фитнеса.
-                    Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
+                    CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
+                    фитнеса. Не откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
                 </p>
             </Card>
             <Row gutter={[16, 8]} className='grid-container' style={{ marginTop: -8 }}>
@@ -80,12 +80,15 @@ export const MainPage: React.FC = () => {
                             <CustomCardAction
                                 title={item.title}
                                 actions={[
-                                    <Button type='text'
+                                    <Button
+                                        key={item.key + 'button'}
+                                        type='text'
                                         data-test-id={item?.dataTestId}
                                         icon={item.icon}
                                         onClick={() => {
-                                            handleToCalendar(item.pathTo)
-                                        }} >
+                                            handleToCalendar(item.pathTo);
+                                        }}
+                                    >
                                         {item.label}{' '}
                                     </Button>,
                                 ]}
@@ -94,10 +97,12 @@ export const MainPage: React.FC = () => {
                     );
                 })}
             </Row>
-            {isError && <ModalServerError dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
-                isOpen={isError} />}
+            {isError && (
+                <ModalServerError
+                    dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
+                    isOpen={isError}
+                />
+            )}
         </>
     );
 };
-
-

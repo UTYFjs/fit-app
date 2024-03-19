@@ -7,7 +7,7 @@
   background: var(--primary-light-1);
 }
 .calendar .ant-picker-body {
-    background: var(--primary-light-1);
+  background: var(--primary-light-1);
 }
 
 .calendar-page .ant-picker-cell-inner{
@@ -28,61 +28,61 @@
 
 
 @media (max-width: 480px) {
-    .calendar-page{
+  .calendar-page{
     padding: 10px 24px 24px;
     margin: -24px -16px -63px;
-}
+  }
   .calendar-page .calendar{
-  background: var(--character-light-primary-inverse);
-}
-.calendar .ant-picker-body {
     background: var(--character-light-primary-inverse);
-}
+  }
+  .calendar .ant-picker-body {
+    background: var(--character-light-primary-inverse);
+  }
 
-.ant-picker-calendar-header{
+  .ant-picker-calendar-header{
     display:flex;
     justify-content: flex-end;
     gap: 8px;
     height: 44px;
     padding: 10px 8px;
   }
-.ant-picker-calendar-header .ant-picker-calendar-month-select{
+  .ant-picker-calendar-header .ant-picker-calendar-month-select{
     margin-left: 0;
   }
-.ant-picker-calendar-header .ant-select {
+  .ant-picker-calendar-header .ant-select {
     width: fit-content;
     border: 1px solid var(--character-light-border);
     border-radius: 2px;
   }
-.ant-picker-calendar-header .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
+  .ant-picker-calendar-header .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
 
     line-height: 22px;
     height: 22px;
   }
-.ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-search{
+  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-search{
     
     height: 22px;
   }
-.ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-item{
+  .ant-picker-calendar-header .ant-select .ant-select-selector .ant-select-selection-item{
     
     height: 22px;
   }
 
 
-.ant-picker-calendar-header .ant-radio-group {
-   margin-top: 0;
-   width: fit-content;
+  .ant-picker-calendar-header .ant-radio-group {
+    margin-top: 0;
+    width: fit-content;
   }
-.ant-picker-calendar-header .ant-radio-group .ant-radio-button-wrapper{
-      width:fit-content;
+  .ant-picker-calendar-header .ant-radio-group .ant-radio-button-wrapper{
+    width:fit-content;
   }
 
-.ant-picker-calendar .ant-picker-panel .ant-picker-body {
+  .ant-picker-calendar .ant-picker-panel .ant-picker-body {
     padding: 8px;
   }
 
 
-.calendar .ant-picker-content{
+  .calendar .ant-picker-content{
     height: 196px;
   }  
 }

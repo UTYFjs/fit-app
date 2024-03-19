@@ -59,15 +59,15 @@
     max-height: 1018px;
   }
   .feedback-list .ant-row{
-  gap: 16px;
-}
+    gap: 16px;
+  }
 
-.feedback-action{
-  display:flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-top: 32px;
-}
+  .feedback-action{
+    display:flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+  }
 
   .feedback-empty{
     gap: 48px;
@@ -75,11 +75,11 @@
     margin-top: 0;
   }
   .feedback-empty .ant-card{
-  padding: 24px 0;
-}
+    padding: 24px 0;
+  }
   
   .feedback-empty .ant-card-head-title{
-  white-space: inherit;
+    white-space: inherit;
   }
 
   .feedback-empty .ant-card-body{

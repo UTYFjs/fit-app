@@ -1,20 +1,22 @@
-import { Avatar, Comment } from 'antd'
 import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Comment } from 'antd';
+
 import './feedback-item.css';
 import { IFeedback } from '../../types/api';
+
 import Rating from '@components/rating/rating';
 
 type IFeedbackProps = {
-    data: IFeedback
-}
+    data: IFeedback;
+};
 
-const FeedbackItem = ({data}: IFeedbackProps) => {
+const FeedbackItem = ({ data }: IFeedbackProps) => {
     const { id, fullName, imageSrc, message, rating, createdAt } = data;
     let firstName = '';
     let lastName = '';
-    if(fullName){
+    if (fullName) {
         [firstName, lastName] = fullName.split(' ');
-    }    
+    }
     return (
         <Comment
             key={id}
@@ -31,10 +33,10 @@ const FeedbackItem = ({data}: IFeedbackProps) => {
                     </div>
                 </>
             }
-            author={<Rating rating={rating} isDisable={true}/>}
+            author={<Rating rating={rating} isDisable={true} />}
             datetime={<span> {createdAt}</span>}
             content={<p className='feedback-item__content'>{message}</p>}
         ></Comment>
     );
 };
-export default FeedbackItem
+export default FeedbackItem;

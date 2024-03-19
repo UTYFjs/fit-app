@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import styles from './login.module.css';
+
 import 'antd/dist/antd.css';
-import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { validationPassword } from '@utils/validation';
-import { messageValidation, regExpEmail } from '@constants/validation';
-import { useCheckEmailMutation, useLoginMutation } from '@services/auth-api';
-import { ILoginData } from '../..//types/forms';
-import { useNavigate } from 'react-router-dom';
 import { Paths, baseUrl } from '@constants/api';
+import { messageValidation, regExpEmail } from '@constants/validation';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setAccessToken, setUserValues } from '@redux/user-slice';
+import { useCheckEmailMutation, useLoginMutation } from '@services/auth-api';
+import { validationPassword } from '@utils/validation';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { ILoginData } from '../..//types/forms';
 
 export const Login: React.FC = () => {
     const [form] = Form.useForm();
@@ -21,7 +24,7 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    const { email } = useAppSelector((state) => state.user)
+    const { email } = useAppSelector((state) => state.user);
     const { previousLocations } = useAppSelector((state) => state.router);
     const handleGoogleAuth = useCallback(async () => {
         window.location.href = `${baseUrl}/auth/google`;
@@ -31,7 +34,7 @@ export const Login: React.FC = () => {
             checkEmail({ email: email })
                 .unwrap()
                 .then(() => {
-                    navigate(Paths.CONFIRM_EMAIL)
+                    navigate(Paths.CONFIRM_EMAIL);
                 })
                 .catch((e) => {
                     if (e.status === 404 && e.data.message === 'Email не найден') {
@@ -48,33 +51,35 @@ export const Login: React.FC = () => {
     });
 
     const handleForgotPassword = () => {
-        const email = form.getFieldValue('email') as string
+        const email = form.getFieldValue('email') as string;
         if (regExpEmail.test(email)) {
-            dispatch(setUserValues({ email: email, password: '', passwordRepeat: '' }))
+            dispatch(setUserValues({ email: email, password: '', passwordRepeat: '' }));
 
             checkEmail({ email: email })
                 .unwrap()
-                .then(() => { navigate(Paths.CONFIRM_EMAIL); })
+                .then(() => {
+                    navigate(Paths.CONFIRM_EMAIL);
+                })
                 .catch((e) => {
                     if (e.status === 404 && e.data.message === 'Email не найден') {
-                        navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST)
+                        navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST);
                     } else {
                         navigate(Paths.ERROR_CHECK_EMAIL);
                     }
-                })
+                });
         }
-    }
+    };
     const onFinish = (values: ILoginData) => {
-        login({ email: values.email, password: values.password }).unwrap()
+        login({ email: values.email, password: values.password })
+            .unwrap()
             .then((data) => {
                 values.remember ? localStorage.setItem('accessToken', data.accessToken) : '';
                 dispatch(setAccessToken(data.accessToken));
-                navigate(Paths.MAIN)
+                navigate(Paths.MAIN);
             })
             .catch(() => {
                 navigate(Paths.ERROR_LOGIN);
-
-            })
+            });
     };
 
     return (

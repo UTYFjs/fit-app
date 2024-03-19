@@ -4,18 +4,18 @@
 
 .save-error-card__title{
 
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-line-height: 130%;
-color: var(--character-light-title-85);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--character-light-title-85);
 }
 .save-error-card__subtitle{
-font-family: var(--font-family);
-font-weight: 400;
-font-size: 14px;
-line-height: 130%;
-color: var(--character-light-title-85);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--character-light-title-85);
 }
 
 

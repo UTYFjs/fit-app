@@ -1,7 +1,15 @@
-
 import { Endpoint, HTTPMethod } from '@constants/api';
+
+import {
+    IRegistrationForm,
+    ILoginRequest,
+    ICheckEmailRequest,
+    IConfirmEmailForm,
+    IChangePasswordRequest,
+    IChangePasswordForm,
+} from '../types/api';
+
 import { api } from './api';
-import { IRegistrationForm, ILoginRequest, ICheckEmailRequest, IConfirmEmailForm, IChangePasswordRequest, IChangePasswordForm } from '../types/api';
 
 export const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -51,4 +59,10 @@ export const authApi = api.injectEndpoints({
     }),
 });
 
-export const { useLoginMutation ,useRegistrationMutation, useCheckEmailMutation, useConfirmEmailMutation, useChangePasswordMutation } = authApi;
+export const {
+    useLoginMutation,
+    useRegistrationMutation,
+    useCheckEmailMutation,
+    useConfirmEmailMutation,
+    useChangePasswordMutation,
+} = authApi;

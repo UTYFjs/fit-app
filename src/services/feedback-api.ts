@@ -1,8 +1,8 @@
 import { Endpoint, HTTPMethod } from '@constants/api';
+
+import { IFeedback, INewFeedback } from '../types/api';
+
 import { api } from './api';
-import {
-    IFeedback, INewFeedback,
-} from '../types/api';
 
 export const feedbackApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -38,12 +38,8 @@ export const feedbackApi = api.injectEndpoints({
                 method: HTTPMethod.POST,
                 body: body,
             }),
-            
         }),
     }),
 });
 
-export const {
-    useGetFeedbacksQuery,
-    useAddFeedbackMutation
-  } = feedbackApi;
+export const { useGetFeedbacksQuery, useAddFeedbackMutation } = feedbackApi;

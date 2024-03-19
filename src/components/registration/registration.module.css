@@ -1,7 +1,7 @@
 .form_login {
-display:flex;
-flex-direction: column;
-padding-top: 32px;
+  display:flex;
+  flex-direction: column;
+  padding-top: 32px;
 }
 
 .form-item_check-area {
@@ -47,30 +47,30 @@ div[class='ant-form-item'] span[class='ant-input-group-addon']{
 
 .buttom_form-submit{
 
-margin-bottom: -20px;
+  margin-bottom: -20px;
 }
 .login-form-button, .login-form-button_google{
   letter-spacing: .3px;
 }
 
-  @media (max-width: 576px){
+@media (max-width: 576px){
 
-.form_login {
+  .form_login {
 
-padding-top: 24px;
-}
+    padding-top: 24px;
+  }
 
-.password-repeat{
-  padding-bottom: 28px;
-}
-.help{
-      margin-bottom: 12px;
-    }
-.login-form-forgot{
-  font-size: 14px;
-}
-.login-form-button, .login-form-button_google{
-  font-size: 14px;
-  letter-spacing: .4px;
-}
+  .password-repeat{
+    padding-bottom: 28px;
+  }
+  .help{
+    margin-bottom: 12px;
+  }
+  .login-form-forgot{
+    font-size: 14px;
+  }
+  .login-form-button, .login-form-button_google{
+    font-size: 14px;
+    letter-spacing: .4px;
+  }
 }

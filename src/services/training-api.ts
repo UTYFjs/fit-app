@@ -1,11 +1,13 @@
 import { Endpoint, HTTPMethod } from '@constants/api';
-import { api } from './api';
+
 import {
     NewTrainingType,
     ResTrainingType,
     TrainingListType,
     TransformResTrainingType,
 } from '../types/training-types';
+
+import { api } from './api';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({

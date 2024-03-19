@@ -1,40 +1,45 @@
-import FeedbackItem from '@components/feedback-item/feedback-item'
-import './feedbacks.css'
-import { Button, Card, List } from 'antd'
-import { useEffect, useState } from 'react'
-import ModalFeedback from '@components/modal-feedback/modal-feedback'
-import ModalResult from '@components/modal-result/modal-result'
-import ModalServerError from '@components/modal-server-error/modal-server-error'
-import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api'
-import { IRatingStar } from '../../types/api'
-import { useNavigate } from 'react-router-dom'
-import { Paths, StatusCode } from '@constants/api'
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks'
-import { setAccessToken } from '@redux/user-slice'
+import FeedbackItem from '@components/feedback-item/feedback-item';
 
+import './feedbacks.css';
+import { useEffect, useState } from 'react';
+
+import ModalFeedback from '@components/modal-feedback/modal-feedback';
+import ModalResult from '@components/modal-result/modal-result';
+import ModalServerError from '@components/modal-server-error/modal-server-error';
+import { Paths, StatusCode } from '@constants/api';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setAccessToken } from '@redux/user-slice';
+import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api';
+import { Button, Card, List } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { IRatingStar } from '../../types/api';
 
 const Feedbacks = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalResultOpen, setIsModalResultOpen] = useState(false);
-    const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(null);
+    const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(
+        null,
+    );
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
 
     const [ratingValue, setRatingValue] = useState<IRatingStar>(3);
-    const [textFeedbackValue, setTextFeedBackValue] = useState('')
+    const [textFeedbackValue, setTextFeedBackValue] = useState('');
 
     const navigate = useNavigate();
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const { data, error, isError, refetch } = useGetFeedbacksQuery('', {});
 
-    const [addFeedback, { isError: isErrorAddFeedback, isSuccess: isSuccessAddFeedback }] = useAddFeedbackMutation();
+    const [addFeedback, { isError: isErrorAddFeedback, isSuccess: isSuccessAddFeedback }] =
+        useAddFeedbackMutation();
 
     useEffect(() => {
         if (error) {
             if ('status' in error && error.status == StatusCode.FORBIDDEN) {
-                dispatch(setAccessToken(''))
-                localStorage.removeItem('accessToken')
-                navigate(Paths.LOGIN)
+                dispatch(setAccessToken(''));
+                localStorage.removeItem('accessToken');
+                navigate(Paths.LOGIN);
             }
         }
     }, [dispatch, error, navigate]);
@@ -43,7 +48,7 @@ const Feedbacks = () => {
         setIsModalOpen(false);
         setModalResultType('errorReview');
         setIsModalResultOpen(true);
-    }, [isErrorAddFeedback])
+    }, [isErrorAddFeedback]);
 
     useEffect(() => {
         setIsModalOpen(false);
@@ -55,24 +60,25 @@ const Feedbacks = () => {
     const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
 
     const handleSendFeedBack = () => {
-        addFeedback({ message: textFeedbackValue, rating: ratingValue })
+        addFeedback({ message: textFeedbackValue, rating: ratingValue });
     };
     const handleSuccessFeedback = () => {
         setIsModalResultOpen(false);
         setModalResultType(null);
-    }
+    };
     const handleRetryErrorSendFeedback = () => {
         setIsModalResultOpen(false);
-        setModalResultType(null)
+        setModalResultType(null);
         setIsModalOpen(true);
-    }
+    };
     const handleCancelErrorFedback = () => {
         setIsModalOpen(false);
         setIsModalResultOpen(false);
         setModalResultType(null);
-    }
-    const handleShowAllFeedbacks = () => { setIsAllFeedbacks(!isAllFeedbacks) }
-
+    };
+    const handleShowAllFeedbacks = () => {
+        setIsAllFeedbacks(!isAllFeedbacks);
+    };
 
     return (
         <>
@@ -156,6 +162,6 @@ const Feedbacks = () => {
             {isError && <ModalServerError isOpen={isError} />}
         </>
     );
-}
+};
 
-export default Feedbacks
+export default Feedbacks;

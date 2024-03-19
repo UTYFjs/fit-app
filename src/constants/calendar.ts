@@ -1,6 +1,6 @@
 import { PickerLocale } from 'antd/lib/date-picker/generatePicker';
 
- export const localeCalendar: PickerLocale = {
+export const localeCalendar: PickerLocale = {
     lang: {
         locale: 'ru_RU',
         placeholder: 'Выберите дату',
