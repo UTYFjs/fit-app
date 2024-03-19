@@ -14,7 +14,8 @@ import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/tra
 import { getSelectedTrainings } from '@utils/get-select-training';
 import type { Moment } from 'moment';
 
-import { ResTrainingType } from '../../types/training-types';
+import { ResTrainingType, TrainingNames } from '../../types/training-types';
+import { DateFormat } from '@constants/date';
 
 const CalendarPage = () => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
@@ -47,7 +48,9 @@ const CalendarPage = () => {
 
     useEffect(() => {
         if (dataTrainings && calendarDate) {
-            setCurrentTrainings(dataTrainings[calendarDate.format('YYYY-MM-DD')] || []);
+            setCurrentTrainings(
+                dataTrainings[calendarDate.format(DateFormat.DASH_YYYY_MM_DD)] || [],
+            );
         }
     }, [calendarDate, dataTrainings]);
 
@@ -56,7 +59,7 @@ const CalendarPage = () => {
     });
 
     const getDateCellRender = (data: Moment) => {
-        const key = data.format('YYYY-MM-DD');
+        const key = data.format(DateFormat.DASH_YYYY_MM_DD);
 
         const trainings = dataTrainings?.[key];
         if (isDesktop) {
@@ -95,7 +98,7 @@ const CalendarPage = () => {
     const onSelect = (data: Moment) => {
         if (currentMonth === data.month()) {
             setCalendarDate(data);
-            const dateForSelector = data.format('YYYY-MM-DD');
+            const dateForSelector = data.format(DateFormat.DASH_YYYY_MM_DD);
             const parentForModal = document.querySelector(
                 `[title="${dateForSelector}"]`,
             ) as HTMLElement;
@@ -146,9 +149,7 @@ const CalendarPage = () => {
                     )}
                     {typeModal === 'exercise' && (
                         <CardExercise
-                            selectedTraining={
-                                selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь'
-                            }
+                            selectedTraining={selectedTraining as TrainingNames}
                             setSelectedTraining={setSelectedTraining}
                             topPosition={topPosition}
                             currentTrainings={currentTrainings}
@@ -159,7 +160,7 @@ const CalendarPage = () => {
                             options={getSelectedTrainings(
                                 dataTrainingList || [],
                                 currentTrainings,
-                                selectedTraining as 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь',
+                                selectedTraining as TrainingNames,
                                 isEditTraining,
                             )}
                         />

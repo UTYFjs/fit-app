@@ -18,15 +18,16 @@ import { getExercises } from '@utils/get-exercises';
 import Meta from 'antd/lib/card/Meta';
 import type { Moment } from 'moment';
 
-import { ExerciseType, ResTrainingType } from '../../../types/training-types';
+import { ExerciseType, ResTrainingType, TrainingNames } from '../../../types/training-types';
+import { DateFormat } from '@constants/date';
 
 type CardExerciseProps = {
     options: {
-        value: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
-        label: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
+        value: TrainingNames;
+        label: TrainingNames;
     }[];
     calendarDate: Moment;
-    selectedTraining: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
+    selectedTraining: TrainingNames;
     topPosition: number;
     setSelectedTraining: (selectTraining: string) => void;
     currentTrainings: ResTrainingType[];
@@ -110,7 +111,7 @@ const CardExercise = ({
         } else {
             await addTraining({
                 name: selectedTraining,
-                date: calendarDate.format('YYYY-MM-DD') + 'T00:02:50.000Z',
+                date: calendarDate.format(DateFormat.DASH_YYYY_MM_DD) + 'T00:02:50.000Z',
                 isImplementation: false,
                 exercises: newExercises,
             })

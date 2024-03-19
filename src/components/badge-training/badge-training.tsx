@@ -25,7 +25,7 @@ const BadgeTraining = ({
             : isShort
             ? 'badge__traning-item_small'
             : 'badge__traning-item_big',
-        isDisable ? 'badge__training-item_disable' : '',
+        isDisable && 'badge__training-item_disable',
     );
     return (
         <div className={classBadge}>

@@ -85,6 +85,12 @@
   --character-dark-sider-background: #111d2c;
   --font-family: "Inter", sans-serif;
   --second-family: "Roboto", sans-serif;
+  --font-size-l4: 38px;
+  --font-size-l3: 24px;
+  --font-size-l2: 20px;
+  --font-size-l: 16px;
+  --font-size: 14px;
+  --font-size-s: 12px;
 
   margin: 0 auto;
   height: 100vh;

@@ -11,6 +11,7 @@ import { CalendarDataTeatId } from '@constants/data-test-id';
 import { useState } from 'react';
 
 import { isPast } from '@utils/date-utils';
+import { DateFormat } from '@constants/date';
 
 type DrawerCalendarProps = {
     selectedTraining: string;
@@ -41,7 +42,7 @@ const DrawerCalendar = ({
     window.addEventListener('resize', () => {
         setIsDesktop(window.innerWidth > 480);
     });
-    const date = calendarDate?.format('DD.MM.YYYY');
+    const date = calendarDate?.format(DateFormat.DOT_DD_MM_YYYY);
 
     const handleOnChangeName = (name: string, index: number) => {
         setNewExercises((state) => {

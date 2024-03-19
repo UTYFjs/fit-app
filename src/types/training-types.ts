@@ -19,7 +19,8 @@ export type ResTrainingType = NewTrainingType & {
 };
 export type TransformResTrainingType = Record<string, ResTrainingType[]>;
 
+export type TrainingNames = 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
 export type TrainingListType = {
-    name: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь';
+    name: TrainingNames;
     key: 'legs' | 'hands' | 'strength' | 'back' | 'chest';
 };

@@ -47,7 +47,7 @@
 .header .title_header{
   font-family: var(--font-family);
   font-weight: 700;
-  font-size: 38px;
+  font-size: var(--font-size-l4);
   max-width: 1000px;
   color: var(--character-light-title-85);
   margin-top: 14px;

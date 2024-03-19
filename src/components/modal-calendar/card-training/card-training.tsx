@@ -9,6 +9,7 @@ import { isPast } from '@utils/date-utils';
 import { getCssVar } from '@utils/get-css-var';
 
 import { ResTrainingType } from '../../../types/training-types';
+import { DateFormat } from '@constants/date';
 
 type CardTrainingProps = {
     currentTrainings: ResTrainingType[];
@@ -31,7 +32,7 @@ const CardTraining = ({
     onCreate,
     onEdit,
 }: CardTrainingProps) => {
-    const date = calendarDate.format('DD.MM.YYYY');
+    const date = calendarDate.format(DateFormat.DOT_DD_MM_YYYY);
 
     return (
         <Card

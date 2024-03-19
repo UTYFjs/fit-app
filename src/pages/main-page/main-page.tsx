@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 export const MainPage: React.FC = () => {
     const navigate = useNavigate();
     const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
-
     const buttonActions = [
         {
             key: useId(),
@@ -46,7 +45,7 @@ export const MainPage: React.FC = () => {
             await getTrainings().unwrap();
             navigate(pathTo);
         } catch (e) {
-            //d
+            console.error('error getTrainings from Main Page', e);
         }
     };
     return (

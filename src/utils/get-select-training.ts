@@ -1,9 +1,9 @@
-import { ResTrainingType, TrainingListType } from '../types/training-types';
+import { ResTrainingType, TrainingListType, TrainingNames } from '../types/training-types';
 
 export const getSelectedTrainings = (
     trainingList: TrainingListType[],
     currentTrainings: ResTrainingType[],
-    selectedTraining: 'Ноги' | 'Руки' | 'Силовая' | 'Спина' | 'Грудь',
+    selectedTraining: TrainingNames,
     isEditTraining: boolean,
 ) => {
     const options = trainingList
