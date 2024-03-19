@@ -1,0 +1,50 @@
+.card-exercise__content{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.card-exercise__content {
+  scrollbar-width: auto;
+  scrollbar-color: var(--character-light-disable-25);
+}
+.card-exercise__content::-webkit-scrollbar {
+  width: 10px;
+
+}
+.card-exercise__content::-webkit-scrollbar-track {
+  background: var(--character-light-primary-inverse);
+}
+.card-exercise__content::-webkit-scrollbar-thumb {
+  background-color: var(--character-light-disable-25);
+  border-radius: 20px;
+  border: 3px solid var(--character-light-primary-inverse);
+}
+.card-exercise__content-item{
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+
+}
+.card-exercise__title-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+.training-list__select{
+  width: 100%;
+  text-align: left;
+}
+
+.card-training__actions-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+}

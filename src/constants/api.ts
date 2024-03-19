@@ -15,8 +15,9 @@ export enum Endpoint {
     CONFIRM_EMAIL = 'auth/confirm-email ',
     CHANGE_PASSWORD = 'auth/change-password ',
     FEEDBACK = 'feedback',
-    GOOGLE_AUTH = 'auth/google'
-     
+    GOOGLE_AUTH = 'auth/google',
+    TRAINING = 'training',
+    TRAINING_LIST = 'catalogs/training-list',
 }
 export enum Paths {
     MAIN = '/main',
@@ -25,6 +26,7 @@ export enum Paths {
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL = '/auth/confirm-email',
     CHANGE_PASSWORD = '/auth/change-password',
+    CALENDAR = '/calendar',
     RESULT = '/result',
     ERROR_LOGIN = '/result/error-login',
     ERROR_USER_EXIST = '/result/error-user-exist',
@@ -34,6 +36,9 @@ export enum Paths {
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
     SUCCESS = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
+    TRAINING = '/training',
+    PROFILE = '/profile',
+    ACHIEVEMENT = '/achievement',
 }
 
 export enum StatusCode {
@@ -46,4 +51,3 @@ export enum StatusCode {
     METHOD_NOT_ALLOWED = 405,
     SERVER_ERROR = 500,
 }
-

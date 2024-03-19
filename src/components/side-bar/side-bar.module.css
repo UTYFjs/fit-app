@@ -1,25 +1,19 @@
 .sider{
- position: relative;
-
+  position: relative;
 }
 
 
 .sider .menu li[class='ant-menu-item']{
   margin-left: -8px;
-
-  
 }
 
 .logo {
   display:flex;
   justify-content: center;
-  
   align-items: center;
   margin: 30px 0 0;
-  
   height: 64px;
   cursor: pointer;
-
 }
 
 .exit{
@@ -36,7 +30,7 @@
 
 .button_trigger{
   position:absolute;
-  padding: 0;
+  padding: var(--p-null);
   height: 66px;
   width: 20px;
   border: none;
@@ -50,8 +44,8 @@
   
   display:flex;
   align-items: center;
-  gap: 16px;
-  padding:  0;
+  gap: var(--gap);
+  padding:  var(--p-null);
   height: 40px;
   padding: 0 16px;
   margin-top: auto;
@@ -65,9 +59,9 @@
 
 .button__text{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
   padding: 4px 15px;
@@ -86,24 +80,21 @@
     height: 50px;
     width: 106px;
     padding: 16px 17px;
-    margin: 0;
+    margin: var(--m-zero);
   }
 
   .logo  svg {
-
     width: 72px;
     height: 18px;
-
   }
 
   .button_trigger{
-  
     height: 48px;
     width: 32px;
     right: -31px;
     top:48px;
   }
-   .sider > div .menu > li[class='ant-menu-item'] span:last-child{
+  .sider > div .menu > li[class='ant-menu-item'] span:last-child{
     margin-left: 8px;
   }
 
@@ -111,8 +102,8 @@
     display:none;
   }
 
-    .button_exit{
-      justify-content: center;
-    }
+  .button_exit{
+    justify-content: center;
+  }
 
 }

@@ -1,14 +1,14 @@
 import { ResultStatusType } from 'antd/lib/result';
 
- type resultDataType = {
-     url: string;
-     status: ResultStatusType;
-     title: string;
-     description: string;
-     buttonText: string;
-     buttonLink: string;
-     dataTestId: string;
- };
+type resultDataType = {
+    url: string;
+    status: ResultStatusType;
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+    dataTestId: string;
+};
 export const resultData: resultDataType[] = [
     {
         url: '/result/error-login',

@@ -1,7 +1,7 @@
 .ant-layout-sider-children {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 
     
 }
@@ -21,66 +21,59 @@
 }
 .main > .main-card:first-child{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--primary-light-9);
 
 }
 .main > .main-card:first-child > div > p{
 
-  margin: 0;
+  margin: var(--m-zero);
 }
 
 .main > .main-card:nth-child(2){
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 
 }
 
 .main > .main-card:nth-child(2) > div > p{
 
-  margin: 0;
+  margin: var(--m-zero);
 }
 
 .main > .grid-container:last-child{
   background: transparent;
   max-width: 766px;
-
-  
 }
-
-
 
 @media (max-width: 992px) and (min-width: 768px) {
-.app {
-  min-height: 100vh;
-  height: auto;
-
-
-}
-.main > .grid-container:last-child{
-  background: transparent;
-  margin-top: -8px;
-  
-  
-}
+  .app {
+    min-height: 100vh;
+    height: auto;
+  }
+  .main > .grid-container:last-child{
+    background: transparent;
+    margin-top: -8px;
+ 
+  }
 }
 
 @media (max-width: 768px){
   .app {
-  height: fit-content;
+    height: fit-content;
 
-}
+  }
 
   .main > .main-card:first-child{
-      height: 368px;
-    }
+    height: 368px;
+  }
   .main .ant-card-body {
-    padding: 16px;
-}
+    padding: var(--p-xl);
+  }
 
 }

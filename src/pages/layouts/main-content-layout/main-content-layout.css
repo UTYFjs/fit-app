@@ -2,12 +2,12 @@
   width: 100%; 
   background: transparent;
   height: 100vh;
-  }
+}
 
 .main{
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--gap-2xl);
   padding: 24px;
   width: 100%;
   height: 100%;

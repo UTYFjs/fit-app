@@ -1,12 +1,13 @@
-import { Button, Modal, Result } from 'antd';
 import { useEffect, useState } from 'react';
+
+import { Button, Modal, Result } from 'antd';
 import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
 type ModalErrorProps = {
     isOpen: boolean;
-    typeContent: 'successReview' | 'errorReview' | null,
-    handlePrimeButton: () => void,
-    handleSecondButton?: () => void,
+    typeContent: 'successReview' | 'errorReview' | null;
+    handlePrimeButton: () => void;
+    handleSecondButton?: () => void;
 };
 
 type DataModalType = {
@@ -33,21 +34,26 @@ const dataModal: DataModalType[] = [
         primeButtonText: 'Отлично',
     },
 ];
-const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButton }: ModalErrorProps) => {
-  const [data, setData] = useState<DataModalType | null>(null);
-  
-  useEffect(() => {
-  switch (typeContent) {
-      case 'successReview':
-          setData(dataModal[1]);
-          break;
-      case 'errorReview':
-         setData(dataModal[0]);
-          break;
-      default:
-          handlePrimeButton();
-  }
-  },[handlePrimeButton, typeContent])
+const ModalResult = ({
+    isOpen,
+    typeContent,
+    handlePrimeButton,
+    handleSecondButton,
+}: ModalErrorProps) => {
+    const [data, setData] = useState<DataModalType | null>(null);
+
+    useEffect(() => {
+        switch (typeContent) {
+            case 'successReview':
+                setData(dataModal[1]);
+                break;
+            case 'errorReview':
+                setData(dataModal[0]);
+                break;
+            default:
+                handlePrimeButton();
+        }
+    }, [handlePrimeButton, typeContent]);
 
     return (
         <Modal
@@ -58,7 +64,7 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
             bodyStyle={{ padding: 0 }}
             mask={true}
             maskClosable={true}
-            maskStyle={{ backdropFilter: 'blur(12px)', background: 'rgba(121, 156, 212, 0.1)' }}
+            maskStyle={{ backdropFilter: 'blur(5px)', background: 'rgba(121, 156, 212, 0.1)' }}
             width={539}
             className='modal-result'
         >
@@ -72,7 +78,7 @@ const ModalResult = ({ isOpen, typeContent, handlePrimeButton, handleSecondButto
                             type='primary'
                             size='large'
                             data-test-id={data?.dataTestId}
-                            onClick={handlePrimeButton}                            
+                            onClick={handlePrimeButton}
                         >
                             {data?.primeButtonText}
                         </Button>

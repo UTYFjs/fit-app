@@ -1,32 +1,7 @@
-/* .feedback__rating{
-  height: 16px;
- 
-}
-.feedback__rating .ant-rate-star{
-    height: 16px;
-  margin-right: 6px;
-}
-.feedback__rating .ant-rate-star div{
-    height: 16px;
-}
-.feedback__rating .ant-rate-star span{
-  margin-bottom: 3px;
-}
-
-.feedback__rating .ant-rate-star-full .anticon-star svg{
-  width: 14px;
-  height: 14px;
-  fill: var(--character-light-warning);
-}
-.feedback__rating .ant-rate-star-zero .anticon-star svg{
-  width: 14px;
-  height: 14px;
-} */
-
 .feedback__rating .ant-rate-star span{
   margin-bottom: 3px;
 }
 .feedback__rating .ant-rate-star{
-    height: 16px;
+  height: var(--h-2xs);
   margin-right: 6px;
 }

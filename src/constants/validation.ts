@@ -3,7 +3,6 @@ export interface IMessageValidation {
     repeatPassword: string;
 }
 
-
 export const messageValidation: IMessageValidation = {
     password: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
     repeatPassword: 'Пароли не совпадают',

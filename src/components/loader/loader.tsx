@@ -1,6 +1,7 @@
-import styles from './loader.module.css'
 import Lottie from 'react-lottie';
-import animationData from './data/loader.json'
+
+import animationData from './data/loader.json';
+import styles from './loader.module.css';
 const Loader = () => {
     const defaultOptions = {
         loop: true,
@@ -11,12 +12,11 @@ const Loader = () => {
         },
     };
 
+    return (
+        <div className={styles['wrapper-loader']} data-test-id='loader'>
+            <Lottie options={defaultOptions} height={150} width={150} />
+        </div>
+    );
+};
 
-  return (
-      <div className={styles['wrapper-loader']} data-test-id='loader'>
-          <Lottie options={defaultOptions} height={150} width={150} />
-      </div>
-  );
-}
-
-export default Loader
+export default Loader;

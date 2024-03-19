@@ -4,22 +4,18 @@
   background: transparent;
   margin-bottom: 42px;
   padding: 0 24px;
-  
 }
 
 .button_review{
-
   align-self: self-end;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
-  padding-top: 0;
-  padding-bottom: 8px;
-  
-
+  padding-top: var(--p-null);
+  padding-bottom: var(--p-2xs);
 }
 .footer__card{
   width: 240px;
@@ -33,27 +29,27 @@
 .footer__card > div > div > div > div[class="ant-card-meta-title"]{
   cursor:pointer;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
   line-height: 160%;
-  margin-bottom: 8px;
+  margin-bottom: var(--m-xs);
   color: var(--primary-light-6);
 
 }
 .footer__card > div > div > div > div[class="ant-card-meta-description"]{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-secondary-45);
 
 }
 .footer__card > ul > li > span > button{
   padding: 8px 11px;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
 
@@ -62,8 +58,7 @@
 }
 .footer__card > ul > li > span > button > span[role="img"]{
   width: 14px;
-  height: 14px;
-
+  height: var(--h-3xs);
 }
 .footer__card > div{
   padding: 12px 24px;
@@ -74,34 +69,25 @@
 }
 .footer__card > ul >li:not(:last-child) {
   border: none;
-
-  
 }
 
 .card-body{
-  padding: 0;
+  padding: var(--p-null);
 }
-
-
-
 
 @media (max-width: 768px){
 
   .footer{
     flex-direction: column;
-      padding: 0 16px;
+    padding: 0 16px;
   }
 
-    .button_review{
-
-      align-self: center;
-      height: 40px;
-      padding-top: 10;
-      padding-bottom: 10px;
-      margin-top: 24px;
-
-
-
+  .button_review{
+    align-self: center;
+    height: 40px;
+    padding-top: var(--p-xs);
+    padding-bottom: var(--p-xs);
+    margin-top: var(--m-5xl);
     order: 2;
   }
 
@@ -109,7 +95,7 @@
     width: 100%;
   }
 
- .card-body{
-  text-align: center;
-}
+  .card-body{
+    text-align: center;
+  }
 }

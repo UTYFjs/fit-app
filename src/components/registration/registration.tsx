@@ -1,61 +1,65 @@
-import { useEffect, useState } from 'react';
-import styles from './registration.module.css';
-import 'antd/dist/antd.css';
-import { Button, Form, Input } from 'antd';
-import { GooglePlusOutlined } from '@ant-design/icons';
+import { useCallback, useEffect, useState } from 'react';
 
-import { validationPassword } from '@utils/validation';
-import { messageValidation } from '@constants/validation';
-import { useRegistrationMutation } from '@services/auth-api';
-import { IRegisterData } from '../../types/forms';
-import { useNavigate } from 'react-router-dom';
+import styles from './registration.module.css';
+
+import 'antd/dist/antd.css';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { Paths } from '@constants/api';
+import { messageValidation } from '@constants/validation';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setUserValues } from '@redux/user-slice';
+import { useRegistrationMutation } from '@services/auth-api';
+import { validationPassword } from '@utils/validation';
+import { Button, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { IRegisterData } from '../../types/forms';
 
 export const Registration: React.FC = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const [registration] = useRegistrationMutation()
-    const navigate = useNavigate()
+    const [registration] = useRegistrationMutation();
+    const navigate = useNavigate();
     const { accessToken, email, password, passwordRepeat } = useAppSelector((state) => state.user);
-    const {previousLocations } = useAppSelector((state) => state.router)
+    const { previousLocations } = useAppSelector((state) => state.router);
     const dispatch = useAppDispatch();
-
-    useEffect(() => {        
+    useEffect(() => {
         if (accessToken) {
-        navigate(Paths.MAIN);
-    }}, [accessToken, navigate])
+            navigate(Paths.MAIN);
+        }
+    }, [accessToken, navigate]);
+
+    const onFinish = useCallback(
+        (values: IRegisterData) => {
+            dispatch(setUserValues(values));
+            registration({ email: values.email, password: values.password })
+                .unwrap()
+                .then(() => {
+                    navigate(Paths.SUCCESS);
+                })
+                .catch((e) => {
+                    if (e.status === 409) {
+                        navigate(Paths.ERROR_USER_EXIST);
+                    } else {
+                        navigate(Paths.ERROR);
+                    }
+                });
+        },
+        [dispatch, navigate, registration],
+    );
 
     useEffect(() => {
-        if(previousLocations?.[1]?.location?.pathname === Paths.ERROR){
+        if (previousLocations?.[1]?.location?.pathname === Paths.ERROR) {
             onFinish({
                 email: email,
                 password: password,
                 passwordRepeat: passwordRepeat,
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [email, password, passwordRepeat, previousLocations]);
+    }, [email, onFinish, password, passwordRepeat, previousLocations]);
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
-
-
-    const onFinish = (values: IRegisterData) => {
-        dispatch(setUserValues(values))
-        registration({email: values.email, password: values.password})
-        .unwrap()
-        .then(()=>{
-        navigate(Paths.SUCCESS);})
-        .catch((e) => {
-            if(e.status === 409) {
-                navigate(Paths.ERROR_USER_EXIST)
-            } else {
-            navigate(Paths.ERROR);
-            }
-        });
-    };
 
     return (
         <Form

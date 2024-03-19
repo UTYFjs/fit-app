@@ -1,40 +1,52 @@
 import styles from './header-my.module.css';
+
 import 'antd/dist/antd.css';
-import { Typography, Layout, Breadcrumb, Button } from 'antd';
-import {    SettingOutlined} from '@ant-design/icons';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { SettingOutlined } from '@ant-design/icons';
 import { Paths } from '@constants/api';
+import { Typography, Layout, Breadcrumb, Button } from 'antd';
 import classNames from 'classnames';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-
-
-
+import { Link, useLocation } from 'react-router-dom';
 
 const { Header } = Layout;
 const { Title } = Typography;
+export const HeaderMy: React.FC = () => {
+    const { pathname } = useLocation();
 
-
-export const HeaderMy: React.FC = () => {  
-    const {pathname} = useLocation();
-    
-    const headerClass =
-        pathname === Paths.MAIN
-            ? styles.header
-            : classNames(styles.header, styles['header_feedbacks']);
-    const location = useAppSelector((state) => state.router.previousLocations) 
-    console.log(location)
-
-
+    const headerSecondClass = {
+        [Paths.MAIN]: '',
+        [Paths.FEEDBACKS]: 'header_feedbacks',
+        [Paths.CALENDAR]: 'header_calendar',
+    };
+    const headerClass = classNames(
+        styles.header,
+        styles[headerSecondClass[pathname as keyof typeof headerSecondClass]] || '',
+    );
     return (
         <Header className={headerClass}>
             <Breadcrumb className={styles.breadcrumb}>
                 <Breadcrumb.Item>
                     <Link to={Paths.MAIN}>Главная </Link>
                 </Breadcrumb.Item>
-                {pathname === Paths.FEEDBACKS && <Breadcrumb.Item>
-                    <Link to={Paths.FEEDBACKS}>Отзывы пользователей </Link>
-                </Breadcrumb.Item>}
+                {pathname === Paths.FEEDBACKS && (
+                    <Breadcrumb.Item>
+                        <Link to={Paths.FEEDBACKS}>Отзывы пользователей </Link>
+                    </Breadcrumb.Item>
+                )}
+                {pathname === Paths.CALENDAR && (
+                    <Breadcrumb.Item>
+                        <Link to={Paths.CALENDAR}>Календарь </Link>
+                    </Breadcrumb.Item>
+                )}
             </Breadcrumb>
+            {pathname === Paths.CALENDAR && (
+                <Button
+                    type={'text'}
+                    icon={<SettingOutlined />}
+                    className={styles['button_setting-calendar']}
+                >
+                    <span className={styles['button_setting_text']}> Настройки </span>
+                </Button>
+            )}
             {pathname === Paths.MAIN && (
                 <div className={styles['title__wrapper']}>
                     {' '}
@@ -53,5 +65,5 @@ export const HeaderMy: React.FC = () => {
                 </div>
             )}
         </Header>
-    );}
-
+    );
+};
