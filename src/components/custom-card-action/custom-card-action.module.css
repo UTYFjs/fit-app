@@ -3,7 +3,7 @@
 }
 
 .custom-card > div[class="ant-card-body"]{
-  padding: 0;  
+  padding: var(--p-null);  
 }
 .custom-card > div[class="ant-card-body"] > div[class="ant-card-meta"] {
   margin: 12px 30px;
@@ -16,22 +16,22 @@
 }
 .custom-card  div[class="ant-card-head-title"] {
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
   text-align: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: var(--p-m);
+  padding-bottom: var(--p-m);
   white-space: initial;
   overflow: none;
   text-overflow: initial;
 }
 .custom-card > div[class="ant-card-body"] > div[class="ant-card-meta"] > div > div[class='ant-card-meta-title']{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   height: 21px;
   color: var(--character-light-title-85);
   text-align: center;
@@ -45,9 +45,9 @@
 }
 .custom-card > ul[class="ant-card-actions"] > li > span > button {
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
 }

@@ -91,14 +91,80 @@
   --font-size-l: 16px;
   --font-size: 14px;
   --font-size-s: 12px;
+  --line-height: 130%;
+  --font-weight: 400;
+  --font-weight-m: 500;
+  --font-weight-l:700;
+  --gap-4xs: 4px;
+  --gap-3xs: 6px;
+  --gap-2xs: 8px;
+  --gap-xs: 10px;
+  --gap-s: 12px;
+  --gap-m: 14px;
+  --gap: 16px;
+  --gap-l: 20px;
+  --gap-xl: 22px;
+  --gap-2xl: 24px;
+  --gap-3xl: 26px;
+  --gap-4xl: 28px;
+  --gap-5xl: 30px;
+  --gap-6xl: 32px;
+  --gap-7xl: 34px;
+  --gap-8xl: 36px;
+  --gap-9xl: 38px;
+  --gap-10xl: 40px;
+  --gap-11xl: 42px;
+  --gap-12xl: 44px;
+  --gap-13xl: 46px;
+  --gap-14xl: 48px;
+  --p-null: 0;
+  --p-2xs:8px;
+  --p-xs: 10px;
+  --p-m: 12px;
+  --p-l: 14px;
+  --p-l-xl: 13px;
+  --p-xl: 16px;
+  --p-2xl: 18px;
+  --p-3xl: 20px;
+  --p-4xl: 22px;
+  --p-5xl: 24px;
+  --p-6xl: 26px;
+  --p-7xl: 28px;
+  --p-8xl: 30px;
+  --p-9xl: 32px;
+  --m-auto-center: 0 auto;
+  --m-zero: 0;
+  --m-3xs: 2px;
+  --m-3xs: 4px;
+  --m-2xs: 6px;
+  --m-xs: 8px;
+  --m-s: 10px;
+  --m-m: 12px;
+  --m-l: 14px;
+  --m-xl: 16px;
+  --m-2xl: 18px;
+  --m-3xl: 20px;
+  --m-4xl: 22px;
+  --m-5xl: 24px;
+  --m-6xl: 26px;
+  --m-7xl: 28px;
+  --m-8xl: 30px;
+  --m-9xl: 32px;
+  --h-extra-small: 2px;
+  --h-3xs: 14px;
+  --h-2xs: 16px;
+  --h-xs: 18px;
+  --h-s: 20px;
+  --h-m: 22px;
 
-  margin: 0 auto;
+
+  margin: var(--m-auto-center);
   height: 100vh;
   max-width: 1440px;
 
   font-family: --font-family, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  line-height: var(--line-height);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -131,14 +197,14 @@ body {
   transition: none;
 }
 .ant-tabs-top .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
-  height: 2px;
+  height: var(--h-extra-small);
   background: var(--primary-light-6);
   transition: none;
   z-index: 3;
 }
 @media (max-width: 992px) and (min-width: 576px){
   .ant-tabs-top .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
-    height: 2px;
+    height: var(--h-extra-small);
     width: 50%;
     background: var(--primary-light-6);
     transition: none;
@@ -147,7 +213,7 @@ body {
 }
 @media (max-width: 576px){
   .ant-tabs-top .ant-tabs-nav-list .ant-tabs-ink-bar.ant-tabs-ink-bar-animated{
-    height: 2px;
+    height: var(--h-extra-small);
     width: 50%;
     background: var(--primary-light-6);
     transition: none;
@@ -156,34 +222,34 @@ body {
 }
 .ant-tabs-tab a {
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 
 }
 .ant-tabs-tab.ant-tabs-tab-active a {
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--primary-light-6);
 
 }
 
 .ant-btn.ant-btn-primary.ant-btn-lg{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-primary-inverse);
 }
 .ant-btn.ant-btn-link.ant-btn-lg{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
 }
@@ -204,5 +270,5 @@ body {
 }
 
 p{
-  margin-bottom: 0;
+  margin-bottom: var(--m-zero);
 }

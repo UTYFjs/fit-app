@@ -14,7 +14,7 @@
   width: 539px;
   max-height: 742px;
   padding: 64px 85.5px;
-  margin: 0 auto;
+  margin: var(--m-auto-center);
   background-color: white;
 }
 
@@ -29,7 +29,7 @@
     width: 328px;
     max-height: 612px;
     padding: 32px 16px;
-    margin-bottom: 8px;
+    margin-bottom: var(--m-xs);
 
   }
 

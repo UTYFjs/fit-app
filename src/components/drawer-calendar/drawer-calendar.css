@@ -20,23 +20,23 @@
 
 .drawer-calendar__title-wrapper{
   display:flex;
-  gap: 10px;
+  gap: var(--gap-xs);
 }
 
 .drawer-calendar__title{
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 
 .drawer-calendar__badge{
   display:flex;
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-secondary-45);
 
 }
@@ -44,33 +44,33 @@
 .drawer-calendar__exercise-list{
   display:flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--gap-2xl);
   margin: 24px 0;
 }
 .exercise-item{
   display:flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-2xs);
   width: 100%;
 
 }
 .exercise-item__label{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 12px;
+  line-height: var(--line-height);
+  font-size: var(--font-size-s);
   line-height: 24px;
   color: var(--character-light-title-85);
   border-radius: 2px;
   border-bottom: 1px solid var(--character-light-dividers);
   padding: 0 8px;
-  margin-bottom: 6px;
+  margin-bottom: var(--m-2xs);
   height: 24px;
   background: var(--character-light-dividers);
 }
 .exercise-item__values{
   display:flex;
   justify-content: space-between;
-  gap: 32px;
+  gap: var(--gap-6xl);
 }
 
 .exercise-item__values_second{
@@ -78,8 +78,8 @@
 }
 .input-divider{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
   color: var(--character-light-disable-25);
   width:12px;
   line-height: 24px;
@@ -98,18 +98,18 @@
 }
 .drawer-calendar .drawer-calendar__btn-add{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
 
 }
 .drawer-calendar .drawer-calendar__btn-remove{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
 
 }
@@ -123,9 +123,9 @@
 .drawer__warning-message{
   padding: 0 20px;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-secondary-45);
 }
@@ -141,8 +141,8 @@
 
   }
   .drawer-calendar .ant-drawer-content .ant-drawer-header{
-    padding: 16px;
-    padding-top: 13px;
+    padding: var(--p-xl);
+    padding-top: var(--p-l-xl);
     padding-right: 8px;
     border-bottom: none;
 
@@ -156,7 +156,7 @@
   }
   .exercise-item__values{
 
-    gap: 16px;
+    gap: var(--gap);
   }
   
 }

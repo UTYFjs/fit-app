@@ -1,6 +1,6 @@
 .textarea_modal{
   box-sizing: border-box;
-  margin-top: 16px;
+  margin-top: var(--m-xl);
   border: 1px solid var(--character-light-border);
   border-radius: 2px;
   padding: 5px 12px;
@@ -10,9 +10,9 @@
 
 .title_modal{
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 

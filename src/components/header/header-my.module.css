@@ -16,27 +16,27 @@
 }
 .header.header_calendar .button_setting-calendar{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
   display: flex;
   align-items: flex-end;
   width: 129px;
-  margin-top: 8px;
+  margin-top: var(--m-xs);
   padding-left: 15px;
   margin-left: -55px;
-  padding-bottom: 0;
+  padding-bottom: var(--p-null);
   border: none;
   align-self: flex-end;
 }
 
 .breadcrumb{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 .title__wrapper{
@@ -46,17 +46,17 @@
 }
 .header .title_header{
   font-family: var(--font-family);
-  font-weight: 700;
+  line-height: var(--font-weight-l);
   font-size: var(--font-size-l4);
   max-width: 1000px;
   color: var(--character-light-title-85);
-  margin-top: 14px;
-  line-height: 130%;
+  margin-top: var(--m-l);
+  line-height: var(--line-height);
 }
 .header .button_setting{
   display: block;
   width: 129px;
-  margin-top: 8px;
+  margin-top: var(--m-xs);
   padding-left: 15px;
   margin-left: -55px;
   border: none;
@@ -64,9 +64,9 @@
 
 .header  .button_setting{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
 }
@@ -79,9 +79,9 @@
     box-shadow: none;
   }
   .header .title_header{
-    font-weight: 500;
-    font-size: 24px;
-    margin-bottom: 6px;
+    line-height: var(--font-weight-m);
+    font-size: var(--font-size-l3);
+    margin-bottom: var(--m-2xs);
   }
   .button_setting span[role='img']{
     visibility: hidden;
@@ -96,10 +96,10 @@
 
   .header .title_header{
 
-    font-weight: 500;
-    font-size: 20px;
-    margin-bottom: 6px;
-    margin-top: 6px;
+    line-height: var(--font-weight-m);
+    font-size: var(--font-size-l2);
+    margin-bottom: var(--m-2xs);
+    margin-top: var(--m-2xs);
 
   }
   .header  .button_setting{
@@ -111,7 +111,7 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--character-light-primary-inverse);
     margin-left: 0;
-    margin-top: 0;
+    margin-top: var(--m-zero);
 
   }
 

@@ -21,29 +21,29 @@
 }
 .main > .main-card:first-child{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--primary-light-9);
 
 }
 .main > .main-card:first-child > div > p{
 
-  margin: 0;
+  margin: var(--m-zero);
 }
 
 .main > .main-card:nth-child(2){
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 
 }
 
 .main > .main-card:nth-child(2) > div > p{
 
-  margin: 0;
+  margin: var(--m-zero);
 }
 
 .main > .grid-container:last-child{
@@ -73,7 +73,7 @@
     height: 368px;
   }
   .main .ant-card-body {
-    padding: 16px;
+    padding: var(--p-xl);
   }
 
 }

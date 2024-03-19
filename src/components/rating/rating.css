@@ -2,6 +2,6 @@
   margin-bottom: 3px;
 }
 .feedback__rating .ant-rate-star{
-  height: 16px;
+  height: var(--h-2xs);
   margin-right: 6px;
 }

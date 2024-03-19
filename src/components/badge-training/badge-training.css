@@ -14,11 +14,11 @@
   overflow: hidden;
 }
 .badge__traning-item_small{
-  height: 16px; 
+  height: var(--h-2xs); 
   line-height: 16px;
 }
 .badge__traning-item_big{
-  height: 22px;
+  height: var(--h-m);
   line-height: 22px;
 }
 .badge__training-item_icon{
@@ -27,25 +27,25 @@
 }
 .badge__traning-item_small .ant-badge-status-text{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 
 .badge__traning-item_big .ant-badge-status-text{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 
 .badge__training-item_gray .ant-badge-status-text{
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-secondary-45);
 }
 

@@ -1,7 +1,7 @@
 .card-exercise__content{
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-s);
   max-height: 200px;
   overflow-y: auto;
 }
@@ -26,9 +26,9 @@
   display: flex;
   justify-content: space-between;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-secondary-45);
 
 }
@@ -46,5 +46,5 @@
 .card-training__actions-wrapper{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-2xs);
 }

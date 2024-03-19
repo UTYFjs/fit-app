@@ -28,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 12px;
-  height: 22px;
+  height: var(--h-m);
   line-height: 22px;
 }
 
@@ -49,11 +49,11 @@
 
 .card-training__title {
   font-family: var(--font-family);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--font-weight-l);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
-  margin-bottom: 4px;
+  margin-bottom: var(--m-3xs);
 }
 .card-traning__title-wrapper .card-training__title-button{
   width: 20px;
@@ -63,9 +63,9 @@
 }
 .card-training_subtitle{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-secondary-45);
   text-align: left;
 }

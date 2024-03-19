@@ -5,28 +5,28 @@
 .save-error-card__title{
 
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 .save-error-card__subtitle{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 
 
 .modal-error__content .modal-error__button_big{
-  margin-top: 16px;
+  margin-top: var(--m-xl);
   width: fit-content;
   align-self: flex-end;
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-primary-inverse);
 

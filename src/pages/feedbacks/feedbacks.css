@@ -6,11 +6,11 @@
   display: none;
 }
 .feedback-list .ant-row{
-  gap: 20px;
+  gap: var(--gap-l);
 }
 .feedback-action{
   display:flex;
-  gap: 8px;
+  gap: var(--gap-2xs);
   padding-top: 108px;
 }
 
@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: var(--gap-l);
   width: 100%;
   height: 100%;
   margin-top: -9px;
@@ -37,18 +37,18 @@
 
 .feedback-empty__title{
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-9);
 
 }
 .feedback-empty__content{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-secondary-45);
 
@@ -59,20 +59,20 @@
     max-height: 1018px;
   }
   .feedback-list .ant-row{
-    gap: 16px;
+    gap: var(--gap);
   }
 
   .feedback-action{
     display:flex;
     flex-direction: column;
-    gap: 16px;
-    padding-top: 32px;
+    gap: var(--gap);
+    padding-top: var(--p-9xl);
   }
 
   .feedback-empty{
-    gap: 48px;
+    gap: var(--gap-14xl);
     justify-content: flex-start;
-    margin-top: 0;
+    margin-top: var(--m-zero);
   }
   .feedback-empty .ant-card{
     padding: 24px 0;

@@ -1,11 +1,11 @@
 .result-card{
-  padding: 0;
+  padding: var(--p-null);
 }
 .ant-result-title{
   font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 130%;
+  line-height: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
   margin: 0 -20px;
@@ -13,20 +13,20 @@
 
 .ant-result-subtitle{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-secondary-45);
 }
 .ant-result-extra {
-  margin: 0;
+  margin: var(--m-zero);
 }
 .result-card .ant-btn.ant-btn-primary {
   border: 1px solid var(--primary-light-6);
   border-radius: 2px;
   padding: 4px 15px;
-  margin-top: 24px;
+  margin-top: var(--m-5xl);
   height: 40px;
   width: 100%;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
@@ -39,9 +39,9 @@
 
 .result-card .ant-btn.ant-btn.ant-btn-primary > span{
   font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 130%;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-primary-inverse);
 }
