@@ -34,6 +34,7 @@ export enum Paths {
     ERROR_CHECK_EMAIL_NO_EXIST = '/result/error-check-email-no-exist',
     ERROR_CHECK_EMAIL = '/result/error-check-email',
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
+    SETTINGS = '/settings',
     SUCCESS = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
     TRAINING = '/training',

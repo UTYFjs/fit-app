@@ -1,8 +1,7 @@
 module.exports = {
-    extends: require.resolve('arui-presets-lint/stylelint'),
+    extends: ['stylelint-config-prettier', require.resolve('arui-presets-lint/stylelint')],
     rules: {
-
-        'indentation': 2,
+        indentation: 2,
         'selector-pseudo-class-no-unknown': [
             true,
             {

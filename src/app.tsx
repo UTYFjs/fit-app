@@ -16,6 +16,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from './hooks';
 import { MainPage } from './pages';
+import SettingsPage from '@pages/settings-page/settings-page';
 
 const App = () => {
     const { previousLocations } = useAppSelector((state) => state.router);
@@ -37,6 +38,7 @@ const App = () => {
                             <Route path={Paths.TRAINING} element={<TrainingPage />} />
                             <Route path={Paths.ACHIEVEMENT} element={<AchievmentPage />} />
                             <Route path={Paths.PROFILE} element={<ProfilePage />} />
+                            <Route path={Paths.SETTINGS} element={<SettingsPage />} />
                         </Route>
                     </Route>
                     <Route
