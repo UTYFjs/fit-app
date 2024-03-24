@@ -152,7 +152,10 @@
     box-shadow: none;
     z-index: 1;
   }
+  .header.header_profile{
 
+    min-height: 82px;
+  }
   .header .title_header{
 
     line-height: var(--font-weight-m);

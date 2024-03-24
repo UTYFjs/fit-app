@@ -12,8 +12,8 @@
 }
 
 div[class='ant-form-item'] span[class='ant-input-group-addon']{
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: var(--p-m);
+  padding-right: var(--p-m);
   letter-spacing: .3px;
 }
 
