@@ -34,7 +34,7 @@
 
 .main > .main-card:nth-child(2){
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l2);
   line-height: var(--line-height);
   color: var(--character-light-title-85);

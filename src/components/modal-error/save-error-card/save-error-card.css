@@ -2,10 +2,13 @@
   padding: 16px 8px 8px;
 }
 
+.modal-error__content{
+  width:100%;
+}
 .save-error-card__title{
 
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l);
   line-height: var(--line-height);
   color: var(--character-light-title-85);

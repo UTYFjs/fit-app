@@ -10,11 +10,12 @@ import { Content } from 'antd/lib/layout/layout';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
+    console.log(pathname);
     return (
         <>
             <SideBar />
             <Layout className='site-layout'>
-                <HeaderMy />
+                {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
                 <Content className='main'>
                     <Outlet />
                 </Content>

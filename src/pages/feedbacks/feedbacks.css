@@ -37,7 +37,7 @@
 
 .feedback-empty__title{
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l3);
   line-height: var(--line-height);
   text-align: center;

@@ -8,7 +8,7 @@ export enum HTTPMethod {
     PUT = 'PUT',
 }
 
-export enum Endpoint {
+export const enum Endpoint {
     REGISTRATION = 'auth/registration ',
     LOGIN = 'auth/login',
     CHECK_EMAIL = 'auth/check-email ',

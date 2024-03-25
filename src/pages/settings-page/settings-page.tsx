@@ -5,6 +5,9 @@ import TariffControlsForm from './tariff-controls-form/tariff-controls-form';
 import { useState } from 'react';
 import DrawerCustom from '@components/drawer-custom/drawer-custom';
 import { CheckCircleFilled, CloseCircleOutlined } from '@ant-design/icons';
+import ModalResult from '@components/modal-result/modal-result';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@constants/api';
 
 const { Title } = Typography;
 
@@ -56,7 +59,10 @@ const options = [
 
 const SettingsPage = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [valuePay, setValuePay] = useState(0);
+    const navigate = useNavigate();
+
     const handleDraweClose = () => {
         setIsDrawerOpen(false);
     };
@@ -65,7 +71,14 @@ const SettingsPage = () => {
         console.log('opendrawer', isDrawerOpen);
     };
     const handlePay = () => {
-        console.log('Pay');
+        setIsDrawerOpen(false);
+        setIsModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+    const handleWatchReview = () => {
+        navigate(Paths.FEEDBACKS);
     };
     return (
         <div className='settings-page_wrapper'>
@@ -93,12 +106,18 @@ const SettingsPage = () => {
                         {' '}
                         Написать отзыв
                     </Button>
-                    <Button type='link' size='large'>
+                    <Button type='link' size='large' onClick={handleWatchReview}>
                         {' '}
                         Смотреть все отзывы
                     </Button>
                 </div>
             </div>
+            <ModalResult
+                isOpen={isModalOpen}
+                typeContent={'sendPayment'}
+                handlePrimeButton={handleCloseModal}
+                onClose={handleCloseModal}
+            />
             <DrawerCustom
                 drawerTitle='Сравнить тарифы'
                 isDrawerOpen={isDrawerOpen}

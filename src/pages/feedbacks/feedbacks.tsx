@@ -45,9 +45,12 @@ const Feedbacks = () => {
     }, [dispatch, error, navigate]);
 
     useEffect(() => {
-        setIsModalOpen(false);
-        setModalResultType('errorReview');
-        setIsModalResultOpen(true);
+        if (isErrorAddFeedback) {
+            setIsModalOpen(false);
+            setModalResultType('errorReview');
+            setIsModalResultOpen(true);
+            console.log('error add feedback');
+        }
     }, [isErrorAddFeedback]);
 
     useEffect(() => {

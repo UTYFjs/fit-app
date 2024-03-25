@@ -25,7 +25,7 @@
 
 .drawer-calendar__title{
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l2);
   line-height: var(--line-height);
   color: var(--character-light-title-85);
@@ -34,7 +34,7 @@
 .drawer-calendar__badge{
   display:flex;
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
