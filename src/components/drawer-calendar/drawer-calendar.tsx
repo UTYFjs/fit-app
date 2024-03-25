@@ -42,6 +42,7 @@ const DrawerCalendar = ({
     window.addEventListener('resize', () => {
         setIsDesktop(window.innerWidth > 480);
     });
+
     const date = calendarDate?.format(DateFormat.DOT_DD_MM_YYYY);
 
     const handleOnChangeName = (name: string, index: number) => {
@@ -90,15 +91,13 @@ const DrawerCalendar = ({
             className='drawer-calendar'
             data-test-id={CalendarDataTeatId.MODAL_DRAWER_RIGHT}
             title={
-                <>
-                    <div className='drawer-calendar__title-wrapper'>
-                        {isEdit ? <EditOutlined /> : <PlusOutlined />}
-                        <div className='drawer-calendar__title'>
-                            {' '}
-                            {isEdit ? 'Редактирование' : 'Добавление упражнений'}
-                        </div>
+                <div className='drawer-calendar__title-wrapper'>
+                    {isEdit ? <EditOutlined /> : <PlusOutlined />}
+                    <div className='drawer-calendar__title'>
+                        {' '}
+                        {isEdit ? 'Редактирование' : 'Добавление упражнений'}
                     </div>
-                </>
+                </div>
             }
             extra={
                 <Button

@@ -10,8 +10,7 @@ export const LayoutAuth: React.FC = () => {
         let background = '';
         if (appElement) {
             background = appElement.style.background;
-            appElement.style.background =
-                "no-repeat center/cover url('/public/Enter_page_light.png')";
+            appElement.style.background = "no-repeat center/cover url('/Enter_page_light.png')";
         }
         return function () {
             if (appElement) {

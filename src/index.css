@@ -85,6 +85,7 @@
   --character-dark-sider-background: #111d2c;
   --font-family: "Inter", sans-serif;
   --second-family: "Roboto", sans-serif;
+  --boder-radius-5xs: 2px;
   --font-size-l4: 38px;
   --font-size-l3: 24px;
   --font-size-l2: 20px;
@@ -106,6 +107,7 @@
   --gap-l: 20px;
   --gap-xl: 22px;
   --gap-2xl: 24px;
+  --gap-2xlm: 25px;
   --gap-3xl: 26px;
   --gap-4xl: 28px;
   --gap-5xl: 30px;
@@ -119,6 +121,8 @@
   --gap-13xl: 46px;
   --gap-14xl: 48px;
   --p-null: 0;
+  --p-4xs: 4px;
+  --p-3xs: 6px;
   --p-2xs:8px;
   --p-xs: 10px;
   --p-m: 12px;
@@ -256,6 +260,11 @@ body {
 }
 .ant-btn-primary {
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+  background: var(--primary-light-6);
+}
+
+
+.ant-switch-checked{
   background: var(--primary-light-6);
 }
 
