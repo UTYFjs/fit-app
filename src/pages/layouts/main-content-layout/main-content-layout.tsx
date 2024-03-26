@@ -7,9 +7,11 @@ import 'antd/dist/antd.css';
 import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
+import { useGetUserInfoQuery } from '@services/user-profile-api';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
+    const { data } = useGetUserInfoQuery();
     console.log(pathname);
     return (
         <>

@@ -10,12 +10,16 @@ interface ICardTariffProps {
     srcImg: string;
     title: string;
     onClickCompare: () => void;
+    dataTestIdCard?: string;
+    dataTestIdBtn?: string;
 }
 export const CardTariff: React.FC<ICardTariffProps> = ({
     isDisable,
     srcImg,
     title,
     onClickCompare,
+    dataTestIdCard,
+    dataTestIdBtn,
 }) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
     window.addEventListener('resize', () => {
@@ -23,6 +27,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
     });
     return (
         <Card
+            data-test-id={dataTestIdCard}
             hoverable
             bordered={false}
             className='card-tariff'
@@ -56,7 +61,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
             }
         >
             {isDisable ? (
-                <Button type='primary' key='active' size='large'>
+                <Button type='primary' key='active' size='large' data-test-id={dataTestIdBtn}>
                     Активировать{' '}
                 </Button>
             ) : (

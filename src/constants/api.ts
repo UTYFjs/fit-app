@@ -18,6 +18,12 @@ export const enum Endpoint {
     GOOGLE_AUTH = 'auth/google',
     TRAINING = 'training',
     TRAINING_LIST = 'catalogs/training-list',
+    USER_ME = 'user/me',
+    USER = 'user',
+    TARIFF = 'tariff',
+    TARIFF_CHECKOUT = 'tariff/checkout',
+    UPLOAD_IMAGE = 'upload-image',
+    TARIFF_LIST = 'catalogs/tariff-list',
 }
 export enum Paths {
     MAIN = '/main',

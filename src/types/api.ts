@@ -36,3 +36,37 @@ export type INewFeedback = {
     message: string;
     rating: IRatingStar;
 };
+
+export type IUserInfo = {
+    email: string;
+    firstName: string;
+    lastName: string;
+    birthday: string;
+    imgSrc: string;
+    readyForJointTraining: boolean;
+    sendNotification: boolean;
+    tariff: {
+        tariffId: string;
+        expired: string;
+    };
+};
+export type IChangeUserInfo = Omit<IUserInfo, 'tariff'> & {
+    password: string;
+};
+
+export type IChangeTariffRequest = {
+    tariffId: string;
+    days: number;
+};
+
+type ITariffPeriod = {
+    text: string;
+    cost: number;
+    days: number;
+};
+
+export type ITariff = {
+    _id: string;
+    name: string;
+    periods: ITariffPeriod[];
+};

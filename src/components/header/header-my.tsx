@@ -6,6 +6,7 @@ import { Paths } from '@constants/api';
 import { Typography, Layout, Breadcrumb, Button } from 'antd';
 import classNames from 'classnames';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ProfileDataTestId } from '@constants/data-test-id';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -64,7 +65,7 @@ export const HeaderMy: React.FC = () => {
                 <div className={styles['title4__wrapper']}>
                     {pathname === Paths.SETTINGS && (
                         <Button
-                            data-test-id=''
+                            data-test-id={ProfileDataTestId.SETTINGS_BACK}
                             type='text'
                             size='small'
                             style={{ width: 14, height: 14 }}
@@ -100,6 +101,7 @@ export const HeaderMy: React.FC = () => {
                         icon={<SettingOutlined />}
                         className={styles['button_setting']}
                         onClick={handleGoToSettings}
+                        data-test-id={ProfileDataTestId.HEADER_SETTINGS}
                     >
                         Настройки
                     </Button>

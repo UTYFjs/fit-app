@@ -8,21 +8,22 @@ import { CheckCircleFilled, CloseCircleOutlined } from '@ant-design/icons';
 import ModalResult from '@components/modal-result/modal-result';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
+import { ProfileDataTestId } from '@constants/data-test-id';
 
 const { Title } = Typography;
 
 const cardTariffContent = [
     {
         title: 'FREE tariff',
-        actions: '',
         isDisable: false,
         srcImg: '/free.png',
     },
     {
         title: 'PRO tariff',
-        actions: '',
         isDisable: true,
         srcImg: '/pro_able.png',
+        dataTestIdCard: ProfileDataTestId.PRO_TARIFF_CARD,
+        dataTestIdButton: ProfileDataTestId.ACTIVATE_TARIFF_BTN,
     },
 ];
 
@@ -89,15 +90,19 @@ const SettingsPage = () => {
                         Мой тариф{' '}
                     </Title>
                     <div className='settings__card-tariff-wrapper'>
-                        {cardTariffContent.map((item) => (
-                            <CardTariff
-                                key={item.srcImg}
-                                isDisable={item.isDisable}
-                                title={item.title}
-                                srcImg={item.srcImg}
-                                onClickCompare={handleDrawerOpen}
-                            />
-                        ))}
+                        {cardTariffContent.map(
+                            ({ isDisable, srcImg, dataTestIdButton, title, dataTestIdCard }) => (
+                                <CardTariff
+                                    key={srcImg}
+                                    isDisable={isDisable}
+                                    title={title}
+                                    srcImg={srcImg}
+                                    onClickCompare={handleDrawerOpen}
+                                    dataTestIdCard={dataTestIdCard}
+                                    dataTestIdBtn={dataTestIdButton}
+                                />
+                            ),
+                        )}
                     </div>
                 </div>
                 <TariffControlsForm />
@@ -117,6 +122,7 @@ const SettingsPage = () => {
                 typeContent={'sendPayment'}
                 handlePrimeButton={handleCloseModal}
                 onClose={handleCloseModal}
+                data-test-id={ProfileDataTestId.TARIFF_MODAL_SUCCESS}
             />
             <DrawerCustom
                 drawerTitle='Сравнить тарифы'
@@ -134,7 +140,7 @@ const SettingsPage = () => {
                     </Button>
                 }
             >
-                <div className='drawer-tariff'>
+                <div className='drawer-tariff' data-test-id={ProfileDataTestId.TARIFF_SIDER}>
                     <div className='tariff-labels'>
                         <div className='tariff_free'>FREE</div>
                         <div className='tariff_pro'>PRO</div>
@@ -163,7 +169,7 @@ const SettingsPage = () => {
                             );
                         })}
                     </div>
-                    <div>
+                    <div data-test-id={ProfileDataTestId.TARIFF_COST}>
                         <p className='price__title'> Стоимость тарифа</p>
                         <div className='price__body'>
                             <div className='price__body-column'>

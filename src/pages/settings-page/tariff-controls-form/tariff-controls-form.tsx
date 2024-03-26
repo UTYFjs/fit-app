@@ -37,11 +37,15 @@ const TariffControlsForm = () => {
                     <div className='settings__control-item-title'>
                         <p className='control-title'>{item.title}</p>
                         <Tooltip placement='topRight' title={item.tooltipText}>
-                            <ExclamationCircleOutlined />
+                            <ExclamationCircleOutlined data-test-id={item.dataTestIdIcon} />
                         </Tooltip>
                     </div>
 
-                    <Switch defaultChecked size={isDesktop ? 'default' : 'small'} />
+                    <Switch
+                        defaultChecked
+                        size={isDesktop ? 'default' : 'small'}
+                        data-test-id={item.dataTestId}
+                    />
                 </div>
             ))}
         </Form>

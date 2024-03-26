@@ -5,6 +5,7 @@ import { messageValidation } from '@constants/validation';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import { ProfileDataTestId } from '@constants/data-test-id';
 
 const { Title } = Typography;
 const tooLargeFileErrorData = {
@@ -44,6 +45,7 @@ const ProfilePage = () => {
                         <Upload
                             action='/upload.do'
                             listType={isMobile ? 'picture' : 'picture-card'}
+                            data-test-id={ProfileDataTestId.PROFILE_AVATAR}
                         >
                             {!isMobile && (
                                 <div>
@@ -80,16 +82,23 @@ const ProfilePage = () => {
                                 placeholder='Имя'
                                 size='large'
                                 onChange={handleOnChangeSomething}
+                                data-test-id={ProfileDataTestId.INPUT_PROFILE_NAME}
                             />
                         </Form.Item>
                         <Form.Item>
-                            <Input type='text' placeholder='Фамилия' size='large' />
+                            <Input
+                                type='text'
+                                placeholder='Фамилия'
+                                size='large'
+                                data-test-id={ProfileDataTestId.INPUT_PROFILE_SURNAME}
+                            />
                         </Form.Item>
                         <Form.Item>
                             <DatePicker
                                 className='profile__date-picker'
                                 placeholder='Дата рождения'
                                 size='large'
+                                data-test-id={ProfileDataTestId.PROFILE_BIRTHDAY}
                             />
                         </Form.Item>
                     </div>
@@ -99,7 +108,12 @@ const ProfilePage = () => {
                 </Title>
                 <div className='profile-page__item-wrapper'>
                     <Form.Item className='profile__email'>
-                        <Input type='email' addonBefore='e-mail:' size='large' />
+                        <Input
+                            type='email'
+                            addonBefore='e-mail:'
+                            size='large'
+                            data-test-id={ProfileDataTestId.INPUT_PROFILE_EMAIL}
+                        />
                     </Form.Item>
                     <Form.Item
                         name='password'
@@ -109,10 +123,18 @@ const ProfilePage = () => {
                             </div>
                         }
                     >
-                        <Input.Password placeholder='Пароль' size='large' />
+                        <Input.Password
+                            placeholder='Пароль'
+                            size='large'
+                            data-test-id={ProfileDataTestId.PROFILE_PASSWORD}
+                        />
                     </Form.Item>
                     <Form.Item className='profile__repeat-password'>
-                        <Input.Password placeholder='Повторите пароль' size='large' />
+                        <Input.Password
+                            placeholder='Повторите пароль'
+                            size='large'
+                            data-test-id={ProfileDataTestId.PROFILE_REPEAT_PASSWORD}
+                        />
                     </Form.Item>
                 </div>
                 <Button
@@ -122,9 +144,9 @@ const ProfilePage = () => {
                     disabled={isDisabledBtn}
                     size='large'
                     onClick={handleSave}
+                    data-test-id={ProfileDataTestId.PROFILE_SUBMIT}
                 >
-                    {' '}
-                    Сохранить изменения{' '}
+                    Сохранить изменения
                 </Button>
             </Form>
             <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
