@@ -1,5 +1,7 @@
 export const baseUrl = 'https://marathon-api.clevertec.ru';
 
+export const baseUrlForImg = 'https://training-api.clevertec.ru';
+
 export enum HTTPMethod {
     DELETE = 'DELETE',
     GET = 'GET',

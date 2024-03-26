@@ -49,7 +49,7 @@ const userSlice = createSlice({
                 (state.password = payload.password),
                 (state.passwordRepeat = payload.passwordRepeat);
         },
-        setUserInfo: (state, { payload }: PayloadAction<IUserInfo>) => ({
+        setUserInfo: (state, { payload }: PayloadAction<Partial<IUserInfo>>) => ({
             ...state,
             ...payload,
             // (state.email = payload.email),
@@ -67,5 +67,6 @@ export const getUserInfo = ({ user }: RootState) => ({
     email: user.email,
     firstName: user.firstName,
     lastName: user.lastName,
+    birthday: user.birthday,
     imgSrc: user.imgSrc,
 });

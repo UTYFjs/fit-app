@@ -1,5 +1,7 @@
 import { PickerLocale } from 'antd/lib/date-picker/generatePicker';
 
+import ruRU from 'antd/lib/calendar/locale/ru_RU';
+
 export const localeCalendar: PickerLocale = {
     lang: {
         locale: 'ru_RU',
@@ -49,6 +51,40 @@ export const localeCalendar: PickerLocale = {
     },
     timePickerLocale: {
         placeholder: 'Select time',
+    },
+    dateFormat: 'YYYY-MM-DD',
+    dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
+    weekFormat: 'YYYY-wo',
+    monthFormat: 'YYYY-MM',
+};
+
+export const localeCalendar2: PickerLocale = {
+    lang: {
+        ...ruRU.lang,
+        placeholder: 'Выберите дату',
+        today: 'Сегодня',
+        now: 'Сейчас',
+        ok: 'OK',
+        month: 'Месяц',
+        year: 'Год',
+        shortWeekDays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+        shortMonths: [
+            'Янв',
+            'Фев',
+            'Мар',
+            'Апр',
+            'Май',
+            'Июн',
+            'Июл',
+            'Авг',
+            'Сен',
+            'Окт',
+            'Ноя',
+            'Дек',
+        ],
+    },
+    timePickerLocale: {
+        ...ruRU.timePickerLocale,
     },
     dateFormat: 'YYYY-MM-DD',
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',

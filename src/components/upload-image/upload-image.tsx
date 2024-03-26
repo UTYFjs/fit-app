@@ -1,10 +1,10 @@
 import { Button, Upload } from 'antd';
 import './upload-image.css';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Endpoint, StatusCode, baseUrl } from '@constants/api';
+import { Endpoint, StatusCode, baseUrl, baseUrlForImg } from '@constants/api';
 import { useState } from 'react';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { getAccessToken } from '@redux/user-slice';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getAccessToken, setUserInfo } from '@redux/user-slice';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
 import ModalError from '@components/modal-error/modal-error';
 
@@ -12,11 +12,13 @@ import TooLargeFileCard from '@components/modal-error/too-large-file-card/too-la
 
 type UploadImagePropsType = {
     imgSrc: string;
+    handlerError: () => void;
 };
 
-const UploadImage = ({ imgSrc }: UploadImagePropsType) => {
+const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
     const [isModalError, setIsModalError] = useState(false);
     const accessToken = useAppSelector(getAccessToken);
+    const dispatch = useAppDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     //todo добавить тип для стейта
 
@@ -37,20 +39,28 @@ const UploadImage = ({ imgSrc }: UploadImagePropsType) => {
     });
 
     const handleOnChange = (e: UploadChangeParam<UploadFile>) => {
-        if (e.fileList[0]?.status === 'error') {
+        const uploadedFile = e.fileList[0];
+        if (uploadedFile?.status === 'error') {
+            if (
+                uploadedFile?.response?.statusCode === StatusCode.CONFLICT ||
+                uploadedFile.error?.status === StatusCode.CONFLICT
+            ) {
+                console.log('toobigFile Modal Error');
+                setIsModalError(true);
+                handlerError();
+            }
+            console.log('uploadedfile', uploadedFile);
             setFileList([
                 {
                     uid: 'error',
-                    name: e.fileList[0].name,
+                    name: uploadedFile.name,
                     status: 'error',
                 },
             ]);
         } else {
+            console.log(uploadedFile.response);
+            dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}${uploadedFile?.response?.url}` }));
             setFileList(e.fileList);
-        }
-
-        if (e.fileList[0]?.response?.statusCode === StatusCode.CONFLICT) {
-            setIsModalError(true);
         }
     };
     const handleOnRemove = () => {

@@ -7,17 +7,12 @@ import 'antd/dist/antd.css';
 import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
-import { useLazyGetUserInfoQuery } from '@services/user-profile-api';
-import { useLayoutEffect } from 'react';
+import { useGetUserInfoQuery } from '@services/user-profile-api';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
-    const [getUserInfo] = useLazyGetUserInfoQuery();
-    useLayoutEffect(() => {
-        getUserInfo();
-    }, [getUserInfo]);
-    //const { data } = useGetUserInfoQuery();
-    console.log(pathname);
+    useGetUserInfoQuery();
+
     return (
         <>
             <SideBar />

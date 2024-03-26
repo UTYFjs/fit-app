@@ -1,3 +1,6 @@
+import { IUserInfo } from './api';
+import { Moment } from 'moment';
+
 export interface IRegisterData {
     email: string;
     password: string;
@@ -8,3 +11,7 @@ export interface ILoginData {
     password: string;
     remember: boolean;
 }
+
+export type IUserProfileFormValues = Omit<IUserInfo, 'birthday'> & {
+    birthday: Moment;
+};

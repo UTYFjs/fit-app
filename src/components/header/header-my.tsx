@@ -84,6 +84,7 @@ export const HeaderMy: React.FC = () => {
                     icon={<SettingOutlined />}
                     className={styles['button_setting-calendar']}
                     onClick={handleGoToSettings}
+                    data-test-id={ProfileDataTestId.HEADER_SETTINGS}
                 >
                     <span className={styles['button_setting_text']}> Настройки </span>
                 </Button>

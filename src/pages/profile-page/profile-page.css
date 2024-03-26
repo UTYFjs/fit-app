@@ -82,6 +82,15 @@
   
 }
 
+.profile-page__alert{
+  position: absolute;
+  bottom: 70px;
+  right: 50%;
+  transform: translate(50%);
+  min-width: 395px;
+  margin: 0 auto;
+}
+
 @media (max-width: 576px){
   .profile-page{
     gap: var(--gap-l);
@@ -101,5 +110,10 @@
 
   .profile-page__submit-btn{
     width: 100%;
+  }
+
+  .profile-page__alert{
+    bottom: 90px;
+    min-width: 312px;
   }
 }

@@ -27,7 +27,7 @@ export const userProfileApi = api.injectEndpoints({
             //           ]
             //         : [{ type: 'Feedbacks', id: 'LIST' }],
         }),
-        updateUserInfo: builder.mutation<IUserInfo, IChangeUserInfo>({
+        updateUserInfo: builder.mutation<IUserInfo, Partial<IChangeUserInfo>>({
             query: (body) => ({
                 url: Endpoint.USER,
                 method: HTTPMethod.PUT,
