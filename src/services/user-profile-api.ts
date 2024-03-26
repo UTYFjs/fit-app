@@ -58,6 +58,7 @@ export const userProfileApi = api.injectEndpoints({
 });
 
 export const {
+    useLazyGetUserInfoQuery,
     useGetUserInfoQuery,
     useLazyGetTariffListQuery,
     useUpdateUserInfoMutation,

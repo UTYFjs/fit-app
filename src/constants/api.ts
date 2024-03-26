@@ -48,7 +48,7 @@ export enum Paths {
     ACHIEVEMENT = '/achievement',
 }
 
-export enum StatusCode {
+export const enum StatusCode {
     OK = 200,
     CREATED = 201,
     NO_CONTENT = 204,
@@ -57,4 +57,5 @@ export enum StatusCode {
     FORBIDDEN = 403,
     METHOD_NOT_ALLOWED = 405,
     SERVER_ERROR = 500,
+    CONFLICT = 409,
 }

@@ -1,33 +1,28 @@
-import { Button, DatePicker, Form, Input, Typography, Upload } from 'antd';
+import { Button, DatePicker, Form, Input, Typography } from 'antd';
 import './profile-page.css';
 import { useState } from 'react';
 import { messageValidation } from '@constants/validation';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import { ProfileDataTestId } from '@constants/data-test-id';
+import UploadImage from '@components/upload-image/upload-image';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getUserInfo } from '@redux/user-slice';
 
 const { Title } = Typography;
-const tooLargeFileErrorData = {
-    title: 'Файл слишком большой',
-    subTitle: 'Выберите файл размером до 5 МБ.',
-};
+
 const ProfilePage = () => {
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
-    const [isTooLargeFile, setIsTooLargeFile] = useState(true);
     const [isDisabledBtn, setIsDisabledBtn] = useState(true);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-    window.addEventListener('resize', () => {
-        setIsMobile(window.innerWidth < 768);
-    });
+    const userInfo = useAppSelector(getUserInfo);
+    console.log('userInfo', userInfo);
 
     const handleOnChangeSomething = () => {
         setIsDisabledBtn(false);
     };
-    const handleSave = () => {
-        setIsModalErrorOpen(true);
-    };
+    // const handleSave = () => {
+    //     setIsModalErrorOpen(true);
+    // };
     const handleCloseModalError = () => {
         setIsModalErrorOpen(false);
     };
@@ -41,38 +36,12 @@ const ProfilePage = () => {
                     Личная информация
                 </Title>
                 <div className='profile__personal-wrapper'>
-                    <Form.Item className='profile__upload' valuePropName='fileList'>
-                        <Upload
-                            action='/upload.do'
-                            listType={isMobile ? 'picture' : 'picture-card'}
-                            data-test-id={ProfileDataTestId.PROFILE_AVATAR}
-                        >
-                            {!isMobile && (
-                                <div>
-                                    <PlusOutlined />
-                                    <div className='profile__upload-text' style={{ marginTop: 8 }}>
-                                        Загрузить фото профиля
-                                    </div>
-                                </div>
-                            )}
-                            {isMobile && (
-                                <div className='profile__upload_mobile'>
-                                    {' '}
-                                    <p className='upload__label'>Загрузить фото профиля:</p>{' '}
-                                    <Button
-                                        className='upload__button_mobile'
-                                        icon={
-                                            <UploadOutlined
-                                                style={{ color: 'var(--character-light-border)' }}
-                                            />
-                                        }
-                                        size='large'
-                                    >
-                                        Загрузить
-                                    </Button>
-                                </div>
-                            )}
-                        </Upload>
+                    <Form.Item
+                        className='profile__upload'
+                        valuePropName='fileList'
+                        data-test-id={ProfileDataTestId.PROFILE_AVATAR}
+                    >
+                        <UploadImage imgSrc={userInfo.imgSrc} />
                     </Form.Item>
 
                     <div className='profile-page__item-wrapper'>
@@ -143,18 +112,14 @@ const ProfilePage = () => {
                     htmlType='submit'
                     disabled={isDisabledBtn}
                     size='large'
-                    onClick={handleSave}
+                    //onClick={handleSave}
                     data-test-id={ProfileDataTestId.PROFILE_SUBMIT}
                 >
                     Сохранить изменения
                 </Button>
             </Form>
             <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
-                <SaveErrorCard
-                    handlePrimeButton={handleCloseModalError}
-                    titleText={isTooLargeFile ? tooLargeFileErrorData.title : ''}
-                    subTitleText={isTooLargeFile ? tooLargeFileErrorData.subTitle : ''}
-                />
+                <SaveErrorCard handlePrimeButton={handleCloseModalError} />
             </ModalError>
         </>
     );
