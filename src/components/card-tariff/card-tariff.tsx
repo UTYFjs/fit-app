@@ -4,27 +4,37 @@ import 'antd/dist/antd.css';
 import { Button, Card } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import { getUserTariffInfo } from '@redux/user-slice';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import moment from 'moment';
+import { DateFormat } from '@constants/date';
 
 interface ICardTariffProps {
-    isDisable: boolean;
+    isPaid: boolean;
     srcImg: string;
     title: string;
     onClickCompare: () => void;
     dataTestIdCard?: string;
     dataTestIdBtn?: string;
+    isActivePro?: boolean;
 }
 export const CardTariff: React.FC<ICardTariffProps> = ({
-    isDisable,
+    isPaid,
     srcImg,
     title,
     onClickCompare,
     dataTestIdCard,
     dataTestIdBtn,
+    isActivePro,
 }) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
+    const userInfo = useAppSelector(getUserTariffInfo);
+    //todo истекает в будущем
+    //const [isProActive, setIsProActive] = useState(userInfo.tariff.expired);
     window.addEventListener('resize', () => {
         setIsDesktop(window.innerWidth > 576);
     });
+    //console.log('card active', isActivePro, isPaid);
     return (
         <Card
             data-test-id={dataTestIdCard}
@@ -54,20 +64,32 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
             cover={
                 <img
                     className='card-tariff__img'
-                    style={{ filter: isDisable ? 'grayscale(90%) opacity(30%)' : 'none' }}
+                    style={{
+                        filter: isPaid
+                            ? isActivePro
+                                ? 'none'
+                                : 'grayscale(90%) opacity(30%)'
+                            : 'none',
+                    }}
                     alt='free tariff'
                     src={srcImg}
                 />
             }
         >
-            {isDisable ? (
+            {isPaid && !isActivePro ? (
                 <Button type='primary' key='active' size='large' data-test-id={dataTestIdBtn}>
                     Активировать{' '}
                 </Button>
             ) : (
-                <>
-                    <span className='tariff-active-label'>активен</span> <CheckOutlined />
-                </>
+                <div>
+                    <span className='tariff-active-label'>активен</span>
+                    {!isPaid && <CheckOutlined />}
+                    {isPaid && (
+                        <p className='tariff-active-label'>
+                            до {moment(userInfo.tariff.expired).format(DateFormat.DOT_DD_MM)}
+                        </p>
+                    )}
+                </div>
             )}
         </Card>
     );

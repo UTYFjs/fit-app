@@ -44,6 +44,10 @@ const userSlice = createSlice({
         setAccessToken: (state, { payload }: PayloadAction<string>) => {
             state.accessToken = payload;
         },
+        setExitApp: () => ({
+            ...initialState,
+            accessToken: '',
+        }),
         setUserValues: (state, { payload }: PayloadAction<IUserValues>) => {
             (state.email = payload.email),
                 (state.password = payload.password),
@@ -59,7 +63,7 @@ const userSlice = createSlice({
     },
 });
 
-export const { setAccessToken, setUserValues, setUserInfo } = userSlice.actions;
+export const { setAccessToken, setUserValues, setUserInfo, setExitApp } = userSlice.actions;
 export default userSlice.reducer;
 export const getAccessToken = ({ user }: RootState) => user.accessToken;
 export const getUserEmail = ({ user }: RootState) => user.email;
@@ -69,4 +73,14 @@ export const getUserInfo = ({ user }: RootState) => ({
     lastName: user.lastName,
     birthday: user.birthday,
     imgSrc: user.imgSrc,
+    readyForJointTraining: user.readyForJointTraining,
+    sendNotification: user.sendNotification,
+});
+export const getUserTariffInfo = ({ user }: RootState) => ({
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    birthday: user.birthday,
+    imgSrc: user.imgSrc,
+    tariff: user.tariff,
 });

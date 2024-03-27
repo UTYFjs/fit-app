@@ -45,5 +45,7 @@ export const enum ProfileDataTestId {
     TARIFF_SIDER = 'tariff-sider',
     TARIFF_COST = 'tariff-cost',
     TARIFF_MODAL_SUCCESS = 'tariff-modal-success',
+    TARIFF_SUBMIT = 'tariff-submit',
     NEW_REVIEW_SUBMIT_BUTTON = 'new-review-submit-button',
+    TARIFF_10 = 'tariff-10',
 }

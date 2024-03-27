@@ -48,6 +48,19 @@
   gap: var(--gap-2xl);
 }
 
+.drawer-tariff__active-pro-message{
+  width: 100%;
+  text-align: center;
+  line-height: 49px;
+  height: 49px;
+  background: var(--primary-light-1);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l);
+  text-align: center;
+  color: var(--primary-light-10);
+}
+
 
 
 .tariff-labels{
@@ -74,6 +87,10 @@
 .tariff_pro{
   background: var(--primary-light-1);
   color: var(--primary-light-7);
+}
+.tariff_pro.active{
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size);
 }
 
 
@@ -182,6 +199,22 @@
     gap: var(--gap-s);
   }
 
+  .drawer-tariff__active-pro-message{
+    margin-bottom: var(--m-zero);
+    margin-top: var(--m-5xl)
+  }
+
+  .tariff_pro.active{
+    font-weight: var(--font-weight);
+    font-size: var(--font-size-s);
+  }
+  .drawer-tariff .tariff_pro svg{
+    display: none;
+  }
+  .tariff-labels{
+
+    padding-top: var(--p-m);
+  }
   .options-tariff-list{
 
     gap:var(--gap-2xs);

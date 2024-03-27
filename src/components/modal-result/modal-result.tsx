@@ -11,6 +11,7 @@ type ModalErrorProps = {
     handlePrimeButton: () => void;
     handleSecondButton?: () => void;
     onClose?: () => void;
+    dataTestId?: string;
 };
 
 type DataModalType = {
@@ -49,10 +50,11 @@ const ModalResult = ({
     handlePrimeButton,
     handleSecondButton,
     onClose,
+    dataTestId,
 }: ModalErrorProps) => {
     const [data, setData] = useState<DataModalType | null>(null);
     const email = useAppSelector(getUserEmail);
-    console.log('email', email);
+
     useEffect(() => {
         switch (typeContent) {
             case 'errorReview':
@@ -80,6 +82,7 @@ const ModalResult = ({
 
     return (
         <Modal
+            data-test-id={dataTestId}
             closable={onClose ? true : false}
             onCancel={onClose}
             centered

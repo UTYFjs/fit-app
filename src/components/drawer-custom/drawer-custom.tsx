@@ -49,6 +49,7 @@ const DrawerCustom = ({
                     onClick={onClose}
                 />
             }
+            destroyOnClose
             width={408}
             height={isDesktop ? 'auto' : '87%'}
             placement={isDesktop ? 'right' : 'bottom'}

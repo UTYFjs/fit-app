@@ -3,35 +3,68 @@ import './tariff-controls-form.css';
 import { ProfileDataTestId } from '@constants/data-test-id';
 import { Form, Switch, Tooltip } from 'antd';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getUserInfo, setUserInfo } from '@redux/user-slice';
+import { useUpdateUserInfoMutation } from '@services/user-profile-api';
 
 const controlsData = [
     {
+        name: 'readyForJointTraining',
         title: 'Открыт для соместных тренировок',
         tooltipText: 'включеная функция позволит участвовать в совместных тренировках',
         dataTestId: ProfileDataTestId.SWITCH_TARIFF_TRAININGS,
         dataTestIdIcon: ProfileDataTestId.TARIFF_TRAINING_ICON,
     },
     {
+        name: 'sendNotification',
         title: 'Уведомления',
         tooltipText: 'включеная функция позволит получать уведомления об активностях',
         dataTestId: ProfileDataTestId.SWITCH_TARIFF_NOTIFICATION,
         dataTestIdIcon: ProfileDataTestId.TARIFF_NOTIFICATIONS_ICON,
     },
     {
+        name: 'darkTheme',
         title: 'Темная тема',
         tooltipText: 'темная тема доступна для PRO tariff',
         dataTestId: ProfileDataTestId.SWITCH_TARIFF_THEME,
         dataTestIdIcon: ProfileDataTestId.TARIFF_THEME_ICON,
+        pro: true,
     },
 ];
-
-const TariffControlsForm = () => {
+type FieldData = {
+    error: [];
+    name: string[];
+    validate: boolean;
+    validating: boolean;
+    value: boolean;
+    warnings: [];
+};
+type TariffControlsFormPropsType = {
+    isActivePro: boolean;
+};
+const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
+    const userInfo = useAppSelector(getUserInfo);
+    const [updateUserInfo] = useUpdateUserInfoMutation();
+    //console.log('userInfo switcher', userInfo);
+    const dispatch = useAppDispatch();
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
     window.addEventListener('resize', () => {
         setIsDesktop(window.innerWidth > 480);
     });
+    const onChangeSwitchForm = (value: FieldData[]) => {
+        const dto = { [value[0].name[0]]: value[0].value };
+        //console.log('onchngeSwitch', value, dto);
+        updateUserInfo(dto);
+        dispatch(setUserInfo(dto));
+    };
     return (
-        <Form className='settings__control-form'>
+        <Form
+            className='settings__control-form'
+            initialValues={{
+                ...userInfo,
+            }}
+            onFieldsChange={onChangeSwitchForm}
+        >
             {controlsData.map((item) => (
                 <div key={item.dataTestId} className='settings__control-item'>
                     <div className='settings__control-item-title'>
@@ -40,12 +73,19 @@ const TariffControlsForm = () => {
                             <ExclamationCircleOutlined data-test-id={item.dataTestIdIcon} />
                         </Tooltip>
                     </div>
-
-                    <Switch
-                        defaultChecked
-                        size={isDesktop ? 'default' : 'small'}
-                        data-test-id={item.dataTestId}
-                    />
+                    <Form.Item
+                        name={item.name}
+                        valuePropName={'checked'}
+                        className='settings__control-item-switch'
+                    >
+                        <Switch
+                            //checked={userInfo?.[item.name as keyof typeof IUserInfo] && false}
+                            size={isDesktop ? 'default' : 'small'}
+                            data-test-id={item.dataTestId}
+                            disabled={item?.pro && !isActivePro}
+                            //onChange={onChangeSwitchForm}
+                        />
+                    </Form.Item>
                 </div>
             ))}
         </Form>

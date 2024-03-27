@@ -24,7 +24,7 @@ const ProfilePage = () => {
     const [isEmptyPassword, setIsEmptyPassword] = useState(true);
     const [isAlert, setIsAlert] = useState(false);
     const userInfo = useAppSelector(getUserInfo);
-    console.log('userInFo', userInfo);
+    //console.log('userinfo', userInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
 
     const handleOnChangeSomething = () => {
@@ -128,7 +128,7 @@ const ProfilePage = () => {
                         ]}
                     >
                         <Input
-                            defaultValue={userInfo.email}
+                            //defaultValue={userInfo.email}
                             type='email'
                             addonBefore='e-mail:'
                             size='large'

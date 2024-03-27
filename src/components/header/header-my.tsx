@@ -7,6 +7,7 @@ import { Typography, Layout, Breadcrumb, Button } from 'antd';
 import classNames from 'classnames';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ProfileDataTestId } from '@constants/data-test-id';
+import { useLazyGetTariffListQuery } from '@services/user-profile-api';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -18,6 +19,8 @@ const TitleLevel4 = {
 export const HeaderMy: React.FC = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
+
+    const [getTariffList] = useLazyGetTariffListQuery();
 
     const isBreadcrumb = [Paths.MAIN, Paths.CALENDAR, Paths.FEEDBACKS].includes(pathname as Paths);
     const isTitleLevel4 = [Paths.PROFILE, Paths.SETTINGS].includes(pathname as Paths);
@@ -39,6 +42,7 @@ export const HeaderMy: React.FC = () => {
         navigate(-1);
     };
     const handleGoToSettings = () => {
+        getTariffList();
         navigate(Paths.SETTINGS);
     };
     return (

@@ -8,7 +8,7 @@ import ModalResult from '@components/modal-result/modal-result';
 import ModalServerError from '@components/modal-server-error/modal-server-error';
 import { Paths, StatusCode } from '@constants/api';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAccessToken } from '@redux/user-slice';
+import { setExitApp } from '@redux/user-slice';
 import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api';
 import { Button, Card, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ const Feedbacks = () => {
     useEffect(() => {
         if (error) {
             if ('status' in error && error.status == StatusCode.FORBIDDEN) {
-                dispatch(setAccessToken(''));
+                dispatch(setExitApp());
                 localStorage.removeItem('accessToken');
                 navigate(Paths.LOGIN);
             }

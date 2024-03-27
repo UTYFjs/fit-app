@@ -61,6 +61,7 @@ export const {
     useLazyGetUserInfoQuery,
     useGetUserInfoQuery,
     useLazyGetTariffListQuery,
+    useGetTariffListQuery,
     useUpdateUserInfoMutation,
     useChangeTariffMutation,
 } = userProfileApi;

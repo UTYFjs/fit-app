@@ -16,6 +16,7 @@ export const LayoutMainContent: React.FC = () => {
     return (
         <>
             <SideBar />
+
             <Layout className='site-layout'>
                 {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
                 <Content className='main'>
