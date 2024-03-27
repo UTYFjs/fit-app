@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
-import { getUserEmail, getUserInfo } from '@redux/user-slice';
+import { getUserInfo } from '@redux/user-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 type ModalErrorProps = {
     isOpen: boolean;

@@ -7,8 +7,11 @@ import ModalFeedback from '@components/modal-feedback/modal-feedback';
 import { useAddFeedbackMutation } from '@services/feedback-api';
 import ModalResult from '@components/modal-result/modal-result';
 
-const ButtonModalFeedback = () => {
-    //modalFeedback
+type ButtonModalFeedbackProps = {
+    dataTestIdBtn?: string;
+    refetch?: () => void;
+};
+const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProps) => {
     const [isModalFeedbackOpen, setIsModalFeedbackOpen] = useState(false);
     const [isModalResultOpen, setIsModalResultOpen] = useState(false);
     const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(
@@ -28,17 +31,15 @@ const ButtonModalFeedback = () => {
         }
     }, [isErrorAddFeedback]);
 
-    // ?? refetch
     useEffect(() => {
         if (isSuccessAddFeedback) {
             setIsModalFeedbackOpen(false);
             setModalResultType('successReview');
             setIsModalResultOpen(true);
-            //refetch();
+            refetch && refetch();
         }
-    }, [isSuccessAddFeedback]);
+    }, [isSuccessAddFeedback, refetch]);
 
-    //modalfeedback
     const handleOpenModalFeedback = () => {
         setIsModalFeedbackOpen(true);
     };
@@ -65,7 +66,12 @@ const ButtonModalFeedback = () => {
 
     return (
         <>
-            <Button type='primary' size='large' onClick={handleOpenModalFeedback}>
+            <Button
+                type='primary'
+                size='large'
+                onClick={handleOpenModalFeedback}
+                data-test-id={dataTestIdBtn}
+            >
                 Написать отзыв
             </Button>
             <ModalFeedback

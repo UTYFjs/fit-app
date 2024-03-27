@@ -18,6 +18,7 @@
   line-height: var(--line-height);
   color: var(--character-light-title-85);
   margin-bottom: var(--m-zero);
+  margin-bottom: var(--m-5xl);
 }
 
 .profile__title_second{
