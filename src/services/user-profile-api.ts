@@ -16,16 +16,9 @@ export const userProfileApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setUserInfo(data));
                 } catch {
-                    console.log('something went wrong');
+                    console.log('something went wrong with get User Info');
                 }
             },
-            // providesTags: (result) =>
-            //     result
-            //         ? [
-            //               ...result.map(({ id }) => ({ type: 'Feedbacks' as const, id })),
-            //               { type: 'Feedbacks', id: 'LIST' },
-            //           ]
-            //         : [{ type: 'Feedbacks', id: 'LIST' }],
         }),
         updateUserInfo: builder.mutation<IUserInfo, Partial<IChangeUserInfo>>({
             query: (body) => ({
@@ -38,7 +31,7 @@ export const userProfileApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setUserInfo(data));
                 } catch {
-                    console.log('something went wrong');
+                    console.log('something went wrong with update User Info');
                 }
             },
         }),

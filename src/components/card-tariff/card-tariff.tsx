@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Button, Card } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
-import { getUserTariffInfo } from '@redux/user-slice';
+import { getUserInfo } from '@redux/user-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
@@ -28,7 +28,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
     isActivePro,
 }) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
-    const userInfo = useAppSelector(getUserTariffInfo);
+    const userInfo = useAppSelector(getUserInfo);
     //todo истекает в будущем
     //const [isProActive, setIsProActive] = useState(userInfo.tariff.expired);
     window.addEventListener('resize', () => {

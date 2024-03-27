@@ -24,15 +24,8 @@ const ProfilePage = () => {
     const [isEmptyPassword, setIsEmptyPassword] = useState(true);
     const [isAlert, setIsAlert] = useState(false);
     const userInfo = useAppSelector(getUserInfo);
-    //console.log('userinfo', userInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
 
-    const handleOnChangeSomething = () => {
-        setIsDisabledBtn(false);
-    };
-    // const handleSave = () => {
-    //     setIsModalErrorOpen(true);
-    // };
     const handleCloseModalError = () => {
         setIsModalErrorOpen(false);
     };
@@ -42,14 +35,10 @@ const ProfilePage = () => {
         const request = { ...values, birthday, imgSrc: userInfo.imgSrc };
         updateUserInfo(request)
             .unwrap()
-            .then((data) => {
+            .then(() => {
                 setIsAlert(true);
-                console.log('success', data);
             })
-            .catch(() => {
-                console.log('error update');
-            });
-        console.log('onFinish Profile', request, 'isEmptyPassword', isEmptyPassword);
+            .catch(() => {});
         setIsDisabledBtn(true);
     };
     const onChangeForm = () => {
@@ -73,7 +62,6 @@ const ProfilePage = () => {
                 </Title>
                 <div className='profile__personal-wrapper'>
                     <Form.Item
-                        className='profile__upload'
                         valuePropName='fileList'
                         data-test-id={ProfileDataTestId.PROFILE_AVATAR}
                     >
@@ -84,14 +72,12 @@ const ProfilePage = () => {
                             }}
                         />
                     </Form.Item>
-
                     <div className='profile-page__item-wrapper'>
                         <Form.Item name='firstName'>
                             <Input
                                 type='text'
                                 placeholder='Имя'
                                 size='large'
-                                onChange={handleOnChangeSomething}
                                 data-test-id={ProfileDataTestId.INPUT_PROFILE_NAME}
                             />
                         </Form.Item>
@@ -128,7 +114,6 @@ const ProfilePage = () => {
                         ]}
                     >
                         <Input
-                            //defaultValue={userInfo.email}
                             type='email'
                             addonBefore='e-mail:'
                             size='large'
@@ -202,7 +187,6 @@ const ProfilePage = () => {
                     htmlType='submit'
                     disabled={isDisabledBtn}
                     size='large'
-                    //onClick={handleSave}
                     data-test-id={ProfileDataTestId.PROFILE_SUBMIT}
                 >
                     Сохранить изменения

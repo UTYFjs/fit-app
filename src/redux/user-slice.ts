@@ -6,36 +6,42 @@ import { IUserInfo } from '../types/api';
 interface IUserState {
     accessToken: string;
     email: string;
-    firstName: string;
-    lastName: string;
-    birthday: string;
-    imgSrc: string;
-    tariff: {
-        tariffId: string;
-        expired: string;
+    userInfo: {
+        email: string;
+        firstName: string;
+        lastName: string;
+        birthday: string;
+        imgSrc: string;
+        readyForJointTraining: boolean;
+        sendNotification: boolean;
+        tariff: {
+            tariffId: string;
+            expired: string;
+        };
     };
     password: string;
     passwordRepeat: string;
-    readyForJointTraining: boolean;
-    sendNotification: boolean;
 }
 type IUserValues = Pick<IUserState, 'email' | 'password' | 'passwordRepeat'>;
 
 const initialState: IUserState = {
     accessToken: localStorage.getItem('accessToken') || '',
     email: '',
-    firstName: '',
-    lastName: '',
-    birthday: '',
-    imgSrc: '',
-    tariff: {
-        tariffId: '',
-        expired: '',
+    userInfo: {
+        email: '',
+        firstName: '',
+        lastName: '',
+        birthday: '',
+        imgSrc: '',
+        readyForJointTraining: false,
+        sendNotification: false,
+        tariff: {
+            tariffId: '',
+            expired: '',
+        },
     },
     password: '',
     passwordRepeat: '',
-    readyForJointTraining: false,
-    sendNotification: false,
 };
 const userSlice = createSlice({
     name: 'user',
@@ -53,13 +59,12 @@ const userSlice = createSlice({
                 (state.password = payload.password),
                 (state.passwordRepeat = payload.passwordRepeat);
         },
-        setUserInfo: (state, { payload }: PayloadAction<Partial<IUserInfo>>) => ({
-            ...state,
-            ...payload,
-            // (state.email = payload.email),
-            //     (state.readyForJointTraining = payload.readyForJointTraining),
-            //     (state.sendNotification = payload.sendNotification);
-        }),
+        setUserInfo: (state, { payload }: PayloadAction<Partial<IUserInfo>>) => {
+            state.userInfo = {
+                ...state.userInfo,
+                ...payload,
+            };
+        },
     },
 });
 
@@ -67,20 +72,4 @@ export const { setAccessToken, setUserValues, setUserInfo, setExitApp } = userSl
 export default userSlice.reducer;
 export const getAccessToken = ({ user }: RootState) => user.accessToken;
 export const getUserEmail = ({ user }: RootState) => user.email;
-export const getUserInfo = ({ user }: RootState) => ({
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    birthday: user.birthday,
-    imgSrc: user.imgSrc,
-    readyForJointTraining: user.readyForJointTraining,
-    sendNotification: user.sendNotification,
-});
-export const getUserTariffInfo = ({ user }: RootState) => ({
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    birthday: user.birthday,
-    imgSrc: user.imgSrc,
-    tariff: user.tariff,
-});
+export const getUserInfo = ({ user }: RootState) => user.userInfo;

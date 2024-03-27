@@ -45,7 +45,6 @@ type TariffControlsFormPropsType = {
 const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
     const userInfo = useAppSelector(getUserInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
-    //console.log('userInfo switcher', userInfo);
     const dispatch = useAppDispatch();
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
     window.addEventListener('resize', () => {
@@ -53,7 +52,6 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
     });
     const onChangeSwitchForm = (value: FieldData[]) => {
         const dto = { [value[0].name[0]]: value[0].value };
-        //console.log('onchngeSwitch', value, dto);
         updateUserInfo(dto);
         dispatch(setUserInfo(dto));
     };

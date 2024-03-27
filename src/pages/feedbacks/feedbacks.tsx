@@ -49,7 +49,6 @@ const Feedbacks = () => {
             setIsModalOpen(false);
             setModalResultType('errorReview');
             setIsModalResultOpen(true);
-            console.log('error add feedback');
         }
     }, [isErrorAddFeedback]);
 

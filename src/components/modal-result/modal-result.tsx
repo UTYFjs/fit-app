@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
-import { getUserEmail } from '@redux/user-slice';
+import { getUserEmail, getUserInfo } from '@redux/user-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 type ModalErrorProps = {
     isOpen: boolean;
@@ -53,7 +53,7 @@ const ModalResult = ({
     dataTestId,
 }: ModalErrorProps) => {
     const [data, setData] = useState<DataModalType | null>(null);
-    const email = useAppSelector(getUserEmail);
+    const { email } = useAppSelector(getUserInfo);
 
     useEffect(() => {
         switch (typeContent) {

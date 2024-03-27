@@ -34,7 +34,6 @@ const ButtonModalFeedback = () => {
             setIsModalFeedbackOpen(false);
             setModalResultType('successReview');
             setIsModalResultOpen(true);
-            console.log('use effect success  feedback', isSuccessAddFeedback);
             //refetch();
         }
     }, [isSuccessAddFeedback]);
