@@ -8,6 +8,7 @@ import { getUserInfo } from '@redux/user-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
+import { useWindowWidth } from '@hooks/useWindowWidth';
 
 interface ICardTariffProps {
     isPaid: boolean;
@@ -27,11 +28,12 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
     dataTestIdBtn,
     isActivePro,
 }) => {
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
+    const { isDesktop } = useWindowWidth();
+    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
     const userInfo = useAppSelector(getUserInfo);
-    window.addEventListener('resize', () => {
-        setIsDesktop(window.innerWidth > 576);
-    });
+    // window.addEventListener('resize', () => {
+    //     setIsDesktop(window.innerWidth > 576);
+    // });
 
     return (
         <Card

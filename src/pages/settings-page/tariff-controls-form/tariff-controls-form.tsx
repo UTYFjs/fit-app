@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getUserInfo, setUserInfo } from '@redux/user-slice';
 import { useUpdateUserInfoMutation } from '@services/user-profile-api';
+import { useWindowWidth } from '@hooks/useWindowWidth';
 
 const controlsData = [
     {
@@ -46,10 +47,11 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
     const userInfo = useAppSelector(getUserInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
     const dispatch = useAppDispatch();
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
-    window.addEventListener('resize', () => {
-        setIsDesktop(window.innerWidth > 480);
-    });
+    const { isDesktop } = useWindowWidth();
+    //const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
+    // window.addEventListener('resize', () => {
+    //     setIsDesktop(window.innerWidth > 480);
+    // });
     const onChangeSwitchForm = (value: FieldData[]) => {
         const dto = { [value[0].name[0]]: value[0].value };
         updateUserInfo(dto);

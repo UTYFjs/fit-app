@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import { isPast } from '@utils/date-utils';
 import { DateFormat } from '@constants/date';
+import { useWindowWidth } from '@hooks/useWindowWidth';
 
 type DrawerCalendarProps = {
     selectedTraining: string;
@@ -38,10 +39,11 @@ const DrawerCalendar = ({
     calendarDate,
     setNewExercises,
 }: DrawerCalendarProps) => {
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
-    window.addEventListener('resize', () => {
-        setIsDesktop(window.innerWidth > 480);
-    });
+    const { isDesktop } = useWindowWidth();
+    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
+    // window.addEventListener('resize', () => {
+    //     setIsDesktop(window.innerWidth > 480);
+    // });
 
     const date = calendarDate?.format(DateFormat.DOT_DD_MM_YYYY);
 
