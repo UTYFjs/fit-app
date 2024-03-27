@@ -4,7 +4,7 @@ import './drawer-custom.css';
 
 import { CalendarDataTeatId } from '@constants/data-test-id';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 
 type DrawerCalendarProps = {
@@ -24,12 +24,7 @@ const DrawerCustom = ({
     drawerTitleIcon,
     footer,
 }: DrawerCalendarProps) => {
-
     const { isDesktop } = useWindowWidth();
-    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
-    // window.addEventListener('resize', () => {
-    //     setIsDesktop(window.innerWidth > 480);
-    // });
 
     return (
         <Drawer

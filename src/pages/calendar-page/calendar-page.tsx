@@ -20,7 +20,6 @@ import { useWindowWidth } from '@hooks/useWindowWidth';
 
 const CalendarPage = () => {
     const { isDesktop } = useWindowWidth();
-    //const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
     const [parentModal, setParentModal] = useState<Element | null>(null);
     const [topPosition, setTopPosition] = useState(0);
     const [typeModal, setTypeModal] = useState<'training' | 'exercise' | null>(null);
@@ -55,10 +54,6 @@ const CalendarPage = () => {
             );
         }
     }, [calendarDate, dataTrainings]);
-
-    // window.addEventListener('resize', () => {
-    //     setIsDesktop(window.innerWidth > 480);
-    // });
 
     const getDateCellRender = (data: Moment) => {
         const key = data.format(DateFormat.DASH_YYYY_MM_DD);

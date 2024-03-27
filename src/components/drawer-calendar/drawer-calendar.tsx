@@ -7,9 +7,6 @@ import BadgeTraining from '@components/badge-training/badge-training';
 import { ExerciseType } from '../../types/training-types';
 
 import { CalendarDataTeatId } from '@constants/data-test-id';
-
-import { useState } from 'react';
-
 import { isPast } from '@utils/date-utils';
 import { DateFormat } from '@constants/date';
 import { useWindowWidth } from '@hooks/useWindowWidth';
@@ -40,10 +37,6 @@ const DrawerCalendar = ({
     setNewExercises,
 }: DrawerCalendarProps) => {
     const { isDesktop } = useWindowWidth();
-    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 480);
-    // window.addEventListener('resize', () => {
-    //     setIsDesktop(window.innerWidth > 480);
-    // });
 
     const date = calendarDate?.format(DateFormat.DOT_DD_MM_YYYY);
 

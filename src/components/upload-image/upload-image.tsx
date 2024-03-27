@@ -42,11 +42,9 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
                 uploadedFile?.response?.statusCode === StatusCode.CONFLICT ||
                 uploadedFile.error?.status === StatusCode.CONFLICT
             ) {
-                console.log('toobigFile Modal Error');
                 setIsModalError(true);
                 handlerError();
             }
-            console.log('uploadedfile', uploadedFile);
             setFileList([
                 {
                     uid: 'error',
@@ -55,7 +53,6 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
                 },
             ]);
         } else {
-            console.log('setFilelistWithout errors');
             dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}/${uploadedFile?.response?.url}` }));
             setFileList(e.fileList);
         }

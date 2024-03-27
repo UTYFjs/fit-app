@@ -3,7 +3,6 @@ import './card-tariff.css';
 import 'antd/dist/antd.css';
 import { Button, Card } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
-import { useState } from 'react';
 import { getUserInfo } from '@redux/user-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import moment from 'moment';
@@ -29,11 +28,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
     isActivePro,
 }) => {
     const { isDesktop } = useWindowWidth();
-    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
     const userInfo = useAppSelector(getUserInfo);
-    // window.addEventListener('resize', () => {
-    //     setIsDesktop(window.innerWidth > 576);
-    // });
 
     return (
         <Card
