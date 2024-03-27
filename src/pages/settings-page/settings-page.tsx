@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { cardTariffContent, optionsProTariff } from '@constants/tariff';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
+import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
 
 const { Title } = Typography;
 
@@ -34,8 +35,6 @@ const SettingsPage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        //console.log('isActivePro', moment(userInfo.tariff.expired).isAfter());
-
         userInfo.tariff && setIsActivePro(moment(userInfo.tariff.expired).isAfter());
     }, [userInfo]);
 
@@ -86,21 +85,16 @@ const SettingsPage = () => {
                 </div>
                 <TariffControlsForm isActivePro={isActivePro} />
                 <div className='settings__btn-wrapper'>
-                    <Button type='primary' size='large'>
+                    <ButtonModalFeedback />
+                    {/* <Button type='primary' size='large'>
                         Написать отзыв
-                    </Button>
+                    </Button> */}
                     <Button type='link' size='large' onClick={handleWatchReview}>
                         Смотреть все отзывы
                     </Button>
                 </div>
             </div>
-            <ModalResult
-                isOpen={isModalOpen}
-                typeContent={'sendPayment'}
-                handlePrimeButton={handleCloseModal}
-                onClose={handleCloseModal}
-                dataTestId={ProfileDataTestId.TARIFF_MODAL_SUCCESS}
-            />
+
             <DrawerCustom
                 drawerTitle='Сравнить тарифы'
                 isDrawerOpen={isDrawerOpen}
@@ -219,6 +213,13 @@ const SettingsPage = () => {
                     )}
                 </div>
             </DrawerCustom>
+            <ModalResult
+                isOpen={isModalOpen}
+                typeContent={'sendPayment'}
+                handlePrimeButton={handleCloseModal}
+                onClose={handleCloseModal}
+                dataTestId={ProfileDataTestId.TARIFF_MODAL_SUCCESS}
+            />
         </div>
     );
 };
