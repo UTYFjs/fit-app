@@ -29,12 +29,10 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
 }) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
     const userInfo = useAppSelector(getUserInfo);
-    //todo истекает в будущем
-    //const [isProActive, setIsProActive] = useState(userInfo.tariff.expired);
     window.addEventListener('resize', () => {
         setIsDesktop(window.innerWidth > 576);
     });
-    //console.log('card active', isActivePro, isPaid);
+
     return (
         <Card
             data-test-id={dataTestIdCard}
@@ -71,13 +69,19 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
                                 : 'grayscale(90%) opacity(30%)'
                             : 'none',
                     }}
-                    alt='free tariff'
+                    alt={title}
                     src={srcImg}
                 />
             }
         >
             {isPaid && !isActivePro ? (
-                <Button type='primary' key='active' size='large' data-test-id={dataTestIdBtn}>
+                <Button
+                    type='primary'
+                    key='active'
+                    size='large'
+                    data-test-id={dataTestIdBtn}
+                    onClick={onClickCompare}
+                >
                     Активировать{' '}
                 </Button>
             ) : (

@@ -37,8 +37,6 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
 
     const handleOnChange = (e: UploadChangeParam<UploadFile>) => {
         const uploadedFile = e.fileList[0];
-        //dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}/${uploadedFile?.response?.url}` }));
-        //setFileList(e.fileList);
         if (uploadedFile?.status === 'error') {
             if (
                 uploadedFile?.response?.statusCode === StatusCode.CONFLICT ||
@@ -74,8 +72,6 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
             <Upload
                 action={`${baseUrl}/${Endpoint.UPLOAD_IMAGE}`}
                 headers={{ authorization: `Bearer ${accessToken}` }}
-                //withCredentials
-                //accept='image/*'
                 fileList={fileList}
                 listType={isMobile ? 'picture' : 'picture-card'}
                 progress={{ strokeWidth: 4, showInfo: false }}

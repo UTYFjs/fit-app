@@ -1,7 +1,11 @@
 .app .site-layout {
   width: 100%; 
   background: transparent;
-  height: 100vh;
+  min-height: 100vh;
+}
+.app .site-layout.site-layout_feedbacks {
+
+  max-height: 100vh;
 }
 
 .main{
@@ -11,7 +15,7 @@
   padding: 24px;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  /* overflow: auto; */
   
 
 }

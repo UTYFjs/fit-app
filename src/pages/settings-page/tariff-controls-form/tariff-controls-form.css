@@ -33,6 +33,11 @@
   color: var(--character-light-title-85);
 }
 
+
+.settings__control-item.disable .control-title{
+  color: var(--character-light-disable-25);
+}
+
 .control-title.control-title_disable{
   color: var(--character-light-disable-25);
 }

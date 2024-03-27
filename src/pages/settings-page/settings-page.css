@@ -1,7 +1,8 @@
 .settings-page_wrapper{
   background: var(--neutral-gray-3);
   margin: -24px;
-  height: 100vh;
+  height: 100%; 
+
 }
 
 .settings-page{

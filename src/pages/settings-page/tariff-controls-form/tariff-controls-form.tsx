@@ -64,10 +64,20 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
             onFieldsChange={onChangeSwitchForm}
         >
             {controlsData.map((item) => (
-                <div key={item.dataTestId} className='settings__control-item'>
+                <div
+                    key={item.dataTestId}
+                    className={
+                        item?.pro && !isActivePro
+                            ? 'settings__control-item disable'
+                            : 'settings__control-item'
+                    }
+                >
                     <div className='settings__control-item-title'>
                         <p className='control-title'>{item.title}</p>
-                        <Tooltip placement='topRight' title={item.tooltipText}>
+                        <Tooltip
+                            placement={isDesktop ? 'topRight' : 'bottom'}
+                            title={item.tooltipText}
+                        >
                             <ExclamationCircleOutlined data-test-id={item.dataTestIdIcon} />
                         </Tooltip>
                     </div>
@@ -77,11 +87,9 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
                         className='settings__control-item-switch'
                     >
                         <Switch
-                            //checked={userInfo?.[item.name as keyof typeof IUserInfo] && false}
                             size={isDesktop ? 'default' : 'small'}
                             data-test-id={item.dataTestId}
                             disabled={item?.pro && !isActivePro}
-                            //onChange={onChangeSwitchForm}
                         />
                     </Form.Item>
                 </div>

@@ -27,7 +27,6 @@ const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProp
             setIsModalFeedbackOpen(false);
             setModalResultType('errorReview');
             setIsModalResultOpen(true);
-            console.log('error add feedback');
         }
     }, [isErrorAddFeedback]);
 

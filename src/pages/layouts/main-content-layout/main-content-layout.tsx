@@ -16,7 +16,13 @@ export const LayoutMainContent: React.FC = () => {
         <>
             <SideBar />
             {data && (
-                <Layout className='site-layout'>
+                <Layout
+                    className={
+                        pathname === Paths.FEEDBACKS
+                            ? 'site-layout site-layout_feedbacks'
+                            : 'site-layout'
+                    }
+                >
                     {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
                     <Content className='main'>
                         <Outlet />
