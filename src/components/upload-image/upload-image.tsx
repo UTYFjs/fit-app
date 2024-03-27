@@ -20,19 +20,16 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
     const accessToken = useAppSelector(getAccessToken);
     const dispatch = useAppDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    //todo добавить тип для стейта
 
-    const defaultFiles = imgSrc
-        ? [
-              {
-                  uid: 'uuidstring',
-                  name: 'avatar',
-                  status: 'done',
-                  url: imgSrc,
-              },
-          ]
-        : [];
-    const [fileList, setFileList] = useState<UploadFile[]>(defaultFiles as UploadFile[]);
+    const defaultFiles = [
+        {
+            uid: '1',
+            name: 'avatar.jpg',
+            url: imgSrc,
+        },
+    ];
+
+    const [fileList, setFileList] = useState<UploadFile[]>(imgSrc ? defaultFiles : []);
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
@@ -40,6 +37,8 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
 
     const handleOnChange = (e: UploadChangeParam<UploadFile>) => {
         const uploadedFile = e.fileList[0];
+        //dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}/${uploadedFile?.response?.url}` }));
+        //setFileList(e.fileList);
         if (uploadedFile?.status === 'error') {
             if (
                 uploadedFile?.response?.statusCode === StatusCode.CONFLICT ||
@@ -58,8 +57,8 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
                 },
             ]);
         } else {
-            console.log(uploadedFile.response);
-            dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}${uploadedFile?.response?.url}` }));
+            console.log('setFilelistWithout errors');
+            dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}/${uploadedFile?.response?.url}` }));
             setFileList(e.fileList);
         }
     };
@@ -75,11 +74,11 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
             <Upload
                 action={`${baseUrl}/${Endpoint.UPLOAD_IMAGE}`}
                 headers={{ authorization: `Bearer ${accessToken}` }}
-                withCredentials
-                accept='image/*'
+                //withCredentials
+                //accept='image/*'
                 fileList={fileList}
                 listType={isMobile ? 'picture' : 'picture-card'}
-                progress={{ strokeWidth: 4, showInfo: false, size: 'default' }}
+                progress={{ strokeWidth: 4, showInfo: false }}
                 onChange={handleOnChange}
                 onRemove={handleOnRemove}
             >

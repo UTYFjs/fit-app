@@ -11,19 +11,19 @@ import { useGetUserInfoQuery } from '@services/user-profile-api';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
-    useGetUserInfoQuery();
-
+    const { data } = useGetUserInfoQuery();
     return (
         <>
             <SideBar />
-
-            <Layout className='site-layout'>
-                {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
-                <Content className='main'>
-                    <Outlet />
-                </Content>
-                {pathname === Paths.MAIN && <FooterMy />}
-            </Layout>
+            {data && (
+                <Layout className='site-layout'>
+                    {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
+                    <Content className='main'>
+                        <Outlet />
+                    </Content>
+                    {pathname === Paths.MAIN && <FooterMy />}
+                </Layout>
+            )}
         </>
     );
 };
