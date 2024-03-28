@@ -1,6 +1,6 @@
 
 .drawer-tariff{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: var(--gap-2xl);
   overflow: auto;
@@ -25,6 +25,7 @@
   gap: var(--gap-m);
   padding-top: var(--p-5xl);
 }
+
 .tariff_free, .tariff_pro{
   font-family: var(--font-family);
   font-weight: var(--font-weight);
@@ -36,14 +37,17 @@
   width: 56px;
   text-align: center;
 }
+
 .tariff_free{
 
   background: var(--character-light-dividers);
 }
+
 .tariff_pro{
   background: var(--primary-light-1);
   color: var(--primary-light-7);
 }
+
 .tariff_pro.active{
   font-weight: var(--font-weight-m);
   font-size: var(--font-size);
@@ -52,14 +56,16 @@
 .options-tariff-list{
   display: flex;
   flex-direction: column;
-  gap:var(--gap);
+  gap: var(--gap);
   padding-bottom: 50px;
 }
+
 .option-tariff-item{
   display: flex;
-  gap:52px;
+  gap: 52px;
 
 }
+
 .option-tariff-item__title{
   font-family: var(--font-family);
   font-weight: var(--font-weight);
@@ -132,29 +138,32 @@
 
   .drawer-tariff__active-pro-message{
     margin-bottom: var(--m-zero);
-    margin-top: var(--m-5xl)
+    margin-top: var(--m-5xl);
   }
 
   .tariff_pro.active{
     font-weight: var(--font-weight);
     font-size: var(--font-size-s);
   }
+
   .drawer-tariff .tariff_pro svg{
     display: none;
   }
+
   .tariff-labels{
 
     padding-top: var(--p-m);
   }
+
   .options-tariff-list{
 
-    gap:var(--gap-2xs);
+    gap: var(--gap-2xs);
     padding-bottom: var(--p-xs);
   }
 
   .option-tariff-item{
 
-    gap:44px;
+    gap: 44px;
 
   }
 

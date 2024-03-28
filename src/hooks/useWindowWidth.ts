@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 export const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isDesktop, setIsDesktop] = useState(width > 576);
+
     useEffect(() => {
         setIsDesktop(width > 576);
     }, [width]);
+
     useEffect(() => {
         const handleWindowResize = () => setWidth(window.innerWidth);
 

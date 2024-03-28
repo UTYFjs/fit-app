@@ -5,9 +5,10 @@
   padding: var(--p-5xl);
   margin-bottom: var(--m-2xl);
   width: 100%;
-  height:100%;
+  height: 100%;
   background: var(--character-light-primary-inverse);
 }
+
 .profile-page .ant-form-item{
   margin-bottom: var(--m-zero);
 }
@@ -27,14 +28,15 @@
 }
 
 .profile-page__item-wrapper{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: var(--gap);
   max-width: 480px;
   width: 100%;
 }
+
 .profile__personal-wrapper{
-  display:flex;
+  display: flex;
   gap: var(--gap-2xl);
   max-width: 480px;
 }
@@ -67,7 +69,7 @@
 }
 
 .profile-page__submit-btn{
-  width: fit-content
+  width: fit-content;
 }
 
 .profile-page__submit-btn span{
@@ -78,6 +80,7 @@
   text-align: center;
   
 }
+
 .profile-page__submit-btn[disabled] span{
   color: var(--character-light-disable-25);
   
@@ -93,6 +96,7 @@
 }
 
 @media (max-width: 576px){
+
   .profile-page{
     gap: var(--gap-l);
     width: 100vw;

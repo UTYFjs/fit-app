@@ -6,7 +6,7 @@
 }
 
 .settings-page{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: var(--gap-2xl);
   background: var(--character-light-primary-inverse);
@@ -37,15 +37,17 @@
 }
 
 .settings__btn-wrapper{
-  display:flex;
+  display: flex;
   padding-top: 72px;
 
 }
 
 @media (max-width: 576px) {
+
   .settings-page_wrapper{
-    margin: -24px -16px
+    margin: -24px -16px;
   }
+
   .settings-page{
     gap: var(--p-3xl);
     padding: 16px 24px;
@@ -54,11 +56,11 @@
 
 
   }
+
   .settings__card-tariff-wrapper{
     gap: var(--gap-s);
     flex-direction: column;
   }
-
 
   .settings__btn-wrapper{
     

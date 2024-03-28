@@ -11,13 +11,8 @@ const { Title } = Typography;
 export const PrivateInfoFieldset = () => {
     const [isEmptyPassword, setIsEmptyPassword] = useState(true);
 
-    const handleOnChangeField = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value.trim()) {
-            setIsEmptyPassword(false);
-        } else {
-            setIsEmptyPassword(true);
-        }
-    };
+    const handleOnChangeField = (e: React.ChangeEvent<HTMLInputElement>) =>
+        setIsEmptyPassword(!e.target.value.trim());
 
     return (
         <>

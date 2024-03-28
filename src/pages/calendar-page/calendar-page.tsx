@@ -84,9 +84,9 @@ const CalendarPage = () => {
         setSelectedTraining('');
         setTypeModal('training');
     };
-    const handleCreateTraining = () => {
-        setTypeModal('exercise');
-    };
+
+    const handleCreateTraining = () => setTypeModal('exercise');
+
     const handleEditTraining = () => {
         setIsEditTraining(true);
         setTypeModal('exercise');

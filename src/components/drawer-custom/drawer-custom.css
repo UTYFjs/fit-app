@@ -4,28 +4,28 @@
 .drawer-custom .ant-drawer-content .ant-drawer-header{
   padding: 24px 32px 16px;
 }
+
 .drawer-wrapper{
-  display:flex;
+  display: flex;
   flex-direction: column;
   height: 100%;
 }
+
 .ant-select:not(.ant-select-focused) .ant-select-selector{
   border: none;
 }
+
 .drawer-custom .ant-drawer-content, .drawer-custom .ant-drawer-content-wrapper{
   border-radius: 8px 0 0 8px;
 }
+
 .ant-drawer-body{
   padding: 24px 32px;
   overflow: hidden;
 }
-.drawer-calendar__exercise-list{
-  max-height: 76%;
-  overflow: auto;
-}
 
 .drawer-calendar__title-wrapper{
-  display:flex;
+  display: flex;
   gap: var(--gap-xs);
 }
 
@@ -38,7 +38,7 @@
 }
 
 .drawer-calendar__badge{
-  display:flex;
+  display: flex;
   font-family: var(--font-family);
   font-weight: var(--font-weight-m);
   font-size: var(--font-size);
@@ -48,18 +48,22 @@
 }
 
 .drawer-calendar__exercise-list{
-  display:flex;
+  max-height: 76%;
+  overflow: auto;
+  display: flex;
   flex-direction: column;
   gap: var(--gap-2xl);
   margin: 24px 0;
 }
+
 .exercise-item{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: var(--gap-2xs);
   width: 100%;
 
 }
+
 .exercise-item__label{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -73,8 +77,9 @@
   height: 24px;
   background: var(--character-light-dividers);
 }
+
 .exercise-item__values{
-  display:flex;
+  display: flex;
   justify-content: space-between;
   gap: var(--gap-6xl);
 }
@@ -82,26 +87,28 @@
 .exercise-item__values_second{
   display: flex;
 }
+
 .input-divider{
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size);
   color: var(--character-light-disable-25);
-  width:12px;
+  width: 12px;
   line-height: 24px;
   align-self: flex-end;
   text-align: center;
 }
 
 .exercise-item__input-title{
-  width: 100%
+  width: 100%;
 }
 
 .drawer-calendar__btn-wrapper{
-  display:flex;
+  display: flex;
   background: var(--character-light-dividers);
   border-radius: 0 0 6px 6px;
 }
+
 .drawer-custom .drawer-calendar__btn-add{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -111,6 +118,7 @@
   color: var(--primary-light-6);
 
 }
+
 .drawer-custom .drawer-calendar__btn-remove{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -119,13 +127,15 @@
   text-align: center;
 
 }
+
 .drawer_footer-wrapper{
   flex-grow: 1;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   
 }
+
 .drawer__warning-message{
   padding: 0 20px;
   font-family: var(--font-family);
@@ -137,9 +147,9 @@
 }
 
 @media  (max-width: 480px) {
+
   .drawer-custom .ant-drawer-content, .drawer-custom .ant-drawer-content-wrapper{
     border-radius: 24px 24px 0 0;
-
   }
 
   .drawer-custom .ant-drawer-content .ant-drawer-header{
@@ -147,13 +157,14 @@
   }
 
   .ant-drawer-body{
-    padding: 0 16px 24px
+    padding: 0 16px 24px;
   }
+
   .exercise-item{
     padding: 0 5px;
   }
-  .exercise-item__values{
 
+  .exercise-item__values{
     gap: var(--gap);
   }
   

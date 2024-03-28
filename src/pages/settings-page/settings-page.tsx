@@ -40,15 +40,12 @@ const SettingsPage = () => {
 
     const dateActivePRO = moment(userInfo.tariff.expired).format(DateFormat.DOT_DD_MM);
 
-    const handleSetValuePay = (e: RadioChangeEvent) => {
-        setValuePay(e.target.value);
-    };
-    const handleDrawerClose = () => {
-        setIsDrawerOpen(false);
-    };
-    const handleDrawerOpen = () => {
-        setIsDrawerOpen((state) => !state);
-    };
+    const handleSetValuePay = (e: RadioChangeEvent) => setValuePay(e.target.value);
+
+    const handleDrawerClose = () => setIsDrawerOpen(false);
+
+    const handleDrawerOpen = () => setIsDrawerOpen((state) => !state);
+
     const handlePay = () => {
         dataTariffList && changeTariff({ tariffId: dataTariffList[0]._id, days: valuePay });
         setIsDrawerOpen(false);
@@ -60,9 +57,8 @@ const SettingsPage = () => {
         dispatch(setExitAppUserInfo());
         setIsModalOpen(false);
     };
-    const handleWatchReview = () => {
-        navigate(Paths.FEEDBACKS);
-    };
+    const handleWatchReview = () => navigate(Paths.FEEDBACKS);
+
     return (
         <div className='settings-page_wrapper'>
             <div className='settings-page'>

@@ -20,12 +20,10 @@ const ProfilePage = () => {
     const [isAlert, setIsAlert] = useState(false);
     const [form] = Form.useForm();
 
-    const handleCloseModalError = () => {
-        setIsModalErrorOpen(false);
-    };
-    const handleUploadImageError = () => {
-        setIsDisabledBtn(true);
-    };
+    const handleCloseModalError = () => setIsModalErrorOpen(false);
+
+    const handleUploadImageError = () => setIsDisabledBtn(true);
+
     const onFinish = (values: IUserProfileFormValues) => {
         const birthday = values.birthday?.utc().format();
         const request = { ...values, birthday, imgSrc: userInfo.imgSrc };

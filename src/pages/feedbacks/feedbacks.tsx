@@ -22,21 +22,17 @@ const Feedbacks = () => {
     const { data, error, isError, refetch } = useGetFeedbacksQuery('', {});
 
     useEffect(() => {
-        if (error) {
-            if ('status' in error && error.status == StatusCode.FORBIDDEN) {
-                dispatch(setExitApp());
-                dispatch(setExitAppUserInfo());
-                localStorage.removeItem('accessToken');
-                navigate(Paths.LOGIN);
-            }
+        if (error && 'status' in error && error.status == StatusCode.FORBIDDEN) {
+            dispatch(setExitApp());
+            dispatch(setExitAppUserInfo());
+            localStorage.removeItem('accessToken');
+            navigate(Paths.LOGIN);
         }
     }, [dispatch, error, navigate]);
 
     const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
 
-    const handleShowAllFeedbacks = () => {
-        setIsAllFeedbacks(!isAllFeedbacks);
-    };
+    const handleShowAllFeedbacks = () => setIsAllFeedbacks(!isAllFeedbacks);
 
     return (
         <>

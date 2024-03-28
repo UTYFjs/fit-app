@@ -2,6 +2,19 @@ module.exports = {
     extends: ['stylelint-config-prettier', require.resolve('arui-presets-lint/stylelint')],
     rules: {
         indentation: 2,
+        'string-quotes': 'single',
+        'no-duplicate-selectors': true,
+        'color-hex-case': 'lower',
+        'declaration-block-trailing-semicolon': 'always',
+        'declaration-no-important': true,
+        'declaration-colon-space-before': 'never',
+        'declaration-colon-space-after': 'always',
+        'number-leading-zero': 'never',
+        'font-weight-notation': 'numeric',
+        'comment-whitespace-inside': 'never',
+        'comment-empty-line-before': 'always',
+        'rule-empty-line-before': 'always-multi-line',
+        'color-no-invalid-hex': [true, { reportDisables: true }],
         'selector-pseudo-class-no-unknown': [
             true,
             {

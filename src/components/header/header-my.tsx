@@ -38,9 +38,7 @@ export const HeaderMy: React.FC = () => {
         styles[headerSecondClass[pathname as keyof typeof headerSecondClass]] || '',
     );
 
-    const handleGoBack = () => {
-        navigate(-1);
-    };
+    const handleGoBack = () => navigate(-1);
     const handleGoToSettings = () => {
         getTariffList();
         navigate(Paths.SETTINGS);

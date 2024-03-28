@@ -91,12 +91,8 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
             ]);
         }
     };
-    const handleOnRemove = () => {
-        setFileList([]);
-    };
-    const handleCloseModalError = () => {
-        setIsModalError(false);
-    };
+    const handleOnRemove = () => setFileList([]);
+    const handleCloseModalError = () => setIsModalError(false);
 
     return (
         <>

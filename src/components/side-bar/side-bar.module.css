@@ -8,7 +8,7 @@
 }
 
 .logo {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 30px 0 0;
@@ -18,34 +18,36 @@
 
 .exit{
   position: relative;
-  bottom:0;
+  bottom: 0;
   margin-top: auto;
 }
+
 .sider .trigger{
   margin-left: 0;
 }
+
 .button__wrapper{
   margin-top: auto;
 }
 
 .button_trigger{
-  position:absolute;
+  position: absolute;
   padding: var(--p-null);
   height: 66px;
   width: 20px;
   border: none;
-  transform:translateY(-50%);
+  transform: translateY(-50%);
   right: -19px;
-  top:50%;
+  top: 50%;
   clip-path: polygon(0 0, 100% 12%, 100% 88%, 0% 100%);
 }
 
 .button_exit{
   
-  display:flex;
+  display: flex;
   align-items: center;
   gap: var(--gap);
-  padding:  var(--p-null);
+  padding: var(--p-null);
   height: 40px;
   padding: 0 16px;
   margin-top: auto;
@@ -70,8 +72,9 @@
 
 
 @media (max-width:768px){
+
   .sider{
-    position:fixed;
+    position: fixed;
     z-index: 2;
     height: 100vh;
   }
@@ -92,14 +95,15 @@
     height: 48px;
     width: 32px;
     right: -31px;
-    top:48px;
+    top: 48px;
   }
+
   .sider > div .menu > li[class='ant-menu-item'] span:last-child{
     margin-left: 8px;
   }
 
   .sider > div .menu > li[class='ant-menu-item'] span:first-child {
-    display:none;
+    display: none;
   }
 
   .button_exit{

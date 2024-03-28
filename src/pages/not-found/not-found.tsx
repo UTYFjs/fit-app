@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const NotFound = () => {
     const navigate = useNavigate();
 
-    const handleGoToMain = () => {
-        navigate('/main');
-    };
+    const handleGoToMain = () => navigate('/main');
     return (
         <div className='not-found__container'>
             <Result

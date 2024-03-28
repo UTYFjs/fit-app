@@ -17,6 +17,7 @@
   width: 100%;
   gap: var(--gap);
 }
+
 .profile__upload_mobile .upload__label{
   font-family: var(--font-family);
   font-weight: var(--font-weight);
@@ -25,6 +26,7 @@
   text-align: right;
   color: var(--character-light-title-85);
 }
+
 .upload__button_mobile{
   display: flex;
   align-items: center;
@@ -32,6 +34,7 @@
   height: 40px;
   padding: 10px 25px;
 }
+
 .upload__button_mobile span{
   font-family: var(--font-family);
   font-weight: var(--font-weight);
@@ -43,8 +46,9 @@
 
 
 @media (max-width: 576px){
+
   .profile__upload{
     padding: 0;
-    order:2;
+    order: 2;
   }
 }

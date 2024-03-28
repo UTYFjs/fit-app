@@ -39,13 +39,10 @@ const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProp
         }
     }, [isSuccessAddFeedback, refetch]);
 
-    const handleOpenModalFeedback = () => {
-        setIsModalFeedbackOpen(true);
-    };
+    const handleOpenModalFeedback = () => setIsModalFeedbackOpen(true);
 
-    const handleSendFeedBack = () => {
+    const handleSendFeedBack = () =>
         addFeedback({ message: textFeedbackValue, rating: ratingValue });
-    };
 
     const handleSuccessFeedback = () => {
         setIsModalResultOpen(false);

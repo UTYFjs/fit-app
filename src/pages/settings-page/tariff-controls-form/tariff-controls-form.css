@@ -1,5 +1,5 @@
 .settings__control-form{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: var(--gap);
   padding: var(--p-xl) 0;
@@ -7,7 +7,7 @@
 }
 
 .settings__control-item{
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   max-height: 22px;
@@ -20,6 +20,7 @@
   gap: 4px;
   
 }
+
 .settings__control-item-switch{
   max-height: 22px;
   margin-bottom: var(--m-zero);
@@ -54,6 +55,7 @@
   .settings__control-form{
     gap: var(--gap-2xl);
   }
+
   .settings__control-item{
     align-items: center;
 
@@ -63,12 +65,12 @@
     display: flex;
     flex-basis: 260px;
   }
+
   .settings__control-item-title span{
     align-self: flex-start;
   }
+
   .control-title{
-
     max-width: 170px;
-
   }
 }

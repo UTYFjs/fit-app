@@ -3,6 +3,7 @@
   background: transparent;
   min-height: 100vh;
 }
+
 .app .site-layout.site-layout_feedbacks {
 
   max-height: 100vh;
@@ -19,6 +20,7 @@
 }
 
 @media (max-width: 768px){
+
   .main{
     padding: 24px 16px;
   }
