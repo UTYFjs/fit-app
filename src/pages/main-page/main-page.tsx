@@ -47,8 +47,8 @@ export const MainPage: React.FC = () => {
                 await getTrainings().unwrap();
             }
             navigate(pathTo);
-        } catch (e) {
-            console.error('error getTrainings from Main Page', e);
+        } catch {
+            () => {};
         }
     };
     return (

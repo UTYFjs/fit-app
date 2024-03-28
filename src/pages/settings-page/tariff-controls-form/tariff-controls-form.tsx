@@ -1,9 +1,9 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import './tariff-controls-form.css';
 import { ProfileDataTestId } from '@constants/data-test-id';
-import { Form, Switch, Tooltip } from 'antd';
+import { Form, FormProps, Switch, Tooltip } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { getUserInfo, setUserInfo } from '@redux/user-slice';
+import { getUserInfo, setUserInfo } from '@redux/profile-slice';
 import { useUpdateUserInfoMutation } from '@services/user-profile-api';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 
@@ -31,14 +31,7 @@ const controlsData = [
         pro: true,
     },
 ];
-type FieldData = {
-    error: [];
-    name: string[];
-    validate: boolean;
-    validating: boolean;
-    value: boolean;
-    warnings: [];
-};
+
 type TariffControlsFormPropsType = {
     isActivePro: boolean;
 };
@@ -48,7 +41,7 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
     const dispatch = useAppDispatch();
     const { isDesktop } = useWindowWidth();
 
-    const onChangeSwitchForm = (value: FieldData[]) => {
+    const onChangeSwitchForm: FormProps['onFieldsChange'] = (value) => {
         const dto = { [value[0].name[0]]: value[0].value };
         updateUserInfo(dto);
         dispatch(setUserInfo(dto));

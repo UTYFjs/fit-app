@@ -5,7 +5,7 @@ import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import { ProfileDataTestId } from '@constants/data-test-id';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { getUserInfo } from '@redux/user-slice';
+import { getUserInfo } from '@redux/profile-slice';
 import { IUserProfileFormValues } from '../../types/forms';
 import { useUpdateUserInfoMutation } from '@services/user-profile-api';
 import moment from 'moment';
@@ -15,10 +15,10 @@ import { PrivateInfoFieldset } from './private-info-fieldset/private-info-fields
 const ProfilePage = () => {
     const userInfo = useAppSelector(getUserInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
-
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
     const [isDisabledBtn, setIsDisabledBtn] = useState(true);
     const [isAlert, setIsAlert] = useState(false);
+    const [form] = Form.useForm();
 
     const handleCloseModalError = () => {
         setIsModalErrorOpen(false);
@@ -28,7 +28,6 @@ const ProfilePage = () => {
     };
     const onFinish = (values: IUserProfileFormValues) => {
         const birthday = values.birthday?.utc().format();
-
         const request = { ...values, birthday, imgSrc: userInfo.imgSrc };
         updateUserInfo(request)
             .unwrap()
@@ -45,13 +44,12 @@ const ProfilePage = () => {
         <>
             <Form
                 className='profile-page'
+                form={form}
                 onFinish={onFinish}
                 onChange={onChangeForm}
                 initialValues={{
-                    firstName: userInfo.firstName,
-                    lastName: userInfo.lastName,
+                    ...userInfo,
                     birthday: userInfo.birthday && moment(userInfo.birthday),
-                    email: userInfo.email,
                 }}
             >
                 <PersonalInfoFieldset

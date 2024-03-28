@@ -1,15 +1,17 @@
 import { Button, Upload } from 'antd';
 import './upload-image.css';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Endpoint, StatusCode, baseUrl, baseUrlForImg } from '@constants/api';
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { getAccessToken, setUserInfo } from '@redux/user-slice';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
+import { StatusCode, baseUrlForImg } from '@constants/api';
+import { useEffect, useState } from 'react';
+import { UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload';
 import ModalError from '@components/modal-error/modal-error';
-
 import TooLargeFileCard from '@components/modal-error/too-large-file-card/too-large-file-card';
+import { usePostUserAvatarMutation } from '@services/user-profile-api';
+import { RcFile } from 'rc-upload/lib/interface';
 
+type Upload<T> = {
+    file: T;
+};
 type UploadImagePropsType = {
     imgSrc: string;
     handlerError: () => void;
@@ -17,10 +19,8 @@ type UploadImagePropsType = {
 
 const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
     const [isModalError, setIsModalError] = useState(false);
-    const accessToken = useAppSelector(getAccessToken);
-    const dispatch = useAppDispatch();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
+    const [postUserAvatar] = usePostUserAvatarMutation();
     const defaultFiles = [
         {
             uid: '1',
@@ -31,30 +31,64 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
 
     const [fileList, setFileList] = useState<UploadFile[]>(imgSrc ? defaultFiles : []);
 
+    useEffect(() => {
+        if (imgSrc) {
+            setFileList([
+                {
+                    uid: '1',
+                    name: 'avatar.jpg',
+                    url: imgSrc,
+                },
+            ]);
+        }
+    }, [imgSrc]);
+
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
     });
 
+    const customRequest: UploadProps['customRequest'] = async (options) => {
+        const { file } = options;
+        const formData = new FormData();
+
+        formData.append('file', file);
+
+        await postUserAvatar({ file: formData })
+            .unwrap()
+            .then((data) => {
+                setFileList([
+                    {
+                        uid: 'done',
+                        name: (file as RcFile).name,
+                        status: 'done',
+                        url: `${baseUrlForImg}/${data.url}`,
+                    },
+                ]);
+            })
+            .catch((e) => {
+                if (e.status === StatusCode.CONFLICT) {
+                    setFileList([
+                        {
+                            uid: 'error',
+                            name: (file as RcFile).name,
+                            status: 'error',
+                        },
+                    ]);
+                    setIsModalError(true);
+                    handlerError();
+                }
+            });
+    };
     const handleOnChange = (e: UploadChangeParam<UploadFile>) => {
-        const uploadedFile = e.fileList[0];
-        if (uploadedFile?.status === 'error') {
-            if (
-                uploadedFile?.response?.statusCode === StatusCode.CONFLICT ||
-                uploadedFile.error?.status === StatusCode.CONFLICT
-            ) {
-                setIsModalError(true);
-                handlerError();
-            }
+        const file = e.file;
+        if (file.status === 'uploading' && file.size && file?.size > 5000000) {
             setFileList([
                 {
                     uid: 'error',
-                    name: uploadedFile.name,
+                    name: file.name,
                     status: 'error',
                 },
             ]);
-        } else {
-            dispatch(setUserInfo({ imgSrc: `${baseUrlForImg}/${uploadedFile?.response?.url}` }));
-            setFileList(e.fileList);
         }
     };
     const handleOnRemove = () => {
@@ -67,8 +101,8 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
     return (
         <>
             <Upload
-                action={`${baseUrl}/${Endpoint.UPLOAD_IMAGE}`}
-                headers={{ authorization: `Bearer ${accessToken}` }}
+                customRequest={customRequest}
+                accept='image/*'
                 fileList={fileList}
                 listType={isMobile ? 'picture' : 'picture-card'}
                 progress={{ strokeWidth: 4, showInfo: false }}

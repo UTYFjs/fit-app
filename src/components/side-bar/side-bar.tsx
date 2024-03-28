@@ -18,6 +18,7 @@ import { Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
+import { setExitAppUserInfo } from '@redux/profile-slice.ts';
 
 const { Sider } = Layout;
 
@@ -41,6 +42,7 @@ export const SideBar: React.FC = () => {
     const handleExit = () => {
         localStorage.removeItem('accessToken');
         dispatch(setExitApp());
+        dispatch(setExitAppUserInfo());
         navigate(Paths.LOGIN);
     };
 

@@ -3,7 +3,7 @@ import './card-tariff.css';
 import 'antd/dist/antd.css';
 import { Button, Card } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
-import { getUserInfo } from '@redux/user-slice';
+import { getUserInfo } from '@redux/profile-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';

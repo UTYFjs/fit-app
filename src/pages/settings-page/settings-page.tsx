@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import { ProfileDataTestId } from '@constants/data-test-id';
 import { useChangeTariffMutation, useGetTariffListQuery } from '@services/user-profile-api';
-import { getUserInfo, setExitApp } from '@redux/user-slice';
+import { setExitApp } from '@redux/user-slice';
+import { getUserInfo, setExitAppUserInfo } from '@redux/profile-slice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { cardTariffContent } from '@constants/tariff';
 import moment from 'moment';
@@ -56,6 +57,7 @@ const SettingsPage = () => {
     const handleCloseModal = () => {
         localStorage.removeItem('accessToken');
         dispatch(setExitApp());
+        dispatch(setExitAppUserInfo());
         setIsModalOpen(false);
     };
     const handleWatchReview = () => {

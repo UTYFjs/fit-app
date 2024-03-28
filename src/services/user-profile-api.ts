@@ -1,9 +1,9 @@
-import { Endpoint, HTTPMethod } from '@constants/api';
+import { Endpoint, HTTPMethod, baseUrlForImg } from '@constants/api';
 
 import { IChangeTariffRequest, IChangeUserInfo, ITariff, IUserInfo } from '../types/api';
 
 import { api } from './api';
-import { setUserInfo } from '@redux/user-slice';
+import { setUserInfo } from '@redux/profile-slice';
 
 export const userProfileApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -16,7 +16,7 @@ export const userProfileApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setUserInfo(data));
                 } catch {
-                    console.log('something went wrong with get User Info');
+                    () => {};
                 }
             },
         }),
@@ -31,7 +31,7 @@ export const userProfileApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setUserInfo(data));
                 } catch {
-                    console.log('something went wrong with update User Info');
+                    () => {};
                 }
             },
         }),
@@ -47,6 +47,22 @@ export const userProfileApi = api.injectEndpoints({
                 body: body,
             }),
         }),
+        postUserAvatar: builder.mutation<{ name: string; url: string }, { file: FormData }>({
+            query: (body) => ({
+                url: Endpoint.UPLOAD_IMAGE,
+                method: 'POST',
+                body: body.file,
+            }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    const url = `${baseUrlForImg}/${data.url}`;
+                    dispatch(setUserInfo({ imgSrc: url }));
+                } catch {
+                    () => {};
+                }
+            },
+        }),
     }),
 });
 
@@ -57,4 +73,5 @@ export const {
     useGetTariffListQuery,
     useUpdateUserInfoMutation,
     useChangeTariffMutation,
+    usePostUserAvatarMutation,
 } = userProfileApi;

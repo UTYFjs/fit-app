@@ -21,7 +21,11 @@ export const PersonalInfoFieldset = ({
                 Личная информация
             </Typography.Title>
             <div className='profile__personal-wrapper'>
-                <Form.Item valuePropName='fileList' data-test-id={ProfileDataTestId.PROFILE_AVATAR}>
+                <Form.Item
+                    name='avatar'
+                    valuePropName='fileList'
+                    data-test-id={ProfileDataTestId.PROFILE_AVATAR}
+                >
                     <UploadImage imgSrc={imgSrc} handlerError={handleUploadImageError} />
                 </Form.Item>
                 <div className='profile-page__item-wrapper'>

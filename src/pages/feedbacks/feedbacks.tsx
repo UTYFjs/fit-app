@@ -11,6 +11,7 @@ import { useGetFeedbacksQuery } from '@services/feedback-api';
 import { Button, Card, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
+import { setExitAppUserInfo } from '@redux/profile-slice';
 
 const Feedbacks = () => {
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
@@ -24,6 +25,7 @@ const Feedbacks = () => {
         if (error) {
             if ('status' in error && error.status == StatusCode.FORBIDDEN) {
                 dispatch(setExitApp());
+                dispatch(setExitAppUserInfo());
                 localStorage.removeItem('accessToken');
                 navigate(Paths.LOGIN);
             }
