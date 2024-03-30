@@ -7,19 +7,29 @@ import 'antd/dist/antd.css';
 import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
+import { useGetUserInfoQuery } from '@services/user-profile-api';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
+    const { data } = useGetUserInfoQuery();
     return (
         <>
             <SideBar />
-            <Layout className='site-layout'>
-                <HeaderMy />
-                <Content className='main'>
-                    <Outlet />
-                </Content>
-                {pathname === Paths.MAIN && <FooterMy />}
-            </Layout>
+            {data && (
+                <Layout
+                    className={
+                        pathname === Paths.FEEDBACKS
+                            ? 'site-layout site-layout_feedbacks'
+                            : 'site-layout'
+                    }
+                >
+                    {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
+                    <Content className='main'>
+                        <Outlet />
+                    </Content>
+                    {pathname === Paths.MAIN && <FooterMy />}
+                </Layout>
+            )}
         </>
     );
 };

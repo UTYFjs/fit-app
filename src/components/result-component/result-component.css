@@ -1,9 +1,10 @@
 .result-card{
   padding: var(--p-null);
 }
+
 .ant-result-title{
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l3);
   line-height: var(--line-height);
   text-align: center;
@@ -19,9 +20,11 @@
   text-align: center;
   color: var(--character-light-secondary-45);
 }
+
 .ant-result-extra {
   margin: var(--m-zero);
 }
+
 .result-card .ant-btn.ant-btn-primary {
   border: 1px solid var(--primary-light-6);
   border-radius: 2px;
@@ -29,7 +32,7 @@
   margin-top: var(--m-5xl);
   height: 40px;
   width: 100%;
-  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, .04);
   background: var(--primary-light-6);
 }
 

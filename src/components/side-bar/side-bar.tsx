@@ -12,18 +12,19 @@ import {
 } from '@ant-design/icons';
 import { Paths } from '@constants/api.ts';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
-import { setAccessToken } from '@redux/user-slice.ts';
+import { setExitApp } from '@redux/user-slice.ts';
 import { getCssVar } from '@utils/get-css-var.ts';
 import { Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
+import { setExitAppUserInfo } from '@redux/profile-slice.ts';
 
 const { Sider } = Layout;
 
 export const SideBar: React.FC = () => {
-    const [collapsed, setCollapsed] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [collapsed, setCollapsed] = useState(isMobile);
     const { pathname } = useLocation();
     const [currentMenuItem, setCurrentMenuItem] = useState(pathname);
     const navigate = useNavigate();
@@ -35,11 +36,13 @@ export const SideBar: React.FC = () => {
 
     window.addEventListener('resize', () => {
         setIsMobile(window.innerWidth < 768);
+        setCollapsed(window.innerWidth < 768);
     });
 
     const handleExit = () => {
         localStorage.removeItem('accessToken');
-        dispatch(setAccessToken(''));
+        dispatch(setExitApp());
+        dispatch(setExitAppUserInfo());
         navigate(Paths.LOGIN);
     };
 

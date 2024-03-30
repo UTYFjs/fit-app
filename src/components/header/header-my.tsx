@@ -1,48 +1,92 @@
 import styles from './header-my.module.css';
 
 import 'antd/dist/antd.css';
-import { SettingOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, SettingOutlined } from '@ant-design/icons';
 import { Paths } from '@constants/api';
 import { Typography, Layout, Breadcrumb, Button } from 'antd';
 import classNames from 'classnames';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ProfileDataTestId } from '@constants/data-test-id';
+import { useLazyGetTariffListQuery } from '@services/user-profile-api';
 
 const { Header } = Layout;
 const { Title } = Typography;
+
+const TitleLevel4 = {
+    [Paths.PROFILE]: 'Профиль',
+    [Paths.SETTINGS]: 'Настройки',
+};
 export const HeaderMy: React.FC = () => {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+
+    const [getTariffList] = useLazyGetTariffListQuery();
+
+    const isBreadcrumb = [Paths.MAIN, Paths.CALENDAR, Paths.FEEDBACKS].includes(pathname as Paths);
+    const isTitleLevel4 = [Paths.PROFILE, Paths.SETTINGS].includes(pathname as Paths);
+    const isSettings = [Paths.CALENDAR, Paths.PROFILE].includes(pathname as Paths);
 
     const headerSecondClass = {
         [Paths.MAIN]: '',
         [Paths.FEEDBACKS]: 'header_feedbacks',
         [Paths.CALENDAR]: 'header_calendar',
+        [Paths.SETTINGS]: 'header_settings',
+        [Paths.PROFILE]: 'header_profile',
     };
     const headerClass = classNames(
         styles.header,
         styles[headerSecondClass[pathname as keyof typeof headerSecondClass]] || '',
     );
+
+    const handleGoBack = () => navigate(-1);
+    const handleGoToSettings = () => {
+        getTariffList();
+        navigate(Paths.SETTINGS);
+    };
     return (
         <Header className={headerClass}>
-            <Breadcrumb className={styles.breadcrumb}>
-                <Breadcrumb.Item>
-                    <Link to={Paths.MAIN}>Главная </Link>
-                </Breadcrumb.Item>
-                {pathname === Paths.FEEDBACKS && (
+            {isBreadcrumb && (
+                <Breadcrumb className={styles.breadcrumb}>
                     <Breadcrumb.Item>
-                        <Link to={Paths.FEEDBACKS}>Отзывы пользователей </Link>
+                        <Link to={Paths.MAIN}>Главная </Link>
                     </Breadcrumb.Item>
-                )}
-                {pathname === Paths.CALENDAR && (
-                    <Breadcrumb.Item>
-                        <Link to={Paths.CALENDAR}>Календарь </Link>
-                    </Breadcrumb.Item>
-                )}
-            </Breadcrumb>
-            {pathname === Paths.CALENDAR && (
+                    {pathname === Paths.FEEDBACKS && (
+                        <Breadcrumb.Item>
+                            <Link to={Paths.FEEDBACKS}>Отзывы пользователей </Link>
+                        </Breadcrumb.Item>
+                    )}
+                    {pathname === Paths.CALENDAR && (
+                        <Breadcrumb.Item>
+                            <Link to={Paths.CALENDAR}>Календарь </Link>
+                        </Breadcrumb.Item>
+                    )}
+                </Breadcrumb>
+            )}
+
+            {isTitleLevel4 && (
+                <div className={styles['title4__wrapper']}>
+                    {pathname === Paths.SETTINGS && (
+                        <Button
+                            data-test-id={ProfileDataTestId.SETTINGS_BACK}
+                            type='text'
+                            size='small'
+                            style={{ width: 14, height: 14 }}
+                            icon={<ArrowLeftOutlined style={{ width: 14, height: 14 }} />}
+                            onClick={handleGoBack}
+                        />
+                    )}
+                    <Title className={styles['title_header4']} level={4}>
+                        {TitleLevel4[pathname as keyof typeof TitleLevel4] || 'Заголовок'}
+                    </Title>
+                </div>
+            )}
+            {isSettings && (
                 <Button
                     type={'text'}
                     icon={<SettingOutlined />}
                     className={styles['button_setting-calendar']}
+                    onClick={handleGoToSettings}
+                    data-test-id={ProfileDataTestId.HEADER_SETTINGS}
                 >
                     <span className={styles['button_setting_text']}> Настройки </span>
                 </Button>
@@ -59,6 +103,8 @@ export const HeaderMy: React.FC = () => {
                         type={'text'}
                         icon={<SettingOutlined />}
                         className={styles['button_setting']}
+                        onClick={handleGoToSettings}
+                        data-test-id={ProfileDataTestId.HEADER_SETTINGS}
                     >
                         Настройки
                     </Button>

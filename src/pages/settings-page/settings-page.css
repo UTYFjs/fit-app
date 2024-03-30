@@ -1,0 +1,73 @@
+.settings-page_wrapper{
+  background: var(--neutral-gray-3);
+  margin: -24px;
+  height: 100%; 
+
+}
+
+.settings-page{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl);
+  background: var(--character-light-primary-inverse);
+  padding: var(--p-5xl);
+  margin: 24px 24px 42px;
+  height: 83vh;
+
+}
+
+.settings__tariff .settings__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+  margin-bottom: var(--m-zero);
+}
+
+.settings__tariff{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.settings__card-tariff-wrapper{
+  display: flex;
+  gap: var(--gap-2xlm);
+}
+
+.settings__btn-wrapper{
+  display: flex;
+  padding-top: 72px;
+
+}
+
+@media (max-width: 576px) {
+
+  .settings-page_wrapper{
+    margin: -24px -16px;
+  }
+
+  .settings-page{
+    gap: var(--p-3xl);
+    padding: 16px 24px;
+    margin: 24px 0;
+    height: auto;
+
+
+  }
+
+  .settings__card-tariff-wrapper{
+    gap: var(--gap-s);
+    flex-direction: column;
+  }
+
+  .settings__btn-wrapper{
+    
+    flex-direction: column;
+    gap: var(--gap);
+    padding-top: var(--p-zero);
+
+  }
+
+}

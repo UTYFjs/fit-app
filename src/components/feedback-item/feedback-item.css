@@ -3,13 +3,14 @@
   min-height: 128px;
   padding: 0 16px;
   width: 100%;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .15);
   background: var(--character-light-primary-inverse);
 }
 
 .feedback-item .ant-avatar{
   margin: 0 66px 12px;
 }
+
 .feedback-item__name-owner{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -29,6 +30,7 @@
   
   height: var(--h-2xs);
 }
+
 .feedback-item .ant-comment-content-author-time {
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -36,7 +38,7 @@
   letter-spacing: -1px;
   line-height: var(--line-height);
   text-align: right;
-  color: var(--character-light-disable-25)
+  color: var(--character-light-disable-25);
 }
 
 
@@ -49,16 +51,19 @@
 }
 
 @media  screen and (max-width: 768px) {
+
   .feedback-item .ant-comment-inner{
     flex-direction: column;
   }
 
   .feedback-item .ant-comment-avatar{
-    display:flex;
+    display: flex;
   }
+
   .feedback-item .ant-avatar{
     margin: 0 16px 12px 0;
   }
+
   .feedback-item .ant-comment-content-author{
 
     margin-bottom: var(--m-xl);

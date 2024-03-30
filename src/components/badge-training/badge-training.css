@@ -5,6 +5,7 @@
   flex-wrap: nowrap;
   overflow: hidden; 
 }
+
 .badge__traning-item .ant-badge{
   display: flex;
   align-items: center;
@@ -13,18 +14,22 @@
   flex-wrap: nowrap;
   overflow: hidden;
 }
+
 .badge__traning-item_small{
   height: var(--h-2xs); 
   line-height: 16px;
 }
+
 .badge__traning-item_big{
   height: var(--h-m);
   line-height: 22px;
 }
+
 .badge__training-item_icon{
   line-height: 18px;
   color: var(--primary-light-6);
 }
+
 .badge__traning-item_small .ant-badge-status-text{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -43,7 +48,7 @@
 
 .badge__training-item_gray .ant-badge-status-text{
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
@@ -54,6 +59,7 @@
 }
 
 @media (max-width: 992px){
+
   .badge__traning-item .ant-badge-status-text{
     margin-left: 6px;
   }

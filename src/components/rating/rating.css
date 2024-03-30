@@ -1,6 +1,7 @@
 .feedback__rating .ant-rate-star span{
   margin-bottom: 3px;
 }
+
 .feedback__rating .ant-rate-star{
   height: var(--h-2xs);
   margin-right: 6px;

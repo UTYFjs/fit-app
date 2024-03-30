@@ -1,19 +1,19 @@
 .form_login {
-  display:flex;
+  display: flex;
   flex-direction: column;
   padding-top: var(--p-9xl);
 }
 
 .form-item_check-area {
-  display:flex;
+  display: flex;
   justify-content: space-between;
   margin-top: var(--m-5xl);
   margin-bottom: var(--m-5xl);
 }
 
 div[class='ant-form-item'] span[class='ant-input-group-addon']{
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: var(--p-m);
+  padding-right: var(--p-m);
   letter-spacing: .3px;
 }
 
@@ -34,8 +34,9 @@ div[class='ant-form-item'] span[class='ant-input-group-addon']{
   line-height: var(--line-height);
   font-size: var(--font-size);
   line-height: var(--line-height);
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(0, 0, 0, .85);
 }
+
 .login-form-forgot{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -49,6 +50,7 @@ div[class='ant-form-item'] span[class='ant-input-group-addon']{
 
   margin-bottom: -20px;
 }
+
 .login-form-button, .login-form-button_google{
   letter-spacing: .3px;
 }
@@ -63,12 +65,15 @@ div[class='ant-form-item'] span[class='ant-input-group-addon']{
   .password-repeat{
     padding-bottom: var(--p-7xl);
   }
+
   .help{
     margin-bottom: var(--m-m);
   }
+
   .login-form-forgot{
     font-size: var(--font-size);
   }
+
   .login-form-button, .login-form-button_google{
     font-size: var(--font-size);
     letter-spacing: .4px;

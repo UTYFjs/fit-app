@@ -1,5 +1,5 @@
 .app {
   max-width: 1440px;
   min-height: 100vh;
-  background: no-repeat center/cover url('/public/Main_page_light.png');
+  background: no-repeat center/cover url('/Main_page_light.png');
 }

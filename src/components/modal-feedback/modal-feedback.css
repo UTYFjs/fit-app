@@ -10,18 +10,19 @@
 
 .title_modal{
   font-family: var(--font-family);
-  line-height: var(--font-weight-m);
+  font-weight: var(--font-weight-m);
   font-size: var(--font-size-l);
   line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
 
 .ant-modal-footer{
-  padding: 10px 24px
+  padding: 10px 24px;
 }
 
 @media  screen and (max-width: 768px) {
+
   .button_modal-send{
-    width: 100%
+    width: 100%;
   }
 }

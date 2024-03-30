@@ -3,82 +3,36 @@ import FeedbackItem from '@components/feedback-item/feedback-item';
 import './feedbacks.css';
 import { useEffect, useState } from 'react';
 
-import ModalFeedback from '@components/modal-feedback/modal-feedback';
-import ModalResult from '@components/modal-result/modal-result';
 import ModalServerError from '@components/modal-server-error/modal-server-error';
 import { Paths, StatusCode } from '@constants/api';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setAccessToken } from '@redux/user-slice';
-import { useAddFeedbackMutation, useGetFeedbacksQuery } from '@services/feedback-api';
+import { setExitApp } from '@redux/user-slice';
+import { useGetFeedbacksQuery } from '@services/feedback-api';
 import { Button, Card, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
-import { IRatingStar } from '../../types/api';
+import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
+import { setExitAppUserInfo } from '@redux/profile-slice';
 
 const Feedbacks = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isModalResultOpen, setIsModalResultOpen] = useState(false);
-    const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(
-        null,
-    );
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
-
-    const [ratingValue, setRatingValue] = useState<IRatingStar>(3);
-    const [textFeedbackValue, setTextFeedBackValue] = useState('');
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const { data, error, isError, refetch } = useGetFeedbacksQuery('', {});
 
-    const [addFeedback, { isError: isErrorAddFeedback, isSuccess: isSuccessAddFeedback }] =
-        useAddFeedbackMutation();
-
     useEffect(() => {
-        if (error) {
-            if ('status' in error && error.status == StatusCode.FORBIDDEN) {
-                dispatch(setAccessToken(''));
-                localStorage.removeItem('accessToken');
-                navigate(Paths.LOGIN);
-            }
+        if (error && 'status' in error && error.status == StatusCode.FORBIDDEN) {
+            dispatch(setExitApp());
+            dispatch(setExitAppUserInfo());
+            localStorage.removeItem('accessToken');
+            navigate(Paths.LOGIN);
         }
     }, [dispatch, error, navigate]);
 
-    useEffect(() => {
-        setIsModalOpen(false);
-        setModalResultType('errorReview');
-        setIsModalResultOpen(true);
-    }, [isErrorAddFeedback]);
-
-    useEffect(() => {
-        setIsModalOpen(false);
-        setModalResultType('successReview');
-        setIsModalResultOpen(true);
-        refetch();
-    }, [isSuccessAddFeedback, refetch]);
-
     const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
 
-    const handleSendFeedBack = () => {
-        addFeedback({ message: textFeedbackValue, rating: ratingValue });
-    };
-    const handleSuccessFeedback = () => {
-        setIsModalResultOpen(false);
-        setModalResultType(null);
-    };
-    const handleRetryErrorSendFeedback = () => {
-        setIsModalResultOpen(false);
-        setModalResultType(null);
-        setIsModalOpen(true);
-    };
-    const handleCancelErrorFedback = () => {
-        setIsModalOpen(false);
-        setIsModalResultOpen(false);
-        setModalResultType(null);
-    };
-    const handleShowAllFeedbacks = () => {
-        setIsAllFeedbacks(!isAllFeedbacks);
-    };
+    const handleShowAllFeedbacks = () => setIsAllFeedbacks(!isAllFeedbacks);
 
     return (
         <>
@@ -91,17 +45,7 @@ const Feedbacks = () => {
                         renderItem={(item) => <FeedbackItem data={item} />}
                     />
                     <div className='feedback-action'>
-                        <Button
-                            type='primary'
-                            size='large'
-                            onClick={() => {
-                                setIsModalOpen(true);
-                            }}
-                            data-test-id='write-review'
-                        >
-                            {' '}
-                            Написать отзыв{' '}
-                        </Button>
+                        <ButtonModalFeedback dataTestIdBtn='write-review' refetch={refetch} />
                         <Button
                             type='link'
                             size='large'
@@ -127,38 +71,9 @@ const Feedbacks = () => {
                             помогите им сделать правильный выбор.
                         </p>
                     </Card>
-                    <Button
-                        className='feedback-empty__action'
-                        type='primary'
-                        size='large'
-                        onClick={() => {
-                            setIsModalOpen(true);
-                        }}
-                        data-test-id='write-review'
-                    >
-                        Написать отзыв
-                    </Button>
+                    <ButtonModalFeedback dataTestIdBtn='write-review' refetch={refetch} />
                 </div>
             )}
-            <ModalFeedback
-                isOpen={isModalOpen}
-                setIsOpen={setIsModalOpen}
-                setTextFeedBackValue={setTextFeedBackValue}
-                setRatingValue={setRatingValue}
-                handleSubmitReview={handleSendFeedBack}
-            />
-
-            <ModalResult
-                isOpen={isModalResultOpen}
-                typeContent={modalResultType}
-                handlePrimeButton={
-                    modalResultType === 'errorReview'
-                        ? handleRetryErrorSendFeedback
-                        : handleSuccessFeedback
-                }
-                handleSecondButton={handleCancelErrorFedback}
-            />
-
             {isError && <ModalServerError isOpen={isError} />}
         </>
     );

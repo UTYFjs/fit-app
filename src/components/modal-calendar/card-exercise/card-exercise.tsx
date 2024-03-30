@@ -73,18 +73,16 @@ const CardExercise = ({
         onClose();
     };
 
-    const handleAddNewExercise = () => {
+    const handleAddNewExercise = () =>
         setNewExercises((state) => [...state, { ...defaultExercise }]);
-    };
+
     const handleAddExercise = () => {
         if (!newExercises.length) {
             setNewExercises([{ ...defaultExercise }]);
         }
         setIsDrawerOpen(true);
     };
-    const handleEditExercise = () => {
-        setIsDrawerOpen(true);
-    };
+    const handleEditExercise = () => setIsDrawerOpen(true);
 
     const onCloseDrawer = () => {
         setNewExercises((state) => state.filter((item) => item.name !== ''));

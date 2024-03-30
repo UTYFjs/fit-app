@@ -1,7 +1,6 @@
+import InDeveloping from '@pages/in-developing-page/in-developing-page';
 import './achievment-page.css';
 
-const AchievmentPage = () => {
-    return <div>here should be ACHIEVMENT page</div>;
-};
+const AchievmentPage = () => <InDeveloping />;
 
 export default AchievmentPage;

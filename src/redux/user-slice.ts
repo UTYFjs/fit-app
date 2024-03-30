@@ -23,6 +23,10 @@ const userSlice = createSlice({
         setAccessToken: (state, { payload }: PayloadAction<string>) => {
             state.accessToken = payload;
         },
+        setExitApp: () => ({
+            ...initialState,
+            accessToken: '',
+        }),
         setUserValues: (state, { payload }: PayloadAction<IUserValues>) => {
             (state.email = payload.email),
                 (state.password = payload.password),
@@ -31,6 +35,7 @@ const userSlice = createSlice({
     },
 });
 
-export const { setAccessToken, setUserValues } = userSlice.actions;
+export const { setAccessToken, setUserValues, setExitApp } = userSlice.actions;
 export default userSlice.reducer;
-export const accessTokenState = ({ user }: RootState) => user.accessToken;
+export const getAccessToken = ({ user }: RootState) => user.accessToken;
+export const getUserEmail = ({ user }: RootState) => user.email;

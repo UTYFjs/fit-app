@@ -1,5 +1,7 @@
 export const baseUrl = 'https://marathon-api.clevertec.ru';
 
+export const baseUrlForImg = 'https://training-api.clevertec.ru';
+
 export enum HTTPMethod {
     DELETE = 'DELETE',
     GET = 'GET',
@@ -8,7 +10,7 @@ export enum HTTPMethod {
     PUT = 'PUT',
 }
 
-export enum Endpoint {
+export const enum Endpoint {
     REGISTRATION = 'auth/registration ',
     LOGIN = 'auth/login',
     CHECK_EMAIL = 'auth/check-email ',
@@ -18,6 +20,12 @@ export enum Endpoint {
     GOOGLE_AUTH = 'auth/google',
     TRAINING = 'training',
     TRAINING_LIST = 'catalogs/training-list',
+    USER_ME = 'user/me',
+    USER = 'user',
+    TARIFF = 'tariff',
+    TARIFF_CHECKOUT = 'tariff/checkout',
+    UPLOAD_IMAGE = 'upload-image',
+    TARIFF_LIST = 'catalogs/tariff-list',
 }
 export enum Paths {
     MAIN = '/main',
@@ -34,6 +42,7 @@ export enum Paths {
     ERROR_CHECK_EMAIL_NO_EXIST = '/result/error-check-email-no-exist',
     ERROR_CHECK_EMAIL = '/result/error-check-email',
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
+    SETTINGS = '/settings',
     SUCCESS = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
     TRAINING = '/training',
@@ -41,7 +50,7 @@ export enum Paths {
     ACHIEVEMENT = '/achievement',
 }
 
-export enum StatusCode {
+export const enum StatusCode {
     OK = 200,
     CREATED = 201,
     NO_CONTENT = 204,
@@ -50,4 +59,5 @@ export enum StatusCode {
     FORBIDDEN = 403,
     METHOD_NOT_ALLOWED = 405,
     SERVER_ERROR = 500,
+    CONFLICT = 409,
 }

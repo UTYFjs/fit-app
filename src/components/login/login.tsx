@@ -5,7 +5,7 @@ import styles from './login.module.css';
 import 'antd/dist/antd.css';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Paths, baseUrl } from '@constants/api';
-import { messageValidation, regExpEmail } from '@constants/validation';
+import { messageValidation, regExpEmail, validationRulesEmail } from '@constants/validation';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setAccessToken, setUserValues } from '@redux/user-slice';
 import { useCheckEmailMutation, useLoginMutation } from '@services/auth-api';
@@ -90,14 +90,7 @@ export const Login: React.FC = () => {
             initialValues={{ remember: false }}
             onFinish={onFinish}
         >
-            <Form.Item
-                name='email'
-                rules={[
-                    { required: true, message: '' },
-                    { type: 'email', message: '' },
-                ]}
-                style={{ marginBottom: 32 }}
-            >
+            <Form.Item name='email' rules={validationRulesEmail} style={{ marginBottom: 32 }}>
                 <Input addonBefore='e-mail' size='large' data-test-id='login-email' />
             </Form.Item>
 

@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 import './main-page.css';
 import ModalServerError from '@components/modal-server-error/modal-server-error';
 import { Paths } from '@constants/api';
-import { CalendarDataTeatId } from '@constants/data-test-id';
+import { CalendarDataTeatId, ProfileDataTestId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,14 +38,17 @@ export const MainPage: React.FC = () => {
             icon: <IdcardOutlined />,
             label: 'Профиль',
             pathTo: Paths.PROFILE,
+            dataTestId: ProfileDataTestId.MENU_BUTTON_PRIFILE,
         },
     ];
     const handleToCalendar = async (pathTo: Paths) => {
         try {
-            await getTrainings().unwrap();
+            if (pathTo === Paths.CALENDAR) {
+                await getTrainings().unwrap();
+            }
             navigate(pathTo);
-        } catch (e) {
-            console.error('error getTrainings from Main Page', e);
+        } catch {
+            () => {};
         }
     };
     return (

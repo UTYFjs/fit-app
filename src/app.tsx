@@ -16,6 +16,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from './hooks';
 import { MainPage } from './pages';
+import SettingsPage from '@pages/settings-page/settings-page';
+import NotFound from '@pages/not-found/not-found';
 
 const App = () => {
     const { previousLocations } = useAppSelector((state) => state.router);
@@ -37,6 +39,8 @@ const App = () => {
                             <Route path={Paths.TRAINING} element={<TrainingPage />} />
                             <Route path={Paths.ACHIEVEMENT} element={<AchievmentPage />} />
                             <Route path={Paths.PROFILE} element={<ProfilePage />} />
+                            <Route path={Paths.SETTINGS} element={<SettingsPage />} />
+                            <Route path='*' element={<NotFound />} />
                         </Route>
                     </Route>
                     <Route
