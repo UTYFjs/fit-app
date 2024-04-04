@@ -1,0 +1,39 @@
+.trainings__marathon-title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
+  color: var(--primary-light-9);
+  text-align: center;
+  margin-top: 306px;
+  margin-bottom: 48px;
+}
+
+.trainings__subtitle{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-secondary-45);
+  max-width: 300px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 1280px) and (min-width: 576px){
+
+  .trainings__marathon-title{
+    max-width: 240px;
+    margin: 381px auto 48px;
+  }
+}      
+
+@media (max-width: 576px){
+
+  .trainings__marathon-title{
+    max-width: 240px;
+    margin: 110px auto 48px;
+  }
+}

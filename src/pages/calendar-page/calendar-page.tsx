@@ -41,6 +41,7 @@ const CalendarPage = () => {
     useLayoutEffect(() => {
         getTrainingList();
     }, [dataTrainings, getTrainingList]);
+
     useEffect(() => {
         if (IsErrorTrainingsList) {
             setIsOpenModalError(true);

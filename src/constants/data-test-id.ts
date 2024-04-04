@@ -49,3 +49,18 @@ export const enum ProfileDataTestId {
     NEW_REVIEW_SUBMIT_BUTTON = 'new-review-submit-button',
     TARIFF_10 = 'tariff-10',
 }
+
+export const enum TrainingDataTestId {
+    MY_TRAININGS_TABLE = 'my-trainings-table',
+    CREATE_NEW_TRAINING_BUTTON = 'create-new-training-button',
+    UPDATE_MY_TRAINING_TABLE_ICON_INDEX = 'update-my-training-table-icon',
+    CREATE_TRAINING_SUCCESS_ALERT = 'create-training-success-alert',
+    NOTIFICATION_ABOUT_JOINT_TRAINING = 'notification-about-joint-training',
+    JOINT_TRAINING_CARDS_INDEX = 'joint-training-cards',
+    JOINT_TRAINING_REVIEW_CARD = 'joint-training-review-card',
+    MODAL_DRAWER_RIGHT_DATE_PICKER = 'modal-drawer-right-date-picker',
+    MODAL_DRAWER_RIGHT_CHECKBOX_PERIOD = 'modal-drawer-right-checkbox-period',
+    MODAL_DRAWER_RIGHT_SELECT_PERIOD = 'modal-drawer-right-select-period',
+    SEARCH_INPUT = 'search-input',
+    PARTNER_MODAL = 'partner-modal',
+}

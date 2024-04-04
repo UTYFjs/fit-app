@@ -86,6 +86,9 @@
   --font-family: 'Inter', sans-serif;
   --second-family: 'Roboto', sans-serif;
   --boder-radius-5xs: 2px;
+  --border-radius-4xs: 4px;
+  --boder-radius-3xs: 6px;
+  --border-radius-2xs: 8px;
   --font-size-l4: 38px;
   --font-size-l3: 24px;
   --font-size-l2: 20px;

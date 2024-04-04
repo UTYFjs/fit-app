@@ -31,8 +31,16 @@
   max-height: 70px;
 }
 
+.header.header_training{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 96px;
+  padding-bottom: var(--p-8xl);
+}
 
-.header.header_calendar .button_setting-calendar{
+
+.header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar {
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size);
@@ -120,6 +128,10 @@
     box-shadow: none;
   }
 
+  .header.header_training{
+    min-height: 96px;
+  }
+
   .header .title_header{
     line-height: var(--line-height);
     font-size: var(--font-size-l3);
@@ -167,6 +179,11 @@
     min-height: 82px;
   }
 
+  .header.header_training{
+    max-height: 82px;
+    padding-bottom: var(--p-5xl);
+  }
+
   .header .title_header{
     line-height: var(--line-height);
     font-size: var(--font-size-l2);
@@ -191,7 +208,7 @@
     display: none;
   }
 
-  .header.header_calendar .button_setting-calendar{
+  .header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar{
     width: 32px;
     height: 32px;
   }

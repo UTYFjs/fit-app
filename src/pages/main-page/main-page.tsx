@@ -41,11 +41,14 @@ export const MainPage: React.FC = () => {
             dataTestId: ProfileDataTestId.MENU_BUTTON_PRIFILE,
         },
     ];
+
+    const handleToTraining = async (pathTo: Paths) => {};
     const handleToCalendar = async (pathTo: Paths) => {
         try {
-            if (pathTo === Paths.CALENDAR) {
+            if (pathTo === Paths.CALENDAR || pathTo === Paths.TRAINING) {
                 await getTrainings().unwrap();
             }
+
             navigate(pathTo);
         } catch {
             () => {};

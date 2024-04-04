@@ -1,0 +1,29 @@
+.my-trainings{
+  display: flex;
+  flex-direction: column;  
+  gap: 20px;
+}
+
+.trainings-table__title_empty{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: (--line-height);
+  text-align: center;
+  color: var(--character-light-title-85);
+  margin-top: 168px;
+  padding: 56px 130px;
+}
+
+.trainings__btn-create{
+  align-self: center;
+}
+
+
+@media (max-width: 576px){
+
+  .trainings-table__title_empty{
+    padding: 56px 12px;
+  }
+
+}
