@@ -5,6 +5,7 @@ import {
     ResTrainingType,
     TrainingListType,
     TransformResTrainingType,
+    UserJointTrainingListType,
 } from '../types/training-types';
 
 import { api } from './api';
@@ -16,6 +17,7 @@ export const trainingApi = api.injectEndpoints({
                 url: Endpoint.TRAINING,
             }),
             transformResponse(baseQueryReturnValue: ResTrainingType[]) {
+                console.log('traininglist', baseQueryReturnValue);
                 const response = baseQueryReturnValue.reduce(
                     (acc: TransformResTrainingType, item) => {
                         const key = new Date(item.date).toISOString().split('T')[0];
@@ -60,6 +62,36 @@ export const trainingApi = api.injectEndpoints({
                 url: Endpoint.TRAINING_LIST,
             }),
         }),
+        getUserJointTrainingList: builder.query<
+            UserJointTrainingListType[],
+            { trainingType?: string; status?: string }
+        >({
+            query: (body) => ({
+                url: Endpoint.USER_JOINT_TRAINING_LIST,
+                params: body,
+            }),
+            onQueryStarted: async (_, { queryFulfilled }) => {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log('данные пользователей', data);
+                } catch {
+                    () => {};
+                }
+            },
+        }),
+        getTrainingPals: builder.query<UserJointTrainingListType[], void>({
+            query: () => ({
+                url: Endpoint.TRAINING_PALS,
+            }),
+            onQueryStarted: async (_, { queryFulfilled }) => {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log('данные совместных пользователей', data);
+                } catch {
+                    () => {};
+                }
+            },
+        }),
     }),
 });
 
@@ -71,4 +103,5 @@ export const {
     useDeleteTrainingMutation,
     useGetTrainingListQuery,
     useLazyGetTrainingListQuery,
+    useLazyGetUserJointTrainingListQuery,
 } = trainingApi;

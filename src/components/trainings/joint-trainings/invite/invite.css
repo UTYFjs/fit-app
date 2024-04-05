@@ -1,0 +1,86 @@
+.invite-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 16px 24px 24px;
+  background: var(--character-light-table-header);
+}
+
+.invite__message-counts{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+}
+
+
+.invite__card-item{
+  display: flex;  
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 2px 16px 16px;
+  padding: 20px 20px 20px 12px;
+  height: 140px;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+  background: var(--character-light-primary-inverse);
+}
+
+.invite-card__avatar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-s);
+  min-width: 174px;
+}
+
+.invite-card__message{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+}
+
+.invite-card__date{
+  font-family: var(--font-family);
+  font-weight: var(--fint-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);  
+  color: var(--character-light-disable-25);
+}
+
+.invite-card__message-title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-l);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
+  color: var(--primary-light-9);
+  margin-bottom: 0;
+}
+
+.invite-card__details{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--primary-light-6);
+
+}
+
+.invite-card__actions{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding-left: var(--p-xl);
+
+}
+
+.invite__btn-all-invites{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--primary-light-6);
+  width: fit-content;
+}
