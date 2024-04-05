@@ -5,7 +5,7 @@ import { PartnersList } from './partners-list/partners-list';
 import { useLazyGetUserJointTrainingListQuery } from '@services/training-api';
 import { Invite } from './invite/invite';
 
-export const JointTrainings: React.FC = () => {
+export const JointTrainings = () => {
     const [
         getUserJointTrainingList,
         { data: dataUserJointTrainingList, isError: isErrorUserJointTrainingList },

@@ -1,6 +1,6 @@
 import './marathons.css';
 
-export const Marathons: React.FC = () => {
+export const Marathons = () => {
     return (
         <>
             <p className='trainings__marathon-title'>

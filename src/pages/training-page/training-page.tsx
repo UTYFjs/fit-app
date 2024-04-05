@@ -38,6 +38,7 @@ const TrainingPage = () => {
         setIsOpenModalError(false);
         getTrainingList();
     };
+
     const OnChangeTabs = (key: string) => {
         console.log(key, tabItems[2].key);
         setIsMarathon(key === tabItems[2].key ? true : false);

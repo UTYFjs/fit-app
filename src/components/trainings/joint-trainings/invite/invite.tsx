@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './invite.css';
-import { Avatar, Button, Comment } from 'antd';
+import { Avatar, Button } from 'antd';
 import { DownOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
 
 export const Invite = () => {

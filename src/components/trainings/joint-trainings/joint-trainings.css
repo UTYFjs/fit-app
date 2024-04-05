@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: var(--gap-2xl);
   padding-top: var(--p-5xl);
+  max-height: 70vh;
+  overflow: auto;
 }
 
 .joint-training__info{
@@ -28,7 +30,6 @@
   text-align: center;
   color: var(--character-light-secondary-45);
   margin-bottom: var(--m-5xl);
-
 }
 
 
@@ -50,7 +51,6 @@
 
 .joint-training__button-group__item:first-child{
   color: var(--primary-light-6);
-
 }
 
 .joint-training__button-group__item:last-child{
@@ -63,8 +63,6 @@
 }
 
 
-
-
 @media (max-width: 1280px) and (min-width: 576px){
 
 
@@ -72,4 +70,22 @@
 
 @media (max-width: 576px){
 
+  .joint-training-wrapper{
+    margin-right: var(--m-xs);
+    margin-left: var(--m-xs);
+  }
+
+  .joint-training__info{
+    padding: 32px 8px 0;
+  }
+
+  .joint-training__button-group{
+    flex-direction: column;
+    height: auto;
+    gap: var(--gap);
+  }
+
+  .joint-training__button-group__item{
+    width: 100%;
+  }
 }

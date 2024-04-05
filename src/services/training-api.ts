@@ -17,7 +17,6 @@ export const trainingApi = api.injectEndpoints({
                 url: Endpoint.TRAINING,
             }),
             transformResponse(baseQueryReturnValue: ResTrainingType[]) {
-                console.log('traininglist', baseQueryReturnValue);
                 const response = baseQueryReturnValue.reduce(
                     (acc: TransformResTrainingType, item) => {
                         const key = new Date(item.date).toISOString().split('T')[0];

@@ -23,7 +23,7 @@
   border-radius: 2px 16px 16px;
   padding: 20px 20px 20px 12px;
   height: 140px;
-  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, .02);
   background: var(--character-light-primary-inverse);
 }
 
@@ -83,4 +83,85 @@
   text-align: center;
   color: var(--primary-light-6);
   width: fit-content;
+}
+
+
+
+@media (max-width: 1280px) and (min-width: 576px){
+
+  .invite-wrapper{
+    padding: var(--p-m);
+  }
+
+  .invite__card-item{
+    flex-direction: column;
+    height: 357px;
+    padding: 20px 20px 20px 12px;
+  }
+
+
+  .invite-card__avatar{
+    align-self: baseline;
+    flex-direction: row;
+  }
+
+  .invite-card__avatar .feedback-item__name-owner{
+    text-align: start;
+  }
+
+  .invite-card__message{
+    gap: var(--gap-s);
+    height: 147px;
+  }
+
+
+  .invite-card__actions{
+    padding-left: 0;
+  }
+
+  .invite-card__actions, .invite-card__actions .ant-btn  {
+    width: 100%;
+  }
+
+
+
+}      
+
+@media (max-width: 576px){
+
+
+
+  .invite-wrapper{
+    padding: var(--p-m);
+  }
+
+  .invite__card-item{
+    flex-direction: column;
+    height: 399px;
+    padding: 20px 20px 20px 12px;
+  }
+
+
+  .invite-card__avatar{
+    align-self: baseline;
+    flex-direction: row;
+  }
+
+  .invite-card__avatar .feedback-item__name-owner{
+    text-align: start;
+  }
+
+  .invite-card__message{
+    gap: var(--gap-s);
+    height: 189px;
+  }
+
+
+  .invite-card__actions{
+    padding-left: 0;
+  }
+
+  .invite-card__actions, .invite-card__actions .ant-btn  {
+    width: 100%;
+  }
 }
