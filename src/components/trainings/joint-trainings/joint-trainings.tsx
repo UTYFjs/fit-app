@@ -2,26 +2,64 @@ import { Button, Divider } from 'antd';
 import './joint-trainings.css';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { PartnersList } from './partners-list/partners-list';
-import { useLazyGetUserJointTrainingListQuery } from '@services/training-api';
+import {
+    useGetTrainingPalsQuery,
+    useGetTrainingsQuery,
+    useLazyGetTrainingsQuery,
+    useLazyGetUserJointTrainingListQuery,
+} from '@services/training-api';
 import { Invite } from './invite/invite';
+import { useGetInviteListQuery } from '@services/invite-api';
+import { useState } from 'react';
+import { UserJointList } from './users-joint-list/users-joint-list';
+import { getFavoriteTraining } from '@utils/get-favourite-training';
 
 export const JointTrainings = () => {
     const [
         getUserJointTrainingList,
         { data: dataUserJointTrainingList, isError: isErrorUserJointTrainingList },
     ] = useLazyGetUserJointTrainingListQuery();
+    const { data: dataInviteList, isError: isErrorInviteList } = useGetInviteListQuery();
+    //const [getTrainings, { data: MyTrainings }] = useLazyGetTrainingsQuery();
+    const { data: MyTrainings } = useGetTrainingsQuery();
+    console.log('dataInviteList', dataInviteList);
 
-    const handleGetRandomPartnersList = () => {
-        getUserJointTrainingList();
-        console.log('случайный выбор партнеров');
+    const [isShowUsersJointList, setIsShowUsersJointList] = useState(false);
+
+    const handleGetRandomPartnersList = async () => {
+        try {
+            await getUserJointTrainingList({}).unwrap();
+            setIsShowUsersJointList(true);
+        } catch {
+            console.log('error');
+        }
+        console.log('случайный выбор партнеров', dataUserJointTrainingList);
     };
-    const handleGetSimilarPartnersList = () => {
+    const handleGetSimilarPartnersList = async () => {
+        //await getTrainings().unwrap();
+        //console.log('MyTrainings', MyTrainings);
+        if (MyTrainings) {
+            const favoriteTraining = getFavoriteTraining(MyTrainings);
+            try {
+                await getUserJointTrainingList({
+                    trainingType: favoriteTraining,
+                }).unwrap();
+                setIsShowUsersJointList(true);
+            } catch {
+                console.log('error');
+            }
+        }
+
         console.log('выбор похожих партнеров');
     };
+    const handleGoBack = () => setIsShowUsersJointList(false);
 
+    if (dataUserJointTrainingList && isShowUsersJointList) {
+        return <UserJointList users={dataUserJointTrainingList} handleGoBack={handleGoBack} />;
+    }
     return (
         <div className='joint-training-wrapper'>
-            <Invite />
+            {!!dataInviteList?.length && <Invite />}
             <div className='joint-training__info'>
                 <h3 className='joint-training__title'>
                     Хочешь тренироваться с тем, кто разделяет твои цели и темп? <br /> Можешь найти

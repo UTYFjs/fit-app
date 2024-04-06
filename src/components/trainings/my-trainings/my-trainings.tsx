@@ -1,12 +1,15 @@
 import { Button } from 'antd';
 import './my-trainings.css';
 import ButtonDrawerCustom from '@components/button-drawer-training/button-drawer-training';
-import { useGetTrainingsQuery } from '@services/training-api';
+import { useGetTrainingListQuery, useGetTrainingsQuery } from '@services/training-api';
 import { TrainingList } from './training-list.tsx/training-list';
+import { useEffect } from 'react';
 
 export const MyTrainings = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
-    console.log('data Trainings', dataTrainings);
+    const { isError: IsErrorTrainingsList } = useGetTrainingListQuery();
+
+    //console.log('data Trainings', dataTrainings);
     return (
         <div className='my-trainings'>
             {dataTrainings && <TrainingList />}
@@ -21,7 +24,7 @@ export const MyTrainings = () => {
             >
                 Создать тренировку
             </Button> */}
-            <ButtonDrawerCustom buttonClass='trainings__btn-create' />
+            {!IsErrorTrainingsList && <ButtonDrawerCustom buttonClass='trainings__btn-create' />}
         </div>
     );
 };

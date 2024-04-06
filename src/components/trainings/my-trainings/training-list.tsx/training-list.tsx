@@ -20,7 +20,7 @@ export const TrainingList = () => {
             key: 'TrainingType',
             //width: 250,
             render: (_, record) => (
-                <div className='training-list__type-cell' key={record._id}>
+                <div key={record._id + 'type'} className='training-list__type-cell'>
                     <BadgeTraining text={record.name} />
                     <Button
                         icon={

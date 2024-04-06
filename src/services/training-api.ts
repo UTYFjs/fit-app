@@ -103,4 +103,5 @@ export const {
     useGetTrainingListQuery,
     useLazyGetTrainingListQuery,
     useLazyGetUserJointTrainingListQuery,
+    useGetTrainingPalsQuery,
 } = trainingApi;

@@ -1,0 +1,103 @@
+.partner-card{
+  border-radius: 2px;
+  width: 234px;
+  background: var(--primary-light-1);
+
+}
+
+.partner-card .ant-card-body{
+  padding: var(--p-m);
+ 
+}
+
+.partner-card__wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+}
+
+.partner-card.partner-card_rejected{
+  background: var(--character-light-table-header);
+}
+
+.partner-card.partner-card_full .ant-card-body{
+  padding: 16px 16px 8px;
+}
+
+.partner-card__avatar{
+  display: flex;
+  gap: var(--gap-2xs);
+
+}
+
+.partner-card__name{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: left;
+  color: var(--character-light-title-85);
+}
+
+.partner-card__info{
+  display: grid;
+  grid-template-columns: 110px 80px;  
+  grid-template-rows: repeat(2);
+  grid-column-gap: var(--gap);
+  grid-row-gap: var(--gap-3_4xs);
+}
+
+.partner-card__info-title{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+  width: fit-content;
+}
+
+.partner-card__info-value{
+  font-family: var(--font-family);
+  font-weight: var(font-weight-m);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--primary-light-6);
+  width: fit-content;
+}
+
+.partner-card__btn{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-primary-inverse);
+  width: 100%;
+  margin-top: var(--m-xs);
+}
+
+.partner-card__status{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+  text-align: center;
+  line-height: 16px;
+  height: 16px;
+}
+
+
+
+@media (max-width: 1280px) and (min-width: 480px){
+
+
+}      
+
+@media (max-width: 480px){
+
+  .partner-card{
+    width: 312px;
+  }
+
+}
