@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
+  --tranie-yellow: #FADB14;
+  --tranie-cyan: #13C2C2;
+  --tranie-orange: #FA8C16;
   --character-light-title-85: #262626;
   --character-light-primary-85: #262626;
   --character-light-secondary-45: #8c8c8c;

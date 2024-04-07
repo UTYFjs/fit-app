@@ -13,7 +13,7 @@ import { CalendarDataTeatId, ProfileDataTestId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';
 import { useNavigate } from 'react-router-dom';
 
-export const MainPage: React.FC = () => {
+export const MainPage = () => {
     const navigate = useNavigate();
     const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
     const buttonActions = [

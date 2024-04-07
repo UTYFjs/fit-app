@@ -3,6 +3,7 @@ import './partner-card.css';
 import { UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { UserJointTrainingListType } from '@types/training-types';
+import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
 
 type PartnerCardProps = {
     type: 'short' | 'full';
@@ -42,9 +43,15 @@ export const PartnerCard = ({ type, user, searchValue }: PartnerCardProps) => {
                 </div>
                 {type === 'full' && (
                     <>
-                        <Button className='partner-card__btn' type='primary'>
+                        <ButtonDrawerTraining
+                            className='partner-card__btn'
+                            type='primary'
+                            btnText='Создать тренировку'
+                            size='middle'
+                        />
+                        {/* <Button className='partner-card__btn' type='primary'>
                             Создать тренировку
-                        </Button>
+                        </Button> */}
                         <div className='partner-card__status'>
                             {status && 'тренировка отклонена'}
                         </div>

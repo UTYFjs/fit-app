@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { IRatingStar } from '../../types/api';
 import ModalFeedback from '@components/modal-feedback/modal-feedback';
@@ -8,16 +8,22 @@ import { useAddFeedbackMutation } from '@services/feedback-api';
 import ModalResult from '@components/modal-result/modal-result';
 import DrawerCustom from '@components/drawer-custom/drawer-custom';
 import './button-drawer-training.css';
+import { ButtonProps } from 'antd/lib/button/button';
 
-type ButtonDrawerTrainingProps = {
-    buttonClass: string;
+type ButtonDrawerTrainingProps = ButtonProps & {
+    buttonClass?: string;
+    btnText?: string;
     dataTestIdBtn?: string;
     refetch?: () => void;
+    drawerChildren?: ReactNode;
 };
 const ButtonDrawerTraining = ({
     buttonClass,
+    btnText,
     dataTestIdBtn,
     refetch,
+    drawerChildren,
+    ...rest
 }: ButtonDrawerTrainingProps) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalResultOpen, setIsModalResultOpen] = useState(false);
@@ -80,8 +86,9 @@ const ButtonDrawerTraining = ({
                 size='large'
                 onClick={handleOpenDrawer}
                 data-test-id={dataTestIdBtn}
+                {...rest}
             >
-                Создать тренировку
+                {btnText}
             </Button>
             <DrawerCustom
                 drawerTitle={'Новая тренировка'}
@@ -99,6 +106,7 @@ const ButtonDrawerTraining = ({
                 }
             >
                 Custom Drawer
+                {drawerChildren}
             </DrawerCustom>
             {/* <ModalResult
                 isOpen={isModalResultOpen}

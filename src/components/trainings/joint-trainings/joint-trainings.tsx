@@ -3,9 +3,7 @@ import './joint-trainings.css';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { PartnersList } from './partners-list/partners-list';
 import {
-    useGetTrainingPalsQuery,
     useGetTrainingsQuery,
-    useLazyGetTrainingsQuery,
     useLazyGetUserJointTrainingListQuery,
 } from '@services/training-api';
 import { Invite } from './invite/invite';
@@ -36,8 +34,6 @@ export const JointTrainings = () => {
         console.log('случайный выбор партнеров', dataUserJointTrainingList);
     };
     const handleGetSimilarPartnersList = async () => {
-        //await getTrainings().unwrap();
-        //console.log('MyTrainings', MyTrainings);
         if (MyTrainings) {
             const favoriteTraining = getFavoriteTraining(MyTrainings);
             try {

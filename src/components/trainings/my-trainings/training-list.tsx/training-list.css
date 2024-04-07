@@ -50,6 +50,7 @@
 }
 
 .training-list__type-cell{
+  position: relative;
   display: flex;
   align-items: center;
   height: 100%;
