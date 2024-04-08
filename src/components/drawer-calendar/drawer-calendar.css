@@ -109,7 +109,6 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
-
 }
 
 .drawer-calendar .drawer-calendar__btn-remove{
@@ -118,15 +117,13 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   text-align: center;
-
 }
 
 .drawer_footer-wrapper{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  
+  justify-content: space-between;  
 }
 
 .drawer__warning-message{
@@ -161,7 +158,6 @@
   }
 
   .exercise-item__values{
-
     gap: var(--gap);
   }
   

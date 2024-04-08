@@ -5,55 +5,46 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 
 import './exercise-info-card.css';
 import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
-import ModalError from '@components/modal-error/modal-error';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
-import { CalendarDataTeatId } from '@constants/data-test-id';
-import {
-    useAddTrainingMutation,
-    useGetTrainingsQuery,
-    useUpdateTrainingMutation,
-} from '@services/training-api';
-import { isPast } from '@utils/date-utils';
+// import ModalError from '@components/modal-error/modal-error';
+// import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+// import {
+//     useAddTrainingMutation,
+//     useGetTrainingsQuery,
+//     useUpdateTrainingMutation,
+// } from '@services/training-api';
+// import { isPast } from '@utils/date-utils';
 import Meta from 'antd/lib/card/Meta';
 import { ExerciseType, ResTrainingType } from '../../../../types/training-types';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
 import moment from 'moment';
 import getBadgeColor from '@utils/get-badge-color';
+import { defaultExercise } from '@constants/training';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getCurrentTraining } from '@redux/training-slice';
 
 type CardExerciseProps = {
     record: ResTrainingType;
     onClose: () => void;
-    isEditTraining?: boolean; // тоже нужно т к только добавляем новые тренировки
 };
 
-const defaultExercise = {
-    name: '',
-    replays: 1,
-    weight: 0,
-    approaches: 1,
-    isImplementation: false,
-};
-
-export const ExerciseInfoCard = ({
-    record,
-    onClose,
-    isEditTraining = false,
-}: CardExerciseProps) => {
+export const ExerciseInfoCard = ({ record, onClose }: CardExerciseProps) => {
+    const currentTraining = useAppSelector(getCurrentTraining);
+    console.log('from cardexercise CurrentTraining', currentTraining);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const [newExercises, setNewExercises] = useState<ExerciseType[]>(record.exercises);
     const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([]);
 
-    const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
+    // const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
-    const [addTraining, { isError: isErrorAdd }] = useAddTrainingMutation();
-    const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation();
-    const { refetch } = useGetTrainingsQuery();
+    // const [addTraining, { isError: isErrorAdd }] = useAddTrainingMutation();
+    // const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation();
+    // const { refetch } = useGetTrainingsQuery();
 
-    const handleCloseErrorModal = () => {
-        setIsModalErrorOpen(false);
-        onClose();
-    };
+    // const handleCloseErrorModal = () => {
+    //     setIsModalErrorOpen(false);
+    //     onClose();
+    // };
 
     const handleAddNewExercise = () =>
         setNewExercises((state) => [...state, { ...defaultExercise }]);
@@ -70,40 +61,40 @@ export const ExerciseInfoCard = ({
         setIsDrawerOpen(false);
     };
 
-    const handleSave = async () => {
-        if (isEditTraining) {
-            let data = currentTrainings.find((item) => item.name === selectedTraining);
-            if (data) {
-                data = JSON.parse(JSON.stringify(data)) as ResTrainingType;
-                data.exercises = newExercises;
-                data.isImplementation = isPast(moment(record.date));
-                await updateTraining(data)
-                    .unwrap()
-                    .then(() => {
-                        refetch();
-                        onClose();
-                    })
-                    .catch(() => {
-                        setIsModalErrorOpen(true);
-                    });
-            }
-        } else {
-            await addTraining({
-                name: record.name,
-                date: record.date,
-                isImplementation: false,
-                exercises: newExercises,
-            })
-                .unwrap()
-                .then(() => {
-                    refetch();
-                    onClose();
-                })
-                .catch(() => {
-                    setIsModalErrorOpen(true);
-                });
-        }
-    };
+    // const handleSave = async () => {
+    //     if (isEditTraining) {
+    //         let data = currentTrainings.find((item) => item.name === selectedTraining);
+    //         if (data) {
+    //             data = JSON.parse(JSON.stringify(data)) as ResTrainingType;
+    //             data.exercises = newExercises;
+    //             data.isImplementation = isPast(moment(record.date));
+    //             await updateTraining(data)
+    //                 .unwrap()
+    //                 .then(() => {
+    //                     refetch();
+    //                     onClose();
+    //                 })
+    //                 .catch(() => {
+    //                     setIsModalErrorOpen(true);
+    //                 });
+    //         }
+    //     } else {
+    //         await addTraining({
+    //             name: record.name,
+    //             date: record.date,
+    //             isImplementation: false,
+    //             exercises: newExercises,
+    //         })
+    //             .unwrap()
+    //             .then(() => {
+    //                 refetch();
+    //                 onClose();
+    //             })
+    //             .catch(() => {
+    //                 setIsModalErrorOpen(true);
+    //             });
+    //     }
+    // };
 
     return (
         <>
@@ -136,6 +127,10 @@ export const ExerciseInfoCard = ({
                 actions={[
                     <div key='actionAddTraining' className='card-training__actions-wrapper'>
                         <ButtonDrawerTraining
+                            training={record}
+                            isPeriodicity={true}
+                            isJoint={false}
+                            isEdit={true}
                             style={{ width: '100%' }}
                             type='ghost'
                             size='middle'
@@ -188,11 +183,11 @@ export const ExerciseInfoCard = ({
                 setNewExercises={setNewExercises}
             />
 
-            {(isErrorAdd || isErrorUpdate) && (
+            {/* {(isErrorAdd || isErrorUpdate) && (
                 <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
                     <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
                 </ModalError>
-            )}
+            )} */}
         </>
     );
 };

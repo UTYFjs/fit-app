@@ -2,10 +2,7 @@ import { Button, Divider } from 'antd';
 import './joint-trainings.css';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { PartnersList } from './partners-list/partners-list';
-import {
-    useGetTrainingsQuery,
-    useLazyGetUserJointTrainingListQuery,
-} from '@services/training-api';
+import { useGetTrainingsQuery, useLazyGetUserJointTrainingListQuery } from '@services/training-api';
 import { Invite } from './invite/invite';
 import { useGetInviteListQuery } from '@services/invite-api';
 import { useState } from 'react';

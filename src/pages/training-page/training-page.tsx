@@ -10,6 +10,7 @@ import { JointTrainings } from '@components/trainings/joint-trainings/joint-trai
 import { MyTrainings } from '@components/trainings/my-trainings/my-trainings';
 
 import classNames from 'classnames';
+import { getSelectedTrainings } from '@utils/get-select-training';
 
 const tabItems = [
     { label: 'Мои тренировки', key: 'myTrainings', children: <MyTrainings /> }, // remember to pass the key prop

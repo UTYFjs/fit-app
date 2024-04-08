@@ -1,10 +1,12 @@
-import { Button } from 'antd';
 import './my-trainings.css';
 import ButtonDrawerCustom from '@components/button-drawer-training/button-drawer-training';
 import { useGetTrainingListQuery, useGetTrainingsQuery } from '@services/training-api';
 import { TrainingList } from './training-list.tsx/training-list';
-import { useEffect } from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { getSelectedTrainings } from '@utils/get-select-training';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getCurrentTraining } from '@redux/training-slice';
+import { TrainingListType, TrainingNames, TransformResTrainingType } from '@types/training-types';
 
 export const MyTrainings = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -13,8 +15,9 @@ export const MyTrainings = () => {
     //console.log('data Trainings', dataTrainings);
     return (
         <div className='my-trainings'>
-            {dataTrainings && <TrainingList />}
-            {!dataTrainings && (
+            {Object.keys(dataTrainings || {})?.length ? (
+                <TrainingList />
+            ) : (
                 <p className='trainings-table__title_empty'>У вас еще нет созданных тренировок</p>
             )}
             {/* <Button
@@ -28,7 +31,8 @@ export const MyTrainings = () => {
             {!IsErrorTrainingsList && (
                 <ButtonDrawerCustom
                     btnText='Создать тренировку'
-                    icon={<EditOutlined style={{ fontSize: '14px' }} />}
+                    isPeriodicity={true}
+                    icon={<PlusOutlined style={{ fontSize: '14px' }} />}
                     buttonClass='trainings__btn-create'
                 />
             )}

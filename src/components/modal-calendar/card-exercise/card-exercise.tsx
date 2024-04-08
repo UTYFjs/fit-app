@@ -20,6 +20,7 @@ import type { Moment } from 'moment';
 
 import { ExerciseType, ResTrainingType, TrainingNames } from '../../../types/training-types';
 import { DateFormat } from '@constants/date';
+import { defaultExercise, defaultParameters } from '@constants/training';
 
 type CardExerciseProps = {
     options: {
@@ -34,14 +35,6 @@ type CardExerciseProps = {
     onClose: () => void;
     isEditTraining: boolean;
     setIsEditTraining: (value: boolean) => void;
-};
-
-const defaultExercise = {
-    name: '',
-    replays: 1,
-    weight: 0,
-    approaches: 1,
-    isImplementation: false,
 };
 
 const CardExercise = ({
@@ -112,6 +105,7 @@ const CardExercise = ({
                 date: calendarDate.format(DateFormat.DASH_YYYY_MM_DD) + 'T00:02:50.000Z',
                 isImplementation: false,
                 exercises: newExercises,
+                parameters: defaultParameters,
             })
                 .unwrap()
                 .then(() => {

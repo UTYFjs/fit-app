@@ -9,6 +9,7 @@ import {
 } from '../types/training-types';
 
 import { api } from './api';
+import { setAvailableTrainingNames } from '@redux/training-slice';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -35,7 +36,7 @@ export const trainingApi = api.injectEndpoints({
             providesTags: ['Trainings'],
         }),
 
-        addTraining: builder.mutation<void, NewTrainingType>({
+        addTraining: builder.mutation<ResTrainingType, NewTrainingType>({
             query: (body) => ({
                 url: Endpoint.TRAINING,
                 method: HTTPMethod.POST,
@@ -60,6 +61,14 @@ export const trainingApi = api.injectEndpoints({
             query: () => ({
                 url: Endpoint.TRAINING_LIST,
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setAvailableTrainingNames(data.map((item) => item.name)));
+                } catch {
+                    () => {};
+                }
+            },
         }),
         getUserJointTrainingList: builder.query<
             UserJointTrainingListType[],

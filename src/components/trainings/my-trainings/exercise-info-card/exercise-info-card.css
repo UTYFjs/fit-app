@@ -1,13 +1,7 @@
-
 .card-exercise-info__title-wrapper{
   display: flex;
   gap: var(--gap-s);
-  /* height: 53px; */
-  /* padding-top: var(--p-m);
-  padding-bottom: var(--p-m);
-  border-bottom: 3px solid black; */
 }
-
 
 .card-exercise__title{
   font-family: var(--font-family);
@@ -16,7 +10,6 @@
   line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
-
 
 .card-exercice-info__content{
   min-height: 131px;

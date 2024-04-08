@@ -42,7 +42,6 @@ export const MainPage = () => {
         },
     ];
 
-    const handleToTraining = async (pathTo: Paths) => {};
     const handleToCalendar = async (pathTo: Paths) => {
         try {
             if (pathTo === Paths.CALENDAR || pathTo === Paths.TRAINING) {

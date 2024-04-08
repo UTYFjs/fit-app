@@ -1,0 +1,12 @@
+.periodicity-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+
+}
+
+
+.periodicity-row{
+  display: flex;
+  gap: var(--gap-6xl);
+}

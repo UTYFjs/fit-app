@@ -1,8 +1,8 @@
-import { Avatar, Button, Card } from 'antd';
+import { Avatar, Card } from 'antd';
 import './partner-card.css';
 import { UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import { UserJointTrainingListType } from '@types/training-types';
+import { UserJointTrainingListType } from '../../../../types/training-types';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
 
 type PartnerCardProps = {
@@ -13,7 +13,7 @@ type PartnerCardProps = {
 
 export const PartnerCard = ({ type, user, searchValue }: PartnerCardProps) => {
     const { imageSrc, name, avgWeightInWeek, trainingType, status } = user;
-
+    console.log('searchValue', searchValue);
     const [firstName, lastName] = name.split(' ');
     const isRejected = false;
 
@@ -28,8 +28,13 @@ export const PartnerCard = ({ type, user, searchValue }: PartnerCardProps) => {
         >
             <div className='partner-card__wrapper'>
                 <div className='partner-card__avatar'>
-                    {imageSrc && <Avatar size={42} src={imageSrc} />}
-                    {!imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
+                    <Avatar
+                        size={42}
+                        src={imageSrc}
+                        alt={name}
+                        icon={!imageSrc && <UserOutlined />}
+                    />
+                    {/* {!imageSrc && <Avatar size={42} />} */}
                     <div>
                         <p className='partner-card__name'>{name ? firstName : 'Пользователь'}</p>
                         <p className='partner-card__name'>{lastName}</p>
@@ -44,6 +49,10 @@ export const PartnerCard = ({ type, user, searchValue }: PartnerCardProps) => {
                 {type === 'full' && (
                     <>
                         <ButtonDrawerTraining
+                            partnerUser={user}
+                            isJoint={true}
+                            isPeriodicity={true}
+                            isEdit={false}
                             className='partner-card__btn'
                             type='primary'
                             btnText='Создать тренировку'

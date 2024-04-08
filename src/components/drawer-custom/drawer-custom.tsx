@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 
 type DrawerCalendarProps = {
-    drawerTitle: string;
+    drawerTitle: string | ReactNode;
     children: ReactNode;
     isDrawerOpen: boolean;
     onClose: () => void;

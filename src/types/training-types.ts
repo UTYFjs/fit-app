@@ -8,7 +8,7 @@ export type ExerciseType = {
 
 export type ParametersTraining = {
     repeat: boolean;
-    period: number;
+    period: number | null;
     jointTraining: boolean;
     participants: string[];
 };
@@ -17,7 +17,7 @@ export type NewTrainingType = {
     date: string;
     isImplementation: boolean;
     exercises: ExerciseType[];
-    parameters?: ParametersTraining;
+    parameters: ParametersTraining;
 };
 
 export type ResTrainingType = NewTrainingType & {
