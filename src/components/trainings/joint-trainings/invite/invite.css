@@ -58,13 +58,18 @@
   margin-bottom: 0;
 }
 
+.invite-card__details-wrapper{
+  position: relative;
+}
+
 .invite-card__details{
   font-family: var(--font-family);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--primary-light-6);
-
+  width: fit-content;
+  padding: 0;
 }
 
 .invite-card__actions{

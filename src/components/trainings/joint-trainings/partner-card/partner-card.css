@@ -76,7 +76,21 @@
   margin-top: var(--m-xs);
 }
 
+.partner-card__btn_default{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+  text-align: center;
+  width: 100%;
+  margin-top: var(--m-xs);
+}
+
 .partner-card__status{
+  display: flex;
+  gap: var(--gap-2xs);
+  justify-content: center;
   font-family: var(--font-family);
   font-weight: var(font-weight);
   font-size: var(--font-size-s);

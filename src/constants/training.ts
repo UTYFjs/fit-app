@@ -5,6 +5,14 @@ export type PeriodOptionsType = {
     value: number;
 };
 
+export enum TrainingsInviteMessage {
+    'Ноги' = 'тренировок на ноги',
+    'Руки' = 'тренировок на руки',
+    'Силовая' = 'силовых тренировок',
+    'Спина' = 'тренировок на спину',
+    'Грудь' = 'тренировок на грудь',
+}
+
 export const PeriodOptions: PeriodOptionsType[] = [
     { label: 'Через 1 день', value: 1 },
     { label: 'Через 2 дня', value: 2 },
@@ -38,3 +46,9 @@ export const defaultTraining: ResTrainingType = {
     parameters: defaultParameters,
     exercises: [defaultExercise],
 };
+
+export const enum PartnerStatus {
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
+    PENDING = 'pending',
+}

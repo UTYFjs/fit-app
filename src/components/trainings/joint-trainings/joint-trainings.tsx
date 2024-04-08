@@ -52,7 +52,7 @@ export const JointTrainings = () => {
     }
     return (
         <div className='joint-training-wrapper'>
-            {!!dataInviteList?.length && <Invite />}
+            {!!dataInviteList?.length && <Invite inviteList={dataInviteList} />}
             <div className='joint-training__info'>
                 <h3 className='joint-training__title'>
                     Хочешь тренироваться с тем, кто разделяет твои цели и темп? <br /> Можешь найти

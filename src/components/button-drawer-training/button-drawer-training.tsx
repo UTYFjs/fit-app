@@ -40,6 +40,7 @@ type ButtonDrawerTrainingProps = ButtonProps & {
     isPeriodicity?: boolean;
     isEdit?: boolean;
     dataTestIdBtn?: string;
+    onClickBtn?: (() => void) | null;
     //refetch?: () => void;
     drawerChildren?: ReactNode;
     partnerUser?: UserJointTrainingListType;
@@ -53,6 +54,7 @@ const ButtonDrawerTraining = ({
     isPeriodicity = false,
     isEdit = false,
     dataTestIdBtn,
+    onClickBtn,
     //refetch,
     drawerChildren,
     partnerUser,
@@ -91,8 +93,8 @@ const ButtonDrawerTraining = ({
     useEffect(() => {
         if (partnerUser) {
             dispatch(updateNameCurrentTraining(partnerUser.trainingType as TrainingNames));
+            console.log('dispatch currentTraining AFTER pARTNERusER', currentTraining);
         }
-        console.log('dispatch currentTraining AFTER pARTNERusER', currentTraining);
     }, [dispatch, partnerUser]);
 
     const [newExercises, setNewExercises] = useState(currentTraining.exercises);
@@ -218,7 +220,7 @@ const ButtonDrawerTraining = ({
                 className={buttonClass}
                 type='primary'
                 size='large'
-                onClick={handleOpenDrawer}
+                onClick={onClickBtn ? onClickBtn : handleOpenDrawer}
                 data-test-id={dataTestIdBtn}
                 {...rest}
             >
