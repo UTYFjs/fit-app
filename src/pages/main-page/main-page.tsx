@@ -48,7 +48,6 @@ export const MainPage = () => {
             if (pathTo === Paths.CALENDAR || pathTo === Paths.TRAINING) {
                 await getTrainings().unwrap();
             }
-
             navigate(pathTo);
         } catch {
             () => {};

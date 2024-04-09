@@ -1,4 +1,4 @@
-import { Avatar, Button, Select } from 'antd';
+import { Alert, Avatar, Button, Select } from 'antd';
 
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     getCurrentTraining,
     removeExercises,
+    setAlertMessage,
     setCurrentTraining,
     updateNameCurrentTraining,
 } from '@redux/training-slice';
@@ -31,7 +32,9 @@ import {
 } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
 import { useCreateInviteMutation } from '@services/invite-api';
-import { CalendarDataTeatId } from '@constants/data-test-id';
+import { CalendarDataTeatId, TrainingDataTestId } from '@constants/data-test-id';
+import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import ModalError from '@components/modal-error/modal-error';
 
 type ButtonDrawerTrainingProps = ButtonProps & {
     buttonClass?: string;
@@ -71,8 +74,17 @@ const ButtonDrawerTraining = ({
     const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation();
     const { data: allTrainingsByDay, refetch } = useGetTrainingsQuery();
     const [createInvite, { isError: IsErrorCreateInvite }] = useCreateInviteMutation();
+    const [isModalError, setIsModalError] = useState(false);
 
     const { data: dataTrainingList } = useGetTrainingListQuery();
+
+    useEffect(() => {
+        if (isErrorAdd || isErrorUpdate || IsErrorCreateInvite) {
+            setIsModalError(true);
+        } else {
+            setIsModalError(false);
+        }
+    }, [IsErrorCreateInvite, isErrorAdd, isErrorUpdate]);
 
     // const optionsTrainingSelect = getSelectedTrainings(
     //     dataTrainingList || [],
@@ -145,6 +157,7 @@ const ButtonDrawerTraining = ({
                 .then(() => {
                     refetch();
                     handleCloseDrawer();
+                    dispatch(setAlertMessage('Тренировка успешно обновлена'));
                 })
                 .catch(() => {
                     setIsModalErrorOpen(true);
@@ -161,6 +174,7 @@ const ButtonDrawerTraining = ({
                         (await createInvite({ to: partnerUser.id, trainingId: data._id }).unwrap());
                     await refetch();
                     handleCloseDrawer();
+                    dispatch(setAlertMessage('Новая тренировка успешно добавлена'));
                 })
                 .catch(() => {
                     setIsModalErrorOpen(true);
@@ -213,6 +227,10 @@ const ButtonDrawerTraining = ({
     const handleRemove = () => {
         dispatch(removeExercises(forRemoveIdxExercises));
         setForRemoveIdxExercises([]);
+    };
+    const handleCloseErrorModal = () => {
+        setIsModalErrorOpen(false);
+        setIsDrawerOpen(false);
     };
 
     return (
@@ -337,6 +355,14 @@ const ButtonDrawerTraining = ({
                     {drawerChildren}
                 </div>
             </DrawerCustom>
+            {
+                //(isErrorAdd || isErrorUpdate || IsErrorCreateInvite) && (
+                <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
+                    <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
+                </ModalError>
+                //)
+            }
+
             {/* <ModalResult
                 isOpen={isModalResultOpen}
                 typeContent={modalResultType}

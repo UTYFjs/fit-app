@@ -7,11 +7,13 @@ import { defaultExercise, defaultTraining } from '@constants/training';
 type TrainingState = {
     currentTraining: ResTrainingType;
     availableTrainingNames: string[];
+    alertMessage: string;
 };
 
 const initialState: TrainingState = {
     currentTraining: defaultTraining,
     availableTrainingNames: [],
+    alertMessage: '',
 };
 const trainingSlice = createSlice({
     name: 'training',
@@ -68,6 +70,9 @@ const trainingSlice = createSlice({
         clearCurrentTraining: (state) => {
             state.currentTraining = defaultTraining;
         },
+        setAlertMessage: (state, { payload }: PayloadAction<string>) => {
+            state.alertMessage = payload;
+        },
     },
 });
 
@@ -84,6 +89,8 @@ export const {
     updateExerciseReplaysCurrentTraining,
     removeExercises,
     clearCurrentTraining,
+    setAlertMessage,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;
 export const getCurrentTraining = ({ training }: RootState) => training.currentTraining;
+export const getAlertMessage = ({ training }: RootState) => training.alertMessage;

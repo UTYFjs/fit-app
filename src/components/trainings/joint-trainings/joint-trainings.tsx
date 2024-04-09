@@ -9,10 +9,14 @@ import { UserJointList } from './users-joint-list/users-joint-list';
 import { getFavoriteTraining } from '@utils/get-favourite-training';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getInviteList } from '@redux/invite-slice';
+import ModalError from '@components/modal-error/modal-error';
+import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
 
 export const JointTrainings = () => {
-    const [getUserJointTrainingList, { data: dataUserJointTrainingList }] =
-        useLazyGetUserJointTrainingListQuery();
+    const [
+        getUserJointTrainingList,
+        { data: dataUserJointTrainingList, isError: isErrorJointTrainingList },
+    ] = useLazyGetUserJointTrainingListQuery();
     const dataInviteList = useAppSelector(getInviteList);
     console.log('dataInviteList', dataInviteList);
     //const { data: dataInviteList, isError: isErrorInviteList } = useGetInviteListQuery();
@@ -21,15 +25,16 @@ export const JointTrainings = () => {
     console.log('dataInviteList', dataInviteList);
 
     const [isShowUsersJointList, setIsShowUsersJointList] = useState(false);
+    const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
     const handleGetRandomPartnersList = async () => {
         try {
             await getUserJointTrainingList({}).unwrap();
             setIsShowUsersJointList(true);
         } catch {
+            setIsModalErrorOpen(true);
             console.log('error');
         }
-        console.log('случайный выбор партнеров', dataUserJointTrainingList);
     };
     const handleGetSimilarPartnersList = async () => {
         if (MyTrainings) {
@@ -40,13 +45,19 @@ export const JointTrainings = () => {
                 }).unwrap();
                 setIsShowUsersJointList(true);
             } catch {
+                setIsModalErrorOpen(true);
                 console.log('error');
             }
         }
-
-        console.log('выбор похожих партнеров');
     };
     const handleGoBack = () => setIsShowUsersJointList(false);
+
+    const handleCloseErrorModal = () => setIsModalErrorOpen(false);
+
+    const handleRefetch = () => {
+        setIsModalErrorOpen(false);
+        handleGetRandomPartnersList();
+    };
 
     if (dataUserJointTrainingList && isShowUsersJointList) {
         return <UserJointList users={dataUserJointTrainingList} handleGoBack={handleGoBack} />;
@@ -82,6 +93,18 @@ export const JointTrainings = () => {
                 </ButtonGroup>
             </div>
             <PartnersList />
+
+            {
+                <ModalError
+                    isOpen={isModalErrorOpen}
+                    width={416}
+                    isClosable={true}
+                    onCancel={handleCloseErrorModal}
+                >
+                    {/* <SaveErrorCard handlePrimeButton={handleCloseErrorModal} /> */}
+                    <OpenErrorCard handlePrimeButton={handleRefetch} />
+                </ModalError>
+            }
         </div>
     );
 };

@@ -66,7 +66,9 @@ export const trainingApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setAvailableTrainingNames(data.map((item) => item.name)));
                 } catch {
-                    () => {};
+                    () => {
+                        console.log('error request Training List');
+                    };
                 }
             },
         }),
@@ -113,4 +115,5 @@ export const {
     useLazyGetTrainingListQuery,
     useLazyGetUserJointTrainingListQuery,
     useGetTrainingPalsQuery,
+    useLazyGetTrainingPalsQuery,
 } = trainingApi;

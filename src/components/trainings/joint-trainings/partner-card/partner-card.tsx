@@ -131,6 +131,9 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                     )}
                 </div>
             </Card>
+            {
+                //todo rename ModalError
+            }
             <ModalError isOpen={isOpenModal} onCancel={handleCloseModal} isClosable width={539}>
                 <div
                     data-test-id={TrainingDataTestId.PARTNER_MODAL}

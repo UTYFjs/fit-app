@@ -12,6 +12,8 @@ import { ExerciseInfoCard } from '../exercise-info-card/exercise-info-card';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining, setCurrentTraining } from '@redux/training-slice';
 import { TrainingDataTestId } from '@constants/data-test-id';
+import { PeriodTextByValue } from '@constants/training';
+import classNames from 'classnames';
 
 export const TrainingList = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -67,11 +69,11 @@ export const TrainingList = () => {
             ),
         },
         {
-            title: 'Сортировка по периоду',
+            title: 'Периодичность',
             key: 'SortingByPeriod',
             render: (_, record) => (
                 <div key={record._id} className='training-list__type-cell'>
-                    <p>{record.parameters?.period || 0}</p>
+                    <p>{PeriodTextByValue[record.parameters.period || 0]}</p>
                 </div>
             ),
             sorter: (a, b) => (a.parameters?.period || 0) - (b.parameters?.period || 0),
@@ -89,11 +91,16 @@ export const TrainingList = () => {
                     type='link'
                     disabled={record.isImplementation}
                     icon={
-                        record.isImplementation ? (
-                            <EditOutlined style={{ fontSize: '24px', color: 'red' }} />
-                        ) : (
-                            <EditTwoTone style={{ fontSize: '24px', color: 'red' }} />
-                        )
+                        <EditOutlined
+                            className={
+                                record.isImplementation
+                                    ? 'training-list__button-edit_disable'
+                                    : 'training-list__button-edit'
+                            }
+                            style={{
+                                fontSize: '24px',
+                            }}
+                        />
                     }
                     //     style={{ padding: 0 }}
                     //     //data-test-id={}

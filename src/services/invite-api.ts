@@ -25,7 +25,7 @@ export const inviteApi = api.injectEndpoints({
                     () => {};
                 }
             },
-            //todo
+            //todo неправильно теги ставятся
             providesTags: (result) =>
                 result
                     ? [

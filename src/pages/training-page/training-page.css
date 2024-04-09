@@ -1,4 +1,5 @@
 .training-page{
+  position: relative;
   min-height: 100%;
   background: var(--character-light-primary-inverse);
   padding: var(--p-5xl);
@@ -45,6 +46,16 @@
   line-height: var(--line-height);
   color: var(--character-light-title-85);
 }
+
+.training__success-alert{
+  position: absolute;
+  bottom: 70px;
+  right: 50%;
+  transform: translate(50%);
+  min-width: 395px;
+  margin: 0 auto;
+}
+
 
 @media (max-width: 1280px) and (min-width: 576px){
 
