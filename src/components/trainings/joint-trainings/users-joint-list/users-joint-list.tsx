@@ -14,6 +14,10 @@ type UserJointListProps = {
 export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
     const [searchValue, setSearchValue] = useState('');
 
+    const searchedUsers = users.filter((user) =>
+        user.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase().trim()),
+    );
+
     const onSearch = (search: string) => {
         setSearchValue(search);
         console.log('onSearch event', search);
@@ -45,7 +49,7 @@ export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
 
             <List
                 className='partners-list'
-                dataSource={users}
+                dataSource={searchedUsers}
                 grid={{
                     gutter: 16,
                     xs: 1,
@@ -54,9 +58,14 @@ export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
                     lg: 3,
                     xl: 4,
                 }}
-                renderItem={(item) => (
+                renderItem={(item, index) => (
                     <List.Item key={item.id + 'partnerCard'}>
-                        <PartnerCard type={'full'} user={item} searchValue={searchValue} />
+                        <PartnerCard
+                            type={'full'}
+                            user={item}
+                            index={index}
+                            searchValue={searchValue}
+                        />
                     </List.Item>
                 )}
                 //pagination={}

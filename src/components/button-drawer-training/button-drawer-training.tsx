@@ -290,12 +290,7 @@ const ButtonDrawerTraining = ({
                                     icon={!partnerUser.imageSrc && <UserOutlined />}
                                 />
                                 <div>
-                                    <p className='partner-card__name'>
-                                        {partnerUser.name.split(' ')[0]}
-                                    </p>
-                                    <p className='partner-card__name'>
-                                        {partnerUser.name.split(' ')[1]}
-                                    </p>
+                                    <p className='partner-card__name'>{partnerUser.name}</p>
                                 </div>
                             </div>
 

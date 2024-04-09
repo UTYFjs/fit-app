@@ -32,9 +32,17 @@ export const MyTrainings = () => {
             {!IsErrorTrainingsList && (
                 <ButtonDrawerCustom
                     dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}
-                    btnText='Создать тренировку'
+                    btnText={
+                        Object.keys(dataTrainings || {})?.length
+                            ? 'Новая тренировка'
+                            : 'Создать тренировку'
+                    }
                     isPeriodicity={true}
-                    icon={<PlusOutlined style={{ fontSize: '14px' }} />}
+                    icon={
+                        Object.keys(dataTrainings || {})?.length && (
+                            <PlusOutlined style={{ fontSize: '14px' }} />
+                        )
+                    }
                     buttonClass='trainings__btn-create'
                 />
             )}

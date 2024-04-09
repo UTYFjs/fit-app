@@ -1,6 +1,7 @@
 import { Avatar } from 'antd';
 import './partner-avatar.css';
 import { UserOutlined } from '@ant-design/icons';
+import { HighlightedText } from '@components/highlighted-text/highlighted-text';
 
 type PartnerCardProps = {
     imageSrc: string | null;

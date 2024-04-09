@@ -1,6 +1,6 @@
-import { Button, Card, Tooltip } from 'antd';
+import { Avatar, Button, Card, Tooltip } from 'antd';
 import './partner-card.css';
-import { CheckCircleFilled, InfoCircleOutlined } from '@ant-design/icons';
+import { CheckCircleFilled, InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { UserJointTrainingListType } from '../../../../types/training-types';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
@@ -11,6 +11,7 @@ import ModalError from '@components/modal-error/modal-error';
 import { useState } from 'react';
 import { PartnerAvatar } from './partner-avatar/partner-avatar';
 import { PartnerInfo } from './partner-info/partner-info';
+import { HighlightedText } from '@components/highlighted-text/highlighted-text';
 
 type PartnerCardProps = {
     type: 'short' | 'full';
@@ -26,7 +27,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
     if (status) console.log('status', status, name);
     const [isOpenModal, setIsModalOpen] = useState(false);
 
-    //const [firstName, lastName] = name.split(' ');
+    const [firstName, lastName] = name.split(' ');
 
     const [answerInvite] = useAnswerInviteMutation();
     const handleRejectTraining = async () => {
@@ -53,8 +54,8 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                 onClick={handleClickModal}
             >
                 <div className='partner-card__wrapper'>
-                    <PartnerAvatar imageSrc={imageSrc} name={name} />
-                    {/* <div className='partner-card__avatar'>
+                    {/* <PartnerAvatar imageSrc={imageSrc} name={name} /> */}
+                    <div className='partner-card__avatar'>
                         <Avatar
                             size={42}
                             src={imageSrc}
@@ -63,12 +64,17 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                         />
 
                         <div>
-                            <p className='partner-card__name'>
+                            <HighlightedText
+                                text={name ? name : 'Пользователь'}
+                                searchValue={searchValue || ''}
+                            />
+                            {/* <HighlightedText text={lastName} searchValue={searchValue} /> */}
+                            {/* <p className='partner-card__name'>
                                 {name ? firstName : 'Пользователь'}
                             </p>
-                            <p className='partner-card__name'>{lastName}</p>
+                            <p className='partner-card__name'>{lastName}</p> */}
                         </div>
-                    </div> */}
+                    </div>
                     <PartnerInfo avgWeightInWeek={avgWeightInWeek} trainingType={trainingType} />
                     {/* <div className='partner-card__info'>
                         <p className='partner-card__info-title'>Тип тренировки:</p>
@@ -79,6 +85,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                     {type === 'full' && (
                         <>
                             <ButtonDrawerTraining
+                                dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}
                                 partnerUser={user}
                                 isJoint={true}
                                 isPeriodicity={true}
