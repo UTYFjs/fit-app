@@ -12,6 +12,8 @@ import { useState } from 'react';
 import { PartnerAvatar } from './partner-avatar/partner-avatar';
 import { PartnerInfo } from './partner-info/partner-info';
 import { HighlightedText } from '@components/highlighted-text/highlighted-text';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { deletePartnerFromList } from '@redux/training-slice';
 
 type PartnerCardProps = {
     type: 'short' | 'full';
@@ -23,16 +25,16 @@ type PartnerCardProps = {
 export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps) => {
     const [getInviteList] = useLazyGetInviteListQuery();
 
+    const dispatch = useAppDispatch();
     const { imageSrc, name, avgWeightInWeek, trainingType, status } = user;
     if (status) console.log('status', status, name);
     const [isOpenModal, setIsModalOpen] = useState(false);
-
-    const [firstName, lastName] = name.split(' ');
 
     const [answerInvite] = useAnswerInviteMutation();
     const handleRejectTraining = async () => {
         console.log('reject training', user);
         await answerInvite({ id: user.inviteId || '', status: PartnerStatus.REJECTED }).unwrap();
+        dispatch(deletePartnerFromList(user.id));
         await getInviteList();
     };
     const handleClickModal = () => {
@@ -68,20 +70,9 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                                 text={name ? name : 'Пользователь'}
                                 searchValue={searchValue || ''}
                             />
-                            {/* <HighlightedText text={lastName} searchValue={searchValue} /> */}
-                            {/* <p className='partner-card__name'>
-                                {name ? firstName : 'Пользователь'}
-                            </p>
-                            <p className='partner-card__name'>{lastName}</p> */}
                         </div>
                     </div>
                     <PartnerInfo avgWeightInWeek={avgWeightInWeek} trainingType={trainingType} />
-                    {/* <div className='partner-card__info'>
-                        <p className='partner-card__info-title'>Тип тренировки:</p>
-                        <p className='partner-card__info-value'>{trainingType}</p>
-                        <p className='partner-card__info-title'>Средняя нагрузка:</p>
-                        <p className='partner-card__info-value'>{avgWeightInWeek} кг/нед</p>
-                    </div> */}
                     {type === 'full' && (
                         <>
                             <ButtonDrawerTraining

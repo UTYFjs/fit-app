@@ -9,26 +9,33 @@ import { PartnerStatus, TrainingsInviteMessage } from '@constants/training';
 import { InviteDetailsCard } from '../invite-details-card/invite-details-card';
 import { useAnswerInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { deleteInviteItem } from '@redux/invite-slice';
+import { useGetTrainingPalsQuery } from '@services/training-api';
 
 type InviteProps = {
     inviteList: InviteType[];
 };
 export const Invite = ({ inviteList }: InviteProps) => {
+    const [answerInvite] = useAnswerInviteMutation();
+    const [getInviteList] = useLazyGetInviteListQuery();
+    const { refetch } = useGetTrainingPalsQuery();
+
+    const dispatch = useAppDispatch();
+
     const [isAllInvites, setIsAllInvites] = useState(false);
     const [isOpenModalDetails, setIsOpenModalDetails] = useState(false);
     const [currentInviteIdInvite, setIsCurrentIdInvite] = useState('');
-    const [answerInvite] = useAnswerInviteMutation();
-    const [getInviteList] = useLazyGetInviteListQuery();
 
-    const handleSeeAllInvites = () => {
-        setIsAllInvites((state) => !state);
-        console.log('isAllInvtes', isAllInvites);
-    };
+    const handleSeeAllInvites = () => setIsAllInvites((state) => !state);
+
     const handleAcceptInvite = async (idInvite: string) => {
         console.log('accept invite', idInvite);
         await answerInvite({ id: idInvite, status: PartnerStatus.ACCEPTED })
             .unwrap()
             .then(async () => {
+                dispatch(deleteInviteItem(idInvite));
+                await refetch();
                 await getInviteList();
             })
             .catch(() => {});
@@ -37,20 +44,18 @@ export const Invite = ({ inviteList }: InviteProps) => {
         await answerInvite({ id: idInvite, status: PartnerStatus.REJECTED })
             .unwrap()
             .then(async () => {
+                dispatch(deleteInviteItem(idInvite));
                 await getInviteList();
             })
             .catch(() => {});
-        console.log('reject invite', idInvite);
     };
     const handleSeeTrainingDetails = (id: string) => {
         setIsCurrentIdInvite(id);
         setIsOpenModalDetails(true);
-        console.log('open modal');
     };
     const handleCloseModalDetails = () => {
         setIsCurrentIdInvite('');
         setIsOpenModalDetails(false);
-        console.log('close modal');
     };
     return (
         <div className='invite-wrapper'>

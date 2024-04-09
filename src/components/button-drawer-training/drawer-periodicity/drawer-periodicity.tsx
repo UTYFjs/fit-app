@@ -16,8 +16,6 @@ import { TrainingDataTestId } from '@constants/data-test-id';
 import { isPast } from '@utils/date-utils';
 import { useGetTrainingsQuery } from '@services/training-api';
 
-//type DrawerPeriodicityProps = {};
-
 export const DrawerPeriodicity = () => {
     const currentTraining = useAppSelector(getCurrentTraining);
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -58,7 +56,6 @@ export const DrawerPeriodicity = () => {
             dispatch(updatePeriodCurrentTraining(null));
         }
         setWithPeriod(e.target.checked);
-        //todo привязать чекбокс к repeat
     };
 
     const onChangeSelect = (e: number) => {
@@ -77,7 +74,6 @@ export const DrawerPeriodicity = () => {
                     size='small'
                     defaultValue={moment(currentTraining.date || new Date())}
                     onChange={onChangeDate}
-                    // data-test-id={ProfileDataTestId.PROFILE_BIRTHDAY}
                 />
                 <Checkbox
                     data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_CHECKBOX_PERIOD}
@@ -89,9 +85,7 @@ export const DrawerPeriodicity = () => {
             {withPeriod && (
                 <div className='periodicity-row'>
                     <Select
-                        // className='training-list__select'
                         data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_SELECT_PERIOD}
-                        // defaultValue={selectedTraining || 'Выбор типа тренировки'}
                         placeholder={<div>Периодичность</div>}
                         size={'middle'}
                         options={PeriodOptions}

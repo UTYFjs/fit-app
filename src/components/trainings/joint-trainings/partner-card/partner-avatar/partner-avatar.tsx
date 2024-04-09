@@ -15,8 +15,9 @@ export const PartnerAvatar = ({ imageSrc, name }: PartnerCardProps) => {
             <Avatar size={42} src={imageSrc} alt={name} icon={!imageSrc && <UserOutlined />} />
             {/* {!imageSrc && <Avatar size={42} />} */}
             <div>
-                <p className='partner__name'>{name ? firstName : 'Пользователь'}</p>
-                <p className='partner__name'>{lastName}</p>
+                <p className='partner-card__name'>{name}</p>
+                {/* <p className='partner__name'>{name ? firstName : 'Пользователь'}</p>
+                <p className='partner__name'>{lastName}</p> */}
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { Alert, Avatar, Button, Select } from 'antd';
+import { Avatar, Button, Select } from 'antd';
 
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -23,16 +23,18 @@ import {
     setAlertMessage,
     setCurrentTraining,
     updateNameCurrentTraining,
+    updateStatusUserJointTrainingList,
 } from '@redux/training-slice';
 import {
     useAddTrainingMutation,
     useGetTrainingListQuery,
     useGetTrainingsQuery,
+    useLazyGetUserJointTrainingListQuery,
     useUpdateTrainingMutation,
 } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
 import { useCreateInviteMutation } from '@services/invite-api';
-import { CalendarDataTeatId, TrainingDataTestId } from '@constants/data-test-id';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import ModalError from '@components/modal-error/modal-error';
 
@@ -45,7 +47,6 @@ type ButtonDrawerTrainingProps = ButtonProps & {
     isEdit?: boolean;
     dataTestIdBtn?: string;
     onClickBtn?: (() => void) | null;
-    //refetch?: () => void;
     drawerChildren?: ReactNode;
     partnerUser?: UserJointTrainingListType;
     handleOnSave?: () => void;
@@ -59,41 +60,23 @@ const ButtonDrawerTraining = ({
     isEdit = false,
     dataTestIdBtn,
     onClickBtn,
-    //refetch,
     drawerChildren,
     partnerUser,
-    //check onSave isUse
     handleOnSave,
     ...rest
 }: ButtonDrawerTrainingProps) => {
-    const dispatch = useAppDispatch();
     const currentTraining = useAppSelector(getCurrentTraining);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const [addTraining, { isError: isErrorAdd }] = useAddTrainingMutation();
     const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation();
     const { data: allTrainingsByDay, refetch } = useGetTrainingsQuery();
     const [createInvite, { isError: IsErrorCreateInvite }] = useCreateInviteMutation();
-    const [isModalError, setIsModalError] = useState(false);
+
+    const dispatch = useAppDispatch();
+
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const { data: dataTrainingList } = useGetTrainingListQuery();
-
-    useEffect(() => {
-        if (isErrorAdd || isErrorUpdate || IsErrorCreateInvite) {
-            setIsModalError(true);
-        } else {
-            setIsModalError(false);
-        }
-    }, [IsErrorCreateInvite, isErrorAdd, isErrorUpdate]);
-
-    // const optionsTrainingSelect = getSelectedTrainings(
-    //     dataTrainingList || [],
-    //     allTrainingsByDay?.[
-    //         new Date(currentTraining.date || new Date()).toISOString().split('T')[0]
-    //     ] || [],
-    //     currentTraining.name as TrainingNames,
-    //     false,
-    // );
 
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
@@ -106,34 +89,11 @@ const ButtonDrawerTraining = ({
     useEffect(() => {
         if (partnerUser) {
             dispatch(updateNameCurrentTraining(partnerUser.trainingType as TrainingNames));
-            console.log('dispatch currentTraining AFTER pARTNERusER', currentTraining);
         }
     }, [dispatch, partnerUser]);
 
     const [newExercises, setNewExercises] = useState(currentTraining.exercises);
     const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([]);
-
-    // const [isModalResultOpen, setIsModalResultOpen] = useState(false);
-    // const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(
-    //     null,
-    // );
-
-    // useEffect(() => {
-    //     if (isErrorAddFeedback) {
-    //         setIsModalFeedbackOpen(false);
-    //         setModalResultType('errorReview');
-    //         setIsModalResultOpen(true);
-    //     }
-    // }, [isErrorAddFeedback]);
-
-    // useEffect(() => {
-    //     if (isSuccessAddFeedback) {
-    //         setIsModalFeedbackOpen(false);
-    //         setModalResultType('successReview');
-    //         setIsModalResultOpen(true);
-    //         refetch && refetch();
-    //     }
-    // }, [isSuccessAddFeedback, refetch]);
 
     const handleOpenDrawer = () => {
         const currentTraining = training || structuredClone(defaultTraining);
@@ -149,9 +109,7 @@ const ButtonDrawerTraining = ({
 
     const handleDrawerAction = async () => {
         handleOnSave && handleOnSave();
-
         if (isEdit) {
-            console.log('PERIODICITY EDIT  drawer Action');
             await updateTraining(currentTraining)
                 .unwrap()
                 .then(() => {
@@ -163,15 +121,24 @@ const ButtonDrawerTraining = ({
                     setIsModalErrorOpen(true);
                 });
         } else {
-            console.log('PERIODICITY NEW drawer Action');
             await addTraining(currentTraining)
                 .unwrap()
                 .then(async (data) => {
-                    console.log('dataTraining from Handler', data._id);
-
                     partnerUser &&
                         isJoint &&
-                        (await createInvite({ to: partnerUser.id, trainingId: data._id }).unwrap());
+                        (await createInvite({
+                            to: partnerUser.id,
+                            trainingId: data._id,
+                        })
+                            .unwrap()
+                            .then(() => {
+                                dispatch(
+                                    updateStatusUserJointTrainingList({
+                                        ...partnerUser,
+                                        status: 'pending',
+                                    }),
+                                );
+                            }));
                     await refetch();
                     handleCloseDrawer();
                     dispatch(setAlertMessage('Новая тренировка успешно добавлена'));
@@ -195,35 +162,6 @@ const ButtonDrawerTraining = ({
         }
         console.log('after update remove', forRemoveIdxExercises);
     };
-
-    // const handleOnChangeName = (name: string, index: number) => {
-    //     setNewExercises((state) => {
-    //         const newState = [...state];
-    //         newState[index].name = name;
-    //         return newState;
-    //     });
-    // };
-    // const handleOnChangeReplays = (replays: number, index: number) => {
-    //     setNewExercises((state) => {
-    //         const newState = [...state];
-    //         newState[index].replays = replays;
-    //         return newState;
-    //     });
-    // };
-    // const handleOnChangeWeight = (weight: number, index: number) => {
-    //     setNewExercises((state) => {
-    //         const newState = [...state];
-    //         newState[index].weight = weight;
-    //         return newState;
-    //     });
-    // };
-    // const handleOnChangeApproaches = (approaches: number, index: number) => {
-    //     setNewExercises((state) => {
-    //         const newState = [...state];
-    //         newState[index].approaches = approaches;
-    //         return newState;
-    //     });
-    // };
     const handleRemove = () => {
         dispatch(removeExercises(forRemoveIdxExercises));
         setForRemoveIdxExercises([]);
@@ -289,9 +227,7 @@ const ButtonDrawerTraining = ({
                                     alt={partnerUser.name}
                                     icon={!partnerUser.imageSrc && <UserOutlined />}
                                 />
-                                <div>
-                                    <p className='partner-card__name'>{partnerUser.name}</p>
-                                </div>
+                                <p className='partner-card__name'>{partnerUser.name}</p>
                             </div>
 
                             <div>
@@ -333,10 +269,6 @@ const ButtonDrawerTraining = ({
                                     weight={weight}
                                     index={index}
                                     forRemoveIdxExercises={forRemoveIdxExercises}
-                                    //handleOnChangeApproaches={handleOnChangeApproaches}
-                                    //handleOnChangeName={handleOnChangeName}
-                                    //handleOnChangeReplays={handleOnChangeReplays}
-                                    //handleOnChangeWeight={handleOnChangeWeight}
                                     handleOnChangeRemoveCheckbox={handleOnChangeRemoveCheckbox}
                                 />
                             ),
@@ -350,24 +282,9 @@ const ButtonDrawerTraining = ({
                     {drawerChildren}
                 </div>
             </DrawerCustom>
-            {
-                //(isErrorAdd || isErrorUpdate || IsErrorCreateInvite) && (
-                <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
-                    <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
-                </ModalError>
-                //)
-            }
-
-            {/* <ModalResult
-                isOpen={isModalResultOpen}
-                typeContent={modalResultType}
-                handlePrimeButton={
-                    modalResultType === 'errorReview'
-                        ? handleRetryErrorSendFeedback
-                        : handleSuccessFeedback
-                }
-                handleSecondButton={handleCancelErrorFedback}
-            /> */}
+            <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>
+                <SaveErrorCard handlePrimeButton={handleCloseErrorModal} />
+            </ModalError>
         </>
     );
 };

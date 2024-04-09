@@ -5,6 +5,8 @@ import { UserJointTrainingListType } from '@types/training-types';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { TrainingDataTestId } from '@constants/data-test-id';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getUserJointTrainingList } from '@redux/training-slice';
 
 const { Search } = Input;
 type UserJointListProps = {
@@ -13,15 +15,13 @@ type UserJointListProps = {
 };
 export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
     const [searchValue, setSearchValue] = useState('');
+    const users1 = useAppSelector(getUserJointTrainingList);
 
-    const searchedUsers = users.filter((user) =>
+    const searchedUsers = users1.filter((user) =>
         user.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase().trim()),
     );
 
-    const onSearch = (search: string) => {
-        setSearchValue(search);
-        console.log('onSearch event', search);
-    };
+    const onSearch = (search: string) => setSearchValue(search);
     return (
         <div className='users-joint-list-wrapper'>
             <div className='user-joint-list__header'>

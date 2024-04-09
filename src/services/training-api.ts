@@ -9,7 +9,11 @@ import {
 } from '../types/training-types';
 
 import { api } from './api';
-import { setAvailableTrainingNames } from '@redux/training-slice';
+import {
+    setAvailableTrainingNames,
+    setPartnersList,
+    setUserJointTrainingList,
+} from '@redux/training-slice';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -80,9 +84,10 @@ export const trainingApi = api.injectEndpoints({
                 url: Endpoint.USER_JOINT_TRAINING_LIST,
                 params: body,
             }),
-            onQueryStarted: async (_, { queryFulfilled }) => {
+            onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
                 try {
                     const { data } = await queryFulfilled;
+                    dispatch(setUserJointTrainingList(data));
                     console.log('данные пользователей', data);
                 } catch {
                     () => {};
@@ -93,9 +98,10 @@ export const trainingApi = api.injectEndpoints({
             query: () => ({
                 url: Endpoint.TRAINING_PALS,
             }),
-            onQueryStarted: async (_, { queryFulfilled }) => {
+            onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
                 try {
                     const { data } = await queryFulfilled;
+                    dispatch(setPartnersList(data));
                     console.log('данные совместных пользователей', data);
                 } catch {
                     () => {};

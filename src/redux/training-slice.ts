@@ -1,18 +1,22 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from './configure-store';
-import { ResTrainingType, TrainingNames } from '../types/training-types';
+import { ResTrainingType, TrainingNames, UserJointTrainingListType } from '../types/training-types';
 import { defaultExercise, defaultTraining } from '@constants/training';
 
 type TrainingState = {
     currentTraining: ResTrainingType;
     availableTrainingNames: string[];
     alertMessage: string;
+    userJointTrainingList: UserJointTrainingListType[];
+    partnersList: UserJointTrainingListType[];
 };
 
 const initialState: TrainingState = {
     currentTraining: defaultTraining,
     availableTrainingNames: [],
+    userJointTrainingList: [],
+    partnersList: [],
     alertMessage: '',
 };
 const trainingSlice = createSlice({
@@ -70,6 +74,32 @@ const trainingSlice = createSlice({
         clearCurrentTraining: (state) => {
             state.currentTraining = defaultTraining;
         },
+        setUserJointTrainingList: (
+            state,
+            { payload }: PayloadAction<UserJointTrainingListType[]>,
+        ) => {
+            state.userJointTrainingList = payload;
+        },
+        updateStatusUserJointTrainingList: (
+            state,
+            { payload }: PayloadAction<UserJointTrainingListType>,
+        ) => {
+            state.userJointTrainingList = state.userJointTrainingList.map((item) => {
+                if (item.id === payload.id) {
+                    return payload;
+                }
+                return item;
+            });
+        },
+        setPartnersList: (state, { payload }: PayloadAction<UserJointTrainingListType[]>) => {
+            state.partnersList = payload;
+        },
+        addPartnerToList: (state, { payload }: PayloadAction<UserJointTrainingListType>) => {
+            state.partnersList.push(payload);
+        },
+        deletePartnerFromList: (state, { payload }: PayloadAction<string>) => {
+            state.partnersList = state.partnersList.filter((partner) => partner.id !== payload);
+        },
         setAlertMessage: (state, { payload }: PayloadAction<string>) => {
             state.alertMessage = payload;
         },
@@ -89,8 +119,15 @@ export const {
     updateExerciseReplaysCurrentTraining,
     removeExercises,
     clearCurrentTraining,
+    setUserJointTrainingList,
+    updateStatusUserJointTrainingList,
+    setPartnersList,
+    addPartnerToList,
+    deletePartnerFromList,
     setAlertMessage,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;
 export const getCurrentTraining = ({ training }: RootState) => training.currentTraining;
 export const getAlertMessage = ({ training }: RootState) => training.alertMessage;
+export const getUserJointTrainingList = ({ training }: RootState) => training.userJointTrainingList;
+export const getPartnersList = ({ training }: RootState) => training.partnersList;

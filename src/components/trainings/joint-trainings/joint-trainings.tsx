@@ -19,8 +19,6 @@ export const JointTrainings = () => {
     ] = useLazyGetUserJointTrainingListQuery();
     const dataInviteList = useAppSelector(getInviteList);
     console.log('dataInviteList', dataInviteList);
-    //const { data: dataInviteList, isError: isErrorInviteList } = useGetInviteListQuery();
-    //const [getTrainings, { data: MyTrainings }] = useLazyGetTrainingsQuery();
     const { data: MyTrainings } = useGetTrainingsQuery();
     console.log('dataInviteList', dataInviteList);
 
@@ -101,7 +99,6 @@ export const JointTrainings = () => {
                     isClosable={true}
                     onCancel={handleCloseErrorModal}
                 >
-                    {/* <SaveErrorCard handlePrimeButton={handleCloseErrorModal} /> */}
                     <OpenErrorCard handlePrimeButton={handleRefetch} />
                 </ModalError>
             }
