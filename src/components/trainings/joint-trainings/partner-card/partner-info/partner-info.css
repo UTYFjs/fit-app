@@ -1,0 +1,27 @@
+.partner-card__info{
+  display: grid;
+  grid-template-columns: 110px minmax(80px, 150px);  
+  grid-template-rows: repeat(2);
+  grid-column-gap: var(--gap);
+  grid-row-gap: var(--gap-3_4xs);
+}
+
+.partner-card__info-title{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+
+  /*width: fit-content;*/
+}
+
+.partner-card__info-value{
+  font-family: var(--font-family);
+  font-weight: var(font-weight-m);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--primary-light-6);
+
+  /*width: fit-content;*/
+}

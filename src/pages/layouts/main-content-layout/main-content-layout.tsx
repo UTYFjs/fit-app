@@ -8,10 +8,13 @@ import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
 import { useGetUserInfoQuery } from '@services/user-profile-api';
+import { useGetInviteListQuery } from '@services/invite-api';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
     const { data } = useGetUserInfoQuery();
+    useGetInviteListQuery();
+
     return (
         <>
             <SideBar />

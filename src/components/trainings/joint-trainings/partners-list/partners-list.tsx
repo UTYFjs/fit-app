@@ -17,9 +17,9 @@ export const PartnersList = () => {
                 <List
                     className='partners-list'
                     dataSource={dataTrainingPals}
-                    renderItem={(item) => (
+                    renderItem={(item, index) => (
                         <List.Item key={item.id + 'partnerCard'}>
-                            <PartnerCard type={'short'} user={item} />
+                            <PartnerCard index={index} type={'short'} user={item} />
                         </List.Item>
                     )}
                 />

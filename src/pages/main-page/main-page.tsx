@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 import './main-page.css';
 import ModalServerError from '@components/modal-server-error/modal-server-error';
 import { Paths } from '@constants/api';
-import { CalendarDataTeatId, ProfileDataTestId } from '@constants/data-test-id';
+import { CalendarDataTeatId, ProfileDataTestId, TrainingDataTestId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +23,7 @@ export const MainPage = () => {
             icon: <HeartFilled />,
             label: 'Тренировки',
             pathTo: Paths.TRAINING,
+            dataTestId: TrainingDataTestId.MENU_BUTTON_TRAINING,
         },
         {
             key: useId(),

@@ -7,7 +7,8 @@ import moment from 'moment';
 import { DateFormat } from '@constants/date';
 import { PartnerStatus, TrainingsInviteMessage } from '@constants/training';
 import { InviteDetailsCard } from '../invite-details-card/invite-details-card';
-import { useAnswerInviteMutation } from '@services/invite-api';
+import { useAnswerInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
+import { TrainingDataTestId } from '@constants/data-test-id';
 
 type InviteProps = {
     inviteList: InviteType[];
@@ -16,18 +17,29 @@ export const Invite = ({ inviteList }: InviteProps) => {
     const [isAllInvites, setIsAllInvites] = useState(false);
     const [isOpenModalDetails, setIsOpenModalDetails] = useState(false);
     const [currentInviteIdInvite, setIsCurrentIdInvite] = useState('');
-    const [answerInvite, { isError: IsErrorAnswerInvite }] = useAnswerInviteMutation();
+    const [answerInvite] = useAnswerInviteMutation();
+    const [getInviteList] = useLazyGetInviteListQuery();
 
     const handleSeeAllInvites = () => {
         setIsAllInvites((state) => !state);
         console.log('isAllInvtes', isAllInvites);
     };
-    const handleAcceptInvite = (idInvite: string) => {
+    const handleAcceptInvite = async (idInvite: string) => {
         console.log('accept invite', idInvite);
-        answerInvite({ id: idInvite, status: PartnerStatus.ACCEPTED });
+        await answerInvite({ id: idInvite, status: PartnerStatus.ACCEPTED })
+            .unwrap()
+            .then(async () => {
+                await getInviteList();
+            })
+            .catch(() => {});
     };
-    const handleRejectInvite = (idInvite: string) => {
-        answerInvite({ id: idInvite, status: PartnerStatus.REJECTED });
+    const handleRejectInvite = async (idInvite: string) => {
+        await answerInvite({ id: idInvite, status: PartnerStatus.REJECTED })
+            .unwrap()
+            .then(async () => {
+                await getInviteList();
+            })
+            .catch(() => {});
         console.log('reject invite', idInvite);
     };
     const handleSeeTrainingDetails = (id: string) => {
@@ -81,6 +93,7 @@ export const Invite = ({ inviteList }: InviteProps) => {
                                     <InviteDetailsCard
                                         record={training}
                                         onClose={handleCloseModalDetails}
+                                        dataTestId={TrainingDataTestId.JOINT_TRAINING_REVIEW_CARD}
                                     />
                                 )}
                             </div>

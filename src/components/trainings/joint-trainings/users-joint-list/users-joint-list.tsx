@@ -4,6 +4,7 @@ import './users-joint-list.css';
 import { UserJointTrainingListType } from '@types/training-types';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import { TrainingDataTestId } from '@constants/data-test-id';
 
 const { Search } = Input;
 type UserJointListProps = {
@@ -32,6 +33,7 @@ export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
                 <div>
                     {' '}
                     <Search
+                        data-test-id={TrainingDataTestId.SEARCH_INPUT}
                         className='user-joint-list__search'
                         placeholder='Поиск по имени'
                         onSearch={(search) => {

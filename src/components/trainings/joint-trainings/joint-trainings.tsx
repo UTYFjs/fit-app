@@ -4,17 +4,18 @@ import ButtonGroup from 'antd/lib/button/button-group';
 import { PartnersList } from './partners-list/partners-list';
 import { useGetTrainingsQuery, useLazyGetUserJointTrainingListQuery } from '@services/training-api';
 import { Invite } from './invite/invite';
-import { useGetInviteListQuery } from '@services/invite-api';
 import { useState } from 'react';
 import { UserJointList } from './users-joint-list/users-joint-list';
 import { getFavoriteTraining } from '@utils/get-favourite-training';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getInviteList } from '@redux/invite-slice';
 
 export const JointTrainings = () => {
-    const [
-        getUserJointTrainingList,
-        { data: dataUserJointTrainingList, isError: isErrorUserJointTrainingList },
-    ] = useLazyGetUserJointTrainingListQuery();
-    const { data: dataInviteList, isError: isErrorInviteList } = useGetInviteListQuery();
+    const [getUserJointTrainingList, { data: dataUserJointTrainingList }] =
+        useLazyGetUserJointTrainingListQuery();
+    const dataInviteList = useAppSelector(getInviteList);
+    console.log('dataInviteList', dataInviteList);
+    //const { data: dataInviteList, isError: isErrorInviteList } = useGetInviteListQuery();
     //const [getTrainings, { data: MyTrainings }] = useLazyGetTrainingsQuery();
     const { data: MyTrainings } = useGetTrainingsQuery();
     console.log('dataInviteList', dataInviteList);

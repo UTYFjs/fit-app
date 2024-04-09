@@ -8,6 +8,7 @@ import {
 } from '../types/training-types';
 
 import { api } from './api';
+import { setInviteList } from '@redux/invite-slice';
 
 export const inviteApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -15,7 +16,23 @@ export const inviteApi = api.injectEndpoints({
             query: () => ({
                 url: Endpoint.INVITE,
             }),
-            providesTags: ['Invites'],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setInviteList(data));
+                    console.log('сетнулась в редакс InviteList');
+                } catch {
+                    () => {};
+                }
+            },
+            //todo
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ _id }) => ({ type: 'Invites' as const, _id })),
+                          { type: 'Invites', id: 'LIST' },
+                      ]
+                    : [{ type: 'Invites', id: 'LIST' }],
         }),
 
         createInvite: builder.mutation<CreateInviteResType, CreateInviteRequestType>({

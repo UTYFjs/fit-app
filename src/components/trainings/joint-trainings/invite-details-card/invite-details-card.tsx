@@ -11,10 +11,12 @@ import { getPeriodTextByValue } from '@utils/get-period-text-by-value';
 type InviteDetailsCardProps = {
     record: ResTrainingType;
     onClose: () => void;
+    dataTestId: string;
 };
 
-export const InviteDetailsCard = ({ record, onClose }: InviteDetailsCardProps) => (
+export const InviteDetailsCard = ({ record, onClose, dataTestId }: InviteDetailsCardProps) => (
     <Card
+        data-test-id={dataTestId}
         className='card-training'
         //data-test-id={}
         bordered={false}

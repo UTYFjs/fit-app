@@ -7,6 +7,7 @@ import { getSelectedTrainings } from '@utils/get-select-training';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining } from '@redux/training-slice';
 import { TrainingListType, TrainingNames, TransformResTrainingType } from '@types/training-types';
+import { TrainingDataTestId } from '@constants/data-test-id';
 
 export const MyTrainings = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -30,6 +31,7 @@ export const MyTrainings = () => {
             </Button> */}
             {!IsErrorTrainingsList && (
                 <ButtonDrawerCustom
+                    dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}
                     btnText='Создать тренировку'
                     isPeriodicity={true}
                     icon={<PlusOutlined style={{ fontSize: '14px' }} />}

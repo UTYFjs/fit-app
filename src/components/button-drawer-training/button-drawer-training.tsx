@@ -31,6 +31,7 @@ import {
 } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
 import { useCreateInviteMutation } from '@services/invite-api';
+import { CalendarDataTeatId } from '@constants/data-test-id';
 
 type ButtonDrawerTrainingProps = ButtonProps & {
     buttonClass?: string;
@@ -233,10 +234,10 @@ const ButtonDrawerTraining = ({
                         <div className='drawer-button__title'>
                             {' '}
                             {isEdit
-                                ? 'Редактировать тренировку'
+                                ? 'Редактирование'
                                 : isJoint
                                 ? 'Совместная тренировка'
-                                : 'Новая тренировка'}
+                                : 'Добавление упражнений'}
                         </div>
                     </div>
                 }
@@ -288,7 +289,7 @@ const ButtonDrawerTraining = ({
                     {isPeriodicity && !isJoint && (
                         <Select
                             className='training-list__select'
-                            //data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
+                            data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
                             defaultValue={currentTraining.name || 'Выбор типа тренировки'}
                             placeholder={<div>Выбор типа тренировки</div>}
                             size={'middle'}

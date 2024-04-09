@@ -11,18 +11,22 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 import { Paths } from '@constants/api.ts';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks.ts';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks.ts';
 import { setExitApp } from '@redux/user-slice.ts';
 import { getCssVar } from '@utils/get-css-var.ts';
-import { Button, Layout, Menu } from 'antd';
+import { Badge, Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
 import { setExitAppUserInfo } from '@redux/profile-slice.ts';
+import { getInviteList } from '@redux/invite-slice.ts';
+import { TrainingDataTestId } from '@constants/data-test-id.ts';
 
 const { Sider } = Layout;
 
 export const SideBar: React.FC = () => {
+    const inviteList = useAppSelector(getInviteList);
+
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [collapsed, setCollapsed] = useState(isMobile);
     const { pathname } = useLocation();
@@ -63,7 +67,15 @@ export const SideBar: React.FC = () => {
         },
         {
             key: Paths.TRAINING,
-            icon: <HeartFilled style={{ color: colorPrimaryLight9 }} />,
+            icon: (
+                <Badge
+                    data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
+                    count={inviteList.length ? inviteList.length : 0}
+                    size='small'
+                >
+                    <HeartFilled style={{ color: colorPrimaryLight9 }} />
+                </Badge>
+            ),
             label: 'Тренировки',
             style: styleMenuItem,
         },

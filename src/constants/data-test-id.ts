@@ -63,4 +63,5 @@ export const enum TrainingDataTestId {
     MODAL_DRAWER_RIGHT_SELECT_PERIOD = 'modal-drawer-right-select-period',
     SEARCH_INPUT = 'search-input',
     PARTNER_MODAL = 'partner-modal',
+    MENU_BUTTON_TRAINING = 'menu-button-training',
 }

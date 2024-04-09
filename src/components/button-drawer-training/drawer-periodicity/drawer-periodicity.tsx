@@ -12,6 +12,7 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { TrainingDataTestId } from '@constants/data-test-id';
 
 //type DrawerPeriodicityProps = {};
 
@@ -49,6 +50,7 @@ export const DrawerPeriodicity = () => {
         <div className='periodicity-wrapper'>
             <div className='periodicity-row'>
                 <DatePicker
+                    data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_DATE_PICKER}
                     locale={localeCalendar2}
                     format={DateFormat.DOT_DD_MM_YYYY}
                     placeholder='Выберите дату'
@@ -57,13 +59,18 @@ export const DrawerPeriodicity = () => {
                     onChange={onChangeDate}
                     // data-test-id={ProfileDataTestId.PROFILE_BIRTHDAY}
                 />
-                <Checkbox onChange={onChangeCheckbox}>С периодичностью</Checkbox>
+                <Checkbox
+                    data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_CHECKBOX_PERIOD}
+                    onChange={onChangeCheckbox}
+                >
+                    С периодичностью
+                </Checkbox>
             </div>
             {withPeriod && (
                 <div className='periodicity-row'>
                     <Select
                         // className='training-list__select'
-                        // data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
+                        data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_SELECT_PERIOD}
                         // defaultValue={selectedTraining || 'Выбор типа тренировки'}
                         placeholder={<div>Периодичность</div>}
                         size={'middle'}

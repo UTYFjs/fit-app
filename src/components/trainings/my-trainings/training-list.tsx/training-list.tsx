@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { ExerciseInfoCard } from '../exercise-info-card/exercise-info-card';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining, setCurrentTraining } from '@redux/training-slice';
+import { TrainingDataTestId } from '@constants/data-test-id';
 
 export const TrainingList = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -78,8 +79,9 @@ export const TrainingList = () => {
         {
             key: 'action',
             width: 20,
-            render: (_, record) => (
+            render: (_, record, index) => (
                 <ButtonDrawerTraining
+                    dataTestIdBtn={`${TrainingDataTestId.UPDATE_MY_TRAINING_TABLE_ICON_INDEX}${index}`}
                     training={record}
                     isEdit={true}
                     isPeriodicity={true}
@@ -118,6 +120,7 @@ export const TrainingList = () => {
     return (
         <div className='training-list-table'>
             <Table
+                data-test-id={TrainingDataTestId.MY_TRAININGS_TABLE}
                 columns={columns}
                 pagination={{ position: ['bottomLeft', 'bottomLeft'] }}
                 size='small'
