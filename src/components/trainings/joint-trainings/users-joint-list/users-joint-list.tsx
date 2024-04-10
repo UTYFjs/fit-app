@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getUserJointTrainingList } from '@redux/training-slice';
+import { sortByAZAndStatusUsers } from '@utils/sort-by-a-z-and-status-users';
 
 const { Search } = Input;
 type UserJointListProps = {
@@ -13,9 +14,9 @@ type UserJointListProps = {
 };
 export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
     const [searchValue, setSearchValue] = useState('');
-    const users1 = useAppSelector(getUserJointTrainingList);
+    const users = useAppSelector(getUserJointTrainingList);
 
-    const searchedUsers = users1.filter((user) =>
+    const searchedUsers = sortByAZAndStatusUsers(users).filter((user) =>
         user.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase().trim()),
     );
 
@@ -27,7 +28,7 @@ export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
                     className='user-joint-list__btn-back'
                     type='text'
                     size='large'
-                    icon={<ArrowLeftOutlined style={{ fontSize: 12 }} />}
+                    icon={<ArrowLeftOutlined style={{ fontSize: 16 }} />}
                     onClick={handleGoBack}
                 >
                     Назад
@@ -37,6 +38,7 @@ export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
                     <Search
                         data-test-id={TrainingDataTestId.SEARCH_INPUT}
                         className='user-joint-list__search'
+                        //style={{ maxWidth: 200 }}
                         placeholder='Поиск по имени'
                         onSearch={(search) => {
                             onSearch(search);

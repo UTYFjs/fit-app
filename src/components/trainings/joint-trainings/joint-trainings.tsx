@@ -52,7 +52,11 @@ export const JointTrainings = () => {
     };
 
     if (dataUserJointTrainingList && isShowUsersJointList) {
-        return <UserJointList handleGoBack={handleGoBack} />;
+        return (
+            <div className='joint-training-wrapper'>
+                <UserJointList handleGoBack={handleGoBack} />
+            </div>
+        );
     }
     return (
         <div className='joint-training-wrapper'>

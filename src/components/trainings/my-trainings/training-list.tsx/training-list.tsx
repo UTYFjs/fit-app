@@ -24,7 +24,7 @@ export const TrainingList = () => {
 
     const [isOpenTrainingModal, setIsOpenTrainingModal] = useState(false);
 
-    const handleOpenTrainingModal = (record: ResTrainingType) => {
+    const handleOpenTrainingModal = () => {
         setIsOpenTrainingModal(true);
     };
     const handleOnCloseTrainingModal = () => {
