@@ -35,7 +35,6 @@ export const InviteDetailsCard = ({ record, onClose, dataTestId }: InviteDetails
                 <div className='card-exercise-info__title-wrapper'>
                     <BadgeTraining text={record.name} isShort />
                     <Button
-                        // data-test-id={CalendarDataTeatId.MODAL_EXERCISE_TRAINING_BUTTON_CLOSE}
                         type='text'
                         size='small'
                         style={{ height: 16, width: 16 }}

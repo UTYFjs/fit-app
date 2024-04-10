@@ -1,17 +1,15 @@
 import { List } from 'antd';
 import { PartnerCard } from '../partner-card/partner-card';
 import './partners-list.css';
-import { useGetTrainingPalsQuery, useLazyGetTrainingPalsQuery } from '@services/training-api';
+import { useLazyGetTrainingPalsQuery } from '@services/training-api';
 import { useEffect, useState } from 'react';
 import ModalError from '@components/modal-error/modal-error';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
-import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getPartnersList } from '@redux/training-slice';
 
 export const PartnersList = () => {
-    //const { data: dataTrainingPals, isError: isErrorTrainingPals } = useGetTrainingPalsQuery();
-    const [getTrainingPals, { data: dataTrainingPals }] = useLazyGetTrainingPalsQuery();
+    const [getTrainingPals] = useLazyGetTrainingPalsQuery();
     const partnerList = useAppSelector(getPartnersList);
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 

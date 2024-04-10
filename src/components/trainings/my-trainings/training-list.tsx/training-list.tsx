@@ -2,12 +2,12 @@ import { Button, Table } from 'antd';
 import './training-list.css';
 
 import { useGetTrainingsQuery } from '@services/training-api';
-import { DownOutlined, EditOutlined, EditTwoTone } from '@ant-design/icons';
+import { DownOutlined, EditOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/lib/table';
 import { ResTrainingType } from '../../../../types/training-types';
 import BadgeTraining from '@components/badge-training/badge-training';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ExerciseInfoCard } from '../exercise-info-card/exercise-info-card';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining, setCurrentTraining } from '@redux/training-slice';
@@ -54,7 +54,7 @@ export const TrainingList = () => {
                         disabled={record.isImplementation}
                         onClick={() => {
                             dispatch(setCurrentTraining(record));
-                            handleOpenTrainingModal(record);
+                            handleOpenTrainingModal();
                         }}
                     />
                     {isOpenTrainingModal && currentTraining._id === record._id && (

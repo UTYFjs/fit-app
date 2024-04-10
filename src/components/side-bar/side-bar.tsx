@@ -11,30 +11,27 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 import { Paths } from '@constants/api.ts';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks.ts';
-import { setExitApp } from '@redux/user-slice.ts';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks.ts';
 import { getCssVar } from '@utils/get-css-var.ts';
 import { Badge, Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
-import { setExitAppProfile, setExitAppUserInfo } from '@redux/profile-slice.ts';
-import { getInviteList, setExitAppInvite } from '@redux/invite-slice.ts';
+import { getInviteList } from '@redux/invite-slice.ts';
 import { TrainingDataTestId } from '@constants/data-test-id.ts';
-import { setExitAppTraining } from '@redux/training-slice.ts';
 import { useExitApp } from '@hooks/use-exit-app.ts';
 
 const { Sider } = Layout;
 
 export const SideBar: React.FC = () => {
     const inviteList = useAppSelector(getInviteList);
+    const { pathname } = useLocation();
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [collapsed, setCollapsed] = useState(isMobile);
-    const { pathname } = useLocation();
     const [currentMenuItem, setCurrentMenuItem] = useState(pathname);
+
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const exitApp = useExitApp();
 
     useEffect(() => {
@@ -45,16 +42,6 @@ export const SideBar: React.FC = () => {
         setIsMobile(window.innerWidth < 768);
         setCollapsed(window.innerWidth < 768);
     });
-
-    const handleExit = () => {
-        localStorage.removeItem('accessToken');
-        dispatch(setExitAppInvite());
-        dispatch(setExitAppProfile());
-        dispatch(setExitAppTraining());
-        dispatch(setExitApp());
-        dispatch(setExitAppUserInfo());
-        navigate(Paths.LOGIN);
-    };
 
     const colorPrimaryLight9 = getCssVar('--primary-light-9') || '#000';
     const styleMenuItem = {

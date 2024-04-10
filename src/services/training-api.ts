@@ -70,9 +70,7 @@ export const trainingApi = api.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setAvailableTrainingNames(data.map((item) => item.name)));
                 } catch {
-                    () => {
-                        console.log('error request Training List');
-                    };
+                    () => {};
                 }
             },
         }),
@@ -88,7 +86,6 @@ export const trainingApi = api.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setUserJointTrainingList(data));
-                    console.log('данные пользователей', data);
                 } catch {
                     () => {};
                 }
@@ -102,7 +99,6 @@ export const trainingApi = api.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setPartnersList(data));
-                    console.log('данные совместных пользователей', data);
                 } catch {
                     () => {};
                 }

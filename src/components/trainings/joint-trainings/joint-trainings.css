@@ -62,12 +62,6 @@
   color: var(--character-light-title-85);
 }
 
-
-@media (max-width: 1280px) and (min-width: 576px){
-
-
-}      
-
 @media (max-width: 576px){
 
   .joint-training-wrapper{

@@ -5,11 +5,7 @@ import classNames from 'classnames';
 import { UserJointTrainingListType } from '../../../../types/training-types';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
 import { PartnerStatus } from '@constants/training';
-import {
-    useAnswerInviteMutation,
-    useDeleteInviteMutation,
-    useLazyGetInviteListQuery,
-} from '@services/invite-api';
+import { useDeleteInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import ModalError from '@components/modal-error/modal-error';
 import { useState } from 'react';
@@ -28,22 +24,17 @@ type PartnerCardProps = {
 
 export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps) => {
     const [getInviteList] = useLazyGetInviteListQuery();
-
-    const dispatch = useAppDispatch();
-    const { imageSrc, name, avgWeightInWeek, trainingType, status } = user;
-    if (status) console.log('status', status, name);
-    const [isOpenModal, setIsModalOpen] = useState(false);
-
-    //const [answerInvite] = useAnswerInviteMutation();
     const [deleteInvite] = useDeleteInviteMutation();
+    const dispatch = useAppDispatch();
+
+    const { imageSrc, name, avgWeightInWeek, trainingType, status } = user;
+    const [isOpenModal, setIsModalOpen] = useState(false);
 
     const handleRejectTraining = async () => {
         await deleteInvite(user.inviteId || '');
-        //await answerInvite({ id: user.inviteId || '', status: PartnerStatus.REJECTED }).unwrap();
         dispatch(deletePartnerFromList(user.id));
         await getInviteList();
     };
-
     const handleClickModal = () => {
         if (type === 'short') setIsModalOpen(true);
     };
@@ -63,7 +54,6 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                 onClick={handleClickModal}
             >
                 <div className='partner-card__wrapper'>
-                    {/* <PartnerAvatar imageSrc={imageSrc} name={name} /> */}
                     <div className='partner-card__avatar'>
                         <Avatar
                             size={42}
@@ -71,7 +61,6 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                             alt={name}
                             icon={!imageSrc && <UserOutlined />}
                         />
-
                         <div>
                             <HighlightedText
                                 text={name ? name : 'Пользователь'}
@@ -136,9 +125,6 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                     )}
                 </div>
             </Card>
-            {
-                //todo rename ModalError
-            }
             <ModalError isOpen={isOpenModal} onCancel={handleCloseModal} isClosable width={539}>
                 <div
                     data-test-id={TrainingDataTestId.PARTNER_MODAL}

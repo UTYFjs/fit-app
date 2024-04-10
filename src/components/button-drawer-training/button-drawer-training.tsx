@@ -79,19 +79,12 @@ const ButtonDrawerTraining = ({
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
-    // useEffect(() => {
-    //     if (isDrawerOpen) {
-    //         setNewExercises(structuredClone(currentTraining.exercises));
-    //     }
-    // }, [currentTraining.exercises, isDrawerOpen]);
-
     useEffect(() => {
         if (partnerUser) {
             dispatch(updateNameCurrentTraining(partnerUser.trainingType as TrainingNames));
         }
     }, [dispatch, partnerUser]);
 
-    // const [newExercises, setNewExercises] = useState(currentTraining.exercises);
     const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([]);
 
     const handleOpenDrawer = () => {
@@ -101,7 +94,6 @@ const ButtonDrawerTraining = ({
         setIsDrawerOpen(true);
     };
     const handleCloseDrawer = () => {
-        // setNewExercises(newExercises.filter((item) => item.name));
         setForRemoveIdxExercises([]);
         setIsDrawerOpen(false);
     };

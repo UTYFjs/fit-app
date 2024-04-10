@@ -53,9 +53,6 @@ const SettingsPage = () => {
     };
     const handleCloseModal = () => {
         exitApp();
-        // localStorage.removeItem('accessToken');
-        // dispatch(setExitApp());
-        // dispatch(setExitAppUserInfo());
         setIsModalOpen(false);
     };
     const handleWatchReview = () => navigate(Paths.FEEDBACKS);

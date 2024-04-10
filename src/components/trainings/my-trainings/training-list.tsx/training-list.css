@@ -10,11 +10,10 @@
 }
 
 .training-list-table .ant-table-thead tr, .training-list-table .ant-table-tbody .ant-table-row{
-   display: flex;
-   flex-direction: row;
-   max-height: 32px;
-   gap: var(--gap-s);
-   /* justify-content: space-between; */
+  display: flex;
+  flex-direction: row;
+  max-height: 32px;
+  gap: var(--gap-s);
   width: 100%;
   margin-bottom: var(--m-3xs);
 }

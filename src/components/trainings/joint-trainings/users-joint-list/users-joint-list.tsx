@@ -38,7 +38,6 @@ export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
                     <Search
                         data-test-id={TrainingDataTestId.SEARCH_INPUT}
                         className='user-joint-list__search'
-                        //style={{ maxWidth: 200 }}
                         placeholder='Поиск по имени'
                         onSearch={(search) => {
                             onSearch(search);
@@ -75,7 +74,6 @@ export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
                         />
                     </List.Item>
                 )}
-                //pagination={}
             />
         </div>
     );

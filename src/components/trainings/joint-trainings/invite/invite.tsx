@@ -30,7 +30,6 @@ export const Invite = ({ inviteList }: InviteProps) => {
     const handleSeeAllInvites = () => setIsAllInvites((state) => !state);
 
     const handleAcceptInvite = async (idInvite: string) => {
-        console.log('accept invite', idInvite);
         await answerInvite({ id: idInvite, status: PartnerStatus.ACCEPTED })
             .unwrap()
             .then(async () => {

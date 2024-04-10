@@ -1,12 +1,3 @@
-
-/*.invite__badge-font{
-  font-family: var(--font-family);
-font-weight: 400;
-font-size: 14px;
-line-height: 130%;
-color: var(--character-light-title-85);
-}*/
-
 .invite-details__content-wrapper{
   display: flex;
   flex-direction: column;
@@ -16,8 +7,6 @@ color: var(--character-light-title-85);
   max-height: 200px;
   overflow: auto;
 }
-
-
 
 .invite-details__periodicity{
   font-family: var(--font-family);

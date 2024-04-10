@@ -16,11 +16,7 @@ type ExerciseFormProps = {
     name: string;
     index: number;
     forRemoveIdxExercises: number[];
-    // handleOnChangeName: (name: string, index: number) => void;
     handleOnChangeRemoveCheckbox: (index: number) => void;
-    // handleOnChangeReplays: (replays: number, index: number) => void;
-    // handleOnChangeWeight: (weight: number, index: number) => void;
-    // handleOnChangeApproaches: (approaches: number, index: number) => void;
     isEdit?: boolean;
 };
 
@@ -32,17 +28,12 @@ export const ExerciseForm = ({
     index,
     forRemoveIdxExercises,
     handleOnChangeRemoveCheckbox,
-    // handleOnChangeReplays,
-    // handleOnChangeWeight,
-    // handleOnChangeApproaches,
     isEdit = false,
 }: ExerciseFormProps) => {
     const dispatch = useAppDispatch();
-    //const currentTraining = useAppSelector(getCurrentTraining);
 
     const onChangeName = (value: string, index: number) => {
         dispatch(updateExerciseNameCurrentTraining({ value, index }));
-        //console.log(currentTraining.exercises);
     };
     const onChangeApproaches = (value: number, index: number) => {
         dispatch(updateExerciseApproachesCurrentTraining({ value, index }));
@@ -84,7 +75,6 @@ export const ExerciseForm = ({
                     <div className='exercise-item__label'> Подходы </div>
                     <InputNumber
                         name='approaches'
-                        //className='exercise-item__input-approaches'
                         data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_APPROACH_INDEX}${index}`}
                         addonBefore='+'
                         min={1}
@@ -101,7 +91,6 @@ export const ExerciseForm = ({
                         <div className='exercise-item__label'> Вес, кг </div>
                         <InputNumber
                             name='weight'
-                            //className='exercise-item__input-weight'
                             data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_WEIGHT_INDEX}${index}`}
                             min={0}
                             placeholder='0'
@@ -117,7 +106,6 @@ export const ExerciseForm = ({
                         <div className='exercise-item__label'> Количество </div>
                         <InputNumber
                             name='replays'
-                            //className='exercise-item__input-count'
                             data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_INPUT_QUANTITY_INDEX}${index}`}
                             min={1}
                             placeholder='3'
