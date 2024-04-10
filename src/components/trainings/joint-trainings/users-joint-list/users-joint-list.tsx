@@ -13,8 +13,9 @@ type UserJointListProps = {
     handleGoBack: () => void;
 };
 export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
-    const [searchValue, setSearchValue] = useState('');
     const users = useAppSelector(getUserJointTrainingList);
+
+    const [searchValue, setSearchValue] = useState('');
 
     const searchedUsers = sortByAZAndStatusUsers(users).filter((user) =>
         user.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase().trim()),

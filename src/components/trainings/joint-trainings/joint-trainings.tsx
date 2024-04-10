@@ -15,8 +15,8 @@ import OpenErrorCard from '@components/modal-error/open-error-card/open-error-ca
 export const JointTrainings = () => {
     const [getUserJointTrainingList, { data: dataUserJointTrainingList }] =
         useLazyGetUserJointTrainingListQuery();
-    const dataInviteList = useAppSelector(getInviteList);
     const { data: MyTrainings } = useGetTrainingsQuery();
+    const dataInviteList = useAppSelector(getInviteList);
 
     const [isShowUsersJointList, setIsShowUsersJointList] = useState(false);
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);

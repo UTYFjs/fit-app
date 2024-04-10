@@ -11,6 +11,7 @@ import { getPartnersList } from '@redux/training-slice';
 export const PartnersList = () => {
     const [getTrainingPals] = useLazyGetTrainingPalsQuery();
     const partnerList = useAppSelector(getPartnersList);
+
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
     useEffect(() => {

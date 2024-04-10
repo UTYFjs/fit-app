@@ -1,12 +1,11 @@
 import { Avatar, Button, Select } from 'antd';
-
 import { ReactNode, useEffect, useState } from 'react';
-
 import DrawerCustom from '@components/drawer-custom/drawer-custom';
 import './button-drawer-training.css';
 import { ButtonProps } from 'antd/lib/button/button';
 import BadgeTraining from '@components/badge-training/badge-training';
 import {
+    ExerciseType,
     ResTrainingType,
     TrainingNames,
     UserJointTrainingListType,
@@ -50,7 +49,7 @@ type ButtonDrawerTrainingProps = ButtonProps & {
     onClickBtn?: (() => void) | null;
     drawerChildren?: ReactNode;
     partnerUser?: UserJointTrainingListType;
-    handleOnSave?: () => void;
+    handleOnSave?: (exercises: ExerciseType[]) => void;
 };
 const ButtonDrawerTraining = ({
     buttonClass,
@@ -99,7 +98,6 @@ const ButtonDrawerTraining = ({
     };
 
     const handleDrawerAction = async () => {
-        handleOnSave && handleOnSave();
         if (isEdit) {
             const data = structuredClone(currentTraining);
             data.isImplementation = isPast(moment(currentTraining.date));
@@ -107,6 +105,7 @@ const ButtonDrawerTraining = ({
                 .unwrap()
                 .then(() => {
                     refetch();
+                    handleOnSave && handleOnSave(data.exercises);
                     handleCloseDrawer();
                     dispatch(setAlertMessage('Тренировка успешно обновлена'));
                 })

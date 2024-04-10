@@ -36,7 +36,7 @@ export const TrainingList = () => {
             title: 'Тип тренировки',
             key: 'TrainingType',
             render: (_, record) => (
-                <div key={record._id} className='training-list__type-cell'>
+                <div className='training-list__type-cell'>
                     <BadgeTraining text={record.name} />
 
                     <Button
@@ -67,7 +67,7 @@ export const TrainingList = () => {
             title: 'Периодичность',
             key: 'SortingByPeriod',
             render: (_, record) => (
-                <div key={record._id} className='training-list__type-cell'>
+                <div className='training-list__type-cell'>
                     <p>{PeriodTextByValue[record.parameters.period || 0]}</p>
                 </div>
             ),
@@ -82,7 +82,6 @@ export const TrainingList = () => {
                     training={record}
                     isEdit={true}
                     isPeriodicity={true}
-                    key={record._id}
                     type='link'
                     disabled={record.isImplementation}
                     icon={
@@ -110,6 +109,7 @@ export const TrainingList = () => {
                 pagination={{ position: ['bottomLeft', 'bottomLeft'] }}
                 size='small'
                 dataSource={trainingsList}
+                rowKey={(record) => record._id}
             />
         </div>
     );
