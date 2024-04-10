@@ -2,12 +2,12 @@
   border-radius: 2px;
   width: 234px;
   background: var(--primary-light-1);
-
+  max-height: 199px;
+  overflow: hidden;
 }
 
 .partner-card .ant-card-body{
   padding: var(--p-m);
- 
 }
 
 .partner-card__wrapper{
@@ -26,6 +26,8 @@
 
 .partner-card_short{
   cursor: pointer;
+  background: var(--character-light-primary-inverse);
+  border: 1px solid var(--character-light-dividers);
 }
 
 .partner-card__avatar{
@@ -42,32 +44,6 @@
   color: var(--character-light-title-85);
   width: 90px;
 }
-
-/*.partner-card__info{
-  display: grid;
-  grid-template-columns: 110px 80px;  
-  grid-template-rows: repeat(2);
-  grid-column-gap: var(--gap);
-  grid-row-gap: var(--gap-3_4xs);
-}
-
-.partner-card__info-title{
-  font-family: var(--font-family);
-  font-weight: var(font-weight);
-  font-size: var(--font-size-s);
-  line-height: var(--line-height);
-  color: var(--character-light-secondary-45);
-  width: fit-content;
-}
-
-.partner-card__info-value{
-  font-family: var(--font-family);
-  font-weight: var(font-weight-m);
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-  color: var(--primary-light-6);
-  width: fit-content;
-}*/
 
 .partner-card__btn{
   font-family: var(--font-family);
@@ -115,13 +91,7 @@
   justify-items: left;
 }
 
-@media (max-width: 1280px) and (min-width: 480px){
-
-
-}      
-
 @media (max-width: 480px){
-
 
   .partner-modal__wrapper{
     display: grid;

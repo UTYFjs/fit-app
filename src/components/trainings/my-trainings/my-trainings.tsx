@@ -8,6 +8,7 @@ import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining } from '@redux/training-slice';
 import { TrainingListType, TrainingNames, TransformResTrainingType } from '@types/training-types';
 import { TrainingDataTestId } from '@constants/data-test-id';
+import classNames from 'classnames';
 
 export const MyTrainings = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -21,14 +22,6 @@ export const MyTrainings = () => {
             ) : (
                 <p className='trainings-table__title_empty'>У вас еще нет созданных тренировок</p>
             )}
-            {/* <Button
-                className='trainings__btn-create'
-                type='primary'
-                size='large'
-                style={{ width: 'fit-content' }}
-            >
-                Создать тренировку
-            </Button> */}
             {!IsErrorTrainingsList && (
                 <ButtonDrawerCustom
                     dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}
@@ -43,7 +36,10 @@ export const MyTrainings = () => {
                             <PlusOutlined style={{ fontSize: '14px' }} />
                         )
                     }
-                    buttonClass='trainings__btn-create'
+                    buttonClass={classNames(
+                        'trainings__btn-create',
+                        Object.keys(dataTrainings || {})?.length && 'trainings__btn-create_left',
+                    )}
                 />
             )}
         </div>

@@ -124,3 +124,11 @@
   }
 
 }
+
+@media (max-width: 576px){
+
+  .training__success-alert{
+    bottom: 90px;
+    min-width: 312px;
+  }
+}

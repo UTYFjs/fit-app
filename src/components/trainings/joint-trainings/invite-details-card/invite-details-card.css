@@ -51,9 +51,3 @@ color: var(--character-light-title-85);
   color: var(--primary-light-6);
 }
 
-@media (max-width: 1280px) and (min-width: 576px){
-
-  .card-training.card-invite-details{
-  
-  }
-}

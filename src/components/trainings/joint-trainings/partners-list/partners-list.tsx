@@ -41,6 +41,14 @@ export const PartnersList = () => {
                             <PartnerCard index={index} type={'short'} user={item} />
                         </List.Item>
                     )}
+                    grid={{
+                        gutter: 16,
+                        xs: 1,
+                        sm: 2,
+                        md: 2,
+                        lg: 3,
+                        xl: 4,
+                    }}
                 />
             )}
             <ModalError isOpen={isModalErrorOpen} width={416} isClosable={false}>

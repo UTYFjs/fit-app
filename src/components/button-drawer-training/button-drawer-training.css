@@ -1,3 +1,5 @@
+
+
 .drawer-button__title-wrapper{
   display: flex;
   gap: var(--gap-xs);
@@ -26,12 +28,16 @@
   align-items: flex-end;
 }
 
+.training-list__select{
+  border: 1px solid var(--character-light-border);
+  border-radius: 2px;
+}
+
 .drawer-button__exercise-list{
   max-height: 70%;
   overflow: auto;
   display: flex;
   flex-direction: column;
   gap: var(--gap-2xl);
-  margin: 24px 0;
 }
 

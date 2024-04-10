@@ -29,7 +29,6 @@ import {
     useAddTrainingMutation,
     useGetTrainingListQuery,
     useGetTrainingsQuery,
-    useLazyGetUserJointTrainingListQuery,
     useUpdateTrainingMutation,
 } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
@@ -67,24 +66,22 @@ const ButtonDrawerTraining = ({
 }: ButtonDrawerTrainingProps) => {
     const currentTraining = useAppSelector(getCurrentTraining);
 
-    const [addTraining, { isError: isErrorAdd }] = useAddTrainingMutation();
-    const [updateTraining, { isError: isErrorUpdate }] = useUpdateTrainingMutation();
+    const [addTraining] = useAddTrainingMutation();
+    const [updateTraining] = useUpdateTrainingMutation();
     const { data: allTrainingsByDay, refetch } = useGetTrainingsQuery();
-    const [createInvite, { isError: IsErrorCreateInvite }] = useCreateInviteMutation();
+    const [createInvite] = useCreateInviteMutation();
+    const { data: dataTrainingList } = useGetTrainingListQuery();
 
     const dispatch = useAppDispatch();
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-    const { data: dataTrainingList } = useGetTrainingListQuery();
-
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
-    useEffect(() => {
-        if (isDrawerOpen) {
-            setNewExercises(structuredClone(currentTraining.exercises));
-        }
-    }, [currentTraining.exercises, isDrawerOpen]);
+    // useEffect(() => {
+    //     if (isDrawerOpen) {
+    //         setNewExercises(structuredClone(currentTraining.exercises));
+    //     }
+    // }, [currentTraining.exercises, isDrawerOpen]);
 
     useEffect(() => {
         if (partnerUser) {
@@ -92,7 +89,7 @@ const ButtonDrawerTraining = ({
         }
     }, [dispatch, partnerUser]);
 
-    const [newExercises, setNewExercises] = useState(currentTraining.exercises);
+    // const [newExercises, setNewExercises] = useState(currentTraining.exercises);
     const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([]);
 
     const handleOpenDrawer = () => {
@@ -102,7 +99,7 @@ const ButtonDrawerTraining = ({
         setIsDrawerOpen(true);
     };
     const handleCloseDrawer = () => {
-        setNewExercises(newExercises.filter((item) => item.name));
+        // setNewExercises(newExercises.filter((item) => item.name));
         setForRemoveIdxExercises([]);
         setIsDrawerOpen(false);
     };
@@ -154,13 +151,11 @@ const ButtonDrawerTraining = ({
     };
 
     const handleOnChangeRemoveCheckbox = (index: number) => {
-        console.log('before update remove', forRemoveIdxExercises);
         if (forRemoveIdxExercises.includes(index)) {
             setForRemoveIdxExercises((state) => state.filter((item) => item !== index));
         } else {
             setForRemoveIdxExercises((state) => [...state, index]);
         }
-        console.log('after update remove', forRemoveIdxExercises);
     };
     const handleRemove = () => {
         dispatch(removeExercises(forRemoveIdxExercises));
@@ -209,7 +204,7 @@ const ButtonDrawerTraining = ({
                             disabled={
                                 currentTraining.date === '' ||
                                 currentTraining.name === '' ||
-                                newExercises.some((item) => item.name === '')
+                                currentTraining.exercises.some((item) => item.name === '')
                             }
                         >
                             {isJoint ? 'Отправить приглашение' : isPeriodicity && 'Сохранить'}
@@ -241,7 +236,7 @@ const ButtonDrawerTraining = ({
                             data-test-id={CalendarDataTeatId.MODAL_CREATE_EXERCISE_SELECT}
                             defaultValue={currentTraining.name || 'Выбор типа тренировки'}
                             placeholder={<div>Выбор типа тренировки</div>}
-                            size={'middle'}
+                            size='small'
                             disabled={isEdit}
                             options={getSelectedTrainings(
                                 dataTrainingList || [],

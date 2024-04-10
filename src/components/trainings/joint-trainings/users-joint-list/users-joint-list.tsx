@@ -1,7 +1,6 @@
 import { Button, List, Input } from 'antd';
 import { PartnerCard } from '../partner-card/partner-card';
 import './users-joint-list.css';
-import { UserJointTrainingListType } from '@types/training-types';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { TrainingDataTestId } from '@constants/data-test-id';
@@ -10,10 +9,9 @@ import { getUserJointTrainingList } from '@redux/training-slice';
 
 const { Search } = Input;
 type UserJointListProps = {
-    users: UserJointTrainingListType[];
     handleGoBack: () => void;
 };
-export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
+export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
     const [searchValue, setSearchValue] = useState('');
     const users1 = useAppSelector(getUserJointTrainingList);
 
@@ -57,6 +55,13 @@ export const UserJointList = ({ users, handleGoBack }: UserJointListProps) => {
                     md: 2,
                     lg: 3,
                     xl: 4,
+                }}
+                pagination={{
+                    pageSize: 12,
+                    size: 'small',
+                    position: 'bottom',
+                    hideOnSinglePage: true,
+                    responsive: true,
                 }}
                 renderItem={(item, index) => (
                     <List.Item key={item.id + 'partnerCard'}>

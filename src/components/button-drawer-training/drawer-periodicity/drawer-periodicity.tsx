@@ -65,6 +65,7 @@ export const DrawerPeriodicity = () => {
         <div className='periodicity-wrapper'>
             <div className='periodicity-row'>
                 <DatePicker
+                    className='periodicity-item'
                     data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_DATE_PICKER}
                     disabledDate={(date) => isPast(date)}
                     dateRender={getDatePickerCellRender}
@@ -76,6 +77,7 @@ export const DrawerPeriodicity = () => {
                     onChange={onChangeDate}
                 />
                 <Checkbox
+                    className='periodicity-item'
                     data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_CHECKBOX_PERIOD}
                     onChange={onChangeCheckbox}
                 >
@@ -85,9 +87,10 @@ export const DrawerPeriodicity = () => {
             {withPeriod && (
                 <div className='periodicity-row'>
                     <Select
+                        className='periodicity__select'
                         data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_SELECT_PERIOD}
                         placeholder={<div>Периодичность</div>}
-                        size={'middle'}
+                        size='small'
                         options={PeriodOptions}
                         onChange={onChangeSelect}
                     />

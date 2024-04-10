@@ -19,6 +19,10 @@
   align-self: center;
 }
 
+.trainings__btn-create.trainings__btn-create_left{
+  align-self: flex-start;
+}
+
 
 @media (max-width: 576px){
 

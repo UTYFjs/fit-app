@@ -13,23 +13,18 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getCurrentTraining, setCurrentTraining } from '@redux/training-slice';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { PeriodTextByValue } from '@constants/training';
-import classNames from 'classnames';
 
 export const TrainingList = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
     const dispatch = useAppDispatch();
-    //todo исправить
+
     const currentTraining = useAppSelector(getCurrentTraining);
-    useEffect(() => {
-        console.log('currentTraining', currentTraining);
-    }, [currentTraining]);
 
     const trainingsList = Object.values(dataTrainings || {}).flat();
 
     const [isOpenTrainingModal, setIsOpenTrainingModal] = useState(false);
 
     const handleOpenTrainingModal = (record: ResTrainingType) => {
-        console.log('record TrainingModal', record);
         setIsOpenTrainingModal(true);
     };
     const handleOnCloseTrainingModal = () => {
@@ -102,24 +97,7 @@ export const TrainingList = () => {
                             }}
                         />
                     }
-                    //     style={{ padding: 0 }}
-                    //     //data-test-id={}
                 />
-                // <Button
-                //     key={record._id + 'btn'}
-                //     type='link'
-                //     disabled={record.isImplementation}
-                //     onClick={() => {}}
-                //     icon={
-                //         record.isImplementation ? (
-                //             <EditOutlined style={{ fontSize: '24px', color: 'red' }} />
-                //         ) : (
-                //             <EditTwoTone style={{ fontSize: '24px', color: 'red' }} />
-                //         )
-                //     }
-                //     style={{ padding: 0 }}
-                //     //data-test-id={}
-                // />
             ),
         },
     ];

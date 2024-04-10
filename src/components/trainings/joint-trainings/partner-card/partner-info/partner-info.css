@@ -3,7 +3,9 @@
   grid-template-columns: 110px minmax(80px, 150px);  
   grid-template-rows: repeat(2);
   grid-column-gap: var(--gap);
-  grid-row-gap: var(--gap-3_4xs);
+  grid-row-gap: var(--gap-4xs);
+  white-space: nowrap;
+
 }
 
 .partner-card__info-title{
@@ -12,8 +14,7 @@
   font-size: var(--font-size-s);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
-
-  /*width: fit-content;*/
+  white-space: nowrap;
 }
 
 .partner-card__info-value{
@@ -22,6 +23,5 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--primary-light-6);
-
-  /*width: fit-content;*/
+  white-space: nowrap;
 }

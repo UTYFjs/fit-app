@@ -13,14 +13,10 @@ import ModalError from '@components/modal-error/modal-error';
 import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
 
 export const JointTrainings = () => {
-    const [
-        getUserJointTrainingList,
-        { data: dataUserJointTrainingList, isError: isErrorJointTrainingList },
-    ] = useLazyGetUserJointTrainingListQuery();
+    const [getUserJointTrainingList, { data: dataUserJointTrainingList }] =
+        useLazyGetUserJointTrainingListQuery();
     const dataInviteList = useAppSelector(getInviteList);
-    console.log('dataInviteList', dataInviteList);
     const { data: MyTrainings } = useGetTrainingsQuery();
-    console.log('dataInviteList', dataInviteList);
 
     const [isShowUsersJointList, setIsShowUsersJointList] = useState(false);
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
@@ -31,7 +27,6 @@ export const JointTrainings = () => {
             setIsShowUsersJointList(true);
         } catch {
             setIsModalErrorOpen(true);
-            console.log('error');
         }
     };
     const handleGetSimilarPartnersList = async () => {
@@ -44,7 +39,6 @@ export const JointTrainings = () => {
                 setIsShowUsersJointList(true);
             } catch {
                 setIsModalErrorOpen(true);
-                console.log('error');
             }
         }
     };
@@ -58,7 +52,7 @@ export const JointTrainings = () => {
     };
 
     if (dataUserJointTrainingList && isShowUsersJointList) {
-        return <UserJointList users={dataUserJointTrainingList} handleGoBack={handleGoBack} />;
+        return <UserJointList handleGoBack={handleGoBack} />;
     }
     return (
         <div className='joint-training-wrapper'>
