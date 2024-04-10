@@ -18,9 +18,11 @@ import { Badge, Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
-import { setExitAppUserInfo } from '@redux/profile-slice.ts';
-import { getInviteList } from '@redux/invite-slice.ts';
+import { setExitAppProfile, setExitAppUserInfo } from '@redux/profile-slice.ts';
+import { getInviteList, setExitAppInvite } from '@redux/invite-slice.ts';
 import { TrainingDataTestId } from '@constants/data-test-id.ts';
+import { setExitAppTraining } from '@redux/training-slice.ts';
+import { useExitApp } from '@hooks/use-exit-app.ts';
 
 const { Sider } = Layout;
 
@@ -33,6 +35,7 @@ export const SideBar: React.FC = () => {
     const [currentMenuItem, setCurrentMenuItem] = useState(pathname);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const exitApp = useExitApp();
 
     useEffect(() => {
         setCurrentMenuItem(pathname);
@@ -45,6 +48,9 @@ export const SideBar: React.FC = () => {
 
     const handleExit = () => {
         localStorage.removeItem('accessToken');
+        dispatch(setExitAppInvite());
+        dispatch(setExitAppProfile());
+        dispatch(setExitAppTraining());
         dispatch(setExitApp());
         dispatch(setExitAppUserInfo());
         navigate(Paths.LOGIN);
@@ -150,7 +156,7 @@ export const SideBar: React.FC = () => {
                 type='text'
                 icon={isMobile ? '' : <ExitIcon />}
                 className={styles['button_exit']}
-                onClick={handleExit}
+                onClick={exitApp}
             >
                 {!collapsed && 'Выход'}
             </Button>

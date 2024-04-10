@@ -103,6 +103,9 @@ const trainingSlice = createSlice({
         setAlertMessage: (state, { payload }: PayloadAction<string>) => {
             state.alertMessage = payload;
         },
+        setExitAppTraining: () => ({
+            ...initialState,
+        }),
     },
 });
 
@@ -125,6 +128,7 @@ export const {
     addPartnerToList,
     deletePartnerFromList,
     setAlertMessage,
+    setExitAppTraining,
 } = trainingSlice.actions;
 export default trainingSlice.reducer;
 export const getCurrentTraining = ({ training }: RootState) => training.currentTraining;

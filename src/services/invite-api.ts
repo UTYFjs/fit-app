@@ -20,19 +20,10 @@ export const inviteApi = api.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setInviteList(data));
-                    console.log('сетнулась в редакс InviteList');
                 } catch {
                     () => {};
                 }
             },
-            //todo неправильно теги ставятся
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.map(({ _id }) => ({ type: 'Invites' as const, _id })),
-                          { type: 'Invites', id: 'LIST' },
-                      ]
-                    : [{ type: 'Invites', id: 'LIST' }],
         }),
 
         createInvite: builder.mutation<CreateInviteResType, CreateInviteRequestType>({

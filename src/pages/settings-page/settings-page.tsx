@@ -9,14 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import { ProfileDataTestId } from '@constants/data-test-id';
 import { useChangeTariffMutation, useGetTariffListQuery } from '@services/user-profile-api';
-import { setExitApp } from '@redux/user-slice';
-import { getUserInfo, setExitAppUserInfo } from '@redux/profile-slice';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { getUserInfo } from '@redux/profile-slice';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { cardTariffContent } from '@constants/tariff';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
 import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
 import TariffDrawerContent from './tariff-drawer-content/tariff-drawer-content';
+import { useExitApp } from '@hooks/use-exit-app';
 
 const { Title } = Typography;
 
@@ -32,7 +32,7 @@ const SettingsPage = () => {
     const [valuePay, setValuePay] = useState(0);
 
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+    const exitApp = useExitApp();
 
     useEffect(() => {
         userInfo.tariff && setIsActivePro(moment(userInfo.tariff.expired).isAfter());
@@ -52,9 +52,10 @@ const SettingsPage = () => {
         setIsModalOpen(true);
     };
     const handleCloseModal = () => {
-        localStorage.removeItem('accessToken');
-        dispatch(setExitApp());
-        dispatch(setExitAppUserInfo());
+        exitApp();
+        // localStorage.removeItem('accessToken');
+        // dispatch(setExitApp());
+        // dispatch(setExitAppUserInfo());
         setIsModalOpen(false);
     };
     const handleWatchReview = () => navigate(Paths.FEEDBACKS);

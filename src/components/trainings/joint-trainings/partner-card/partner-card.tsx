@@ -5,7 +5,11 @@ import classNames from 'classnames';
 import { UserJointTrainingListType } from '../../../../types/training-types';
 import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
 import { PartnerStatus } from '@constants/training';
-import { useAnswerInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
+import {
+    useAnswerInviteMutation,
+    useDeleteInviteMutation,
+    useLazyGetInviteListQuery,
+} from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import ModalError from '@components/modal-error/modal-error';
 import { useState } from 'react';
@@ -30,13 +34,16 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
     if (status) console.log('status', status, name);
     const [isOpenModal, setIsModalOpen] = useState(false);
 
-    const [answerInvite] = useAnswerInviteMutation();
+    //const [answerInvite] = useAnswerInviteMutation();
+    const [deleteInvite] = useDeleteInviteMutation();
+
     const handleRejectTraining = async () => {
-        console.log('reject training', user);
-        await answerInvite({ id: user.inviteId || '', status: PartnerStatus.REJECTED }).unwrap();
+        await deleteInvite(user.inviteId || '');
+        //await answerInvite({ id: user.inviteId || '', status: PartnerStatus.REJECTED }).unwrap();
         dispatch(deletePartnerFromList(user.id));
         await getInviteList();
     };
+
     const handleClickModal = () => {
         if (type === 'short') setIsModalOpen(true);
     };

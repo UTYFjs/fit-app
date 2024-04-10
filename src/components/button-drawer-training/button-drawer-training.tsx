@@ -36,6 +36,8 @@ import { useCreateInviteMutation } from '@services/invite-api';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
 import ModalError from '@components/modal-error/modal-error';
+import { isPast } from '@utils/date-utils';
+import moment from 'moment';
 
 type ButtonDrawerTrainingProps = ButtonProps & {
     buttonClass?: string;
@@ -107,7 +109,9 @@ const ButtonDrawerTraining = ({
     const handleDrawerAction = async () => {
         handleOnSave && handleOnSave();
         if (isEdit) {
-            await updateTraining(currentTraining)
+            const data = structuredClone(currentTraining);
+            data.isImplementation = isPast(moment(currentTraining.date));
+            await updateTraining(data)
                 .unwrap()
                 .then(() => {
                     refetch();

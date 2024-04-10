@@ -15,14 +15,17 @@ const inviteSlice = createSlice({
     initialState: initialState,
     reducers: {
         setInviteList: (state, { payload }: PayloadAction<InviteType[]>) => {
-            state.inviteList = [...state.inviteList, ...payload];
+            state.inviteList = payload;
         },
         deleteInviteItem: (state, { payload }: PayloadAction<string>) => {
             state.inviteList = state.inviteList.filter((invite) => invite._id !== payload);
         },
+        setExitAppInvite: () => ({
+            ...initialState,
+        }),
     },
 });
 
-export const { setInviteList, deleteInviteItem } = inviteSlice.actions;
+export const { setInviteList, deleteInviteItem, setExitAppInvite } = inviteSlice.actions;
 export default inviteSlice.reducer;
 export const getInviteList = ({ invite }: RootState) => invite.inviteList;

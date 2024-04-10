@@ -27,9 +27,12 @@ const userInfoSlice = createSlice({
             ...state,
             ...payload,
         }),
+        setExitAppProfile: () => ({
+            ...initialState,
+        }),
     },
 });
 
-export const { setUserInfo, setExitAppUserInfo } = userInfoSlice.actions;
+export const { setUserInfo, setExitAppUserInfo, setExitAppProfile } = userInfoSlice.actions;
 export default userInfoSlice.reducer;
 export const getUserInfo = ({ userInfo }: RootState) => userInfo;
