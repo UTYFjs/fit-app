@@ -86,6 +86,10 @@ export const ButtonDrawerTraining = ({
 
     const [forRemoveIdxExercises, setForRemoveIdxExercises] = useState<number[]>([]);
 
+    const getDrawerTitle = (isEdit: boolean, isJoint: boolean) => {
+        if (isEdit) return 'Редактирование';
+        return isJoint ? 'Совместная тренировка' : 'Добавление упражнений';
+    };
     const handleOpenDrawer = () => {
         const currentTraining = training || structuredClone(defaultTraining);
         if (partnerUser) currentTraining.name = partnerUser.trainingType;
@@ -178,12 +182,15 @@ export const ButtonDrawerTraining = ({
                     <div className='drawer-button__title-wrapper'>
                         {isEdit ? <EditOutlined /> : <PlusOutlined />}
                         <div className='drawer-button__title'>
-                            {' '}
-                            {isEdit
-                                ? 'Редактирование'
-                                : isJoint
-                                ? 'Совместная тренировка'
-                                : 'Добавление упражнений'}
+                            {
+                                getDrawerTitle(isEdit, isJoint)
+
+                                // isEdit
+                                //     ? 'Редактирование'
+                                //     : isJoint
+                                //     ? 'Совместная тренировка'
+                                //     : 'Добавление упражнений'
+                            }
                         </div>
                     </div>
                 }

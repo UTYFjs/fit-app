@@ -14,9 +14,10 @@ import { PartnerInfo } from './partner-info/partner-info';
 import { HighlightedText } from '@components/highlighted-text/highlighted-text';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { deletePartnerFromList } from '@redux/training-slice';
+import { FullShort } from '../../../../types/common-types';
 
 type PartnerCardProps = {
-    type: 'short' | 'full';
+    type: FullShort;
     user: UserJointTrainingListType;
     index: number;
     searchValue?: string;
@@ -36,7 +37,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
         await getInviteList();
     };
     const handleClickModal = () => {
-        if (type === 'short') setIsModalOpen(true);
+        if (type === FullShort.SHORT) setIsModalOpen(true);
     };
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -48,7 +49,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                 className={classNames(
                     'partner-card',
                     status === PartnerStatus.REJECTED && 'partner-card_rejected',
-                    type === 'full' ? 'partner-card_full' : 'partner-card_short',
+                    type === FullShort.FULL ? 'partner-card_full' : 'partner-card_short',
                 )}
                 bordered={false}
                 onClick={handleClickModal}
@@ -69,7 +70,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                         </div>
                     </div>
                     <PartnerInfo avgWeightInWeek={avgWeightInWeek} trainingType={trainingType} />
-                    {type === 'full' && (
+                    {type === FullShort.FULL && (
                         <>
                             <ButtonDrawerTraining
                                 dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}

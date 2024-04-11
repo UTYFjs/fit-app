@@ -8,7 +8,7 @@
 }
 
 .training-page.training-page_marathon{
-  background: no-repeat center/cover url('/public/marathon.png');
+  background: no-repeat center/cover url('@assets/marathon.png');
 }
 
 .training-page .ant-tabs-nav{

@@ -195,7 +195,7 @@
   .header  .button_setting{
     border: 1px solid var(--character-light-border);
     border-radius: 100px;
-    padding: 4px 8px;
+    padding: var(--p-4xs) var(--p-2xs);
     width: 32px;
     height: 32px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, .04);

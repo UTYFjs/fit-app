@@ -48,7 +48,7 @@
 }
 
 .footer__card > ul > li > span > button{
-  padding: 8px 11px;
+  padding: var(--p-2xs) 11px;
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size);

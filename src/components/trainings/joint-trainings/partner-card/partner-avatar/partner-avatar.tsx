@@ -1,9 +1,10 @@
 import { Avatar } from 'antd';
 import './partner-avatar.css';
 import { UserOutlined } from '@ant-design/icons';
+import { Nullable } from '../../../../../types/common-types';
 
 type PartnerCardProps = {
-    imageSrc: string | null;
+    imageSrc: Nullable<string>;
     name: string;
 };
 

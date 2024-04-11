@@ -8,6 +8,9 @@ import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import FreeImg from '@assets/free.png';
+import ProImg from '@assets/pro_able.png';
+import { cardTariffContent } from '@constants/tariff';
 
 interface ICardTariffProps {
     isPaid: boolean;
@@ -29,7 +32,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
 }) => {
     const { isDesktop } = useWindowWidth();
     const userInfo = useAppSelector(getUserInfo);
-    console.log(srcImg);
+    const imageForGhPages = srcImg === cardTariffContent[0].srcImg ? FreeImg : ProImg;
     return (
         <Card
             data-test-id={dataTestIdCard}
@@ -67,7 +70,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
                             : 'none',
                     }}
                     alt={title}
-                    src={srcImg}
+                    src={imageForGhPages}
                 />
             }
         >

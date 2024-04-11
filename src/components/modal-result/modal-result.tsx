@@ -5,6 +5,7 @@ import { ResultStatusType } from 'antd/lib/result';
 import './modal-result.css';
 import { getUserInfo } from '@redux/profile-slice';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { Nullable } from '../../types/common-types';
 type ModalErrorProps = {
     isOpen: boolean;
     typeContent: 'successReview' | 'errorReview' | 'sendPayment' | null;
@@ -52,7 +53,7 @@ export const ModalResult = ({
     onClose,
     dataTestId,
 }: ModalErrorProps) => {
-    const [data, setData] = useState<DataModalType | null>(null);
+    const [data, setData] = useState<Nullable<DataModalType>>(null);
     const { email } = useAppSelector(getUserInfo);
 
     useEffect(() => {

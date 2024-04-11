@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './configure-store';
 import { ResTrainingType, TrainingNames, UserJointTrainingListType } from '../types/training-types';
 import { defaultExercise, defaultTraining } from '@constants/training';
+import { Nullable } from '../types/common-types';
 
 type TrainingState = {
     currentTraining: ResTrainingType;
@@ -35,7 +36,7 @@ const trainingSlice = createSlice({
         updateDateCurrentTraining: (state, { payload }: PayloadAction<string>) => {
             state.currentTraining.date = payload;
         },
-        updatePeriodCurrentTraining: (state, { payload }: PayloadAction<number | null>) => {
+        updatePeriodCurrentTraining: (state, { payload }: PayloadAction<Nullable<number>>) => {
             state.currentTraining.parameters.period = payload;
             if (payload !== null) state.currentTraining.parameters.repeat = true;
         },

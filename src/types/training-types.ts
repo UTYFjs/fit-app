@@ -1,3 +1,5 @@
+import { Nullable } from './common-types';
+
 export type ExerciseType = {
     name: string;
     replays: number;
@@ -8,7 +10,7 @@ export type ExerciseType = {
 
 export type ParametersTraining = {
     repeat: boolean;
-    period: number | null;
+    period: Nullable<number>;
     jointTraining: boolean;
     participants: string[];
 };
@@ -37,10 +39,10 @@ export type UserJointTrainingListType = {
     id: string;
     name: string;
     trainingType: string;
-    imageSrc: string | null;
+    imageSrc: Nullable<string>;
     avgWeightInWeek: number;
-    status: string | null;
-    inviteId: string | null;
+    status: Nullable<string>;
+    inviteId: Nullable<string>;
 };
 
 export type InviteType = {

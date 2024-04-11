@@ -72,7 +72,7 @@
   color: var(--character-light-title-85);
   border-radius: 2px;
   border-bottom: 1px solid var(--character-light-dividers);
-  padding: 0 8px;
+  padding: 0 var(--p-2xs);
   margin-bottom: var(--m-2xs);
   height: 24px;
   background: var(--character-light-dividers);

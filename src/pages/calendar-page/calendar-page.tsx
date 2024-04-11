@@ -17,14 +17,15 @@ import type { Moment } from 'moment';
 import { ResTrainingType, TrainingNames } from '../../types/training-types';
 import { DateFormat } from '@constants/date';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { Nullable } from '../../types/common-types';
 
 export const CalendarPage = () => {
     const { isDesktop } = useWindowWidth();
-    const [parentModal, setParentModal] = useState<Element | null>(null);
+    const [parentModal, setParentModal] = useState<Nullable<Element>>(null);
     const [topPosition, setTopPosition] = useState(0);
     const [typeModal, setTypeModal] = useState<'training' | 'exercise' | null>(null);
 
-    const [calendarDate, setCalendarDate] = useState<Moment | null>(null);
+    const [calendarDate, setCalendarDate] = useState<Nullable<Moment>>(null);
     const [currentTrainings, setCurrentTrainings] = useState<ResTrainingType[]>([]);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
 

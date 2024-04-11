@@ -7,6 +7,7 @@ import { ModalError } from '@components/modal-error/modal-error';
 import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getPartnersList } from '@redux/training-slice';
+import { FullShort } from '@types/common-types';
 
 const gridParameters = {
     gutter: 16,
@@ -41,7 +42,7 @@ export const PartnersList = () => {
                     dataSource={partnerList}
                     renderItem={(item, index) => (
                         <List.Item key={item.id + 'partnerCard'}>
-                            <PartnerCard index={index} type={'short'} user={item} />
+                            <PartnerCard index={index} type={FullShort.SHORT} user={item} />
                         </List.Item>
                     )}
                     grid={gridParameters}

@@ -7,6 +7,7 @@ import { TrainingDataTestId } from '@constants/data-test-id';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getUserJointTrainingList } from '@redux/training-slice';
 import { sortByAZAndStatusUsers } from '@utils/sort-by-a-z-and-status-users';
+import { FullShort } from '@types/common-types';
 
 const { Search } = Input;
 type UserJointListProps = {
@@ -68,7 +69,7 @@ export const UserJointList = ({ handleGoBack }: UserJointListProps) => {
                 renderItem={(item, index) => (
                     <List.Item key={item.id + 'partnerCard'}>
                         <PartnerCard
-                            type={'full'}
+                            type={FullShort.FULL}
                             user={item}
                             index={index}
                             searchValue={searchValue}

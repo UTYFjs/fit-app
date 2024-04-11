@@ -15,6 +15,7 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { isPast } from '@utils/date-utils';
 import { useGetTrainingsQuery } from '@services/training-api';
+import { Nullable } from '../../../types/common-types';
 
 export const DrawerPeriodicity = () => {
     const currentTraining = useAppSelector(getCurrentTraining);
@@ -44,7 +45,7 @@ export const DrawerPeriodicity = () => {
             </div>
         );
     };
-    const onChangeDate = (e: moment.Moment | null) => {
+    const onChangeDate = (e: Nullable<moment.Moment>) => {
         if (e) {
             dispatch(updateDateCurrentTraining(e?.format(DateFormat.Server_Format)));
         } else {

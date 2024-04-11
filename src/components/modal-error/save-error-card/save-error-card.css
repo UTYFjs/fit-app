@@ -1,5 +1,5 @@
 .save-error-card{
-  padding: 16px 8px 8px;
+  padding: 16px var(--p-2xs) var(--p-2xs);
 }
 
 .modal-error__content{
