@@ -8,11 +8,11 @@
 }
 
 .training-page.training-page_marathon{
-  background: no-repeat center/cover url('./public/marathon.png');
+  background: no-repeat center/cover url('/public/marathon.png');
 }
 
 .training-page .ant-tabs-nav{
-  margin-bottom: 12px;
+  margin-bottom: var(--m-m);
 }
 
 .training-page .ant-tabs-nav-list{
@@ -22,8 +22,8 @@
 }
 
 .training-page .ant-tabs-nav-wrap{
-  padding-left: 12px;
-  padding-right: 32px;
+  padding-left: var(--p-m);
+  padding-right: var(--p-9xl);
 }
 
 .training-page .ant-tabs-tab{
@@ -68,8 +68,8 @@
   }
 
   .training-page .ant-tabs-nav-wrap{
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: var(--p-4xs);
+    padding-right: var(--p-4xs);
   }
 
 
@@ -99,8 +99,8 @@
   }
 
   .training-page .ant-tabs-nav-wrap{
-    padding-left: 4px;
-    padding-right: 32px;
+    padding-left: var(--p-4xs);
+    padding-right: var(--p-9xl);
   }
 
   .training-page .ant-tabs-nav-list{

@@ -19,9 +19,7 @@ export const DrawerFooterAction = ({
 }: DrawerFooterActionProps) => {
     const dispatch = useAppDispatch();
 
-    const handleAddExercise = () => {
-        dispatch(addNewExerciseToCurrentTraining());
-    };
+    const handleAddExercise = () => dispatch(addNewExerciseToCurrentTraining());
     const currentTraining = useAppSelector(getCurrentTraining);
     return (
         <div className='drawer_footer-wrapper'>

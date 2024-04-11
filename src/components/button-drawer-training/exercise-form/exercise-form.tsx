@@ -32,18 +32,18 @@ export const ExerciseForm = ({
 }: ExerciseFormProps) => {
     const dispatch = useAppDispatch();
 
-    const onChangeName = (value: string, index: number) => {
+    const onChangeName = (value: string, index: number) =>
         dispatch(updateExerciseNameCurrentTraining({ value, index }));
-    };
-    const onChangeApproaches = (value: number, index: number) => {
+
+    const onChangeApproaches = (value: number, index: number) =>
         dispatch(updateExerciseApproachesCurrentTraining({ value, index }));
-    };
-    const onChangeWeight = (value: number, index: number) => {
+
+    const onChangeWeight = (value: number, index: number) =>
         dispatch(updateExerciseWeightCurrentTraining({ value, index }));
-    };
-    const onChangeReplays = (value: number, index: number) => {
+
+    const onChangeReplays = (value: number, index: number) =>
         dispatch(updateExerciseReplaysCurrentTraining({ value, index }));
-    };
+
     return (
         <fieldset key={index} className='exercise-item'>
             <Input
@@ -54,7 +54,7 @@ export const ExerciseForm = ({
                 size='small'
                 value={name}
                 addonAfter={
-                    isEdit ? (
+                    isEdit && (
                         <Checkbox
                             checked={forRemoveIdxExercises.includes(index)}
                             onChange={() => {
@@ -62,8 +62,6 @@ export const ExerciseForm = ({
                             }}
                             data-test-id={`${CalendarDataTeatId.MODAL_DRAWER_RIGHT_CHECKBOX_EXERCISE_INDEX}${index}`}
                         />
-                    ) : (
-                        false
                     )
                 }
                 onChange={(e) => {

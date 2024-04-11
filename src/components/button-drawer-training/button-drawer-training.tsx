@@ -1,9 +1,9 @@
 import { Avatar, Button, Select } from 'antd';
 import { ReactNode, useEffect, useState } from 'react';
-import DrawerCustom from '@components/drawer-custom/drawer-custom';
+import { DrawerCustom } from '@components/drawer-custom/drawer-custom';
 import './button-drawer-training.css';
 import { ButtonProps } from 'antd/lib/button/button';
-import BadgeTraining from '@components/badge-training/badge-training';
+import { BadgeTraining } from '@components/badge-training/badge-training';
 import {
     ExerciseType,
     ResTrainingType,
@@ -33,8 +33,8 @@ import {
 import { getSelectedTrainings } from '@utils/get-select-training';
 import { useCreateInviteMutation } from '@services/invite-api';
 import { CalendarDataTeatId } from '@constants/data-test-id';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
-import ModalError from '@components/modal-error/modal-error';
+import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
+import { ModalError } from '@components/modal-error/modal-error';
 import { isPast } from '@utils/date-utils';
 import moment from 'moment';
 
@@ -46,12 +46,12 @@ type ButtonDrawerTrainingProps = ButtonProps & {
     isPeriodicity?: boolean;
     isEdit?: boolean;
     dataTestIdBtn?: string;
-    onClickBtn?: (() => void) | null;
+    onClickBtn?: () => void;
     drawerChildren?: ReactNode;
     partnerUser?: UserJointTrainingListType;
     handleOnSave?: (exercises: ExerciseType[]) => void;
 };
-const ButtonDrawerTraining = ({
+export const ButtonDrawerTraining = ({
     buttonClass,
     btnText,
     training,
@@ -278,5 +278,3 @@ const ButtonDrawerTraining = ({
         </>
     );
 };
-
-export default ButtonDrawerTraining;

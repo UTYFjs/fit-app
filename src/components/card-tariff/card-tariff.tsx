@@ -29,7 +29,7 @@ export const CardTariff: React.FC<ICardTariffProps> = ({
 }) => {
     const { isDesktop } = useWindowWidth();
     const userInfo = useAppSelector(getUserInfo);
-
+    console.log(srcImg);
     return (
         <Card
             data-test-id={dataTestIdCard}

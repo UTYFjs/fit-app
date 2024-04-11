@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { HistoryRouter } from 'redux-first-history/rr6';
 
-import App from './app';
+import { App } from './app';
 import 'normalize.css';
 import './index.css';
 

@@ -13,7 +13,13 @@ type ModalErrorProps = {
     handleSecondButton?: () => void;
 };
 
-const ModalError = ({ isOpen, children, width, isClosable = false, onCancel }: ModalErrorProps) => (
+export const ModalError = ({
+    isOpen,
+    children,
+    width,
+    isClosable = false,
+    onCancel,
+}: ModalErrorProps) => (
     <Modal
         closable={isClosable}
         onCancel={onCancel}
@@ -34,4 +40,3 @@ const ModalError = ({ isOpen, children, width, isClosable = false, onCancel }: M
         {children}
     </Modal>
 );
-export default ModalError;

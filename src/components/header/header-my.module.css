@@ -51,7 +51,7 @@
   align-items: flex-end;
   width: 129px;
   margin-top: var(--m-xs);
-  padding-left: 15px;
+  padding-left: var(--p-l-xl);
   margin-left: -55px;
   padding-bottom: var(--p-null);
   border: none;
@@ -109,7 +109,7 @@
   display: block;
   width: 129px;
   margin-top: var(--m-xs);
-  padding-left: 15px;
+  padding-left: var(--p-l-xl);
   margin-left: -55px;
   border: none;
   font-family: var(--font-family);

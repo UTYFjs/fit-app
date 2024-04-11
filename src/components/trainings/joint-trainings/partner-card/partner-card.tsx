@@ -3,11 +3,11 @@ import './partner-card.css';
 import { CheckCircleFilled, InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { UserJointTrainingListType } from '../../../../types/training-types';
-import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
+import { ButtonDrawerTraining } from '@components/button-drawer-training/button-drawer-training';
 import { PartnerStatus } from '@constants/training';
 import { useDeleteInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
-import ModalError from '@components/modal-error/modal-error';
+import { ModalError } from '@components/modal-error/modal-error';
 import { useState } from 'react';
 import { PartnerAvatar } from './partner-avatar/partner-avatar';
 import { PartnerInfo } from './partner-info/partner-info';
@@ -89,7 +89,7 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                                         : 'Создать тренировку'
                                 }
                                 onClickBtn={
-                                    status === PartnerStatus.ACCEPTED ? handleRejectTraining : null
+                                    status === PartnerStatus.ACCEPTED && handleRejectTraining
                                 }
                                 size='middle'
                                 disabled={

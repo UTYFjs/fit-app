@@ -1,6 +1,6 @@
 import { Badge } from 'antd';
 import './badge-training.css';
-import getBadgeColor from '@utils/get-badge-color';
+import { getBadgeColor } from '@utils/get-badge-color';
 import classNames from 'classnames';
 
 type BadgeTrainingProps = {
@@ -11,7 +11,7 @@ type BadgeTrainingProps = {
     dataTestIdEdit?: string;
 };
 
-const BadgeTraining = ({
+export const BadgeTraining = ({
     text,
     isDisable = false,
     isGray = false,
@@ -34,4 +34,3 @@ const BadgeTraining = ({
         </div>
     );
 };
-export default BadgeTraining;

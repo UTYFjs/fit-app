@@ -2,7 +2,7 @@ import { DatePicker, Form, Input, Typography } from 'antd';
 import './personal-info-fieldset.css';
 
 import { ProfileDataTestId } from '@constants/data-test-id';
-import UploadImage from '@components/upload-image/upload-image';
+import { UploadImage } from '@components/upload-image/upload-image';
 
 import { localeCalendar2 } from '@constants/calendar';
 import { DateFormat } from '@constants/date';

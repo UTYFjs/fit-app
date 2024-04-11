@@ -1,6 +1,6 @@
 import { Result } from 'antd';
 
-const InDeveloping = () => (
+export const InDeveloping = () => (
     <div className='not-found__container'>
         <Result
             className='not-found'
@@ -9,4 +9,3 @@ const InDeveloping = () => (
         />
     </div>
 );
-export default InDeveloping;

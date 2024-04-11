@@ -12,7 +12,7 @@ type IFeedbackProps = {
     onChange?: (value: IRatingStar) => void;
 };
 
-const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: IFeedbackProps) => {
+export const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: IFeedbackProps) => {
     const colorIcon = getCssVar('--character-light-warning');
     return (
         <Rate
@@ -36,5 +36,3 @@ const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: IFeedbac
         />
     );
 };
-
-export default Rating;

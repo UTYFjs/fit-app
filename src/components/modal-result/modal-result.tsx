@@ -44,7 +44,7 @@ const dataModal: DataModalType[] = [
         extraText: 'Не пришло письмо? Проверьте папку Спам.',
     },
 ];
-const ModalResult = ({
+export const ModalResult = ({
     isOpen,
     typeContent,
     handlePrimeButton,
@@ -130,5 +130,3 @@ const ModalResult = ({
         </Modal>
     );
 };
-
-export default ModalResult;

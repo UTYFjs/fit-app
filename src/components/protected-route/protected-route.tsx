@@ -7,7 +7,7 @@ type ProtectedRouteType = {
     isAllowed: boolean;
     redirectPath?: string;
 };
-const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) => {
+export const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) => {
     const location = useLocation();
     const accessToken = location.search.split('=');
     const dispatch = useAppDispatch();
@@ -21,5 +21,3 @@ const ProtectedRoute = ({ isAllowed, redirectPath = '/' }: ProtectedRouteType) =
     }
     return <Outlet />;
 };
-
-export default ProtectedRoute;

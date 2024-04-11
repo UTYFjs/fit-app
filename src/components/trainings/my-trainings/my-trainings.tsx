@@ -1,5 +1,5 @@
 import './my-trainings.css';
-import ButtonDrawerCustom from '@components/button-drawer-training/button-drawer-training';
+import { ButtonDrawerTraining } from '@components/button-drawer-training/button-drawer-training';
 import { useGetTrainingListQuery, useGetTrainingsQuery } from '@services/training-api';
 import { TrainingList } from './training-list.tsx/training-list';
 import { PlusOutlined } from '@ant-design/icons';
@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 export const MyTrainings = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
-    const { isError: IsErrorTrainingsList } = useGetTrainingListQuery();
+    const { isError: isErrorTrainingsList } = useGetTrainingListQuery();
 
     return (
         <div className='my-trainings'>
@@ -17,8 +17,8 @@ export const MyTrainings = () => {
             ) : (
                 <p className='trainings-table__title_empty'>У вас еще нет созданных тренировок</p>
             )}
-            {!IsErrorTrainingsList && (
-                <ButtonDrawerCustom
+            {!isErrorTrainingsList && (
+                <ButtonDrawerTraining
                     dataTestIdBtn={TrainingDataTestId.CREATE_NEW_TRAINING_BUTTON}
                     btnText={
                         Object.keys(dataTrainings || {})?.length

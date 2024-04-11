@@ -134,7 +134,7 @@
   --p-xs: 10px;
   --p-m: 12px;
   --p-l: 14px;
-  --p-l-xl: 13px;
+  --p-l-xl: 15px;
   --p-xl: 16px;
   --p-2xl: 18px;
   --p-3xl: 20px;
@@ -146,10 +146,10 @@
   --p-9xl: 32px;
   --m-auto-center: 0 auto;
   --m-zero: 0;
-  --m-3xs: 2px;
+  --m-4xs: 2px;
   --m-3xs: 4px;
   --m-2xs: 6px;
-  --m-xs: 8px;
+  --m-s: 8px;
   --m-s: 10px;
   --m-m: 12px;
   --m-l: 14px;

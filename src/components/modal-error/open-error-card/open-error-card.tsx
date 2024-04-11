@@ -8,7 +8,7 @@ type ModalErrorProps = {
     handlePrimeButton: () => void;
 };
 
-const OpenErrorCard = ({ handlePrimeButton }: ModalErrorProps) => (
+export const OpenErrorCard = ({ handlePrimeButton }: ModalErrorProps) => (
     <div className='modal-error-notification'>
         <CloseCircleOutlined style={{ color: getCssVar('--primary-light-6'), fontSize: 22 }} />
         <div className='modal-error__content'>
@@ -36,5 +36,3 @@ const OpenErrorCard = ({ handlePrimeButton }: ModalErrorProps) => (
         </div>
     </div>
 );
-
-export default OpenErrorCard;

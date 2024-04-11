@@ -1,10 +1,10 @@
 import { Button, RadioChangeEvent, Typography } from 'antd';
 import './settings-page.css';
 import { CardTariff } from '@components/card-tariff/card-tariff';
-import TariffControlsForm from './tariff-controls-form/tariff-controls-form';
+import { TariffControlsForm } from './tariff-controls-form/tariff-controls-form';
 import { useEffect, useState } from 'react';
-import DrawerCustom from '@components/drawer-custom/drawer-custom';
-import ModalResult from '@components/modal-result/modal-result';
+import { DrawerCustom } from '@components/drawer-custom/drawer-custom';
+import { ModalResult } from '@components/modal-result/modal-result';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 import { ProfileDataTestId } from '@constants/data-test-id';
@@ -14,13 +14,13 @@ import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { cardTariffContent } from '@constants/tariff';
 import moment from 'moment';
 import { DateFormat } from '@constants/date';
-import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
-import TariffDrawerContent from './tariff-drawer-content/tariff-drawer-content';
+import { ButtonModalFeedback } from '@components/button-modal-feedback/button-modal-feedback';
+import { TariffDrawerContent } from './tariff-drawer-content/tariff-drawer-content';
 import { useExitApp } from '@hooks/use-exit-app';
 
 const { Title } = Typography;
 
-const SettingsPage = () => {
+export const SettingsPage = () => {
     const { data: dataTariffList } = useGetTariffListQuery();
     const [changeTariff] = useChangeTariffMutation();
 
@@ -127,5 +127,3 @@ const SettingsPage = () => {
         </div>
     );
 };
-
-export default SettingsPage;

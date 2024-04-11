@@ -14,8 +14,7 @@ export const sortByAZAndStatusUsers = (data: UserJointTrainingListType[]) => {
                 statusValueForSort[a.status as keyof typeof statusValueForSort] -
                 statusValueForSort[b.status as keyof typeof statusValueForSort]
             );
-        } else {
-            return a.name.localeCompare(b.name);
         }
+        return a.name.localeCompare(b.name);
     });
 };

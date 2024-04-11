@@ -3,7 +3,7 @@ import type { Moment } from 'moment';
 import { CloseOutlined, EditOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import './card-training.css';
-import BadgeTraning from '@components/badge-training/badge-training';
+import { BadgeTraining } from '@components/badge-training/badge-training';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import { isPast } from '@utils/date-utils';
 import { getCssVar } from '@utils/get-css-var';
@@ -22,7 +22,7 @@ type CardTrainingProps = {
     onEdit: () => void;
 };
 
-const CardTraining = ({
+export const CardTraining = ({
     currentTrainings = [],
     isDisableCreateBtn,
     calendarDate,
@@ -86,7 +86,7 @@ const CardTraining = ({
                     {currentTrainings &&
                         currentTrainings.map((item, index) => (
                             <div className='card-training__item' key={index}>
-                                <BadgeTraning
+                                <BadgeTraining
                                     key={item._id + 'training'}
                                     isDisable={item.isImplementation}
                                     text={item.name}
@@ -127,4 +127,3 @@ const CardTraining = ({
         </Card>
     );
 };
-export default CardTraining;

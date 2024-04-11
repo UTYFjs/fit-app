@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './change-password.module.css';
 
-const ChangePassword = () => {
+export const ChangePassword = () => {
     const [form] = useForm();
     const { password, passwordRepeat } = useAppSelector((state) => state.user);
     const { previousLocations } = useAppSelector((state) => state.router);
@@ -111,5 +111,3 @@ const ChangePassword = () => {
         </Form>
     );
 };
-
-export default ChangePassword;

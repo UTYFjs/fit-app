@@ -1,7 +1,6 @@
 .partner__avatar{
   display: flex;
   gap: var(--gap-2xs);
-
 }
 
 .partner__name{

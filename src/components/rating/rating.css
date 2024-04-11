@@ -4,5 +4,5 @@
 
 .feedback__rating .ant-rate-star{
   height: var(--h-2xs);
-  margin-right: 6px;
+  margin-right: var(--m-2xs);
 }

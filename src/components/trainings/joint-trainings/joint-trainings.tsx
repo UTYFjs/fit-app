@@ -9,8 +9,8 @@ import { UserJointList } from './users-joint-list/users-joint-list';
 import { getFavoriteTraining } from '@utils/get-favourite-training';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getInviteList } from '@redux/invite-slice';
-import ModalError from '@components/modal-error/modal-error';
-import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
+import { ModalError } from '@components/modal-error/modal-error';
+import { OpenErrorCard } from '@components/modal-error/open-error-card/open-error-card';
 
 export const JointTrainings = () => {
     const [getUserJointTrainingList, { data: dataUserJointTrainingList }] =

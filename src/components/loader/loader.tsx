@@ -2,7 +2,7 @@ import Lottie from 'react-lottie';
 
 import animationData from './data/loader.json';
 import styles from './loader.module.css';
-const Loader = () => {
+export const Loader = () => {
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -18,5 +18,3 @@ const Loader = () => {
         </div>
     );
 };
-
-export default Loader;

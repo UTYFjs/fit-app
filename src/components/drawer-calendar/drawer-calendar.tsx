@@ -2,7 +2,7 @@ import { CloseOutlined, EditOutlined, MinusOutlined, PlusOutlined } from '@ant-d
 import { Button, Checkbox, Drawer, Input, InputNumber } from 'antd';
 import type { Moment } from 'moment';
 import './drawer-calendar.css';
-import BadgeTraining from '@components/badge-training/badge-training';
+import { BadgeTraining } from '@components/badge-training/badge-training';
 
 import { ExerciseType } from '../../types/training-types';
 
@@ -24,7 +24,7 @@ type DrawerCalendarProps = {
     setNewExercises: React.Dispatch<React.SetStateAction<ExerciseType[]>>;
 };
 
-const DrawerCalendar = ({
+export const DrawerCalendar = ({
     selectedTraining,
     exercises,
     forRemoveIdxExercises,
@@ -239,4 +239,3 @@ const DrawerCalendar = ({
         </Drawer>
     );
 };
-export default DrawerCalendar;

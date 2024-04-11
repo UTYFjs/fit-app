@@ -1,8 +1,8 @@
 import { Alert, Button, Form } from 'antd';
 import './profile-page.css';
 import { useState } from 'react';
-import ModalError from '@components/modal-error/modal-error';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import { ModalError } from '@components/modal-error/modal-error';
+import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
 import { ProfileDataTestId } from '@constants/data-test-id';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { getUserInfo } from '@redux/profile-slice';
@@ -12,7 +12,7 @@ import moment from 'moment';
 import { PersonalInfoFieldset } from './personal-info-fieldset/personal-info-fieldset';
 import { PrivateInfoFieldset } from './private-info-fieldset/private-info-fieldset';
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
     const userInfo = useAppSelector(getUserInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
@@ -44,7 +44,7 @@ const ProfilePage = () => {
                 className='profile-page'
                 form={form}
                 onFinish={onFinish}
-                onChange={onChangeForm}
+                onFieldsChange={onChangeForm}
                 initialValues={{
                     ...userInfo,
                     birthday: userInfo.birthday && moment(userInfo.birthday),
@@ -86,5 +86,3 @@ const ProfilePage = () => {
         </>
     );
 };
-
-export default ProfilePage;

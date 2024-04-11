@@ -16,7 +16,7 @@ type DrawerCalendarProps = {
     footer?: ReactNode;
 };
 
-const DrawerCustom = ({
+export const DrawerCustom = ({
     drawerTitle,
     children,
     isDrawerOpen,
@@ -64,4 +64,3 @@ const DrawerCustom = ({
         </Drawer>
     );
 };
-export default DrawerCustom;

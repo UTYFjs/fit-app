@@ -14,7 +14,6 @@
   color: var(--character-light-secondary-45);
 }
 
-
 .invite__card-item{
   display: flex;  
   gap: 8px;
@@ -91,7 +90,6 @@
 }
 
 
-
 @media (max-width: 1280px) and (min-width: 576px){
 
   .invite-wrapper{
@@ -128,13 +126,9 @@
     width: 100%;
   }
 
-
-
 }      
 
 @media (max-width: 576px){
-
-
 
   .invite-wrapper{
     padding: var(--p-m);
@@ -145,7 +139,6 @@
     height: 399px;
     padding: 20px 20px 20px 12px;
   }
-
 
   .invite-card__avatar{
     align-self: baseline;
@@ -160,7 +153,6 @@
     gap: var(--gap-s);
     height: 189px;
   }
-
 
   .invite-card__actions{
     padding-left: 0;

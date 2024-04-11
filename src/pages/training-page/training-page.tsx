@@ -1,8 +1,8 @@
 import './training-page.css';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import ModalError from '@components/modal-error/modal-error';
-import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
+import { ModalError } from '@components/modal-error/modal-error';
+import { OpenErrorCard } from '@components/modal-error/open-error-card/open-error-card';
 import { Alert, Badge, Tabs } from 'antd';
 import { Marathons } from '@components/trainings/marathons/marathons';
 import { JointTrainings } from '@components/trainings/joint-trainings/joint-trainings';
@@ -14,7 +14,7 @@ import { getInviteList } from '@redux/invite-slice';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { getAlertMessage, setAlertMessage } from '@redux/training-slice';
 
-const TrainingPage = () => {
+export const TrainingPage = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
     const [getTrainingList, { isError: IsErrorTrainingsList }] = useLazyGetTrainingListQuery();
 
@@ -30,7 +30,7 @@ const TrainingPage = () => {
             label: (
                 <>
                     {'Совместные тренировки '}
-                    <Badge count={inviteList.length ? inviteList.length : 0} />
+                    <Badge count={inviteList.length || 0} />
                 </>
             ),
             key: 'jointTrainings',
@@ -87,4 +87,3 @@ const TrainingPage = () => {
         </div>
     );
 };
-export default TrainingPage;

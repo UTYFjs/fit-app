@@ -4,9 +4,9 @@ import { Button, Card, Empty, Select } from 'antd';
 import { ArrowLeftOutlined, EditOutlined } from '@ant-design/icons';
 
 import './card-exercise.css';
-import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
-import ModalError from '@components/modal-error/modal-error';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import { DrawerCalendar } from '@components/drawer-calendar/drawer-calendar';
+import { ModalError } from '@components/modal-error/modal-error';
+import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import {
     useAddTrainingMutation,
@@ -37,7 +37,7 @@ type CardExerciseProps = {
     setIsEditTraining: (value: boolean) => void;
 };
 
-const CardExercise = ({
+export const CardExercise = ({
     options,
     calendarDate,
     selectedTraining,
@@ -230,5 +230,3 @@ const CardExercise = ({
         </>
     );
 };
-
-export default CardExercise;

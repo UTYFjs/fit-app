@@ -67,7 +67,7 @@
   text-align: center;
   color: var(--character-light-title-85);
   padding: 4px 15px;
-  margin-left: 10px;
+  margin-left: var(--m-s);
 }
 
 
@@ -99,7 +99,7 @@
   }
 
   .sider > div .menu > li[class='ant-menu-item'] span:last-child{
-    margin-left: 8px;
+    margin-left: var(--m-s);
   }
 
   .sider > div .menu > li[class='ant-menu-item'] span:first-child {

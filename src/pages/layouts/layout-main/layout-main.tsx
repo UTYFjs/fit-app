@@ -1,4 +1,4 @@
-import Loader from '@components/loader/loader';
+import { Loader } from '@components/loader/loader';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { RootState } from '@redux/configure-store';
 import { Layout } from 'antd';

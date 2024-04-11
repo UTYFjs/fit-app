@@ -7,11 +7,9 @@ type PartnerCardProps = {
     name: string;
 };
 
-export const PartnerAvatar = ({ imageSrc, name }: PartnerCardProps) => {
-    return (
-        <div className='partner__avatar'>
-            <Avatar size={42} src={imageSrc} alt={name} icon={!imageSrc && <UserOutlined />} />
-            <p className='partner-card__name'>{name}</p>
-        </div>
-    );
-};
+export const PartnerAvatar = ({ imageSrc, name }: PartnerCardProps) => (
+    <div className='partner__avatar'>
+        <Avatar size={42} src={imageSrc} alt={name} icon={!imageSrc && <UserOutlined />} />
+        <p className='partner-card__name'>{name}</p>
+    </div>
+);

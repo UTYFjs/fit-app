@@ -63,7 +63,7 @@ export const SideBar: React.FC = () => {
             icon: (
                 <Badge
                     data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
-                    count={inviteList.length ? inviteList.length : 0}
+                    count={inviteList.length || 0}
                     size='small'
                 >
                     <HeartFilled style={{ color: colorPrimaryLight9 }} />

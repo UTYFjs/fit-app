@@ -3,8 +3,8 @@ import { Button, Card, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import './exercise-info-card.css';
 import { ExerciseType, ResTrainingType } from '../../../../types/training-types';
-import ButtonDrawerTraining from '@components/button-drawer-training/button-drawer-training';
-import getBadgeColor from '@utils/get-badge-color';
+import { ButtonDrawerTraining } from '@components/button-drawer-training/button-drawer-training';
+import { getBadgeColor } from '@utils/get-badge-color';
 
 type CardExerciseProps = {
     record: ResTrainingType;

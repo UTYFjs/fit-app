@@ -35,8 +35,8 @@
 
 
 .modal-result.modal-result_payment .ant-result{
-  padding-right: 32px;
-  padding-left: 32px;
+  padding-right: var(--p-9xl);
+  padding-left: var(--p-9xl);
 }
 
 .modal-result.modal-result_payment .anticon-check-circle svg{

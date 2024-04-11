@@ -145,7 +145,7 @@
   .drawer-calendar .ant-drawer-content .ant-drawer-header{
     padding: var(--p-xl);
     padding-top: var(--p-l-xl);
-    padding-right: 8px;
+    padding-right: var(--p-2xs);
     border-bottom: none;
   }
 

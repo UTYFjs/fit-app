@@ -35,7 +35,7 @@ const controlsData = [
 type TariffControlsFormPropsType = {
     isActivePro: boolean;
 };
-const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
+export const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
     const userInfo = useAppSelector(getUserInfo);
     const [updateUserInfo] = useUpdateUserInfoMutation();
     const dispatch = useAppDispatch();
@@ -88,5 +88,3 @@ const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType) => {
         </Form>
     );
 };
-
-export default TariffControlsForm;

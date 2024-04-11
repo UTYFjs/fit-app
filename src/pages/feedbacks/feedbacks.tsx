@@ -1,17 +1,16 @@
-import FeedbackItem from '@components/feedback-item/feedback-item';
+import { FeedbackItem } from '@components/feedback-item/feedback-item';
 
 import './feedbacks.css';
 import { useEffect, useState } from 'react';
-
-import ModalServerError from '@components/modal-server-error/modal-server-error';
+import { ModalServerError } from '@components/modal-server-error/modal-server-error';
 import { StatusCode } from '@constants/api';
-
 import { useGetFeedbacksQuery } from '@services/feedback-api';
 import { Button, Card, List } from 'antd';
-import ButtonModalFeedback from '@components/button-modal-feedback/button-modal-feedback';
+import { ButtonModalFeedback } from '@components/button-modal-feedback/button-modal-feedback';
 import { useExitApp } from '@hooks/use-exit-app';
+import { IFeedback } from '../../types/api';
 
-const Feedbacks = () => {
+export const Feedbacks = () => {
     const { data, error, isError, refetch } = useGetFeedbacksQuery('', {});
 
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
@@ -36,7 +35,7 @@ const Feedbacks = () => {
                         className='feedback-list'
                         grid={{ column: 1 }}
                         dataSource={feedbacks}
-                        renderItem={(item) => <FeedbackItem data={item} />}
+                        renderItem={(item: IFeedback) => <FeedbackItem data={item} />}
                     />
                     <div className='feedback-action'>
                         <ButtonModalFeedback dataTestIdBtn='write-review' refetch={refetch} />
@@ -72,5 +71,3 @@ const Feedbacks = () => {
         </>
     );
 };
-
-export default Feedbacks;

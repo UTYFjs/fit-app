@@ -4,8 +4,8 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { StatusCode, baseUrlForImg } from '@constants/api';
 import { useEffect, useState } from 'react';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload';
-import ModalError from '@components/modal-error/modal-error';
-import TooLargeFileCard from '@components/modal-error/too-large-file-card/too-large-file-card';
+import { ModalError } from '@components/modal-error/modal-error';
+import { TooLargeFileCard } from '@components/modal-error/too-large-file-card/too-large-file-card';
 import { usePostUserAvatarMutation } from '@services/user-profile-api';
 import { RcFile } from 'rc-upload/lib/interface';
 
@@ -17,7 +17,7 @@ type UploadImagePropsType = {
     handlerError: () => void;
 };
 
-const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
+export const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
     const [isModalError, setIsModalError] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [postUserAvatar] = usePostUserAvatarMutation();
@@ -140,5 +140,3 @@ const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
         </>
     );
 };
-
-export default UploadImage;

@@ -1,4 +1,4 @@
-const getBadgeColor = (badgeName: string): string => {
+export const getBadgeColor = (badgeName: string): string => {
     switch (badgeName) {
         case 'Силовая':
             return 'var(--tranie-yellow)';
@@ -14,5 +14,3 @@ const getBadgeColor = (badgeName: string): string => {
             return 'var(--tranie-orange)';
     }
 };
-
-export default getBadgeColor;

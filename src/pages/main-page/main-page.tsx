@@ -7,7 +7,7 @@ import { CalendarIcon } from '@components/custom-icons/custom-icons';
 
 import 'antd/dist/antd.css';
 import './main-page.css';
-import ModalServerError from '@components/modal-server-error/modal-server-error';
+import { ModalServerError } from '@components/modal-server-error/modal-server-error';
 import { Paths } from '@constants/api';
 import { CalendarDataTeatId, ProfileDataTestId, TrainingDataTestId } from '@constants/data-test-id';
 import { useLazyGetTrainingsQuery } from '@services/training-api';

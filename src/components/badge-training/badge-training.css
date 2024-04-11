@@ -61,6 +61,6 @@
 @media (max-width: 992px){
 
   .badge__traning-item .ant-badge-status-text{
-    margin-left: 6px;
+    margin-left: var(--m-2xs);
   }
 }

@@ -3,7 +3,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import './invite-details-card.css';
 
 import { ResTrainingType } from '../../../../types/training-types';
-import BadgeTraining from '@components/badge-training/badge-training';
+import { BadgeTraining } from '@components/badge-training/badge-training';
 import { DateFormat } from '@constants/date';
 import moment from 'moment';
 import { getPeriodTextByValue } from '@utils/get-period-text-by-value';
