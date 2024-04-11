@@ -3,15 +3,15 @@ import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { IRatingStar } from '../../types/api';
-import ModalFeedback from '@components/modal-feedback/modal-feedback';
+import { ModalFeedback } from '@components/modal-feedback/modal-feedback';
 import { useAddFeedbackMutation } from '@services/feedback-api';
-import ModalResult from '@components/modal-result/modal-result';
+import { ModalResult } from '@components/modal-result/modal-result';
 
 type ButtonModalFeedbackProps = {
     dataTestIdBtn?: string;
     refetch?: () => void;
 };
-const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProps) => {
+export const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProps) => {
     const [isModalFeedbackOpen, setIsModalFeedbackOpen] = useState(false);
     const [isModalResultOpen, setIsModalResultOpen] = useState(false);
     const [modalResultType, setModalResultType] = useState<'errorReview' | 'successReview' | null>(
@@ -90,5 +90,3 @@ const ButtonModalFeedback = ({ dataTestIdBtn, refetch }: ButtonModalFeedbackProp
         </>
     );
 };
-
-export default ButtonModalFeedback;

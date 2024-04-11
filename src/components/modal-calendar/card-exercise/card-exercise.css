@@ -10,7 +10,6 @@
 
 .card-exercise__content::-webkit-scrollbar {
   width: 10px;
-
 }
 
 .card-exercise__content::-webkit-scrollbar-track {
@@ -31,14 +30,13 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
-
 }
 
 .card-exercise__title-wrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: var(--p-xl) 0;
 }
 
 .training-list__select{

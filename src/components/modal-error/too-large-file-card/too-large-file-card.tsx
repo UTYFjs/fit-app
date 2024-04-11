@@ -7,7 +7,7 @@ type ModalErrorProps = {
     handlePrimeButton: () => void;
 };
 
-const TooLargeFileCard = ({ handlePrimeButton }: ModalErrorProps) => (
+export const TooLargeFileCard = ({ handlePrimeButton }: ModalErrorProps) => (
     <div className='modal-error-notification save-error-card'>
         <CloseCircleOutlined style={{ color: 'var(--character-light-error)', fontSize: 22 }} />
         <div className='modal-error__content'>
@@ -25,5 +25,3 @@ const TooLargeFileCard = ({ handlePrimeButton }: ModalErrorProps) => (
         </div>
     </div>
 );
-
-export default TooLargeFileCard;

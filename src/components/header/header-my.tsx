@@ -22,9 +22,11 @@ export const HeaderMy: React.FC = () => {
 
     const [getTariffList] = useLazyGetTariffListQuery();
 
-    const isBreadcrumb = [Paths.MAIN, Paths.CALENDAR, Paths.FEEDBACKS].includes(pathname as Paths);
+    const isBreadcrumb = [Paths.MAIN, Paths.CALENDAR, Paths.FEEDBACKS, Paths.TRAINING].includes(
+        pathname as Paths,
+    );
     const isTitleLevel4 = [Paths.PROFILE, Paths.SETTINGS].includes(pathname as Paths);
-    const isSettings = [Paths.CALENDAR, Paths.PROFILE].includes(pathname as Paths);
+    const isSettings = [Paths.CALENDAR, Paths.PROFILE, Paths.TRAINING].includes(pathname as Paths);
 
     const headerSecondClass = {
         [Paths.MAIN]: '',
@@ -32,6 +34,7 @@ export const HeaderMy: React.FC = () => {
         [Paths.CALENDAR]: 'header_calendar',
         [Paths.SETTINGS]: 'header_settings',
         [Paths.PROFILE]: 'header_profile',
+        [Paths.TRAINING]: 'header_training',
     };
     const headerClass = classNames(
         styles.header,
@@ -58,6 +61,11 @@ export const HeaderMy: React.FC = () => {
                     {pathname === Paths.CALENDAR && (
                         <Breadcrumb.Item>
                             <Link to={Paths.CALENDAR}>Календарь </Link>
+                        </Breadcrumb.Item>
+                    )}
+                    {pathname === Paths.TRAINING && (
+                        <Breadcrumb.Item>
+                            <Link to={Paths.TRAINING}>Тренировки </Link>
                         </Breadcrumb.Item>
                     )}
                 </Breadcrumb>

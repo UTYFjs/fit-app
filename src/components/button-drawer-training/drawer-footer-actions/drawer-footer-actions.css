@@ -1,0 +1,40 @@
+.drawer_footer-wrapper{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.drawer-calendar__btn-wrapper{
+  display: flex;
+  background: var(--character-light-dividers);
+  border-radius: 0 0 6px 6px;
+}
+
+.drawer-calendar__btn-add{
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--primary-light-6);
+
+}
+
+.drawer-calendar__btn-remove{
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+}
+
+.drawer__warning-message{
+  padding: 0 var(--p-3xl);
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-secondary-45);
+}

@@ -3,7 +3,7 @@
   justify-content: space-between;
   background: transparent;
   margin-bottom: 42px;
-  padding: 0 24px;
+  padding: 0 var(--p-5xl);
 }
 
 .button_review{
@@ -35,7 +35,6 @@
   line-height: 160%;
   margin-bottom: var(--m-xs);
   color: var(--primary-light-6);
-
 }
 
 .footer__card > div > div > div > div[class='ant-card-meta-description']{
@@ -44,20 +43,16 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
-
 }
 
 .footer__card > ul > li > span > button{
-  padding: 8px 11px;
+  padding: var(--p-2xs) 11px;
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size);
   line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
-
-  
-
 }
 
 .footer__card > ul > li > span > button > span[role='img']{
@@ -66,7 +61,7 @@
 }
 
 .footer__card > div{
-  padding: 12px 24px;
+  padding: var(--p-m) var(--p-5xl);
 }
 
 .footer__card > ul {
@@ -85,7 +80,7 @@
 
   .footer{
     flex-direction: column;
-    padding: 0 16px;
+    padding: 0 var(--p-xl);
   }
 
   .button_review{

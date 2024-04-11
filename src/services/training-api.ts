@@ -5,9 +5,15 @@ import {
     ResTrainingType,
     TrainingListType,
     TransformResTrainingType,
+    UserJointTrainingListType,
 } from '../types/training-types';
 
 import { api } from './api';
+import {
+    setAvailableTrainingNames,
+    setPartnersList,
+    setUserJointTrainingList,
+} from '@redux/training-slice';
 
 export const trainingApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -34,7 +40,7 @@ export const trainingApi = api.injectEndpoints({
             providesTags: ['Trainings'],
         }),
 
-        addTraining: builder.mutation<void, NewTrainingType>({
+        addTraining: builder.mutation<ResTrainingType, NewTrainingType>({
             query: (body) => ({
                 url: Endpoint.TRAINING,
                 method: HTTPMethod.POST,
@@ -59,6 +65,44 @@ export const trainingApi = api.injectEndpoints({
             query: () => ({
                 url: Endpoint.TRAINING_LIST,
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setAvailableTrainingNames(data.map((item) => item.name)));
+                } catch {
+                    () => {};
+                }
+            },
+        }),
+        getUserJointTrainingList: builder.query<
+            UserJointTrainingListType[],
+            { trainingType?: string; status?: string }
+        >({
+            query: (body) => ({
+                url: Endpoint.USER_JOINT_TRAINING_LIST,
+                params: body,
+            }),
+            onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserJointTrainingList(data));
+                } catch {
+                    () => {};
+                }
+            },
+        }),
+        getTrainingPals: builder.query<UserJointTrainingListType[], void>({
+            query: () => ({
+                url: Endpoint.TRAINING_PALS,
+            }),
+            onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setPartnersList(data));
+                } catch {
+                    () => {};
+                }
+            },
         }),
     }),
 });
@@ -71,4 +115,7 @@ export const {
     useDeleteTrainingMutation,
     useGetTrainingListQuery,
     useLazyGetTrainingListQuery,
+    useLazyGetUserJointTrainingListQuery,
+    useGetTrainingPalsQuery,
+    useLazyGetTrainingPalsQuery,
 } = trainingApi;

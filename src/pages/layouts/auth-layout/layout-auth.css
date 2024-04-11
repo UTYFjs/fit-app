@@ -9,7 +9,6 @@
   backdrop-filter: blur(12px);
 }
 
-
 .main_auth{
   width: 539px;
   max-height: 742px;
@@ -30,13 +29,8 @@
   .main_auth{
     width: 328px;
     max-height: 612px;
-    padding: 32px 16px;
+    padding: var(--p-9xl) var(--p-xl);
     margin-bottom: var(--m-xs);
-
   }
-
-
-
-
 }
 

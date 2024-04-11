@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 
 type DrawerCalendarProps = {
-    drawerTitle: string;
+    drawerTitle: string | ReactNode;
     children: ReactNode;
     isDrawerOpen: boolean;
     onClose: () => void;
@@ -16,7 +16,7 @@ type DrawerCalendarProps = {
     footer?: ReactNode;
 };
 
-const DrawerCustom = ({
+export const DrawerCustom = ({
     drawerTitle,
     children,
     isDrawerOpen,
@@ -57,11 +57,10 @@ const DrawerCustom = ({
             mask={true}
             maskStyle={{ background: 'transparent' }}
             drawerStyle={{ borderRadius: '8px 0 0 8px' }}
-            footerStyle={{ padding: isDesktop ? '12px 32px' : '12px' }}
+            footerStyle={{ padding: isDesktop ? 'var(--p-m) var(--p-9xl)' : 'var(--p-m)' }}
             footer={footer}
         >
             <div className='drawer-wrapper'>{children}</div>
         </Drawer>
     );
 };
-export default DrawerCustom;

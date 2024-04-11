@@ -1,0 +1,21 @@
+.periodicity-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+}
+
+
+.periodicity-row{
+  display: flex;
+  gap: var(--gap-6xl);
+}
+
+.periodicity-item{
+  width: 156px;
+}
+
+.periodicity__select{
+  border: 1px solid var(--character-light-border);
+  border-radius: 2px;
+  width: 156px;
+}

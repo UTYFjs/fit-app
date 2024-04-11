@@ -10,7 +10,7 @@ type ModalErrorProps = {
     dataTestId?: string;
 };
 
-const ModalServerError = ({ isOpen, dataTestId }: ModalErrorProps) => {
+export const ModalServerError = ({ isOpen, dataTestId }: ModalErrorProps) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [isOpenModal, setIsOpenModal] = useState(isOpen);
     const navigate = useNavigate();
@@ -50,10 +50,7 @@ const ModalServerError = ({ isOpen, dataTestId }: ModalErrorProps) => {
                         Назад
                     </Button>
                 }
-                className=''
             />
         </Modal>
     );
 };
-
-export default ModalServerError;

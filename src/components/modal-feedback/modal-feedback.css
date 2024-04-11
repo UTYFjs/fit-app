@@ -3,7 +3,7 @@
   margin-top: var(--m-xl);
   border: 1px solid var(--character-light-border);
   border-radius: 2px;
-  padding: 5px 12px;
+  padding: 5px var(--p-m);
   width: 491px;
   height: 44px;
 }
@@ -17,7 +17,7 @@
 }
 
 .ant-modal-footer{
-  padding: 10px 24px;
+  padding: var(--p-xs) var(--p-5xl);
 }
 
 @media  screen and (max-width: 768px) {

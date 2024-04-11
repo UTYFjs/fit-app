@@ -43,7 +43,6 @@
 
 .profile__date-picker{
   width: 100%;
-
 }
 
 .profile-page .profile__email{
@@ -77,13 +76,11 @@
   font-weight: var(--font-weight);
   font-size: var(--font-size-l);
   line-height: var(--line-height);
-  text-align: center;
-  
+  text-align: center;  
 }
 
 .profile-page__submit-btn[disabled] span{
-  color: var(--character-light-disable-25);
-  
+  color: var(--character-light-disable-25);  
 }
 
 .profile-page__alert{
@@ -100,7 +97,7 @@
   .profile-page{
     gap: var(--gap-l);
     width: 100vw;
-    padding: 16px 24px 37px;
+    padding: var(--p-xl) var(--p-5xl) 37px;
     margin: 0 -16px;
   }
 

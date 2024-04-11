@@ -15,6 +15,6 @@ export const api = createApi({
         },
     }),
 
-    tagTypes: ['User', 'Feedbacks', 'Trainings'],
+    tagTypes: ['User', 'Feedbacks', 'Trainings', 'Invites'],
     endpoints: () => ({}),
 });

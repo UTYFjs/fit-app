@@ -1,7 +1,7 @@
 import { Button, Modal } from 'antd';
 import './modal-feedback.css';
 import TextArea from 'antd/lib/input/TextArea';
-import Rating from '@components/rating/rating';
+import { Rating } from '@components/rating/rating';
 
 import { useState } from 'react';
 
@@ -14,7 +14,7 @@ type ModalFeedbackProps = {
     handleSubmitReview: () => void;
 };
 
-const ModalFeedback = ({
+export const ModalFeedback = ({
     isOpen,
     setIsOpen,
     setTextFeedBackValue,
@@ -64,12 +64,7 @@ const ModalFeedback = ({
                 className='textarea_modal'
                 autoSize={{ minRows: 2, maxRows: 20 }}
                 placeholder='Расскажите, почему Вам понравилось наше приложение'
-                onFocus={() => {
-                    setIsBtnDisable(false);
-                }}
             />
         </Modal>
     );
 };
-
-export default ModalFeedback;

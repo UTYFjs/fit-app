@@ -2,7 +2,7 @@ import { Button, Result } from 'antd';
 import './not-found.css';
 import { useNavigate } from 'react-router-dom';
 
-const NotFound = () => {
+export const NotFound = () => {
     const navigate = useNavigate();
 
     const handleGoToMain = () => navigate('/main');
@@ -24,4 +24,3 @@ const NotFound = () => {
         </div>
     );
 };
-export default NotFound;

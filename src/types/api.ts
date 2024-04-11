@@ -1,3 +1,5 @@
+import { Nullable } from './common-types';
+
 export interface IRegistrationForm {
     email: string;
     password: string;
@@ -23,9 +25,9 @@ export interface IChangePasswordRequest {
 
 export type IFeedback = {
     id: string;
-    fullName: string | null;
-    imageSrc: string | null;
-    message: string | null;
+    fullName: Nullable<string>;
+    imageSrc: Nullable<string>;
+    message: Nullable<string>;
     rating: number;
     createdAt: string;
 };

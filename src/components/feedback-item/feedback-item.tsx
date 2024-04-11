@@ -4,13 +4,13 @@ import { Avatar, Comment } from 'antd';
 import './feedback-item.css';
 import { IFeedback } from '../../types/api';
 
-import Rating from '@components/rating/rating';
+import { Rating } from '@components/rating/rating';
 
 type IFeedbackProps = {
     data: IFeedback;
 };
 
-const FeedbackItem = ({ data }: IFeedbackProps) => {
+export const FeedbackItem = ({ data }: IFeedbackProps) => {
     const { id, fullName, imageSrc, message, rating, createdAt } = data;
     let firstName = '';
     let lastName = '';
@@ -39,4 +39,3 @@ const FeedbackItem = ({ data }: IFeedbackProps) => {
         ></Comment>
     );
 };
-export default FeedbackItem;

@@ -7,7 +7,7 @@
 }
 
 .custom-card > div[class='ant-card-body'] > div[class='ant-card-meta'] {
-  margin: 12px 30px;
+  margin: var(--m-m) var(--m-8xl);
   height: 21px;
 }
 

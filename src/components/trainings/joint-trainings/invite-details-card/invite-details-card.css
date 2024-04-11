@@ -1,0 +1,42 @@
+.invite-details__content-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+  padding: var(--p-5xl) 0; 
+  min-height: 153px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.invite-details__periodicity{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.invite-details__date{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.invite-details__exercise-name{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+}
+
+.invite-details__exercise-values{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  color: var(--primary-light-6);
+}
+

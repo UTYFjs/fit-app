@@ -1,14 +1,14 @@
 .feedback-item{
   border-radius: 2px;
   min-height: 128px;
-  padding: 0 16px;
+  padding: 0 var(--p-xl);
   width: 100%;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .15);
   background: var(--character-light-primary-inverse);
 }
 
 .feedback-item .ant-avatar{
-  margin: 0 66px 12px;
+  margin: 0 66px var(--m-m);
 }
 
 .feedback-item__name-owner{
@@ -26,8 +26,7 @@
   margin-bottom: var(--m-m);
 }
 
-.feedback-item .ant-comment-content-author-name{
-  
+.feedback-item .ant-comment-content-author-name{  
   height: var(--h-2xs);
 }
 
@@ -61,11 +60,10 @@
   }
 
   .feedback-item .ant-avatar{
-    margin: 0 16px 12px 0;
+    margin: 0 16px var(--m-m) 0;
   }
 
   .feedback-item .ant-comment-content-author{
-
     margin-bottom: var(--m-xl);
   }
 }

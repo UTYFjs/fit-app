@@ -5,5 +5,4 @@ type PortalProps = {
     children: ReactNode;
     parent: Element;
 };
-const Portal = ({ children, parent }: PortalProps) => createPortal(children, parent);
-export default Portal;
+export const Portal = ({ children, parent }: PortalProps) => createPortal(children, parent);

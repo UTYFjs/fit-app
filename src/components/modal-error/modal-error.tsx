@@ -13,7 +13,13 @@ type ModalErrorProps = {
     handleSecondButton?: () => void;
 };
 
-const ModalError = ({ isOpen, children, width, isClosable = false, onCancel }: ModalErrorProps) => (
+export const ModalError = ({
+    isOpen,
+    children,
+    width,
+    isClosable = false,
+    onCancel,
+}: ModalErrorProps) => (
     <Modal
         closable={isClosable}
         onCancel={onCancel}
@@ -25,7 +31,7 @@ const ModalError = ({ isOpen, children, width, isClosable = false, onCancel }: M
         centered
         open={isOpen}
         footer={null}
-        bodyStyle={{ minHeight: 144, padding: '16px 24px' }}
+        bodyStyle={{ minHeight: 144, padding: 'var(--p-xl) var(--p-5xl)' }}
         mask={true}
         maskClosable={true}
         maskStyle={{ backdropFilter: 'blur(5px)', background: 'rgba(121, 156, 212, 0.1)' }}
@@ -34,4 +40,3 @@ const ModalError = ({ isOpen, children, width, isClosable = false, onCancel }: M
         {children}
     </Modal>
 );
-export default ModalError;

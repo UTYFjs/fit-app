@@ -20,6 +20,7 @@ export default defineConfig(({ command }) => ({
             '@services': path.resolve(__dirname, 'src/services'),
             '@types': path.resolve(__dirname, 'src/types'),
             '@utils': path.resolve(__dirname, 'src/utils'),
+            '@assets': path.resolve(__dirname, 'src/assets'),
         },
     },
     base: command === 'build' ? '/UTYFjs/' : '/',

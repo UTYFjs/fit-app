@@ -1,0 +1,13 @@
+.partner__avatar{
+  display: flex;
+  gap: var(--gap-2xs);
+}
+
+.partner__name{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: left;
+  color: var(--character-light-title-85);
+}

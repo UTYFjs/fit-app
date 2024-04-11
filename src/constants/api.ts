@@ -26,6 +26,9 @@ export const enum Endpoint {
     TARIFF_CHECKOUT = 'tariff/checkout',
     UPLOAD_IMAGE = 'upload-image',
     TARIFF_LIST = 'catalogs/tariff-list',
+    USER_JOINT_TRAINING_LIST = 'catalogs/user-joint-training-list',
+    TRAINING_PALS = '/catalogs/training-pals',
+    INVITE = 'invite',
 }
 export enum Paths {
     MAIN = '/main',

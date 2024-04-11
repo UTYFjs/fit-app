@@ -8,7 +8,7 @@ import { useConfirmEmailMutation } from '@services/auth-api';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@constants/api';
 
-const ConfirmEmail = () => {
+export const ConfirmEmail = () => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
     const [value, setValue] = useState('');
@@ -63,5 +63,3 @@ const ConfirmEmail = () => {
         </div>
     );
 };
-
-export default ConfirmEmail;

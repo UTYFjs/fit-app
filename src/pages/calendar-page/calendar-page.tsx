@@ -3,12 +3,12 @@ import { Calendar } from 'antd';
 import './calendar-page.css';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-import BadgeTraining from '@components/badge-training/badge-training';
-import CardExercise from '@components/modal-calendar/card-exercise/card-exercise';
-import CardTraining from '@components/modal-calendar/card-training/card-training';
-import ModalError from '@components/modal-error/modal-error';
-import OpenErrorCard from '@components/modal-error/open-error-card/open-error-card';
-import Portal from '@components/portal/portal';
+import { BadgeTraining } from '@components/badge-training/badge-training';
+import { CardExercise } from '@components/modal-calendar/card-exercise/card-exercise';
+import { CardTraining } from '@components/modal-calendar/card-training/card-training';
+import { ModalError } from '@components/modal-error/modal-error';
+import { OpenErrorCard } from '@components/modal-error/open-error-card/open-error-card';
+import { Portal } from '@components/portal/portal';
 import { localeCalendar } from '@constants/calendar';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
@@ -17,14 +17,15 @@ import type { Moment } from 'moment';
 import { ResTrainingType, TrainingNames } from '../../types/training-types';
 import { DateFormat } from '@constants/date';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { Nullable } from '../../types/common-types';
 
-const CalendarPage = () => {
+export const CalendarPage = () => {
     const { isDesktop } = useWindowWidth();
-    const [parentModal, setParentModal] = useState<Element | null>(null);
+    const [parentModal, setParentModal] = useState<Nullable<Element>>(null);
     const [topPosition, setTopPosition] = useState(0);
     const [typeModal, setTypeModal] = useState<'training' | 'exercise' | null>(null);
 
-    const [calendarDate, setCalendarDate] = useState<Moment | null>(null);
+    const [calendarDate, setCalendarDate] = useState<Nullable<Moment>>(null);
     const [currentTrainings, setCurrentTrainings] = useState<ResTrainingType[]>([]);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
 
@@ -41,6 +42,7 @@ const CalendarPage = () => {
     useLayoutEffect(() => {
         getTrainingList();
     }, [dataTrainings, getTrainingList]);
+
     useEffect(() => {
         if (IsErrorTrainingsList) {
             setIsOpenModalError(true);
@@ -180,5 +182,3 @@ const CalendarPage = () => {
         </div>
     );
 };
-
-export default CalendarPage;

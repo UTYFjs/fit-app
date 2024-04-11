@@ -1,3 +1,128 @@
 .training-page{
-  color: red;
+  position: relative;
+  min-height: 100%;
+  background: var(--character-light-primary-inverse);
+  padding: var(--p-5xl);
+  border-radius: var(--border-radius-2xs);
+}
+
+.training-page.training-page_marathon{
+  background: no-repeat center/cover url('@assets/marathon.png');
+}
+
+.training-page .ant-tabs-nav{
+  margin-bottom: var(--m-m);
+}
+
+.training-page .ant-tabs-nav-list{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.training-page .ant-tabs-nav-wrap{
+  padding-left: var(--p-m);
+  padding-right: var(--p-9xl);
+}
+
+.training-page .ant-tabs-tab{
+  padding-bottom: var(--p-zero);
+}
+
+.training-page .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: var(--primary-light-6);
+}
+
+.training-page .ant-tabs-tab + .ant-tabs-tab{
+  margin: 0 var(--m-m);
+}
+
+.training-page .ant-tabs-tab-btn{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.training__success-alert{
+  position: absolute;
+  bottom: 70px;
+  right: 50%;
+  transform: translate(50%);
+  min-width: 395px;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 1280px) and (min-width: 576px){
+
+  .training-page{
+    padding: 29px var(--p-5xl) var(--p-xl);
+  }
+
+  .training-page .ant-tabs .ant-tabs-nav{
+    margin: 0 var(--m-m);
+  }
+
+  .training-page .ant-tabs-nav-wrap{
+    padding-left: var(--p-4xs);
+    padding-right: var(--p-4xs);
+  }
+
+  .training-page .ant-tabs-tab + .ant-tabs-tab{
+    margin: 0;
+  }
+
+  .training-page .ant-tabs-tab{
+    padding-top: var(--p-l);
+    padding-bottom: var(--p-l);
+  }
+
+  .training-page .ant-tabs-tab-btn{
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+  }
+}
+
+
+
+@media (max-width: 576px){
+
+  .training-page{
+    margin: 0 -16px;
+    padding: 21px var(--p-m) var(--p-xl);
+  }
+
+  .training-page .ant-tabs-nav-wrap{
+    padding-left: var(--p-4xs);
+    padding-right: var(--p-9xl);
+  }
+
+  .training-page .ant-tabs-nav-list{
+    gap: 8px;
+  }
+
+  .training-page .ant-tabs-tab + .ant-tabs-tab{
+    margin: 0;
+    margin-left: var(--m-3xs);
+  }
+
+  .training-page .ant-tabs-tab{
+    padding-top: var(--p-l);
+    padding-bottom: var(--p-l);
+  }
+
+  .training-page .ant-tabs-tab-btn{
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+  }
+}
+
+@media (max-width: 576px){
+
+  .training__success-alert{
+    bottom: 90px;
+    min-width: 312px;
+  }
 }

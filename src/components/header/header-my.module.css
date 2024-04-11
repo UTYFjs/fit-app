@@ -1,5 +1,5 @@
 .header{
-  padding: 16px 24px;
+  padding: var(--p-xl) var(--p-5xl);
   height: 168px;
   width: 100%;
   background: var(--primary-light-1);
@@ -31,8 +31,15 @@
   max-height: 70px;
 }
 
+.header.header_training{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 96px;
+  padding-bottom: var(--p-8xl);
+}
 
-.header.header_calendar .button_setting-calendar{
+.header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar {
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size);
@@ -43,7 +50,7 @@
   align-items: flex-end;
   width: 129px;
   margin-top: var(--m-xs);
-  padding-left: 15px;
+  padding-left: var(--p-l-xl);
   margin-left: -55px;
   padding-bottom: var(--p-null);
   border: none;
@@ -59,7 +66,6 @@
   color: var(--character-light-title-85);
 }
 
-
 .breadcrumb{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -70,8 +76,7 @@
 
 .title__wrapper{
   display: flex;
-  justify-content: space-between;
- 
+  justify-content: space-between; 
 }
 
 .header .title_header{
@@ -101,7 +106,7 @@
   display: block;
   width: 129px;
   margin-top: var(--m-xs);
-  padding-left: 15px;
+  padding-left: var(--p-l-xl);
   margin-left: -55px;
   border: none;
   font-family: var(--font-family);
@@ -118,6 +123,10 @@
     height: fit-content;
     z-index: 1;
     box-shadow: none;
+  }
+
+  .header.header_training{
+    min-height: 96px;
   }
 
   .header .title_header{
@@ -153,8 +162,6 @@
   .header .title4__wrapper{
     align-self: flex-start;
   }
-
-
 }
 @media (max-width: 576px){
 
@@ -167,18 +174,22 @@
     min-height: 82px;
   }
 
+  .header.header_training{
+    max-height: 82px;
+    padding-bottom: var(--p-5xl);
+  }
+
   .header .title_header{
     line-height: var(--line-height);
     font-size: var(--font-size-l2);
     margin-bottom: var(--m-2xs);
     margin-top: var(--m-2xs);
-
   }
 
   .header  .button_setting{
     border: 1px solid var(--character-light-border);
     border-radius: 100px;
-    padding: 4px 8px;
+    padding: var(--p-4xs) var(--p-2xs);
     width: 32px;
     height: 32px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, .04);
@@ -191,7 +202,7 @@
     display: none;
   }
 
-  .header.header_calendar .button_setting-calendar{
+  .header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar{
     width: 32px;
     height: 32px;
   }
@@ -215,5 +226,4 @@
   .header .title4__wrapper{
     align-self: flex-start;
   }
-
 }

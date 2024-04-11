@@ -30,13 +30,12 @@
   text-align: center;
   color: var(--character-light-secondary-45);
   margin: 0 auto;
-
 }
 
 
 .modal-result.modal-result_payment .ant-result{
-  padding-right: 32px;
-  padding-left: 32px;
+  padding-right: var(--p-9xl);
+  padding-left: var(--p-9xl);
 }
 
 .modal-result.modal-result_payment .anticon-check-circle svg{
@@ -46,7 +45,7 @@
 @media screen and (max-width: 768px) {
 
   .modal-result .ant-result{
-    padding: 32px 16px;
+    padding: var(--p-9xl) var(--p-xl);
   }
 
   .modal-result .ant-result-title{

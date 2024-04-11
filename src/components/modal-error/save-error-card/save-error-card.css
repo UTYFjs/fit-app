@@ -1,5 +1,5 @@
 .save-error-card{
-  padding: 16px 8px 8px;
+  padding: var(--p-xl) var(--p-2xs) var(--p-2xs);
 }
 
 .modal-error__content{
@@ -7,7 +7,6 @@
 }
 
 .save-error-card__title{
-
   font-family: var(--font-family);
   font-weight: var(--font-weight-m);
   font-size: var(--font-size-l);
@@ -34,5 +33,4 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-primary-inverse);
-
 }

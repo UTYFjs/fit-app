@@ -4,9 +4,9 @@ import { Button, Card, Empty, Select } from 'antd';
 import { ArrowLeftOutlined, EditOutlined } from '@ant-design/icons';
 
 import './card-exercise.css';
-import DrawerCalendar from '@components/drawer-calendar/drawer-calendar';
-import ModalError from '@components/modal-error/modal-error';
-import SaveErrorCard from '@components/modal-error/save-error-card/save-error-card';
+import { DrawerCalendar } from '@components/drawer-calendar/drawer-calendar';
+import { ModalError } from '@components/modal-error/modal-error';
+import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import {
     useAddTrainingMutation,
@@ -20,6 +20,7 @@ import type { Moment } from 'moment';
 
 import { ExerciseType, ResTrainingType, TrainingNames } from '../../../types/training-types';
 import { DateFormat } from '@constants/date';
+import { defaultExercise, defaultParameters } from '@constants/training';
 
 type CardExerciseProps = {
     options: {
@@ -36,15 +37,7 @@ type CardExerciseProps = {
     setIsEditTraining: (value: boolean) => void;
 };
 
-const defaultExercise = {
-    name: '',
-    replays: 1,
-    weight: 0,
-    approaches: 1,
-    isImplementation: false,
-};
-
-const CardExercise = ({
+export const CardExercise = ({
     options,
     calendarDate,
     selectedTraining,
@@ -112,6 +105,7 @@ const CardExercise = ({
                 date: calendarDate.format(DateFormat.DASH_YYYY_MM_DD) + 'T00:02:50.000Z',
                 isImplementation: false,
                 exercises: newExercises,
+                parameters: defaultParameters,
             })
                 .unwrap()
                 .then(() => {
@@ -236,5 +230,3 @@ const CardExercise = ({
         </>
     );
 };
-
-export default CardExercise;

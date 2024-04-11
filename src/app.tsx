@@ -1,25 +1,25 @@
-import ProtectedRoute from '@components/protected-route/protected-route';
+import { ProtectedRoute } from '@components/protected-route/protected-route';
 import { ResultComponent } from '@components/result-component/result-component';
 import { Paths } from '@constants/api';
-import AchievmentPage from '@pages/achievment-page/achievment-page';
+import { AchievmentPage } from '@pages/achievment-page/achievment-page';
 import { Auth } from '@pages/auth/auth';
-import CalendarPage from '@pages/calendar-page/calendar-page';
-import ChangePassword from '@pages/change-password/change-password';
-import ConfirmEmail from '@pages/confirm-email/confirm-email';
-import Feedbacks from '@pages/feedbacks/feedbacks';
+import { CalendarPage } from '@pages/calendar-page/calendar-page';
+import { ChangePassword } from '@pages/change-password/change-password';
+import { ConfirmEmail } from '@pages/confirm-email/confirm-email';
+import { Feedbacks } from '@pages/feedbacks/feedbacks';
 import { LayoutAuth } from '@pages/layouts/auth-layout/layout-auth';
 import { LayoutMain } from '@pages/layouts/layout-main/layout-main';
 import { LayoutMainContent } from '@pages/layouts/main-content-layout/main-content-layout';
-import ProfilePage from '@pages/profile-page/profile-page';
-import TrainingPage from '@pages/training-page/training-page';
+import { ProfilePage } from '@pages/profile-page/profile-page';
+import { TrainingPage } from '@pages/training-page/training-page';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from './hooks';
 import { MainPage } from './pages';
-import SettingsPage from '@pages/settings-page/settings-page';
-import NotFound from '@pages/not-found/not-found';
+import { SettingsPage } from '@pages/settings-page/settings-page';
+import { NotFound } from '@pages/not-found/not-found';
 
-const App = () => {
+export const App = () => {
     const { previousLocations } = useAppSelector((state) => state.router);
     const { accessToken } = useAppSelector((state) => state.user);
     return (
@@ -89,5 +89,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

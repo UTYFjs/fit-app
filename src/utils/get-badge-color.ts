@@ -1,18 +1,16 @@
-const getBadgeColor = (badgeName: string): string => {
+export const getBadgeColor = (badgeName: string): string => {
     switch (badgeName) {
         case 'Силовая':
-            return 'green';
+            return 'var(--tranie-yellow)';
         case 'Ноги':
-            return 'volcano';
+            return 'var(--character-light-error)';
         case 'Руки':
-            return 'cyan';
+            return 'var(--tranie-cyan)';
         case 'Спина':
             return 'orange';
         case 'Грудь':
-            return 'yellow';
+            return 'var(--character-light-success)';
         default:
-            return 'blue';
+            return 'var(--tranie-orange)';
     }
 };
-
-export default getBadgeColor;

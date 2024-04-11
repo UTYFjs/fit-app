@@ -1,0 +1,119 @@
+.partner-card{
+  border-radius: 2px;
+  width: 234px;
+  background: var(--primary-light-1);
+  max-height: 199px;
+  overflow: hidden;
+}
+
+.partner-card .ant-card-body{
+  padding: var(--p-m);
+}
+
+.partner-card__wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+}
+
+.partner-card.partner-card_rejected{
+  background: var(--character-light-table-header);
+}
+
+.partner-card.partner-card_full .ant-card-body{
+  padding: var(--p-xl) var(--p-xl) var(--p-2xs);
+}
+
+.partner-card_short{
+  cursor: pointer;
+  background: var(--character-light-primary-inverse);
+  border: 1px solid var(--character-light-dividers);
+}
+
+.partner-card__avatar{
+  display: flex;
+  gap: var(--gap-2xs);
+}
+
+.partner-card__name{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: left;
+  color: var(--character-light-title-85);
+  width: 90px;
+}
+
+.partner-card__btn{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-primary-inverse);
+  width: 100%;
+  margin-top: var(--m-xs);
+}
+
+.partner-card__btn_default{
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+  text-align: center;
+  width: 100%;
+  margin-top: var(--m-xs);
+}
+
+.partner-card__status{
+  display: flex;
+  gap: var(--gap-2xs);
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: var(font-weight);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+  text-align: center;
+  line-height: 16px;
+  height: 16px;
+}
+
+.partner-modal__wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, fit-content);
+  grid-row-gap: var(--gap-2xl);  
+  padding: var(--p-2xl) var(--p-2xs);
+  align-items: center;
+  justify-items: left;
+}
+
+@media (max-width: 576px){
+
+  .partner-modal__wrapper{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, fit-content);
+    grid-row-gap: var(--gap);  
+    padding: 0;
+    align-items: center;
+    justify-items: left;
+  }
+
+  .partner__btn-reject{
+    width: 100%;
+  }
+
+  .partner-modal__wrapper .partner-card__status{
+    justify-self: center;
+    order: 1;
+  }
+
+  .partner-card{
+    width: 312px;
+  }
+
+}

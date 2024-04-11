@@ -1,0 +1,19 @@
+.partners-list-wrapper{
+  padding-top: var(--p-xl);
+}
+
+.partners-list__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.partners-list__empty-subtitle{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+}

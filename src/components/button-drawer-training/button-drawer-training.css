@@ -1,0 +1,39 @@
+.drawer-button__title-wrapper{
+  display: flex;
+  gap: var(--gap-xs);
+}
+
+.drawer-button__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l2);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.drawer-custom-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl);
+  height: 100%;
+}
+
+.drawer__partner-info{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.training-list__select{
+  border: 1px solid var(--character-light-border);
+  border-radius: 2px;
+}
+
+.drawer-button__exercise-list{
+  max-height: 70%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl);
+}

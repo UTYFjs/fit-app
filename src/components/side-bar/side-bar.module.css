@@ -2,7 +2,6 @@
   position: relative;
 }
 
-
 .sider .menu li[class='ant-menu-item']{
   margin-left: -8px;
 }
@@ -11,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0 0;
+  margin: var(--m-8xl) 0 0;
   height: 64px;
   cursor: pointer;
 }
@@ -42,14 +41,13 @@
   clip-path: polygon(0 0, 100% 12%, 100% 88%, 0% 100%);
 }
 
-.button_exit{
-  
+.button_exit{  
   display: flex;
   align-items: center;
   gap: var(--gap);
   padding: var(--p-null);
   height: 40px;
-  padding: 0 16px;
+  padding: 0 var(--p-xl);
   margin-top: auto;
   border: none;
   background: transparent;
@@ -66,8 +64,8 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-title-85);
-  padding: 4px 15px;
-  margin-left: 10px;
+  padding: var(--p-4xs) 15px;
+  margin-left: var(--m-s);
 }
 
 
@@ -82,7 +80,7 @@
   .logo{
     height: 50px;
     width: 106px;
-    padding: 16px 17px;
+    padding: var(--p-xl) 17px;
     margin: var(--m-zero);
   }
 
@@ -99,7 +97,7 @@
   }
 
   .sider > div .menu > li[class='ant-menu-item'] span:last-child{
-    margin-left: 8px;
+    margin-left: var(--m-s);
   }
 
   .sider > div .menu > li[class='ant-menu-item'] span:first-child {
@@ -109,5 +107,4 @@
   .button_exit{
     justify-content: center;
   }
-
 }

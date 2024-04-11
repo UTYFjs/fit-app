@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
+  --tranie-yellow: #fadb14;
+  --tranie-cyan: #13c2c2;
+  --tranie-orange: #fa8c16;
   --character-light-title-85: #262626;
   --character-light-primary-85: #262626;
   --character-light-secondary-45: #8c8c8c;
@@ -86,6 +89,9 @@
   --font-family: 'Inter', sans-serif;
   --second-family: 'Roboto', sans-serif;
   --boder-radius-5xs: 2px;
+  --border-radius-4xs: 4px;
+  --boder-radius-3xs: 6px;
+  --border-radius-2xs: 8px;
   --font-size-l4: 38px;
   --font-size-l3: 24px;
   --font-size-l2: 20px;
@@ -98,6 +104,7 @@
   --font-weight-l: 700;
   --gap-5xs: 2px;
   --gap-4xs: 4px;
+  --gap-3_4xs: 5px;
   --gap-3xs: 6px;
   --gap-2xs: 8px;
   --gap-xs: 10px;
@@ -127,7 +134,7 @@
   --p-xs: 10px;
   --p-m: 12px;
   --p-l: 14px;
-  --p-l-xl: 13px;
+  --p-l-xl: 15px;
   --p-xl: 16px;
   --p-2xl: 18px;
   --p-3xl: 20px;
@@ -139,10 +146,10 @@
   --p-9xl: 32px;
   --m-auto-center: 0 auto;
   --m-zero: 0;
-  --m-3xs: 2px;
+  --m-4xs: 2px;
   --m-3xs: 4px;
   --m-2xs: 6px;
-  --m-xs: 8px;
+  --m-s: 8px;
   --m-s: 10px;
   --m-m: 12px;
   --m-l: 14px;

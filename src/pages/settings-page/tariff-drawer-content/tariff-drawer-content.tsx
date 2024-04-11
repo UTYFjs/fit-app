@@ -12,7 +12,7 @@ type TariffDrawerContent = {
     handleSetValuePay: (e: RadioChangeEvent) => void;
     dateActivePRO?: string;
 };
-const TariffDrawerContent = ({
+export const TariffDrawerContent = ({
     isActivePro,
     dataTariffList,
     valuePay,
@@ -107,5 +107,3 @@ const TariffDrawerContent = ({
         )}
     </div>
 );
-
-export default TariffDrawerContent;
