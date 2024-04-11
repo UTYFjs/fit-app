@@ -1,7 +1,7 @@
 .my-trainings{
   display: flex;
   flex-direction: column;  
-  gap: 20px;
+  gap: var(--gap-l);
 }
 
 .trainings-table__title_empty{
@@ -27,7 +27,7 @@
 @media (max-width: 576px){
 
   .trainings-table__title_empty{
-    padding: 56px 12px;
+    padding: 56px var(--p-m);
   }
 
 }

@@ -34,11 +34,11 @@
 
 .feedback-empty .ant-card{
   width: 100%;
-  padding: 32px 0;
+  padding: var(--p-9xl) 0;
 }
 
 .feedback-empty .ant-card-head-title{
-  padding: 24px 0;
+  padding: var(--p-5xl) 0;
 }
 
 .feedback-empty__title{
@@ -48,7 +48,6 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-9);
-
 }
 
 .feedback-empty__content{
@@ -58,7 +57,6 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--character-light-secondary-45);
-
 }
 
 @media screen and (max-width: 768px) {
@@ -85,7 +83,7 @@
   }
 
   .feedback-empty .ant-card{
-    padding: 24px 0;
+    padding: var(--p-5xl) 0;
   }
 
   .feedback-empty .ant-card-head-title{
@@ -93,10 +91,10 @@
   }
 
   .feedback-empty .ant-card-body{
-    padding: 24px 16px;
+    padding: var(--p-5xl) var(--p-xl);
   }
 
   .feedback-empty__action{
-    width: 100%;}
-
+    width: 100%;
+  }
 }

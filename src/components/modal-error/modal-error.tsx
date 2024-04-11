@@ -31,7 +31,7 @@ export const ModalError = ({
         centered
         open={isOpen}
         footer={null}
-        bodyStyle={{ minHeight: 144, padding: '16px 24px' }}
+        bodyStyle={{ minHeight: 144, padding: 'var(--p-xl) var(--p-5xl)' }}
         mask={true}
         maskClosable={true}
         maskStyle={{ backdropFilter: 'blur(5px)', background: 'rgba(121, 156, 212, 0.1)' }}

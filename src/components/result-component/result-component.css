@@ -28,7 +28,7 @@
 .result-card .ant-btn.ant-btn-primary {
   border: 1px solid var(--primary-light-6);
   border-radius: 2px;
-  padding: 4px 15px;
+  padding: var(--p-4xs) 15px;
   margin-top: var(--m-5xl);
   height: 40px;
   width: 100%;

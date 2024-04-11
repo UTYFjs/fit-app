@@ -1,8 +1,5 @@
-
-
-
 .drawer-custom .ant-drawer-content .ant-drawer-header{
-  padding: 24px 32px 16px;
+  padding: var(--p-5xl) var(--p-9xl) var(--p-xl);
 }
 
 .drawer-wrapper{
@@ -20,7 +17,7 @@
 }
 
 .ant-drawer-body{
-  padding: 24px 32px;
+  padding: var(--p-5xl) var(--p-9xl);
   overflow: hidden;
 }
 
@@ -44,7 +41,6 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--character-light-secondary-45);
-
 }
 
 .drawer-calendar__exercise-list{
@@ -53,7 +49,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-2xl);
-  margin: 24px 0;
+  margin: var(--m-5xl) 0;
 }
 
 .exercise-item{
@@ -61,7 +57,6 @@
   flex-direction: column;
   gap: var(--gap-2xs);
   width: 100%;
-
 }
 
 .exercise-item__label{
@@ -116,7 +111,6 @@
   line-height: var(--line-height);
   text-align: center;
   color: var(--primary-light-6);
-
 }
 
 .drawer-custom .drawer-calendar__btn-remove{
@@ -125,19 +119,17 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   text-align: center;
-
 }
 
 .drawer_footer-wrapper{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  
+  justify-content: space-between;  
 }
 
 .drawer__warning-message{
-  padding: 0 20px;
+  padding: 0 var(--p-3xl);
   font-family: var(--font-family);
   line-height: var(--line-height);
   font-size: var(--font-size-s);
@@ -153,11 +145,11 @@
   }
 
   .drawer-custom .ant-drawer-content .ant-drawer-header{
-    padding: 24px 16px 16px;
+    padding: var(--p-5xl) var(--p-xl) var(--p-xl);
   }
 
   .ant-drawer-body{
-    padding: 0 16px 24px;
+    padding: 0 var(--p-xl) var(--p-xl);
   }
 
   .exercise-item{

@@ -36,8 +36,7 @@ export const Invite = ({ inviteList }: InviteProps) => {
                 dispatch(deleteInviteItem(idInvite));
                 await refetch();
                 await getInviteList();
-            })
-            .catch(() => {});
+            });
     };
     const handleRejectInvite = async (idInvite: string) => {
         await answerInvite({ id: idInvite, status: PartnerStatus.REJECTED })
@@ -45,8 +44,7 @@ export const Invite = ({ inviteList }: InviteProps) => {
             .then(async () => {
                 dispatch(deleteInviteItem(idInvite));
                 await getInviteList();
-            })
-            .catch(() => {});
+            });
     };
     const handleSeeTrainingDetails = (id: string) => {
         setIsCurrentIdInvite(id);

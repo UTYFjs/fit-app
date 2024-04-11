@@ -19,37 +19,29 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import {
     getCurrentTraining,
     removeExercises,
-    setAlertMessage,
     setCurrentTraining,
     updateNameCurrentTraining,
-    updateStatusUserJointTrainingList,
 } from '@redux/training-slice';
-import {
-    useAddTrainingMutation,
-    useGetTrainingListQuery,
-    useGetTrainingsQuery,
-    useUpdateTrainingMutation,
-} from '@services/training-api';
+import { useGetTrainingListQuery, useGetTrainingsQuery } from '@services/training-api';
 import { getSelectedTrainings } from '@utils/get-select-training';
-import { useCreateInviteMutation } from '@services/invite-api';
+
 import { CalendarDataTeatId } from '@constants/data-test-id';
 import { SaveErrorCard } from '@components/modal-error/save-error-card/save-error-card';
 import { ModalError } from '@components/modal-error/modal-error';
-import { isPast } from '@utils/date-utils';
-import moment from 'moment';
+import { useHandleDrawerTrainingAction } from '@hooks/use-handle-drawer-training-action';
 
 type ButtonDrawerTrainingProps = ButtonProps & {
-    buttonClass?: string;
-    btnText?: string;
-    training?: ResTrainingType;
-    isJoint?: boolean;
-    isPeriodicity?: boolean;
-    isEdit?: boolean;
-    dataTestIdBtn?: string;
-    onClickBtn?: () => void;
-    drawerChildren?: ReactNode;
-    partnerUser?: UserJointTrainingListType;
-    handleOnSave?: (exercises: ExerciseType[]) => void;
+    buttonClass: string;
+    btnText: string;
+    training: ResTrainingType;
+    isJoint: boolean;
+    isPeriodicity: boolean;
+    isEdit: boolean;
+    dataTestIdBtn: string;
+    onClickBtn: () => void;
+    drawerChildren: ReactNode;
+    partnerUser: UserJointTrainingListType;
+    handleOnSave: (exercises: ExerciseType[]) => void;
 };
 export const ButtonDrawerTraining = ({
     buttonClass,
@@ -64,13 +56,10 @@ export const ButtonDrawerTraining = ({
     partnerUser,
     handleOnSave,
     ...rest
-}: ButtonDrawerTrainingProps) => {
+}: Partial<ButtonDrawerTrainingProps>) => {
     const currentTraining = useAppSelector(getCurrentTraining);
 
-    const [addTraining] = useAddTrainingMutation();
-    const [updateTraining] = useUpdateTrainingMutation();
-    const { data: allTrainingsByDay, refetch } = useGetTrainingsQuery();
-    const [createInvite] = useCreateInviteMutation();
+    const { data: allTrainingsByDay } = useGetTrainingsQuery();
     const { data: dataTrainingList } = useGetTrainingListQuery();
 
     const dispatch = useAppDispatch();
@@ -101,49 +90,14 @@ export const ButtonDrawerTraining = ({
         setIsDrawerOpen(false);
     };
 
-    const handleDrawerAction = async () => {
-        if (isEdit) {
-            const data = structuredClone(currentTraining);
-            data.isImplementation = isPast(moment(currentTraining.date));
-            await updateTraining(data)
-                .unwrap()
-                .then(() => {
-                    refetch();
-                    handleOnSave && handleOnSave(data.exercises);
-                    handleCloseDrawer();
-                    dispatch(setAlertMessage('Тренировка успешно обновлена'));
-                })
-                .catch(() => {
-                    setIsModalErrorOpen(true);
-                });
-        } else {
-            await addTraining(currentTraining)
-                .unwrap()
-                .then(async (data) => {
-                    partnerUser &&
-                        isJoint &&
-                        (await createInvite({
-                            to: partnerUser.id,
-                            trainingId: data._id,
-                        })
-                            .unwrap()
-                            .then(() => {
-                                dispatch(
-                                    updateStatusUserJointTrainingList({
-                                        ...partnerUser,
-                                        status: 'pending',
-                                    }),
-                                );
-                            }));
-                    await refetch();
-                    handleCloseDrawer();
-                    dispatch(setAlertMessage('Новая тренировка успешно добавлена'));
-                })
-                .catch(() => {
-                    setIsModalErrorOpen(true);
-                });
-        }
-    };
+    const handleDrawerAction = useHandleDrawerTrainingAction({
+        isEdit,
+        isJoint,
+        handleCloseDrawer,
+        setIsModalErrorOpen,
+        partnerUser,
+        handleOnSave,
+    });
 
     const handleChooseCurrentTrainingType = (trainingType: string) => {
         dispatch(updateNameCurrentTraining(trainingType as TrainingNames));
@@ -182,15 +136,7 @@ export const ButtonDrawerTraining = ({
                     <div className='drawer-button__title-wrapper'>
                         {isEdit ? <EditOutlined /> : <PlusOutlined />}
                         <div className='drawer-button__title'>
-                            {
-                                getDrawerTitle(isEdit, isJoint)
-
-                                // isEdit
-                                //     ? 'Редактирование'
-                                //     : isJoint
-                                //     ? 'Совместная тренировка'
-                                //     : 'Добавление упражнений'
-                            }
+                            {getDrawerTitle(isEdit, isJoint)}
                         </div>
                     </div>
                 }

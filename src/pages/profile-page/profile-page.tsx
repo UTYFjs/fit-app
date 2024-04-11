@@ -31,8 +31,7 @@ export const ProfilePage = () => {
             .unwrap()
             .then(() => {
                 setIsAlert(true);
-            })
-            .catch(() => {});
+            });
         setIsDisabledBtn(true);
     };
     const onChangeForm = () => {

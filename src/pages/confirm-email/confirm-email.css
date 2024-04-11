@@ -1,8 +1,5 @@
-
-
-
 .container_verification-input{
-  margin: 24px auto;
+  margin: var(--m-5xl) auto;
   height: 40px;
   width: 300px;
 }
@@ -53,8 +50,7 @@ p.extra__text {
 
   .container_verification-input{
     width: 280px;
-    gap: 8px;
-  
+    gap: var(--gap-2xs);  
   }
 
   .character{

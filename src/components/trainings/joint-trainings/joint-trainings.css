@@ -8,7 +8,7 @@
 }
 
 .joint-training__info{
-  padding: 32px 24px 0;
+  padding: var(--p-9xl) var(--p-5xl) 0;
   background: var(--character-light-table-header);
 }
 
@@ -31,7 +31,6 @@
   color: var(--character-light-secondary-45);
   margin-bottom: var(--m-5xl);
 }
-
 
 .ant-divider{
   margin: 0;
@@ -70,7 +69,7 @@
   }
 
   .joint-training__info{
-    padding: 32px var(--p-2xs) 0;
+    padding: var(--p-9xl) var(--p-2xs) 0;
   }
 
   .joint-training__button-group{

@@ -57,7 +57,7 @@ export const DrawerCustom = ({
             mask={true}
             maskStyle={{ background: 'transparent' }}
             drawerStyle={{ borderRadius: '8px 0 0 8px' }}
-            footerStyle={{ padding: isDesktop ? '12px 32px' : '12px' }}
+            footerStyle={{ padding: isDesktop ? 'var(--p-m) var(--p-9xl)' : 'var(--p-m)' }}
             footer={footer}
         >
             <div className='drawer-wrapper'>{children}</div>

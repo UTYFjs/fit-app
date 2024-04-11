@@ -1,5 +1,5 @@
 .header{
-  padding: 16px 24px;
+  padding: var(--p-xl) var(--p-5xl);
   height: 168px;
   width: 100%;
   background: var(--primary-light-1);
@@ -39,7 +39,6 @@
   padding-bottom: var(--p-8xl);
 }
 
-
 .header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar {
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -67,7 +66,6 @@
   color: var(--character-light-title-85);
 }
 
-
 .breadcrumb{
   font-family: var(--font-family);
   line-height: var(--line-height);
@@ -78,8 +76,7 @@
 
 .title__wrapper{
   display: flex;
-  justify-content: space-between;
- 
+  justify-content: space-between; 
 }
 
 .header .title_header{
@@ -165,8 +162,6 @@
   .header .title4__wrapper{
     align-self: flex-start;
   }
-
-
 }
 @media (max-width: 576px){
 
@@ -189,7 +184,6 @@
     font-size: var(--font-size-l2);
     margin-bottom: var(--m-2xs);
     margin-top: var(--m-2xs);
-
   }
 
   .header  .button_setting{
@@ -232,5 +226,4 @@
   .header .title4__wrapper{
     align-self: flex-start;
   }
-
 }

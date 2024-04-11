@@ -7,7 +7,7 @@
 
 
 .ant-card-head-title, .ant-card-extra{
-  padding: 12px 0; 
+  padding: var(--p-m) 0; 
 }
 
 .card-tariff__title{
@@ -55,7 +55,7 @@
   }
 
   .ant-card-head-title, .ant-card-extra{
-    padding: 10px 0; 
+    padding: var(--p-xs) 0; 
   }
 
   .card-tariff__img{

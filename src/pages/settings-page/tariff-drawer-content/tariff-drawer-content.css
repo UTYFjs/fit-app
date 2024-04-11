@@ -39,7 +39,6 @@
 }
 
 .tariff_free{
-
   background: var(--character-light-dividers);
 }
 
@@ -63,7 +62,6 @@
 .option-tariff-item{
   display: flex;
   gap: 52px;
-
 }
 
 .option-tariff-item__title{
@@ -99,12 +97,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-
 }
 
 .price__body-column:first-child{
   flex-basis: 177px;
-
 }
 
 .price-item__title{
@@ -122,7 +118,6 @@
   line-height: var(--line-height);
   color: var(--character-light-title-85);
   text-align: end;
-
 }
 
 .price-item__title, .price-item__cost, .price-item__radio{
@@ -151,7 +146,6 @@
   }
 
   .tariff-labels{
-
     padding-top: var(--p-m);
   }
 
@@ -162,25 +156,18 @@
   }
 
   .option-tariff-item{
-
     gap: 44px;
-
   }
 
   .price__title{
-
     padding-bottom: var(--p-xl);
   }
 
   .price__body .price__body-column{
-
     gap: var(--gap-4xs);
-
   }
 
   .price__body-column:first-child{
     flex-basis: 161px;
-
   }
-
 }

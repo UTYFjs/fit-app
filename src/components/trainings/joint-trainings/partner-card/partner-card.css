@@ -21,7 +21,7 @@
 }
 
 .partner-card.partner-card_full .ant-card-body{
-  padding: 16px 16px var(--p-2xs);
+  padding: var(--p-xl) var(--p-xl) var(--p-2xs);
 }
 
 .partner-card_short{
