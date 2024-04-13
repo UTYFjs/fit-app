@@ -1,3 +1,51 @@
-.achievment-page{
-  color: red;
+.load{
+  display: flex;
+  gap: 150px;
+  align-items: center;
+}
+
+.most-frequent{
+  display: grid;
+  grid-template-columns: 188px auto;
+  gap: var(--gap);
+}
+
+.most-frequent__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+  padding-right: var(--p-9xl);
+}
+
+.most-frequent__name{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.card-load{
+  width: 156px;
+  height: 138px;
+  padding: var(--p-5xl);
+}
+
+.card-load__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-l);
+  font-size: var(--font-size-l4);
+  line-height: var(--line-height);
+  color: var(--character-light-title-85);
+}
+
+.card-load__subtitle{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-secondary-45);
 }

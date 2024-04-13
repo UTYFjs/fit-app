@@ -18,13 +18,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
 import { getInviteList } from '@redux/invite-slice.ts';
-import { TrainingDataTestId } from '@constants/data-test-id.ts';
+import { CalendarDataTeatId, TrainingDataTestId } from '@constants/data-test-id.ts';
 import { useExitApp } from '@hooks/use-exit-app.ts';
+import { useLazyGetTrainingsQuery } from '@services/training-api.ts';
+import { ModalServerError } from '@components/modal-server-error/modal-server-error.tsx';
 
 const { Sider } = Layout;
-
+type MenuInfo = {
+    key: Paths;
+    icon: JSX.Element;
+    label: string;
+    style: React.CSSProperties;
+};
 export const SideBar: React.FC = () => {
     const inviteList = useAppSelector(getInviteList);
+    const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
+
     const { pathname } = useLocation();
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -51,7 +60,7 @@ export const SideBar: React.FC = () => {
         height: 42,
         letterSpacing: isMobile ? '.4px' : '.8px',
     };
-    const menuItems = [
+    const menuItems: MenuInfo[] = [
         {
             key: Paths.CALENDAR,
             icon: <CalendarIcon style={{ color: colorPrimaryLight9 }} />,
@@ -86,67 +95,91 @@ export const SideBar: React.FC = () => {
         },
     ];
 
+    const handleOnClickMenu = async (item: { key: string }) => {
+        console.log(item);
+        try {
+            if (
+                item.key === Paths.ACHIEVEMENT ||
+                item.key === Paths.TRAINING ||
+                item.key === Paths.CALENDAR
+            ) {
+                await getTrainings().unwrap();
+            }
+            navigate(item.key);
+        } catch {
+            () => {};
+        }
+    };
     return (
-        <Sider
-            className={styles.sider}
-            trigger={null}
-            collapsed={collapsed}
-            collapsedWidth={isMobile ? 0 : 64}
-            width={isMobile ? 106 : 208}
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                zIndex: 3,
-                background: '#fff',
-            }}
-        >
-            <div>
-                <div
-                    className={styles.logo}
-                    style={{ marginRight: collapsed ? 0 : '15px' }}
-                    onClick={() => {
-                        navigate(Paths.MAIN);
-                    }}
-                >
-                    {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
-                        className: 'trigger',
-                    })}
+        <>
+            {' '}
+            <Sider
+                className={styles.sider}
+                trigger={null}
+                collapsed={collapsed}
+                collapsedWidth={isMobile ? 0 : 64}
+                width={isMobile ? 106 : 208}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    zIndex: 3,
+                    background: '#fff',
+                }}
+            >
+                <div>
+                    <div
+                        className={styles.logo}
+                        style={{ marginRight: collapsed ? 0 : '15px' }}
+                        onClick={() => {
+                            navigate(Paths.MAIN);
+                        }}
+                    >
+                        {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
+                            className: 'trigger',
+                        })}
+                    </div>
+                    <Menu
+                        className={styles.menu}
+                        theme='light'
+                        mode='inline'
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            height: isMobile ? 192 : 230,
+                            marginTop: isMobile ? 16 : 42,
+                        }}
+                        onClick={(item) => {
+                            handleOnClickMenu(item);
+                        }}
+                        selectedKeys={[currentMenuItem]}
+                        items={menuItems}
+                    />
                 </div>
-                <Menu
-                    className={styles.menu}
-                    theme='light'
-                    mode='inline'
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        height: isMobile ? 192 : 230,
-                        marginTop: isMobile ? 16 : 42,
-                    }}
-                    onClick={(item) => {
-                        navigate(item.key);
-                    }}
-                    selectedKeys={[currentMenuItem]}
-                    items={menuItems}
-                />
-            </div>
-            <Button
-                className={styles['button_trigger']}
-                onClick={() => setCollapsed(!collapsed)}
-                data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
-            >
-                {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            </Button>
+                <Button
+                    className={styles['button_trigger']}
+                    onClick={() => setCollapsed(!collapsed)}
+                    data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
+                >
+                    {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                </Button>
 
-            <Button
-                type='text'
-                icon={isMobile ? '' : <ExitIcon />}
-                className={styles['button_exit']}
-                onClick={exitApp}
-            >
-                {!collapsed && 'Выход'}
-            </Button>
-        </Sider>
+                <Button
+                    type='text'
+                    icon={isMobile ? '' : <ExitIcon />}
+                    className={styles['button_exit']}
+                    onClick={exitApp}
+                >
+                    {!collapsed && 'Выход'}
+                </Button>
+            </Sider>
+            {isError && (
+                <ModalServerError
+                    dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
+                    isOpen={isError}
+                />
+            )}
+        </>
     );
 };

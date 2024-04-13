@@ -1,0 +1,4 @@
+.column-chart-wrapper{
+  border: 1px solid var(--character-light-dividers);
+  border-radius: 2px;
+}

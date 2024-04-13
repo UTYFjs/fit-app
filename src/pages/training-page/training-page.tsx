@@ -53,12 +53,12 @@ export const TrainingPage = () => {
         getTrainingList();
     };
 
-    const OnChangeTabs = (key: string) => setIsMarathon(key === tabItems[2].key ? true : false);
+    const onChangeTabs = (key: string) => setIsMarathon(key === tabItems[2].key ? true : false);
 
     return (
         <div className={classNames('training-page', isMarathon && 'training-page_marathon')}>
             {' '}
-            <Tabs items={tabItems} centered onChange={OnChangeTabs} />
+            <Tabs items={tabItems} centered onChange={onChangeTabs} />
             {IsErrorTrainingsList && (
                 <ModalError
                     isOpen={isOpenModalError}
