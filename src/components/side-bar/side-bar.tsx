@@ -96,7 +96,6 @@ export const SideBar: React.FC = () => {
     ];
 
     const handleOnClickMenu = async (item: { key: string }) => {
-        console.log(item);
         try {
             if (
                 item.key === Paths.ACHIEVEMENT ||

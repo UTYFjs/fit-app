@@ -16,7 +16,6 @@ export const ColumnChartLegend = ({
     colorText,
     ...rest
 }: ColumnChartProps) => {
-    console.log('проверка дян ', getStringDayOfWeekByNumber(6));
     return (
         <div className='legend'>
             <p className='legend__title'>{legendTitle}</p>
