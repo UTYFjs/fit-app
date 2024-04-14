@@ -30,7 +30,6 @@ export const ColumnChart = ({ currentData, containerStyles }: ColumnChartProps) 
                 labelSpacing: 16,
             },
         },
-        legend: 'fff',
         style: { fill: '#85a5ff', width: 30 },
         tooltip: {
             title: '',

@@ -1,26 +1,34 @@
 import './column-chart-legend.css';
-import { Badge } from 'antd';
+import { Badge, BadgeProps } from 'antd';
 import { getStringDayOfWeekByNumber } from '@utils/get-string-day-of-week';
 
-type ColumnChartProps = {
-    currentData: Array<{ date: string; value: number }>;
+type ColumnChartProps = BadgeProps & {
+    legendTitle: string;
+    badgeData: Array<{ date: string; value: string }>;
+    colorBadge: { primary: string; secondary: string };
+    colorText: { primary: string; secondary: string };
 };
 
-export const ColumnChartLegend = ({ currentData }: ColumnChartProps) => {
+export const ColumnChartLegend = ({
+    legendTitle,
+    badgeData,
+    colorBadge,
+    colorText,
+    ...rest
+}: ColumnChartProps) => {
     console.log('проверка дян ', getStringDayOfWeekByNumber(6));
     return (
         <div className='legend'>
-            <p className='legend__title'>Средняя нагрузка по дням недели</p>
+            <p className='legend__title'>{legendTitle}</p>
             <div className='legend-item__wrapper'>
-                {currentData.map((item, index) => (
+                {badgeData.map((item, index) => (
                     <div key={item.date} className='legend-item'>
                         <Badge
                             count={index + 1}
-                            color={item.value ? 'var(--primary-light-6)' : 'var(--primary-light-1)'}
+                            {...rest}
+                            color={item.value ? colorBadge.primary : colorBadge.secondary}
                             style={{
-                                color: item.value
-                                    ? ' var(--character-light-primary-inverse)'
-                                    : 'var(--primary-light-6)',
+                                color: item.value ? colorText.primary : colorText.secondary,
                                 fontWeight: 400,
                                 fontSize: 12,
                                 fontFamily: 'var(--font-family)',
@@ -29,9 +37,7 @@ export const ColumnChartLegend = ({ currentData }: ColumnChartProps) => {
                         <span className='legend-item__day'>
                             {getStringDayOfWeekByNumber(index)}
                         </span>{' '}
-                        <span className='legend-item__value'>
-                            {item.value ? `${item.value} кг` : ''}
-                        </span>
+                        <span className='legend-item__value'>{item.value}</span>
                     </div>
                 ))}
             </div>
