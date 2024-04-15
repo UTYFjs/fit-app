@@ -120,7 +120,7 @@ export const useGetStatisticsForAchievement = ({
             frequentDayExercise = {};
             avgLoadsByDay.push({
                 date: start.format(DateFormat.DOT_DD_MM),
-                value: avg,
+                value: Number(avg.toFixed(0)),
             });
         } else {
             avgLoadsByDay.push({
@@ -134,6 +134,7 @@ export const useGetStatisticsForAchievement = ({
         }
         start = moment(start).add(1, 'days');
     }
+    //возможно переделать
     avgDailyLoad = Math.floor(avgLoadsByDay.reduce((acc, item) => acc + item.value, 0) / 7);
     const mostFrequentTraining = Object.entries(mostFrequentTrainings).reduce(
         (acc, item) => {

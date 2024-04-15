@@ -1,5 +1,6 @@
 import { Column, Pie } from '@ant-design/charts';
 import './pie-chart.css';
+import { useWindowWidth } from '@hooks/useWindowWidth';
 
 type PieChartProps = {
     pieData: Array<{ type: string; value: number }>;
@@ -7,14 +8,16 @@ type PieChartProps = {
 };
 
 export const PieChart = ({ pieData, containerStyles }: PieChartProps) => {
+    const { isDesktop, width } = useWindowWidth();
+    console.log('pie data', pieData);
     const configPie = {
         data: pieData,
         angleField: 'value',
         colorField: 'type',
-        // paddingRight: 80,
-        innerRadius: 0.8,
-        width: 450,
-        height: 450,
+        padding: width > 850 ? 60 : 10,
+        innerRadius: 0.7,
+        width: isDesktop ? 510 : 328,
+        height: width > 850 ? 334 : 211,
         // padding: 70,
         // label: {
         //     text: 'type',
@@ -41,16 +44,28 @@ export const PieChart = ({ pieData, containerStyles }: PieChartProps) => {
             // connectorLineWidth: 0,
             style: {
                 fontSize: 14,
-                textAlign: 'start',
+                //textAlign: 'start',
+                textBaseline: 'middle',
                 fill: '#000',
             },
             offset: 10,
             //transform: [{ type: 'overlapDodgeX' }],
         },
+        tooltip: {
+            field: 'value',
+            name: 'Количество',
+            // items: [
+            //     {
+            //         // value: 'value',
+            //         // channel: 'y',
+            //         name: 'Количество',
+            //     },
+            // ],
+        },
         legend: false,
     };
     return (
-        <div className='column-chart-wrapper' style={containerStyles}>
+        <div className='pie-chart-wrapper' style={containerStyles}>
             <Pie {...configPie} />
         </div>
     );

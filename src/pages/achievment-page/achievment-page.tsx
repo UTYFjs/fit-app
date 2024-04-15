@@ -1,13 +1,16 @@
 import './achievment-page.css';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
 import { useLayoutEffect, useState } from 'react';
-import { Space, Tabs } from 'antd';
+import { Collapse, Space, Tabs } from 'antd';
 import { TrainingNames } from '../../types/training-types';
 import { ColumnChart } from '@components/column-chart/column-chart';
 import { ColumnChartLegend } from '@components/column-chart-legend/column-chart-legend';
 import { PieChart } from '@components/pie-chart/pie-chart';
 import { useGetStatisticsForAchievement } from '@hooks/use-get-statistic-for-achievment';
 import { TagsList } from '@components/tags-list/tags-list';
+import { useWindowWidth } from '@hooks/useWindowWidth';
+import classNames from 'classnames';
+import { getMaxWidthColumnChart } from '@utils/get-max-width-column-chart';
 
 enum PeriodStatistic {
     PER_WEEK = 'perWeek',
@@ -15,18 +18,23 @@ enum PeriodStatistic {
     ALL_TIME = 'allTime',
 }
 type Period = 7 | 28 | 1000;
-const PeriodValues: Record<PeriodStatistic, Period> = {
+
+export const PeriodValues: Record<PeriodStatistic, Period> = {
     [PeriodStatistic.PER_WEEK]: 7,
     [PeriodStatistic.PER_MONTH]: 28,
     [PeriodStatistic.ALL_TIME]: 1000,
 };
 export type TagTrainingsListType = TrainingNames | 'Все';
 
+const { Panel } = Collapse;
+
 export const AchievmentPage = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
     const [getTrainingList, { data: dataTrainingList }] = useLazyGetTrainingListQuery();
     const [checkedTag, setCheckedTag] = useState<TagTrainingsListType>('Все');
     const [period, setPeriod] = useState<Period>(7);
+
+    const { isDesktop } = useWindowWidth();
 
     useLayoutEffect(() => {
         getTrainingList();
@@ -47,7 +55,7 @@ export const AchievmentPage = () => {
         { label: 'За неделю', key: PeriodStatistic.PER_WEEK },
         { label: 'За месяц', key: PeriodStatistic.PER_MONTH },
         {
-            label: <div>За все время (PRO)</div>,
+            label: <div className='tabs-title_disabled'>За все время (PRO)</div>,
             key: PeriodStatistic.ALL_TIME,
             disabled: true,
         },
@@ -59,6 +67,7 @@ export const AchievmentPage = () => {
     }, [] as Array<{ type: string; value: number }>);
 
     const handleOnChangeTag = (tagName: TagTrainingsListType) => setCheckedTag(tagName);
+
     const onChangeTabs = (key: string) => {
         switch (key) {
             case PeriodStatistic.PER_WEEK:
@@ -72,21 +81,41 @@ export const AchievmentPage = () => {
                 break;
         }
         setCheckedTag('Все');
+        console.log(period);
     };
+
     return (
-        <div className='training-page'>
+        <div className='training-page achievement-page'>
             <Tabs items={tabItems} centered onChange={onChangeTabs} />
+            <TagsList
+                checkedTag={checkedTag}
+                handleOnChangeTag={handleOnChangeTag}
+                dataTrainingList={dataTrainingList || []}
+            />
             <Space className='achievement-page-wrapper' direction='vertical' size='large'>
-                <TagsList
-                    checkedTag={checkedTag}
-                    handleOnChangeTag={handleOnChangeTag}
-                    dataTrainingList={dataTrainingList || []}
-                />
-                <div className='load'>
-                    <ColumnChart
-                        currentData={avgLoadsByDay}
-                        containerStyles={{ width: 520, height: 374 }}
-                    />
+                <div
+                    className={classNames(period === PeriodValues.perWeek ? 'load' : 'load_column')}
+                >
+                    {period === PeriodValues.perWeek && (
+                        <ColumnChart
+                            currentData={avgLoadsByDay}
+                            containerStyles={{
+                                maxWidth: getMaxWidthColumnChart(isDesktop, period),
+                                height: isDesktop ? 374 : 236,
+                            }}
+                        />
+                    )}
+                    {period === PeriodValues.perMonth && (
+                        <ColumnChart
+                            currentData={avgLoadsByDay}
+                            containerStyles={{
+                                maxWidth: '100%',
+                                height: isDesktop ? 374 : 236,
+                            }}
+                            scrollbar={true}
+                        />
+                    )}
+
                     <ColumnChartLegend
                         legendTitle='Средняя нагрузка по дням недели'
                         badgeData={avgLoadsByDay.map((item) => ({
@@ -103,7 +132,7 @@ export const AchievmentPage = () => {
                         }}
                     />
                 </div>
-                <Space size='middle'>
+                <div className='cards-load-block'>
                     <div className='card-load'>
                         <div className='card-load__title'>
                             {avgLoadsByDay.reduce((acc, item) => acc + item.value, 0)}
@@ -122,15 +151,22 @@ export const AchievmentPage = () => {
                         <div className='card-load__title'>{approachesCount}</div>
                         <div className='card-load__subtitle'>Подходы, раз</div>
                     </div>
-                </Space>
-                <div className='most-frequent'>
-                    <div className='most-frequent__title'>Самая частая тренировка</div>
-                    <div className='most-frequent__name'>{mostFrequentTraining}</div>
-                    <div className='most-frequent__title'>Самое частое упражнение</div>
-                    <div className='most-frequent__name'>{mostFrequentExercise} </div>
                 </div>
+                <div className='most-frequent'>
+                    {checkedTag === 'Все' && (
+                        <>
+                            <div className='most-frequent__title'>Самая частая тренировка</div>
+                            <div className='most-frequent__name'>
+                                {mostFrequentTraining.toLowerCase()}
+                            </div>
+                        </>
+                    )}
+                    <div className='most-frequent__title'>Самое частое упражнение</div>
+                    <div className='most-frequent__name'>{mostFrequentExercise.toLowerCase()} </div>
+                </div>
+
                 <div className='load'>
-                    <div>{pieData.length && <PieChart pieData={pieData} />} </div>
+                    {pieData.length && <PieChart pieData={pieData} />}{' '}
                     <ColumnChartLegend
                         legendTitle='Самые частые упражнения по дням недели'
                         badgeData={frequentExercisesByDayOfWeek}
