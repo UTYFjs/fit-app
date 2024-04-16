@@ -1,4 +1,3 @@
-
 .training-page.achievement-page{
   max-height: calc(100vh - 168px - 48px);
   overflow: hidden;
@@ -14,16 +13,13 @@
   width: 100%;
   padding-top: var(--p-5xl);
   height: 87%;
-  /* max-height: calc(100vh - 368px - 48px); */
   overflow-y: auto;
-  padding-bottom: 70px;
-  
-  
+  padding-bottom: 70px;   
 }
 
 .load{
   display: flex;
-  gap: 150px;
+  gap: 134px;
   align-items: center;
 }
 

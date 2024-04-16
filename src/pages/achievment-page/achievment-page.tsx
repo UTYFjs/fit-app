@@ -1,7 +1,7 @@
 import './achievment-page.css';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
 import { useLayoutEffect, useState } from 'react';
-import { Collapse, Space, Tabs } from 'antd';
+import { Space, Tabs } from 'antd';
 import { TrainingNames } from '../../types/training-types';
 import { ColumnChart } from '@components/column-chart/column-chart';
 import { ColumnChartLegend } from '@components/column-chart-legend/column-chart-legend';
@@ -25,8 +25,6 @@ export const PeriodValues: Record<PeriodStatistic, Period> = {
     [PeriodStatistic.ALL_TIME]: 1000,
 };
 export type TagTrainingsListType = TrainingNames | 'Все';
-
-const { Panel } = Collapse;
 
 export const AchievmentPage = () => {
     const { data: dataTrainings } = useGetTrainingsQuery();
@@ -164,7 +162,48 @@ export const AchievmentPage = () => {
                     <div className='most-frequent__title'>Самое частое упражнение</div>
                     <div className='most-frequent__name'>{mostFrequentExercise.toLowerCase()} </div>
                 </div>
-
+                {/* <Collapse
+                    defaultActiveKey={['2']}
+                    // accordion={true}
+                    expandIconPosition='end'
+                    expandIcon={({ isActive }) => <DownOutlined rotate={isActive ? 180 : 0} />}
+                    ghost
+                >
+                    <Panel header={'This is panel header 1'} key='1'>
+                        <ColumnChartLegend
+                            legendTitle='Средняя нагрузка по дням недели'
+                            badgeData={avgLoadsByDay.map((item) => ({
+                                date: item.date,
+                                value: item.value ? `${item.value} кг` : '',
+                            }))}
+                            colorBadge={{
+                                primary: 'var(--primary-light-6)',
+                                secondary: 'var(--primary-light-1)',
+                            }}
+                            colorText={{
+                                primary: 'var(--character-light-primary-inverse)',
+                                secondary: 'var(--primary-light-6)',
+                            }}
+                        />
+                    </Panel>
+                    <Panel header={'This is panel header dd'} key='2'>
+                        <ColumnChartLegend
+                            legendTitle='Средняя нагрузка по дням недели'
+                            badgeData={avgLoadsByDay.map((item) => ({
+                                date: item.date,
+                                value: item.value ? `${item.value} кг` : '',
+                            }))}
+                            colorBadge={{
+                                primary: 'var(--primary-light-6)',
+                                secondary: 'var(--primary-light-1)',
+                            }}
+                            colorText={{
+                                primary: 'var(--character-light-primary-inverse)',
+                                secondary: 'var(--primary-light-6)',
+                            }}
+                        />
+                    </Panel>
+                </Collapse> */}
                 <div className='load'>
                     {pieData.length && <PieChart pieData={pieData} />}{' '}
                     <ColumnChartLegend

@@ -43,9 +43,13 @@ export const HeaderMy: React.FC = () => {
         [Paths.TRAINING]: 'header_training',
         [Paths.ACHIEVEMENT]: 'header_training',
     };
+    const headerThirdClass = {
+        [Paths.ACHIEVEMENT]: 'header-achievement',
+    };
     const headerClass = classNames(
         styles.header,
-        styles[headerSecondClass[pathname as keyof typeof headerSecondClass]] || '',
+        styles[headerSecondClass[pathname as keyof typeof headerSecondClass]],
+        styles[headerThirdClass[pathname as keyof typeof headerThirdClass]],
     );
 
     const handleGoBack = () => navigate(-1);

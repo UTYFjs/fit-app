@@ -1,8 +1,6 @@
 import { Column } from '@ant-design/charts';
 import './column-chart.css';
 import { useWindowWidth } from '@hooks/useWindowWidth';
-import { PeriodValues } from '@pages/achievment-page/achievment-page';
-import { useEffect, useState } from 'react';
 
 type ColumnChartProps = {
     currentData: Array<{ date: string; value: number }>;
@@ -45,7 +43,7 @@ export const ColumnChart = ({ currentData, containerStyles, scrollbar }: ColumnC
             items: [{ channel: 'y', name: 'Средняя нагрузка' }],
         },
         //scrollbar: scrollbar ? { x: scrollbar ? { ratio: 0.5 } : '' } : {},
-        scrollbar: scrollbar ? { x: { ratio: 0.5 } } : 0,
+        scrollbar: scrollbar ? { x: { ratio: isDesktop ? 0.5 : 0.25 } } : 0,
     };
 
     return (
