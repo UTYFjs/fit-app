@@ -18,9 +18,10 @@ export const DrawerFooterAction = ({
     handleRemove,
 }: DrawerFooterActionProps) => {
     const dispatch = useAppDispatch();
-
+ 
     const handleAddExercise = () => dispatch(addNewExerciseToCurrentTraining());
     const currentTraining = useAppSelector(getCurrentTraining);
+    console.log('current date', currentTraining.date, moment(currentTraining.date))
     return (
         <div className='drawer_footer-wrapper'>
             <div className='drawer-calendar__btn-wrapper'>

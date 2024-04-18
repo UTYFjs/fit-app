@@ -50,7 +50,7 @@ export enum Paths {
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
     TRAINING = '/training',
     PROFILE = '/profile',
-    ACHIEVEMENT = '/achievement',
+    ACHIEVEMENT = '/achievements',
 }
 
 export const enum StatusCode {

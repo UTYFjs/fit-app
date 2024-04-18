@@ -18,7 +18,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
 import { getInviteList } from '@redux/invite-slice.ts';
-import { CalendarDataTeatId, TrainingDataTestId } from '@constants/data-test-id.ts';
+import {
+    AchievementDataTestId,
+    CalendarDataTeatId,
+    TrainingDataTestId,
+} from '@constants/data-test-id.ts';
 import { useExitApp } from '@hooks/use-exit-app.ts';
 import { useLazyGetTrainingsQuery } from '@services/training-api.ts';
 import { ModalServerError } from '@components/modal-server-error/modal-server-error.tsx';
@@ -84,7 +88,9 @@ export const SideBar: React.FC = () => {
         {
             key: Paths.ACHIEVEMENT,
             icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
-            label: 'Достижения',
+            label: (
+                <span data-test-id={AchievementDataTestId.SIDEBAR_ACHIEVEMENTS}> Достижения</span>
+            ) as unknown as string,
             style: styleMenuItem,
         },
         {

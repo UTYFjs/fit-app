@@ -1,4 +1,4 @@
-import { Column, Pie } from '@ant-design/charts';
+import { Pie } from '@ant-design/charts';
 import './pie-chart.css';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 
@@ -9,7 +9,7 @@ type PieChartProps = {
 
 export const PieChart = ({ pieData, containerStyles }: PieChartProps) => {
     const { isDesktop, width } = useWindowWidth();
-    console.log('pie data', pieData);
+    //console.log('pie data', pieData);
     const configPie = {
         data: pieData,
         angleField: 'value',

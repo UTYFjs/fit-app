@@ -1,9 +1,11 @@
 import { Column } from '@ant-design/charts';
 import './column-chart.css';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { LegendItemData } from '@components/column-chart-legend/column-chart-legend';
+import { DateFormat } from '@constants/date';
 
 type ColumnChartProps = {
-    currentData: Array<{ date: string; value: number }>;
+    currentData: Array<LegendItemData>;
     containerStyles: React.CSSProperties;
     scrollbar?: boolean;
 };
@@ -12,7 +14,10 @@ export const ColumnChart = ({ currentData, containerStyles, scrollbar }: ColumnC
     const { isDesktop } = useWindowWidth();
 
     const config = {
-        data: currentData,
+        data: currentData.map((item) => ({
+            date: item.date.format(DateFormat.DOT_DD_MM),
+            value: item.value,
+        })),
         xField: 'date',
         yField: 'value',
         axis: {

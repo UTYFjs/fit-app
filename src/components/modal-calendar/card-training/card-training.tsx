@@ -40,7 +40,7 @@ export const CardTraining = ({
             bordered={false}
             style={{
                 top: topPosition,
-                right: calendarDate.days() === 6 ? 0 : 'initial',
+                right: calendarDate.weekday() === 6 ? 0 : 'initial',
                 left: topPosition > 0 ? 24 : 'initial',
             }}
             bodyStyle={{ padding: 0 }}

@@ -2,6 +2,7 @@ import './legend-item.css';
 import { Badge, BadgeProps } from 'antd';
 import { LegendItemData } from '../column-chart-legend';
 import { getStringDayOfWeekByNumber } from '@utils/get-string-day-of-week';
+// import moment, { Moment } from 'moment';
 
 type ColumnChartProps = BadgeProps & {
     item: LegendItemData;
@@ -28,7 +29,9 @@ export const LegendItem = ({ item, index, colorBadge, colorText, ...rest }: Colu
                     height: 16,
                 }}
             />{' '}
-            <span className='legend-item__day'>{getStringDayOfWeekByNumber(index)}</span>{' '}
+            <span className='legend-item__day'>
+                {getStringDayOfWeekByNumber(item.date.weekday())}
+            </span>{' '}
             <span className='legend-item__value'>{item.value}</span>
         </div>
     );
