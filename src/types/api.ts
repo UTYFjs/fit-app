@@ -1,27 +1,27 @@
 import { Nullable } from './common-types';
 
-export interface IRegistrationForm {
+export type IRegistrationForm = {
     email: string;
     password: string;
-}
-export interface IConfirmEmailForm {
+};
+export type IConfirmEmailForm = {
     email: string;
     code: string;
-}
-export interface IChangePasswordForm {
+};
+export type IChangePasswordForm = {
     password: string;
     confirmPassword: string;
-}
-export interface ILoginRequest {
+};
+export type ILoginRequest = {
     accessToken: string;
-}
-export interface ICheckEmailRequest {
+};
+export type ICheckEmailRequest = {
     email: string;
     message: string;
-}
-export interface IChangePasswordRequest {
+};
+export type IChangePasswordRequest = {
     message: string;
-}
+};
 
 export type IFeedback = {
     id: string;

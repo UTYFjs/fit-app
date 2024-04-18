@@ -2,12 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from './configure-store';
 
-interface IUserState {
+type IUserState = {
     accessToken: string;
     email: string;
     password: string;
     passwordRepeat: string;
-}
+};
 type IUserValues = Pick<IUserState, 'email' | 'password' | 'passwordRepeat'>;
 
 const initialState: IUserState = {
