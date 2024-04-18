@@ -168,7 +168,13 @@ export const ButtonDrawerTraining = ({
                                     size={42}
                                     src={partnerUser.imageSrc}
                                     alt={partnerUser.name}
-                                    icon={!partnerUser.imageSrc && <UserOutlined />}
+                                    icon={
+                                        !partnerUser.imageSrc && (
+                                            <UserOutlined
+                                                style={{ color: 'var(--character-light-title-85)' }}
+                                            />
+                                        )
+                                    }
                                 />
                                 <p className='partner-card__name'>{partnerUser.name}</p>
                             </div>

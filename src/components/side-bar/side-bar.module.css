@@ -68,6 +68,10 @@
   margin-left: var(--m-s);
 }
 
+.menu .empty{
+  min-width: 0;
+  font-size: 0;
+}
 
 @media (max-width:768px){
 

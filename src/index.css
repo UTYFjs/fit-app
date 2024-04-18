@@ -209,9 +209,11 @@ body {
 
 }
 
+.ant-avatar.ant-avatar-icon{
+  background: var(--character-light-background);
+}
 
 .ant-tabs-ink-bar {
-
   background: var(--primary-light-6);
   transition: none;
 }

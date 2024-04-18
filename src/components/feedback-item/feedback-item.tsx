@@ -24,7 +24,16 @@ export const FeedbackItem = ({ data }: IFeedbackProps) => {
             avatar={
                 <>
                     {imageSrc && <Avatar size={42} src={imageSrc} />}
-                    {!imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
+                    {!imageSrc && (
+                        <Avatar
+                            size={42}
+                            icon={
+                                <UserOutlined
+                                    style={{ color: 'var(--character-light-title-85)' }}
+                                />
+                            }
+                        />
+                    )}
                     <div>
                         <p className='feedback-item__name-owner'>
                             {fullName ? firstName : 'Пользователь'}

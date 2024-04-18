@@ -63,7 +63,16 @@ export const Invite = ({ inviteList }: InviteProps) => {
                     <div className='invite__card-item' key={_id}>
                         <div className='invite-card__avatar'>
                             {from.imageSrc && <Avatar size={42} src={from.imageSrc} />}
-                            {!from.imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
+                            {!from.imageSrc && (
+                                <Avatar
+                                    size={42}
+                                    icon={
+                                        <UserOutlined
+                                            style={{ color: 'var(--character-light-title-85)' }}
+                                        />
+                                    }
+                                />
+                            )}
                             <div>
                                 <p className='feedback-item__name-owner'>
                                     {from.firstName || 'Пользователь'}

@@ -67,13 +67,19 @@ export const SideBar: React.FC = () => {
     const menuItems: MenuInfo[] = [
         {
             key: Paths.CALENDAR,
-            icon: <CalendarIcon style={{ color: colorPrimaryLight9 }} />,
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <CalendarIcon style={{ color: colorPrimaryLight9 }} />
+            ),
             label: 'Календарь',
             style: styleMenuItem,
         },
         {
             key: Paths.TRAINING,
-            icon: (
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
                 <Badge
                     data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
                     count={countInvites}
@@ -87,15 +93,23 @@ export const SideBar: React.FC = () => {
         },
         {
             key: Paths.ACHIEVEMENT,
-            icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <TrophyFilled style={{ color: colorPrimaryLight9 }} />
+            ),
             label: (
-                <span data-test-id={AchievementDataTestId.SIDEBAR_ACHIEVEMENTS}> Достижения</span>
+                <p data-test-id={AchievementDataTestId.SIDEBAR_ACHIEVEMENTS}> Достижения</p>
             ) as unknown as string,
             style: styleMenuItem,
         },
         {
             key: Paths.PROFILE,
-            icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <IdcardOutlined style={{ color: colorPrimaryLight9 }} />
+            ),
             label: 'Профиль',
             style: styleMenuItem,
         },

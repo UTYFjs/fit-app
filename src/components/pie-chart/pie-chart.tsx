@@ -22,7 +22,7 @@ export const PieChart = ({ pieData, containerStyles }: PieChartProps) => {
             position: 'outside',
             connector: false,
             style: {
-                fontSize: 14,
+                fontSize: isDesktop ? 14 : 12,
                 textBaseline: 'middle',
                 fill: '#000',
             },
