@@ -1,12 +1,7 @@
 import { DateFormat } from '@constants/date';
-import {
-    useGetTrainingListQuery,
-    useGetTrainingsQuery,
-    useLazyGetTrainingListQuery,
-} from '@services/training-api';
+import { useGetTrainingListQuery, useGetTrainingsQuery } from '@services/training-api';
 import { ExerciseType, TrainingNames } from '../types/training-types';
 import moment from 'moment';
-import { useLayoutEffect } from 'react';
 import { PeriodValues } from '@pages/achievment-page/achievment-page';
 import { initMostFrequentTrainings } from '@utils/utils-for-achievement-statistics';
 import { LegendItemData } from '@components/column-chart-legend/column-chart-legend';
@@ -36,11 +31,6 @@ export const useGetStatisticsForAchievement = ({
 
     let mostFrequentExercises: Record<string, number> = {};
     let mostFrequentExercisesByDay: Array<LegendItemData & { count: number }> = [];
-
-    const pieData: Array<{
-        type: string;
-        value: number;
-    }> = [];
 
     const getMostFrequentExerciseByDayofWeek = (frequentDayExercise: Record<string, number>) => {
         // находим самое частое упражнение дня недели
@@ -220,10 +210,7 @@ export const useGetStatisticsForAchievement = ({
         totalLoadForPeriod: totalLoadForPeriod,
         mostFrequentTraining: mostFrequentTraining, //for card
         mostFrequentExercise: mostFrequentExercise, //for card
-
         frequentExercises: mostFrequentExercises, // for diagramm
         frequentExercisesByDayOfWeek: mostFrequentExercisesByDay, //for legend
-
-        pieData1: pieData,
     };
 };

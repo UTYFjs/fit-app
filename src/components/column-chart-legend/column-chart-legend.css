@@ -31,9 +31,9 @@
   max-width: 190px;
 }
 
-/* .legend__title.legend__title_shorter{
-  max-width: 182px;
-} */
+.legend__title.legend__title_shorter{
+  max-width: 183px;
+}
 
 .legend-item__wrapper{
   display: flex;

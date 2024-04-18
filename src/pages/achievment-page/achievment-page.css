@@ -154,8 +154,13 @@
   }
 
   .most-frequent{
+    grid-template-columns: 157px auto;
     margin: 0;
     padding: var(--p-m) 0;
+  }
+
+  .most-frequent__title{
+    width: 157px;
   }
 
 }

@@ -17,7 +17,7 @@ import { Badge, Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
-import { getInviteList } from '@redux/invite-slice.ts';
+import { getCountInvites } from '@redux/invite-slice.ts';
 import {
     AchievementDataTestId,
     CalendarDataTeatId,
@@ -35,7 +35,7 @@ type MenuInfo = {
     style: React.CSSProperties;
 };
 export const SideBar: React.FC = () => {
-    const inviteList = useAppSelector(getInviteList);
+    const countInvites = useAppSelector(getCountInvites);
     const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
 
     const { pathname } = useLocation();
@@ -76,7 +76,7 @@ export const SideBar: React.FC = () => {
             icon: (
                 <Badge
                     data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
-                    count={inviteList.length || 0}
+                    count={countInvites}
                     size='small'
                 >
                     <HeartFilled style={{ color: colorPrimaryLight9 }} />

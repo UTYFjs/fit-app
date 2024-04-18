@@ -12,7 +12,10 @@ import { useWindowWidth } from '@hooks/useWindowWidth';
 import classNames from 'classnames';
 import { getMaxWidthColumnChart } from '@utils/get-max-width-column-chart';
 import { NoAchievementStats } from '@components/no-achievement/no-achievement';
-import { getTextForTitleColumnLEgendChart } from '@utils/utils-for-achievement-statistics';
+import {
+    getTextForTitleColumnLegendChart,
+    getTextForTitleFrequentExercise,
+} from '@utils/utils-for-achievement-statistics';
 
 enum PeriodStatistic {
     PER_WEEK = 'perWeek',
@@ -50,8 +53,6 @@ export const AchievmentPage = () => {
         mostFrequentExercise, //for card
         frequentExercises, // for diagramm
         frequentExercisesByDayOfWeek, //for legend
-        //todo спроверить pie data1
-        pieData1,
     } = useGetStatisticsForAchievement({ period, checkedTag });
 
     useEffect(() => {
@@ -73,7 +74,6 @@ export const AchievmentPage = () => {
         return acc;
     }, [] as Array<{ type: string; value: number }>);
 
-    console.log('pieData va pieData1', pieData, pieData1);
     const handleOnChangeTag = (tagName: TagTrainingsListType) => setCheckedTag(tagName);
 
     const onChangeTabs = (key: string) => {
@@ -131,7 +131,7 @@ export const AchievmentPage = () => {
                             )}
 
                             <ColumnChartLegend
-                                legendTitle={`Средняя ${getTextForTitleColumnLEgendChart(
+                                legendTitle={`Средняя ${getTextForTitleColumnLegendChart(
                                     checkedTag,
                                 )} по дням недели`}
                                 badgeData={avgLoadsByDay.map((item) => ({
@@ -180,7 +180,9 @@ export const AchievmentPage = () => {
                                     </div>
                                 </>
                             )}
-                            <div className='most-frequent__title'>Самое частое упражнение</div>
+                            <div className='most-frequent__title'>
+                                Самое частое упражнение{getTextForTitleFrequentExercise(checkedTag)}
+                            </div>
                             <div className='most-frequent__name'>
                                 {mostFrequentExercise.toLowerCase()}{' '}
                             </div>

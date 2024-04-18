@@ -5,10 +5,12 @@ import { InviteType } from '../types/training-types';
 
 type InviteState = {
     inviteList: InviteType[];
+    countInvites: number;
 };
 
 const initialState: InviteState = {
     inviteList: [],
+    countInvites: 0,
 };
 const inviteSlice = createSlice({
     name: 'invite',
@@ -16,6 +18,9 @@ const inviteSlice = createSlice({
     reducers: {
         setInviteList: (state, { payload }: PayloadAction<InviteType[]>) => {
             state.inviteList = payload;
+        },
+        setCountInvites: (state, { payload }: PayloadAction<number>) => {
+            state.countInvites = payload;
         },
         deleteInviteItem: (state, { payload }: PayloadAction<string>) => {
             state.inviteList = state.inviteList.filter((invite) => invite._id !== payload);
@@ -26,6 +31,8 @@ const inviteSlice = createSlice({
     },
 });
 
-export const { setInviteList, deleteInviteItem, setExitAppInvite } = inviteSlice.actions;
+export const { setInviteList, setCountInvites, deleteInviteItem, setExitAppInvite } =
+    inviteSlice.actions;
 export default inviteSlice.reducer;
 export const getInviteList = ({ invite }: RootState) => invite.inviteList;
+export const getCountInvites = ({ invite }: RootState) => invite.countInvites;

@@ -7,32 +7,36 @@ import 'antd/dist/antd.css';
 import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
-import { useGetUserInfoQuery } from '@services/user-profile-api';
-import { useGetInviteListQuery } from '@services/invite-api';
+import { useLazyGetUserInfoQuery } from '@services/user-profile-api';
+import { useLazyGetInviteListQuery } from '@services/invite-api';
+import { useEffect } from 'react';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
-    const { data } = useGetUserInfoQuery();
-    useGetInviteListQuery();
+    const [getUserInfo] = useLazyGetUserInfoQuery();
+    const [getInviteList] = useLazyGetInviteListQuery();
+
+    useEffect(() => {
+        getInviteList();
+        getUserInfo();
+    }, [getInviteList, getUserInfo]);
 
     return (
         <>
             <SideBar />
-            {data && (
-                <Layout
-                    className={
-                        pathname === Paths.FEEDBACKS
-                            ? 'site-layout site-layout_feedbacks'
-                            : 'site-layout'
-                    }
-                >
-                    {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
-                    <Content className='main'>
-                        <Outlet />
-                    </Content>
-                    {pathname === Paths.MAIN && <FooterMy />}
-                </Layout>
-            )}
+            <Layout
+                className={
+                    pathname === Paths.FEEDBACKS
+                        ? 'site-layout site-layout_feedbacks'
+                        : 'site-layout'
+                }
+            >
+                {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
+                <Content className='main'>
+                    <Outlet />
+                </Content>
+                {pathname === Paths.MAIN && <FooterMy />}
+            </Layout>
         </>
     );
 };

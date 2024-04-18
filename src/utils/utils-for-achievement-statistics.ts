@@ -14,7 +14,7 @@ export const initMostFrequentTrainings = (
     return mostFrequentTrainings;
 };
 
-export const getTextForTitleColumnLEgendChart = (tag: TagTrainingsListType) => {
+export const getTextForTitleColumnLegendChart = (tag: TagTrainingsListType) => {
     switch (tag) {
         case 'Все':
             return 'нагрузка';
@@ -30,5 +30,24 @@ export const getTextForTitleColumnLEgendChart = (tag: TagTrainingsListType) => {
             return 'нагрузка на руки';
         default:
             return 'нагрузка';
+    }
+};
+
+export const getTextForTitleFrequentExercise = (tag: TagTrainingsListType) => {
+    switch (tag) {
+        case 'Все':
+            return '';
+        case 'Силовая':
+            return ' силовой';
+        case 'Ноги':
+            return ' на ноги';
+        case 'Грудь':
+            return ' на грудь';
+        case 'Спина':
+            return ' на спину';
+        case 'Руки':
+            return ' на руки';
+        default:
+            return '';
     }
 };

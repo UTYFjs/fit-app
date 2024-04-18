@@ -10,7 +10,7 @@ import { InviteDetailsCard } from '../invite-details-card/invite-details-card';
 import { useAnswerInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { deleteInviteItem } from '@redux/invite-slice';
+import { deleteInviteItem, setCountInvites } from '@redux/invite-slice';
 import { useGetTrainingPalsQuery } from '@services/training-api';
 
 type InviteProps = {
@@ -34,6 +34,7 @@ export const Invite = ({ inviteList }: InviteProps) => {
             .unwrap()
             .then(async () => {
                 dispatch(deleteInviteItem(idInvite));
+                dispatch(setCountInvites(inviteList.length - 1));
                 await refetch();
                 await getInviteList();
             });
