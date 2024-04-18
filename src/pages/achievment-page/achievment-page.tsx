@@ -43,10 +43,13 @@ export const AchievmentPage = () => {
         avgDailyLoad,
         approachesCount,
         replaysCount,
+        totalLoadForPeriod,
         mostFrequentTraining, //for card
         mostFrequentExercise, //for card
         frequentExercises, // for diagramm
         frequentExercisesByDayOfWeek, //for legend
+
+        pieData1,
     } = useGetStatisticsForAchievement({ period, checkedTag });
 
     const tabItems = [
@@ -64,6 +67,7 @@ export const AchievmentPage = () => {
         return acc;
     }, [] as Array<{ type: string; value: number }>);
 
+    console.log('pieData va pieData1', pieData, pieData1);
     const handleOnChangeTag = (tagName: TagTrainingsListType) => setCheckedTag(tagName);
 
     const onChangeTabs = (key: string) => {
@@ -133,7 +137,10 @@ export const AchievmentPage = () => {
                 <div className='cards-load-block'>
                     <div className='card-load'>
                         <div className='card-load__title'>
-                            {avgLoadsByDay.reduce((acc, item) => acc + item.value, 0)}
+                            {
+                                totalLoadForPeriod
+                                //avgLoadsByDay.reduce((acc, item) => acc + item.value, 0)
+                            }
                         </div>
                         <div className='card-load__subtitle'>Общая нагрузка, кг</div>
                     </div>

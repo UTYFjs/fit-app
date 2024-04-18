@@ -1,6 +1,4 @@
 export const getStringDayOfWeekByNumber = (number: number) => {
-    // const currNumber = number > 6 ? number % 7 : number;
-    console.log('number of day', number);
     switch (number) {
         case 0:
             return 'Понедельник';
