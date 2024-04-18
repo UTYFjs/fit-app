@@ -2,7 +2,6 @@ import './legend-item.css';
 import { Badge, BadgeProps } from 'antd';
 import { LegendItemData } from '../column-chart-legend';
 import { getStringDayOfWeekByNumber } from '@utils/get-string-day-of-week';
-// import moment, { Moment } from 'moment';
 
 type ColumnChartProps = BadgeProps & {
     item: LegendItemData;

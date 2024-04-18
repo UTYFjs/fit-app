@@ -47,7 +47,6 @@ export const ColumnChart = ({ currentData, containerStyles, scrollbar }: ColumnC
             title: '',
             items: [{ channel: 'y', name: 'Средняя нагрузка' }],
         },
-        //scrollbar: scrollbar ? { x: scrollbar ? { ratio: 0.5 } : '' } : {},
         scrollbar: scrollbar ? { x: { ratio: isDesktop ? 0.5 : 0.25 } } : 0,
     };
 

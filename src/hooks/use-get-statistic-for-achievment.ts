@@ -15,12 +15,7 @@ export const useGetStatisticsForAchievement = ({
     checkedTag,
 }: useGetStatisticsForAchievementProps) => {
     const { data: dataTrainings } = useGetTrainingsQuery();
-    //const [getTrainingList, { data: dataTrainingList }] = useLazyGetTrainingListQuery();
     const { data: dataTrainingList } = useGetTrainingListQuery();
-
-    // useLayoutEffect(() => {
-    //     getTrainingList();
-    // }, [dataTrainings, getTrainingList]);
 
     let replays = 0;
     let approaches = 0;
@@ -33,7 +28,6 @@ export const useGetStatisticsForAchievement = ({
     let mostFrequentExercisesByDay: Array<LegendItemData & { count: number }> = [];
 
     const getMostFrequentExerciseByDayofWeek = (frequentDayExercise: Record<string, number>) => {
-        // находим самое частое упражнение дня недели
         const mostExercise = Object.entries(frequentDayExercise).reduce(
             (acc, item) => {
                 return acc.value > item[1] ? acc : { type: item[0], value: item[1] };
@@ -74,10 +68,8 @@ export const useGetStatisticsForAchievement = ({
                 exercises.reduce((acc, exercise) => {
                     approaches += exercise.approaches;
                     replays += exercise.replays;
-
                     countExercisesPerDay += 1;
-                    //считаем самые частые упражнения по дням недели
-                    //!!!!!!! нужно исправлять логику
+
                     if (Object.prototype.hasOwnProperty.call(frequentDayExercise, exercise.name)) {
                         frequentDayExercise[exercise.name] += 1;
                     } else {
@@ -128,7 +120,6 @@ export const useGetStatisticsForAchievement = ({
         start = moment(start).add(1, 'days');
     }
 
-    //если больше 7 дней
     if (mostFrequentExercisesByDay.length > 7) {
         const arr = Array.from({ length: 7 }, () => ({ exercises: {} as Record<string, number> }));
 
@@ -203,14 +194,14 @@ export const useGetStatisticsForAchievement = ({
     ).name;
 
     return {
-        avgLoadsByDay: avgLoadsByDay, // для диаграммы
+        avgLoadsByDay: avgLoadsByDay,
         avgDailyLoad: avgDailyLoad,
         approachesCount: approaches,
         replaysCount: replays,
         totalLoadForPeriod: totalLoadForPeriod,
-        mostFrequentTraining: mostFrequentTraining, //for card
-        mostFrequentExercise: mostFrequentExercise, //for card
-        frequentExercises: mostFrequentExercises, // for diagramm
-        frequentExercisesByDayOfWeek: mostFrequentExercisesByDay, //for legend
+        mostFrequentTraining: mostFrequentTraining,
+        mostFrequentExercise: mostFrequentExercise,
+        frequentExercises: mostFrequentExercises,
+        frequentExercisesByDayOfWeek: mostFrequentExercisesByDay,
     };
 };

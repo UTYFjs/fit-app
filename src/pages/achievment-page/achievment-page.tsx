@@ -1,6 +1,6 @@
 import './achievment-page.css';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Space, Tabs } from 'antd';
 import { TrainingNames } from '../../types/training-types';
 import { ColumnChart } from '@components/column-chart/column-chart';
@@ -44,20 +44,16 @@ export const AchievmentPage = () => {
     }, [dataTrainings, getTrainingList]);
 
     const {
-        avgLoadsByDay, // для диаграммы
+        avgLoadsByDay,
         avgDailyLoad,
         approachesCount,
         replaysCount,
         totalLoadForPeriod,
-        mostFrequentTraining, //for card
-        mostFrequentExercise, //for card
-        frequentExercises, // for diagramm
-        frequentExercisesByDayOfWeek, //for legend
+        mostFrequentTraining,
+        mostFrequentExercise,
+        frequentExercises,
+        frequentExercisesByDayOfWeek,
     } = useGetStatisticsForAchievement({ period, checkedTag });
-
-    useEffect(() => {
-        console.log('use Effect frequent exercises', frequentExercises);
-    }, [frequentExercises]);
 
     const tabItems = [
         { label: 'За неделю', key: PeriodStatistic.PER_WEEK },
@@ -89,7 +85,6 @@ export const AchievmentPage = () => {
                 break;
         }
         setCheckedTag('Все');
-        console.log(period);
     };
 
     return (
