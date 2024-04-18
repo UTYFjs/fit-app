@@ -114,7 +114,7 @@ export const useGetStatisticsForAchievement = ({
             if (Object.prototype.hasOwnProperty.call(mostFrequentExercises, result.value)) {
                 mostFrequentExercises[result.value] += exerciseCount;
             } else {
-                mostFrequentExercises[result.value] = exerciseCount;
+                if (result.value) mostFrequentExercises[result.value] = exerciseCount;
             }
             mostFrequentExercisesByDay.push(result);
 

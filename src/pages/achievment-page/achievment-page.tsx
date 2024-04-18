@@ -1,6 +1,6 @@
 import './achievment-page.css';
 import { useGetTrainingsQuery, useLazyGetTrainingListQuery } from '@services/training-api';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Space, Tabs } from 'antd';
 import { TrainingNames } from '../../types/training-types';
 import { ColumnChart } from '@components/column-chart/column-chart';
@@ -11,13 +11,15 @@ import { TagsList } from '@components/tags-list/tags-list';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 import classNames from 'classnames';
 import { getMaxWidthColumnChart } from '@utils/get-max-width-column-chart';
+import { NoAchievementStats } from '@components/no-achievement/no-achievement';
+import { getTextForTitleColumnLEgendChart } from '@utils/utils-for-achievement-statistics';
 
 enum PeriodStatistic {
     PER_WEEK = 'perWeek',
     PER_MONTH = 'perMonth',
     ALL_TIME = 'allTime',
 }
-type Period = 7 | 28 | 1000;
+export type Period = 7 | 28 | 1000;
 
 export const PeriodValues: Record<PeriodStatistic, Period> = {
     [PeriodStatistic.PER_WEEK]: 7,
@@ -48,9 +50,13 @@ export const AchievmentPage = () => {
         mostFrequentExercise, //for card
         frequentExercises, // for diagramm
         frequentExercisesByDayOfWeek, //for legend
-
+        //todo спроверить pie data1
         pieData1,
     } = useGetStatisticsForAchievement({ period, checkedTag });
+
+    useEffect(() => {
+        console.log('use Effect frequent exercises', frequentExercises);
+    }, [frequentExercises]);
 
     const tabItems = [
         { label: 'За неделю', key: PeriodStatistic.PER_WEEK },
@@ -95,95 +101,109 @@ export const AchievmentPage = () => {
                 dataTrainingList={dataTrainingList || []}
             />
             <Space className='achievement-page-wrapper' direction='vertical' size='large'>
-                <div
-                    className={classNames(period === PeriodValues.perWeek ? 'load' : 'load_column')}
-                >
-                    {period === PeriodValues.perWeek && (
-                        <ColumnChart
-                            currentData={avgLoadsByDay}
-                            containerStyles={{
-                                maxWidth: getMaxWidthColumnChart(isDesktop, period),
-                                height: isDesktop ? 374 : 236,
-                            }}
-                        />
-                    )}
-                    {period === PeriodValues.perMonth && (
-                        <ColumnChart
-                            currentData={avgLoadsByDay}
-                            containerStyles={{
-                                maxWidth: '100%',
-                                height: isDesktop ? 374 : 236,
-                            }}
-                            scrollbar={true}
-                        />
-                    )}
+                {Object.keys(frequentExercises).length === 0 ? (
+                    <NoAchievementStats period={period} />
+                ) : (
+                    <>
+                        <div
+                            className={classNames(
+                                period === PeriodValues.perWeek ? 'load' : 'load_column',
+                            )}
+                        >
+                            {period === PeriodValues.perWeek && (
+                                <ColumnChart
+                                    currentData={avgLoadsByDay}
+                                    containerStyles={{
+                                        maxWidth: getMaxWidthColumnChart(isDesktop, period),
+                                        height: isDesktop ? 374 : 236,
+                                    }}
+                                />
+                            )}
+                            {period === PeriodValues.perMonth && (
+                                <ColumnChart
+                                    currentData={avgLoadsByDay}
+                                    containerStyles={{
+                                        maxWidth: '100%',
+                                        height: isDesktop ? 374 : 236,
+                                    }}
+                                    scrollbar={true}
+                                />
+                            )}
 
-                    <ColumnChartLegend
-                        legendTitle='Средняя нагрузка по дням недели'
-                        badgeData={avgLoadsByDay.map((item) => ({
-                            date: item.date,
-                            value: item.value ? `${item.value} кг` : '',
-                        }))}
-                        colorBadge={{
-                            primary: 'var(--primary-light-6)',
-                            secondary: 'var(--primary-light-1)',
-                        }}
-                        colorText={{
-                            primary: 'var(--character-light-primary-inverse)',
-                            secondary: 'var(--primary-light-6)',
-                        }}
-                    />
-                </div>
-                <div className='cards-load-block'>
-                    <div className='card-load'>
-                        <div className='card-load__title'>
-                            {
-                                totalLoadForPeriod
-                                //avgLoadsByDay.reduce((acc, item) => acc + item.value, 0)
-                            }
+                            <ColumnChartLegend
+                                legendTitle={`Средняя ${getTextForTitleColumnLEgendChart(
+                                    checkedTag,
+                                )} по дням недели`}
+                                badgeData={avgLoadsByDay.map((item) => ({
+                                    date: item.date,
+                                    value: item.value ? `${item.value} кг` : '',
+                                }))}
+                                colorBadge={{
+                                    primary: 'var(--primary-light-6)',
+                                    secondary: 'var(--primary-light-1)',
+                                }}
+                                colorText={{
+                                    primary: 'var(--character-light-primary-inverse)',
+                                    secondary: 'var(--primary-light-6)',
+                                }}
+                                customClassTitle='legend__title_shorter'
+                            />
                         </div>
-                        <div className='card-load__subtitle'>Общая нагрузка, кг</div>
-                    </div>
-                    <div className='card-load'>
-                        <div className='card-load__title'>{avgDailyLoad}</div>
-                        <div className='card-load__subtitle'>Нагрузка в день, кг</div>
-                    </div>
-                    <div className='card-load'>
-                        <div className='card-load__title'>{replaysCount}</div>
-                        <div className='card-load__subtitle'>Количество повторений, раз</div>
-                    </div>
-                    <div className='card-load'>
-                        <div className='card-load__title'>{approachesCount}</div>
-                        <div className='card-load__subtitle'>Подходы, раз</div>
-                    </div>
-                </div>
-                <div className='most-frequent'>
-                    {checkedTag === 'Все' && (
-                        <>
-                            <div className='most-frequent__title'>Самая частая тренировка</div>
-                            <div className='most-frequent__name'>
-                                {mostFrequentTraining.toLowerCase()}
+                        <div className='cards-load-block'>
+                            <div className='card-load'>
+                                <div className='card-load__title'>{totalLoadForPeriod}</div>
+                                <div className='card-load__subtitle'>Общая нагрузка, кг</div>
                             </div>
-                        </>
-                    )}
-                    <div className='most-frequent__title'>Самое частое упражнение</div>
-                    <div className='most-frequent__name'>{mostFrequentExercise.toLowerCase()} </div>
-                </div>
-                <div className='load'>
-                    {pieData.length && <PieChart pieData={pieData} />}{' '}
-                    <ColumnChartLegend
-                        legendTitle='Самые частые упражнения по дням недели'
-                        badgeData={frequentExercisesByDayOfWeek}
-                        colorBadge={{
-                            primary: 'var(--character-light-error)',
-                            secondary: 'var(--red-1)',
-                        }}
-                        colorText={{
-                            primary: 'var(--character-light-primary-inverse)',
-                            secondary: 'var(--character-light-error)',
-                        }}
-                    />
-                </div>
+                            <div className='card-load'>
+                                <div className='card-load__title'>{avgDailyLoad}</div>
+                                <div className='card-load__subtitle'>Нагрузка в день, кг</div>
+                            </div>
+                            <div className='card-load'>
+                                <div className='card-load__title'>{replaysCount}</div>
+                                <div className='card-load__subtitle'>
+                                    Количество повторений, раз
+                                </div>
+                            </div>
+                            <div className='card-load'>
+                                <div className='card-load__title'>{approachesCount}</div>
+                                <div className='card-load__subtitle'>Подходы, раз</div>
+                            </div>
+                        </div>
+                        <div className='most-frequent'>
+                            {checkedTag === 'Все' && (
+                                <>
+                                    <div className='most-frequent__title'>
+                                        Самая частая тренировка
+                                    </div>
+                                    <div className='most-frequent__name'>
+                                        {mostFrequentTraining.toLowerCase()}
+                                    </div>
+                                </>
+                            )}
+                            <div className='most-frequent__title'>Самое частое упражнение</div>
+                            <div className='most-frequent__name'>
+                                {mostFrequentExercise.toLowerCase()}{' '}
+                            </div>
+                        </div>
+                        <div className='load'>
+                            {pieData.length && <PieChart pieData={pieData} />}{' '}
+                            <ColumnChartLegend
+                                legendTitle={`Самые частые упражнения по дням недели${
+                                    period === PeriodValues.perMonth ? ' за месяц' : ''
+                                }`}
+                                badgeData={frequentExercisesByDayOfWeek}
+                                colorBadge={{
+                                    primary: 'var(--character-light-error)',
+                                    secondary: 'var(--red-1)',
+                                }}
+                                colorText={{
+                                    primary: 'var(--character-light-primary-inverse)',
+                                    secondary: 'var(--character-light-error)',
+                                }}
+                            />
+                        </div>{' '}
+                    </>
+                )}
             </Space>
         </div>
     );

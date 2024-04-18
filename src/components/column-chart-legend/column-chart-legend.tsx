@@ -6,6 +6,7 @@ import { useWindowWidth } from '@hooks/useWindowWidth';
 import { LegendItem } from './legend-item/legend-item';
 import { Moment } from 'moment';
 import { DateFormat } from '@constants/date';
+import classNames from 'classnames';
 
 export type LegendItemData = {
     date: Moment;
@@ -16,6 +17,7 @@ type ColumnChartProps = BadgeProps & {
     badgeData: Array<LegendItemData>;
     colorBadge: { primary: string; secondary: string };
     colorText: { primary: string; secondary: string };
+    customClassTitle?: string;
 };
 const { Panel } = Collapse;
 export const ColumnChartLegend = ({
@@ -23,6 +25,7 @@ export const ColumnChartLegend = ({
     badgeData,
     colorBadge,
     colorText,
+    customClassTitle,
     ...rest
 }: ColumnChartProps) => {
     const data = splitArrayToChunks(badgeData, 7);
@@ -79,7 +82,7 @@ export const ColumnChartLegend = ({
                 </Collapse>
             ) : (
                 <div className='legend_single'>
-                    <p className='legend__title'>{legendTitle}</p>
+                    <p className={classNames('legend__title', customClassTitle)}>{legendTitle}</p>
                     <div className='legend-item__wrapper'>
                         {badgeData
                             .sort((a, b) => a.date.weekday() - b.date.weekday())

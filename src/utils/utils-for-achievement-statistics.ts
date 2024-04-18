@@ -1,3 +1,4 @@
+import { TagTrainingsListType } from '@pages/achievment-page/achievment-page';
 import { TrainingListType } from '../types/training-types';
 
 export const initMostFrequentTrainings = (
@@ -11,4 +12,23 @@ export const initMostFrequentTrainings = (
         }, {} as Record<string, number>) || {};
 
     return mostFrequentTrainings;
+};
+
+export const getTextForTitleColumnLEgendChart = (tag: TagTrainingsListType) => {
+    switch (tag) {
+        case 'Все':
+            return 'нагрузка';
+        case 'Силовая':
+            return 'силовая нагрузка';
+        case 'Ноги':
+            return 'нагрузка на ноги';
+        case 'Грудь':
+            return 'нагрузка на грудь';
+        case 'Спина':
+            return 'нагрузка на спину';
+        case 'Руки':
+            return 'нагрузка на руки';
+        default:
+            return 'нагрузка';
+    }
 };
