@@ -1,3 +1,7 @@
+.card-invite-details{
+  width: 312px;
+}
+
 .invite-details__content-wrapper{
   display: flex;
   flex-direction: column;
@@ -40,3 +44,9 @@
   color: var(--primary-light-6);
 }
 
+@media (max-width: 576px){
+
+  .card-invite-details{
+    width: 288px;
+  }
+}

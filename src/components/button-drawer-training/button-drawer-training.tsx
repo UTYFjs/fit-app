@@ -64,6 +64,15 @@ export const ButtonDrawerTraining = ({
 
     const dispatch = useAppDispatch();
 
+    const [isDisableDrawerAction, setIsDisableDrawerAction] = useState(true);
+    useEffect(() => {
+        setIsDisableDrawerAction(
+            currentTraining.date === '' ||
+                currentTraining.name === '' ||
+                currentTraining.exercises.some((item) => item.name === ''),
+        );
+    }, [currentTraining]);
+
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
@@ -149,11 +158,7 @@ export const ButtonDrawerTraining = ({
                             size='large'
                             style={{ width: '100%' }}
                             onClick={handleDrawerAction}
-                            disabled={
-                                currentTraining.date === '' ||
-                                currentTraining.name === '' ||
-                                currentTraining.exercises.some((item) => item.name === '')
-                            }
+                            disabled={isDisableDrawerAction}
                         >
                             {isJoint ? 'Отправить приглашение' : isPeriodicity && 'Сохранить'}
                         </Button>

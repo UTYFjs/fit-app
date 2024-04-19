@@ -43,7 +43,9 @@ export const TariffControlsForm = ({ isActivePro }: TariffControlsFormPropsType)
 
     const onChangeSwitchForm: FormProps['onFieldsChange'] = (value) => {
         const dto = { [value[0].name[0]]: value[0].value };
-        updateUserInfo(dto);
+        if (value[0].name[0] !== controlsData[2].name) {
+            updateUserInfo(dto);
+        }
         dispatch(setUserInfo(dto));
     };
     return (

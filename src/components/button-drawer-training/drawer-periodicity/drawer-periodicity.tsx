@@ -21,7 +21,7 @@ export const DrawerPeriodicity = () => {
     const currentTraining = useAppSelector(getCurrentTraining);
     const { data: dataTrainings } = useGetTrainingsQuery();
     const dispatch = useAppDispatch();
-    const [withPeriod, setWithPeriod] = useState(false);
+    const [withPeriod, setWithPeriod] = useState(currentTraining.parameters?.repeat);
 
     useEffect(() => {
         if (currentTraining.date === '')
@@ -80,6 +80,7 @@ export const DrawerPeriodicity = () => {
                 <Checkbox
                     className='periodicity-item'
                     data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_CHECKBOX_PERIOD}
+                    defaultChecked={currentTraining.parameters?.repeat}
                     onChange={onChangeCheckbox}
                 >
                     С периодичностью
@@ -88,6 +89,7 @@ export const DrawerPeriodicity = () => {
             {withPeriod && (
                 <div className='periodicity-row'>
                     <Select
+                        defaultValue={currentTraining.parameters?.period}
                         className='periodicity__select'
                         data-test-id={TrainingDataTestId.MODAL_DRAWER_RIGHT_SELECT_PERIOD}
                         placeholder={<div>Периодичность</div>}

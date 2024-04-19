@@ -10,10 +10,12 @@ import { DateFormat } from '@constants/date';
 type PersonalInfoFieldsetProps = {
     imgSrc: string;
     handleUploadImageError: () => void;
+    handleUploadImageSuccess: () => void;
 };
 export const PersonalInfoFieldset = ({
     imgSrc,
     handleUploadImageError,
+    handleUploadImageSuccess,
 }: PersonalInfoFieldsetProps) => {
     return (
         <fieldset className='profile__personal-info'>
@@ -26,7 +28,11 @@ export const PersonalInfoFieldset = ({
                     valuePropName='fileList'
                     data-test-id={ProfileDataTestId.PROFILE_AVATAR}
                 >
-                    <UploadImage imgSrc={imgSrc} handlerError={handleUploadImageError} />
+                    <UploadImage
+                        imgSrc={imgSrc}
+                        handlerError={handleUploadImageError}
+                        handleSuccess={handleUploadImageSuccess}
+                    />
                 </Form.Item>
                 <div className='profile-page__item-wrapper'>
                     <Form.Item name='firstName'>
