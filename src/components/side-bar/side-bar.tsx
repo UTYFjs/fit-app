@@ -11,20 +11,27 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 import { Paths } from '@constants/api.ts';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks.ts';
 import { getCssVar } from '@utils/get-css-var.ts';
-import { Badge, Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
-import { getInviteList } from '@redux/invite-slice.ts';
-import { TrainingDataTestId } from '@constants/data-test-id.ts';
+import { AchievementDataTestId, CalendarDataTeatId } from '@constants/data-test-id.ts';
 import { useExitApp } from '@hooks/use-exit-app.ts';
+import { useLazyGetTrainingsQuery } from '@services/training-api.ts';
+import { ModalServerError } from '@components/modal-server-error/modal-server-error.tsx';
+import { BadgeCustom } from '@components/badge-custom/badge-custom.tsx';
 
 const { Sider } = Layout;
-
+type MenuInfo = {
+    key: Paths;
+    icon: JSX.Element;
+    label: string;
+    style: React.CSSProperties;
+};
 export const SideBar: React.FC = () => {
-    const inviteList = useAppSelector(getInviteList);
+    const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
+
     const { pathname } = useLocation();
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -51,102 +58,138 @@ export const SideBar: React.FC = () => {
         height: 42,
         letterSpacing: isMobile ? '.4px' : '.8px',
     };
-    const menuItems = [
+    const menuItems: MenuInfo[] = [
         {
             key: Paths.CALENDAR,
-            icon: <CalendarIcon style={{ color: colorPrimaryLight9 }} />,
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <CalendarIcon style={{ color: colorPrimaryLight9 }} />
+            ),
             label: 'Календарь',
             style: styleMenuItem,
         },
         {
             key: Paths.TRAINING,
-            icon: (
-                <Badge
-                    data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
-                    count={inviteList.length || 0}
-                    size='small'
-                >
-                    <HeartFilled style={{ color: colorPrimaryLight9 }} />
-                </Badge>
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <BadgeCustom
+                    icon={<HeartFilled style={{ color: colorPrimaryLight9 }} />}
+                    isCollapsed={collapsed}
+                />
             ),
             label: 'Тренировки',
             style: styleMenuItem,
         },
         {
             key: Paths.ACHIEVEMENT,
-            icon: <TrophyFilled style={{ color: colorPrimaryLight9 }} />,
-            label: 'Достижения',
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <TrophyFilled style={{ color: colorPrimaryLight9 }} />
+            ),
+            label: (
+                <p data-test-id={AchievementDataTestId.SIDEBAR_ACHIEVEMENTS}> Достижения</p>
+            ) as unknown as string,
             style: styleMenuItem,
         },
         {
             key: Paths.PROFILE,
-            icon: <IdcardOutlined style={{ color: colorPrimaryLight9 }} />,
+            icon: isMobile ? (
+                <span className={styles.empty} />
+            ) : (
+                <IdcardOutlined style={{ color: colorPrimaryLight9 }} />
+            ),
             label: 'Профиль',
             style: styleMenuItem,
         },
     ];
 
+    const handleOnClickMenu = async (item: { key: string }) => {
+        try {
+            if (
+                item.key === Paths.ACHIEVEMENT ||
+                item.key === Paths.TRAINING ||
+                item.key === Paths.CALENDAR
+            ) {
+                await getTrainings().unwrap();
+            }
+            navigate(item.key);
+        } catch {
+            () => {};
+        }
+    };
     return (
-        <Sider
-            className={styles.sider}
-            trigger={null}
-            collapsed={collapsed}
-            collapsedWidth={isMobile ? 0 : 64}
-            width={isMobile ? 106 : 208}
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                zIndex: 3,
-                background: '#fff',
-            }}
-        >
-            <div>
-                <div
-                    className={styles.logo}
-                    style={{ marginRight: collapsed ? 0 : '15px' }}
-                    onClick={() => {
-                        navigate(Paths.MAIN);
-                    }}
-                >
-                    {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
-                        className: 'trigger',
-                    })}
+        <>
+            {' '}
+            <Sider
+                className={styles.sider}
+                trigger={null}
+                collapsed={collapsed}
+                collapsedWidth={isMobile ? 0 : 64}
+                width={isMobile ? 106 : 208}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    zIndex: 3,
+                    background: '#fff',
+                }}
+            >
+                <div>
+                    <div
+                        className={styles.logo}
+                        style={{ marginRight: collapsed ? 0 : '15px' }}
+                        onClick={() => {
+                            navigate(Paths.MAIN);
+                        }}
+                    >
+                        {React.createElement(collapsed ? FitIcon : CleverFitIcon, {
+                            className: 'trigger',
+                        })}
+                    </div>
+                    <Menu
+                        className={styles.menu}
+                        theme='light'
+                        mode='inline'
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            height: isMobile ? 192 : 230,
+                            marginTop: isMobile ? 16 : 42,
+                        }}
+                        onClick={(item) => {
+                            handleOnClickMenu(item);
+                        }}
+                        selectedKeys={[currentMenuItem]}
+                        items={menuItems}
+                    />
                 </div>
-                <Menu
-                    className={styles.menu}
-                    theme='light'
-                    mode='inline'
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        height: isMobile ? 192 : 230,
-                        marginTop: isMobile ? 16 : 42,
-                    }}
-                    onClick={(item) => {
-                        navigate(item.key);
-                    }}
-                    selectedKeys={[currentMenuItem]}
-                    items={menuItems}
-                />
-            </div>
-            <Button
-                className={styles['button_trigger']}
-                onClick={() => setCollapsed(!collapsed)}
-                data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
-            >
-                {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            </Button>
+                <Button
+                    className={styles['button_trigger']}
+                    onClick={() => setCollapsed(!collapsed)}
+                    data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
+                >
+                    {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                </Button>
 
-            <Button
-                type='text'
-                icon={isMobile ? '' : <ExitIcon />}
-                className={styles['button_exit']}
-                onClick={exitApp}
-            >
-                {!collapsed && 'Выход'}
-            </Button>
-        </Sider>
+                <Button
+                    type='text'
+                    icon={isMobile ? '' : <ExitIcon />}
+                    className={styles['button_exit']}
+                    onClick={exitApp}
+                >
+                    {!collapsed && 'Выход'}
+                </Button>
+            </Sider>
+            {isError && (
+                <ModalServerError
+                    dataTestId={CalendarDataTeatId.MODAL_NO_REVIEW}
+                    isOpen={isError}
+                />
+            )}
+        </>
     );
 };

@@ -10,7 +10,14 @@ type PartnerCardProps = {
 
 export const PartnerAvatar = ({ imageSrc, name }: PartnerCardProps) => (
     <div className='partner__avatar'>
-        <Avatar size={42} src={imageSrc} alt={name} icon={!imageSrc && <UserOutlined />} />
+        <Avatar
+            size={42}
+            src={imageSrc}
+            alt={name}
+            icon={
+                !imageSrc && <UserOutlined style={{ color: 'var(--character-light-title-85)' }} />
+            }
+        />
         <p className='partner-card__name'>{name}</p>
     </div>
 );

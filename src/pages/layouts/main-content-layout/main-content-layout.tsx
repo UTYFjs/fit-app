@@ -7,18 +7,24 @@ import 'antd/dist/antd.css';
 import './main-content-layout.css';
 import { Paths } from '@constants/api';
 import { Content } from 'antd/lib/layout/layout';
-import { useGetUserInfoQuery } from '@services/user-profile-api';
-import { useGetInviteListQuery } from '@services/invite-api';
+import { useLazyGetUserInfoQuery } from '@services/user-profile-api';
+import { useLazyGetInviteListQuery } from '@services/invite-api';
+import { useEffect } from 'react';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
-    const { data } = useGetUserInfoQuery();
-    useGetInviteListQuery();
+    const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
+    const [getInviteList, { isLoading: isLoadingInviteList }] = useLazyGetInviteListQuery();
+
+    useEffect(() => {
+        getUserInfo();
+        getInviteList();
+    }, [getInviteList, getUserInfo]);
 
     return (
         <>
             <SideBar />
-            {data && (
+            {!isLoading && !isLoadingInviteList && (
                 <Layout
                     className={
                         pathname === Paths.FEEDBACKS

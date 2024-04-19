@@ -21,6 +21,7 @@ export const ProfilePage = () => {
     const [form] = Form.useForm();
 
     const handleCloseModalError = () => setIsModalErrorOpen(false);
+    const handleUploadImageSuccess = () => setIsDisabledBtn(false);
 
     const handleUploadImageError = () => setIsDisabledBtn(true);
 
@@ -31,7 +32,9 @@ export const ProfilePage = () => {
             .unwrap()
             .then(() => {
                 setIsAlert(true);
-            });
+                form.setFieldsValue({ password: '', repeatPassword: '' });
+            })
+            .catch(() => setIsModalErrorOpen(true));
         setIsDisabledBtn(true);
     };
     const onChangeForm = () => {
@@ -52,6 +55,7 @@ export const ProfilePage = () => {
                 <PersonalInfoFieldset
                     imgSrc={userInfo.imgSrc}
                     handleUploadImageError={handleUploadImageError}
+                    handleUploadImageSuccess={handleUploadImageSuccess}
                 />
                 <PrivateInfoFieldset />
                 <Button

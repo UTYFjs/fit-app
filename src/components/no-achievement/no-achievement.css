@@ -1,0 +1,28 @@
+.no-achievements{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl);
+  align-items: center;
+  padding-top: 112px;
+}
+
+.no-achievements__img{
+  width: 200px;
+  height: 175px;
+}
+
+.no-achievements__title{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-m);
+  font-size: var(--font-size-l3);
+  line-height: var(--line-height);
+  text-align: center;
+  color: var(--character-light-title-85);
+}
+
+@media (max-width: 576px){
+  
+  .no-achievements{
+    padding-top: 0;
+  }
+}

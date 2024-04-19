@@ -39,6 +39,10 @@
   padding-bottom: var(--p-8xl);
 }
 
+.header.header_training.header-achievement{
+  max-height: 90px;
+}
+
 .header.header_calendar .button_setting-calendar, .header.header_training .button_setting-calendar {
   font-family: var(--font-family);
   line-height: var(--line-height);

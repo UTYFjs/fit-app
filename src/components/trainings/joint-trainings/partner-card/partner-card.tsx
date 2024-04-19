@@ -60,7 +60,13 @@ export const PartnerCard = ({ type, user, index, searchValue }: PartnerCardProps
                             size={42}
                             src={imageSrc}
                             alt={name}
-                            icon={!imageSrc && <UserOutlined />}
+                            icon={
+                                !imageSrc && (
+                                    <UserOutlined
+                                        style={{ color: 'var(--character-light-title-85)' }}
+                                    />
+                                )
+                            }
                         />
                         <div>
                             <HighlightedText

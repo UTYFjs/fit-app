@@ -1,9 +1,9 @@
 import { Rule } from 'antd/lib/form';
 
-export interface IMessageValidation {
+export type IMessageValidation = {
     password: string;
     repeatPassword: string;
-}
+};
 
 export const messageValidation: IMessageValidation = {
     password: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',

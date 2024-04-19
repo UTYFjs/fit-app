@@ -3,7 +3,7 @@ import './modal-feedback.css';
 import TextArea from 'antd/lib/input/TextArea';
 import { Rating } from '@components/rating/rating';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { IRatingStar } from '../../types/api';
 type ModalFeedbackProps = {
@@ -22,7 +22,10 @@ export const ModalFeedback = ({
     handleSubmitReview,
 }: ModalFeedbackProps) => {
     const [isBtnDisable, setIsBtnDisable] = useState(true);
-
+    const [innerRatingValue, setInnerRatingValue] = useState(0);
+    useEffect(() => {
+        innerRatingValue > 0 ? setIsBtnDisable(false) : setIsBtnDisable(true);
+    }, [innerRatingValue]);
     return (
         <Modal
             title={<p className='title_modal'>Ваш отзыв</p>}
@@ -53,8 +56,8 @@ export const ModalFeedback = ({
                 fontSize={22}
                 isDisable={false}
                 onChange={(value) => {
-                    setIsBtnDisable(false);
                     setRatingValue(value);
+                    setInnerRatingValue(value);
                 }}
             />
             <TextArea

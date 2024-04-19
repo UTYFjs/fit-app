@@ -65,3 +65,7 @@ export const enum TrainingDataTestId {
     PARTNER_MODAL = 'partner-modal',
     MENU_BUTTON_TRAINING = 'menu-button-training',
 }
+
+export const enum AchievementDataTestId {
+    SIDEBAR_ACHIEVEMENTS = 'sidebar-achievements',
+}

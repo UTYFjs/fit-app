@@ -20,6 +20,10 @@ import { useWindowWidth } from '@hooks/useWindowWidth';
 import { Nullable } from '../../types/common-types';
 
 export const CalendarPage = () => {
+    const { data: dataTrainings } = useGetTrainingsQuery();
+    const [getTrainingList, { data: dataTrainingList, isError: IsErrorTrainingsList }] =
+        useLazyGetTrainingListQuery();
+
     const { isDesktop } = useWindowWidth();
     const [parentModal, setParentModal] = useState<Nullable<Element>>(null);
     const [topPosition, setTopPosition] = useState(0);
@@ -33,11 +37,6 @@ export const CalendarPage = () => {
     const [isEditTraining, setIsEditTraining] = useState(false);
 
     const [isOpenModalError, setIsOpenModalError] = useState(false);
-
-    const { data: dataTrainings } = useGetTrainingsQuery();
-
-    const [getTrainingList, { data: dataTrainingList, isError: IsErrorTrainingsList }] =
-        useLazyGetTrainingListQuery();
 
     useLayoutEffect(() => {
         getTrainingList();

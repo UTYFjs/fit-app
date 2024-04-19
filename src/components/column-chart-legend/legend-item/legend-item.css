@@ -1,0 +1,23 @@
+.legend-item{
+  display: flex;
+  gap: var(--gap);
+  padding: var(--p-2-3xs) 0;
+}
+
+.legend-item__day{
+  display: inline-block;
+  min-width: 92px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--character-light-secondary-45);
+}
+
+.legend-item__value{
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-l);
+  font-size: var(--font-size);
+  line-height: 130%;
+  color: var(--character-light-title-85);
+}

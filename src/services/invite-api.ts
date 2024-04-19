@@ -8,7 +8,7 @@ import {
 } from '../types/training-types';
 
 import { api } from './api';
-import { setInviteList } from '@redux/invite-slice';
+import { setCountInvites, setInviteList } from '@redux/invite-slice';
 
 export const inviteApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -20,6 +20,7 @@ export const inviteApi = api.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setInviteList(data));
+                    dispatch(setCountInvites(data.length));
                 } catch {
                     () => {};
                 }

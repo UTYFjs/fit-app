@@ -5,11 +5,11 @@ import styles from './custom-card-action.module.css';
 import 'antd/dist/antd.css';
 import { Card } from 'antd';
 
-interface ICustomCardActionProps {
+type ICustomCardActionProps = {
     title: string;
     actions: ReactNode[];
     children?: ReactNode[];
-}
+};
 export const CustomCardAction: React.FC<ICustomCardActionProps> = ({
     title,
     actions,

@@ -12,7 +12,7 @@ import FreeImg from '@assets/free.png';
 import ProImg from '@assets/pro_able.png';
 import { cardTariffContent } from '@constants/tariff';
 
-interface ICardTariffProps {
+type ICardTariffProps = {
     isPaid: boolean;
     srcImg: string;
     title: string;
@@ -20,7 +20,7 @@ interface ICardTariffProps {
     dataTestIdCard?: string;
     dataTestIdBtn?: string;
     isActivePro?: boolean;
-}
+};
 export const CardTariff: React.FC<ICardTariffProps> = ({
     isPaid,
     srcImg,

@@ -14,7 +14,7 @@ export const ConfirmEmail = () => {
     const [value, setValue] = useState('');
     const { email } = useAppSelector((state) => state.user);
     const [confirmEmail] = useConfirmEmailMutation();
-    const onComplete = () => {
+    const onComplete = (value: string) => {
         confirmEmail({ email: email, code: value })
             .unwrap()
             .then(() => {

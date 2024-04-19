@@ -10,7 +10,7 @@ import { InviteDetailsCard } from '../invite-details-card/invite-details-card';
 import { useAnswerInviteMutation, useLazyGetInviteListQuery } from '@services/invite-api';
 import { TrainingDataTestId } from '@constants/data-test-id';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { deleteInviteItem } from '@redux/invite-slice';
+import { deleteInviteItem, setCountInvites } from '@redux/invite-slice';
 import { useGetTrainingPalsQuery } from '@services/training-api';
 
 type InviteProps = {
@@ -34,6 +34,7 @@ export const Invite = ({ inviteList }: InviteProps) => {
             .unwrap()
             .then(async () => {
                 dispatch(deleteInviteItem(idInvite));
+                dispatch(setCountInvites(inviteList.length - 1));
                 await refetch();
                 await getInviteList();
             });
@@ -62,7 +63,16 @@ export const Invite = ({ inviteList }: InviteProps) => {
                     <div className='invite__card-item' key={_id}>
                         <div className='invite-card__avatar'>
                             {from.imageSrc && <Avatar size={42} src={from.imageSrc} />}
-                            {!from.imageSrc && <Avatar size={42} icon={<UserOutlined />} />}
+                            {!from.imageSrc && (
+                                <Avatar
+                                    size={42}
+                                    icon={
+                                        <UserOutlined
+                                            style={{ color: 'var(--character-light-title-85)' }}
+                                        />
+                                    }
+                                />
+                            )}
                             <div>
                                 <p className='feedback-item__name-owner'>
                                     {from.firstName || 'Пользователь'}

@@ -17,6 +17,7 @@
   --character-light-link: #1890ff;
   --character-light-success: #52c41a;
   --character-light-red-4: #ff7875;
+  --red-1: #fff1f0;
   --character-light-primary-inverse: #fff;
   --character-light-sider-background: #fff;
   --primary-light-1: #f0f5ff;
@@ -130,6 +131,7 @@
   --p-null: 0;
   --p-4xs: 4px;
   --p-3xs: 6px;
+  --p-2-3xs: 7px;
   --p-2xs: 8px;
   --p-xs: 10px;
   --p-m: 12px;
@@ -207,9 +209,11 @@ body {
 
 }
 
+.ant-avatar.ant-avatar-icon{
+  background: var(--character-light-background);
+}
 
 .ant-tabs-ink-bar {
-
   background: var(--primary-light-6);
   transition: none;
 }

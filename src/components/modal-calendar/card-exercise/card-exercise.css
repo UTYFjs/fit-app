@@ -32,6 +32,10 @@
   color: var(--character-light-secondary-45);
 }
 
+.card-exercise__content-item:last-child{
+  padding-bottom: var(--p-xl);
+}
+
 .card-exercise__title-wrapper{
   display: flex;
   align-items: center;

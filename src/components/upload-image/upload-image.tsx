@@ -15,9 +15,10 @@ type Upload<T> = {
 type UploadImagePropsType = {
     imgSrc: string;
     handlerError: () => void;
+    handleSuccess: () => void;
 };
 
-export const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
+export const UploadImage = ({ imgSrc, handlerError, handleSuccess }: UploadImagePropsType) => {
     const [isModalError, setIsModalError] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [postUserAvatar] = usePostUserAvatarMutation();
@@ -64,6 +65,8 @@ export const UploadImage = ({ imgSrc, handlerError }: UploadImagePropsType) => {
                         url: `${baseUrlForImg}/${data.url}`,
                     },
                 ]);
+                handleSuccess();
+                //set isDisable btn
             })
             .catch((e) => {
                 if (e.status === StatusCode.CONFLICT) {
