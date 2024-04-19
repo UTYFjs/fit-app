@@ -13,30 +13,32 @@ import { useEffect } from 'react';
 
 export const LayoutMainContent: React.FC = () => {
     const { pathname } = useLocation();
-    const [getUserInfo] = useLazyGetUserInfoQuery();
-    const [getInviteList] = useLazyGetInviteListQuery();
+    const [getUserInfo, { isLoading }] = useLazyGetUserInfoQuery();
+    const [getInviteList, { isLoading: isLoadingInviteList }] = useLazyGetInviteListQuery();
 
     useEffect(() => {
-        getInviteList();
         getUserInfo();
+        getInviteList();
     }, [getInviteList, getUserInfo]);
 
     return (
         <>
             <SideBar />
-            <Layout
-                className={
-                    pathname === Paths.FEEDBACKS
-                        ? 'site-layout site-layout_feedbacks'
-                        : 'site-layout'
-                }
-            >
-                {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
-                <Content className='main'>
-                    <Outlet />
-                </Content>
-                {pathname === Paths.MAIN && <FooterMy />}
-            </Layout>
+            {!isLoading && !isLoadingInviteList && (
+                <Layout
+                    className={
+                        pathname === Paths.FEEDBACKS
+                            ? 'site-layout site-layout_feedbacks'
+                            : 'site-layout'
+                    }
+                >
+                    {Object.values(Paths).includes(pathname as Paths) && <HeaderMy />}
+                    <Content className='main'>
+                        <Outlet />
+                    </Content>
+                    {pathname === Paths.MAIN && <FooterMy />}
+                </Layout>
+            )}
         </>
     );
 };

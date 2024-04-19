@@ -11,21 +11,16 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 import { Paths } from '@constants/api.ts';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks.ts';
 import { getCssVar } from '@utils/get-css-var.ts';
-import { Badge, Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CleverFitIcon, FitIcon, ExitIcon, CalendarIcon } from '../custom-icons/custom-icons.tsx';
-import { getCountInvites } from '@redux/invite-slice.ts';
-import {
-    AchievementDataTestId,
-    CalendarDataTeatId,
-    TrainingDataTestId,
-} from '@constants/data-test-id.ts';
+import { AchievementDataTestId, CalendarDataTeatId } from '@constants/data-test-id.ts';
 import { useExitApp } from '@hooks/use-exit-app.ts';
 import { useLazyGetTrainingsQuery } from '@services/training-api.ts';
 import { ModalServerError } from '@components/modal-server-error/modal-server-error.tsx';
+import { BadgeCustom } from '@components/badge-custom/badge-custom.tsx';
 
 const { Sider } = Layout;
 type MenuInfo = {
@@ -35,7 +30,6 @@ type MenuInfo = {
     style: React.CSSProperties;
 };
 export const SideBar: React.FC = () => {
-    const countInvites = useAppSelector(getCountInvites);
     const [getTrainings, { isError }] = useLazyGetTrainingsQuery();
 
     const { pathname } = useLocation();
@@ -80,13 +74,10 @@ export const SideBar: React.FC = () => {
             icon: isMobile ? (
                 <span className={styles.empty} />
             ) : (
-                <Badge
-                    data-test-id={TrainingDataTestId.NOTIFICATION_ABOUT_JOINT_TRAINING}
-                    count={countInvites}
-                    size='small'
-                >
-                    <HeartFilled style={{ color: colorPrimaryLight9 }} />
-                </Badge>
+                <BadgeCustom
+                    icon={<HeartFilled style={{ color: colorPrimaryLight9 }} />}
+                    isCollapsed={collapsed}
+                />
             ),
             label: 'Тренировки',
             style: styleMenuItem,

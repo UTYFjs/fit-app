@@ -15,7 +15,6 @@ export const ConfirmEmail = () => {
     const { email } = useAppSelector((state) => state.user);
     const [confirmEmail] = useConfirmEmailMutation();
     const onComplete = (value: string) => {
-        console.log('valueconfirm email', value);
         confirmEmail({ email: email, code: value })
             .unwrap()
             .then(() => {
@@ -58,10 +57,7 @@ export const ConfirmEmail = () => {
                     characterFilled: 'character_filled',
                 }}
                 onChange={(value) => setValue(value)}
-                onComplete={(e) => {
-                    console.log(e);
-                    onComplete(e);
-                }}
+                onComplete={onComplete}
             />
             <p className='extra__text'>Не пришло письмо? Проверьте папку Спам.</p>
         </div>
