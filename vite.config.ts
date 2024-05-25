@@ -23,5 +23,6 @@ export default defineConfig(({ command }) => ({
             '@assets': path.resolve(__dirname, 'src/assets'),
         },
     },
-    base: command === 'build' ? '/UTYFjs/' : '/',
+    // base: command === 'build' ? '/UTYFjs/' : '/',
+    //to Run without CORS : Win + R  ->  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 }));
