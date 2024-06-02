@@ -14,6 +14,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { ILoginData } from '../..//types/forms';
+import { NoCORSInfo } from '@components/no-corse-info/no-cors-info';
 
 export const Login: React.FC = () => {
     const [form] = Form.useForm();
@@ -77,82 +78,87 @@ export const Login: React.FC = () => {
                 dispatch(setAccessToken(data.accessToken));
                 navigate(Paths.MAIN);
             })
-            .catch(() => {
+            .catch((e) => {
+                console.log(e);
                 navigate(Paths.ERROR_LOGIN);
             });
     };
 
     return (
-        <Form
-            form={form}
-            name='normal_login'
-            className={styles['form_login']}
-            initialValues={{ remember: false }}
-            onFinish={onFinish}
-        >
-            <Form.Item name='email' rules={validationRulesEmail} style={{ marginBottom: 32 }}>
-                <Input addonBefore='e-mail' size='large' data-test-id='login-email' />
-            </Form.Item>
-
-            <Form.Item
-                name='password'
-                rules={[
-                    {
-                        required: true,
-                        validator: validationPassword,
-                        message: messageValidation.password,
-                    },
-                ]}
+        <>
+            {' '}
+            <Form
+                form={form}
+                name='normal_login'
+                className={styles['form_login']}
+                initialValues={{ remember: false }}
+                onFinish={onFinish}
             >
-                <Input.Password
-                    type='password'
-                    placeholder='Пароль'
-                    size='large'
-                    data-test-id='login-password'
-                />
-            </Form.Item>
-            <div className={styles['form-item_check-area']}>
-                <Form.Item name='remember' valuePropName='checked' noStyle>
-                    <Checkbox
-                        defaultChecked={false}
-                        className={styles['checkbox_remember']}
-                        data-test-id='login-remember'
+                <Form.Item name='email' rules={validationRulesEmail} style={{ marginBottom: 32 }}>
+                    <Input addonBefore='e-mail' size='large' data-test-id='login-email' />
+                </Form.Item>
+
+                <Form.Item
+                    name='password'
+                    rules={[
+                        {
+                            required: true,
+                            validator: validationPassword,
+                            message: messageValidation.password,
+                        },
+                    ]}
+                >
+                    <Input.Password
+                        type='password'
+                        placeholder='Пароль'
+                        size='large'
+                        data-test-id='login-password'
+                    />
+                </Form.Item>
+                <div className={styles['form-item_check-area']}>
+                    <Form.Item name='remember' valuePropName='checked' noStyle>
+                        <Checkbox
+                            defaultChecked={false}
+                            className={styles['checkbox_remember']}
+                            data-test-id='login-remember'
+                        >
+                            Запомнить меня
+                        </Checkbox>
+                    </Form.Item>
+                    <Button
+                        type='text'
+                        size='small'
+                        className={styles['login-form-forgot']}
+                        data-test-id='login-forgot-button'
+                        onClick={handleForgotPassword}
                     >
-                        Запомнить меня
-                    </Checkbox>
+                        Забыли пароль?
+                    </Button>
+                </div>
+                <Form.Item style={{ marginBottom: 16 }}>
+                    <Button
+                        type='primary'
+                        htmlType='submit'
+                        size='large'
+                        style={{ width: '100%' }}
+                        className={styles['login-form-button']}
+                        data-test-id='login-submit-button'
+                    >
+                        Войти
+                    </Button>
                 </Form.Item>
                 <Button
-                    type='text'
-                    size='small'
-                    className={styles['login-form-forgot']}
-                    data-test-id='login-forgot-button'
-                    onClick={handleForgotPassword}
-                >
-                    Забыли пароль?
-                </Button>
-            </div>
-            <Form.Item style={{ marginBottom: 16 }}>
-                <Button
-                    type='primary'
-                    htmlType='submit'
+                    type='default'
+                    htmlType='button'
                     size='large'
-                    style={{ width: '100%' }}
-                    className={styles['login-form-button']}
-                    data-test-id='login-submit-button'
+                    icon={isMobile ? '' : <GooglePlusOutlined />}
+                    className={styles['login-form-button_google']}
+                    onClick={handleGoogleAuth}
                 >
-                    Войти
+                    Войти через Google
                 </Button>
-            </Form.Item>
-            <Button
-                type='default'
-                htmlType='button'
-                size='large'
-                icon={isMobile ? '' : <GooglePlusOutlined />}
-                className={styles['login-form-button_google']}
-                onClick={handleGoogleAuth}
-            >
-                Войти через Google
-            </Button>
-        </Form>
+            </Form>
+            <NoCORSInfo />
+        </>
     );
 };

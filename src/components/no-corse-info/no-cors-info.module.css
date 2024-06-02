@@ -1,0 +1,23 @@
+.warning{
+  margin-top: var(--m-3xl);
+}
+
+.title{
+  font-size: 12px;
+}
+
+.code{
+  color: var(--character-light-secondary-45);
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.copy{
+  color: var(--primary-light-6);
+}
+
+.copy:hover{
+  scale: 1.1;
+  transition: all .5s;
+  color: var(--primary-light-5);
+}

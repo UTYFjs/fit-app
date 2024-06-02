@@ -76,6 +76,27 @@
   padding: var(--p-null);
 }
 
+.author{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+  align-self: end;
+  line-height: 30px;
+  color: var(--primary-dark-5);
+}
+
+.github{
+  align-self: end;
+  transition: all .5s;
+}
+
+.github:hover{
+  cursor: pointer;
+  scale: 1.1;
+  color: var();
+}
+
 @media (max-width: 768px){
 
   .footer{

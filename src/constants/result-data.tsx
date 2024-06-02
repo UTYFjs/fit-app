@@ -14,7 +14,8 @@ export const resultData: resultDataType[] = [
         url: '/result/error-login',
         status: 'warning',
         title: 'Вход не выполнен',
-        description: 'Что-то пошло не так. Попробуйте еще раз.',
+        description:
+            'Что-то пошло не так. Попробуйте еще раз. Возможно следует запустить браузер с отключенным CORS',
         buttonText: 'Повторить',
         buttonLink: '/auth',
         dataTestId: 'login-retry-button',
