@@ -1,6 +1,14 @@
 import Icon from '@ant-design/icons';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 
+type SvgProps = {
+    color?: string;
+    className?: string;
+    width?: string;
+    height?: string;
+    onClick?: () => void;
+};
+
 const ExitSvg = () => (
     <svg
         width='16'

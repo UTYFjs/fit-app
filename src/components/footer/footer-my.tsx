@@ -22,8 +22,8 @@ export const FooterMy: React.FC = () => (
             <p className={styles.author}>SUHAKOU HENADZI 2024</p>
             <GithubSvg
                 className={styles.github}
-                height={30}
-                width={30}
+                height={'30'}
+                width={'30'}
                 onClick={() => window.open('https://github.com/UTYFjs/fit-app')}
             />
         </div>
