@@ -17,4 +17,5 @@ export const api = createApi({
 
     tagTypes: ['User', 'Feedbacks', 'Trainings', 'Invites'],
     endpoints: () => ({}),
+    keepUnusedDataFor: 50,
 });
