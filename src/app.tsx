@@ -25,7 +25,7 @@ export const App = () => {
     return (
         <>
             <Routes>
-                <Route path='/' element={<LayoutMain />}>
+                <Route>
                     <Route
                         element={
                             <ProtectedRoute isAllowed={!!accessToken} redirectPath={Paths.LOGIN} />

@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from '@services/api';
 import { createBrowserHistory } from 'history';
 import { createReduxHistoryContext } from 'redux-first-history';
-
+import { setupListeners } from '@reduxjs/toolkit/query';
 import userReducer from './user-slice';
 import userInfoReducer from './profile-slice';
 import trainingReducer from './training-slice';
@@ -25,7 +25,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(routerMiddleware, api.middleware),
 });
-
+setupListeners(store.dispatch);
 export const history = createReduxHistory(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

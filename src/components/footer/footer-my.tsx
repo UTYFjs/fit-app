@@ -5,6 +5,7 @@ import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { Paths } from '@constants/api';
 import { Card, Layout, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { GithubSvg } from '@components/custom-icons/custom-icons';
 
 const { Footer } = Layout;
 const { Meta } = Card;
@@ -16,6 +17,17 @@ export const FooterMy: React.FC = () => (
                 Смотреть отзывы
             </Link>
         </Button>
+        <div className={styles.author}>
+            {' '}
+            <p className={styles.author}>SUHAKOU HENADZI 2024</p>
+            <GithubSvg
+                className={styles.github}
+                height={'30'}
+                width={'30'}
+                onClick={() => window.open('https://github.com/UTYFjs/fit-app')}
+            />
+        </div>
+
         <Card
             className={styles['footer__card']}
             actions={[

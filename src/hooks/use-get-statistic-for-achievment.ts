@@ -21,28 +21,17 @@ export const useGetStatisticsForAchievement = ({
     let approaches = 0;
     let avgDailyLoad = 0;
     let totalLoadForPeriod = 0;
+    let mostFrequentTraining = '';
+    let mostFrequentExercise = '';
     const avgLoadsByDay = [];
-    const mostFrequentTrainings = initMostFrequentTrainings(dataTrainingList || []);
-
-    let mostFrequentExercises: Record<string, number> = {};
+    const mostFrequentExercises: Record<string, number> = {};
     let mostFrequentExercisesByDay: Array<LegendItemData & { count: number }> = [];
 
-    const getMostFrequentExerciseByDayofWeek = (frequentDayExercise: Record<string, number>) => {
-        const mostExercise = Object.entries(frequentDayExercise).reduce(
-            (acc, item) => {
-                return acc.value > item[1] ? acc : { type: item[0], value: item[1] };
-            },
-            { type: '', value: 0 },
-        );
-        return {
-            result: {
-                date: start,
-                value: mostExercise.type,
-                count: mostExercise.value,
-            },
-            exerciseCount: mostExercise.value,
-        };
-    };
+    const mostFrequentTrainings = initMostFrequentTrainings(dataTrainingList || []);
+    const exercisesCount: Record<string, number> = {};
+    const exercisesCountByDayOfWeek = Array.from({ length: 7 }, () => ({
+        exercises: {} as Record<string, number>,
+    }));
 
     let start = moment().subtract(period - 1, 'days');
 
@@ -62,43 +51,56 @@ export const useGetStatisticsForAchievement = ({
         ) {
             let totalLoadPerDay = 0;
             let countExercisesPerDay = 0;
-            const frequentDayExercise: Record<string, number> = {};
 
-            const getTotalLoadFromExercises = (exercises: ExerciseType[]) =>
-                exercises.reduce((acc, exercise) => {
+            const getTotalLoadFromExercisesAndCountingStatistic = (
+                exercises: ExerciseType[],
+                date: string,
+            ) => {
+                const weekDay = moment(date).weekday();
+
+                return exercises.reduce((acc, exercise) => {
+                    const name = exercise.name;
                     approaches += exercise.approaches;
                     replays += exercise.replays;
                     countExercisesPerDay += 1;
 
-                    if (Object.prototype.hasOwnProperty.call(frequentDayExercise, exercise.name)) {
-                        frequentDayExercise[exercise.name] += 1;
+                    if (Object.prototype.hasOwnProperty.call(exercisesCount, name)) {
+                        exercisesCount[name] += 1;
                     } else {
-                        frequentDayExercise[exercise.name] = 1;
+                        exercisesCount[name] = 1;
+                    }
+                    if (
+                        Object.prototype.hasOwnProperty.call(
+                            exercisesCountByDayOfWeek[weekDay].exercises,
+                            name,
+                        )
+                    ) {
+                        exercisesCountByDayOfWeek[weekDay].exercises[name] += 1;
+                    } else {
+                        exercisesCountByDayOfWeek[weekDay].exercises[name] = 1;
                     }
 
                     return acc + exercise.approaches * exercise.replays * exercise.weight;
                 }, 0);
+            };
 
             dataTrainings[start.format(DateFormat.DASH_YYYY_MM_DD)].forEach((item) => {
                 if (checkedTag === 'Все') {
                     mostFrequentTrainings[item.name] += 1;
-                    const load = getTotalLoadFromExercises(item.exercises);
+                    const load = getTotalLoadFromExercisesAndCountingStatistic(
+                        item.exercises,
+                        item.date,
+                    );
                     totalLoadPerDay += load;
                 } else if (item.name === checkedTag) {
                     mostFrequentTrainings[item.name] += 1;
-                    const load = getTotalLoadFromExercises(item.exercises);
+                    const load = getTotalLoadFromExercisesAndCountingStatistic(
+                        item.exercises,
+                        item.date,
+                    );
                     totalLoadPerDay += load;
                 }
             });
-            const { result, exerciseCount } =
-                getMostFrequentExerciseByDayofWeek(frequentDayExercise);
-
-            if (Object.prototype.hasOwnProperty.call(mostFrequentExercises, result.value)) {
-                mostFrequentExercises[result.value] += exerciseCount;
-            } else {
-                if (result.value) mostFrequentExercises[result.value] = exerciseCount;
-            }
-            mostFrequentExercisesByDay.push(result);
 
             avgLoadsByDay.push({
                 date: start,
@@ -110,65 +112,30 @@ export const useGetStatisticsForAchievement = ({
                 date: start,
                 value: 0,
             });
-            mostFrequentExercisesByDay.push({
-                date: start,
-                value: '',
-                count: 0,
-            });
         }
 
         start = moment(start).add(1, 'days');
     }
 
-    if (mostFrequentExercisesByDay.length > 7) {
-        const arr = Array.from({ length: 7 }, () => ({ exercises: {} as Record<string, number> }));
+    mostFrequentExercisesByDay = exercisesCountByDayOfWeek.map((item, index) => {
+        const frequentExercise = Object.entries(item.exercises).reduce(
+            (acc, item) => (item[1] > acc[1] ? item : acc),
+            ['', 0],
+        );
 
-        mostFrequentExercisesByDay.forEach((item) => {
-            if (
-                Object.prototype.hasOwnProperty.call(arr[item.date.weekday()].exercises, item.value)
-            ) {
-                arr[item.date.weekday()].exercises[item.value] += item.count;
-            } else {
-                arr[item.date.weekday()].exercises[item.value] = item.count;
-            }
-        });
+        if (frequentExercise[0])
+            mostFrequentExercises[frequentExercise[0]] = exercisesCount[frequentExercise[0]];
 
-        const newArr: Array<{ value: string; count: number }> = [];
-
-        arr.forEach((item) => {
-            let maxCount = 0;
-            let exerciseName = '';
-            Object.entries(item.exercises).forEach((item) => {
-                if (item[1] > maxCount) {
-                    maxCount = item[1];
-                    exerciseName = item[0];
-                }
-            });
-            newArr.push({ value: exerciseName, count: maxCount });
-        });
-
-        const newExercisesForDays: Array<LegendItemData & { count: number }> = [];
-        const forPieData: Record<string, number> = {};
-
-        newArr.forEach((item, index) => {
-            newExercisesForDays.push({
-                date: moment().isoWeekday(index + 1),
-                count: item.count,
-                value: item.value,
-            });
-            if (Object.prototype.hasOwnProperty.call(forPieData, item.value) && item.value) {
-                forPieData[item.value] += item.count;
-            } else if (item.value) {
-                forPieData[item.value] = item.count;
-            }
-        });
-
-        mostFrequentExercises = forPieData;
-        mostFrequentExercisesByDay = newExercisesForDays;
-    }
+        return {
+            date: moment().isoWeekday(index + 1),
+            value: frequentExercise[0],
+            count: exercisesCount[frequentExercise[0]],
+        };
+    });
 
     avgDailyLoad = +(totalLoadForPeriod / period).toFixed(1);
-    const mostFrequentTraining = Object.entries(mostFrequentTrainings).reduce(
+
+    mostFrequentTraining = Object.entries(mostFrequentTrainings).reduce(
         (acc, item) => {
             if (acc.value > item[1]) {
                 return acc;
@@ -180,7 +147,8 @@ export const useGetStatisticsForAchievement = ({
             value: 0,
         },
     ).name;
-    const mostFrequentExercise = Object.entries(mostFrequentExercises).reduce(
+
+    mostFrequentExercise = Object.entries(mostFrequentExercises).reduce(
         (acc, item) => {
             if (acc.value > item[1]) {
                 return acc;
@@ -194,13 +162,14 @@ export const useGetStatisticsForAchievement = ({
     ).name;
 
     return {
-        avgLoadsByDay: avgLoadsByDay,
-        avgDailyLoad: avgDailyLoad,
-        approachesCount: approaches,
         replaysCount: replays,
+        approachesCount: approaches,
+        avgDailyLoad: avgDailyLoad,
         totalLoadForPeriod: totalLoadForPeriod,
         mostFrequentTraining: mostFrequentTraining,
         mostFrequentExercise: mostFrequentExercise,
+
+        avgLoadsByDay: avgLoadsByDay,
         frequentExercises: mostFrequentExercises,
         frequentExercisesByDayOfWeek: mostFrequentExercisesByDay,
     };
