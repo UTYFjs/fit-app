@@ -25,7 +25,8 @@ export const App = () => {
     return (
         <>
             <Routes>
-                <Route>
+                //TODO here was problem with background
+                <Route path='/' element={<LayoutMain />}>
                     <Route
                         element={
                             <ProtectedRoute isAllowed={!!accessToken} redirectPath={Paths.LOGIN} />

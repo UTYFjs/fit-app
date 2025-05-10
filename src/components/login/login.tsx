@@ -14,7 +14,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { ILoginData } from '../..//types/forms';
-import { NoCORSInfo } from '@components/no-corse-info/no-cors-info';
+// import { NoCORSInfo } from '@components/no-corse-info/no-cors-info';
 
 export const Login: React.FC = () => {
     const [form] = Form.useForm();
@@ -158,7 +158,7 @@ export const Login: React.FC = () => {
                     Войти через Google
                 </Button>
             </Form>
-            <NoCORSInfo />
+            {/* <NoCORSInfo /> */}
         </>
     );
 };

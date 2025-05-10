@@ -14,7 +14,7 @@ import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { IRegisterData } from '../../types/forms';
-import { NoCORSInfo } from '@components/no-corse-info/no-cors-info';
+// import { NoCORSInfo } from '@components/no-corse-info/no-cors-info';
 
 export const Registration: React.FC = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -145,7 +145,7 @@ export const Registration: React.FC = () => {
                     Регистрация через Google
                 </Button>
             </Form>
-            <NoCORSInfo />
+            {/* <NoCORSInfo /> */}
         </>
     );
 };

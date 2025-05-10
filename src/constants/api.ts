@@ -1,6 +1,9 @@
-export const baseUrl = 'https://marathon-api.clevertec.ru';
+// export const baseUrl = 'https://marathon-api.clevertec.ru';
 
-export const baseUrlForImg = 'https://training-api.clevertec.ru';
+// export const baseUrlForImg = 'https://training-api.clevertec.ru';
+
+export const baseUrl = 'https://fit-back-aal8.onrender.com';
+export const baseUrlForImg = 'https://fit-back-aal8.onrender.com';
 
 export enum HTTPMethod {
     DELETE = 'DELETE',
